@@ -1,110 +1,370 @@
-<x-guest-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Welcome') }}
-        </h2>
-    </x-slot>
+<!DOCTYPE html>
+<html  >
+<head>
+    <!-- Site made with Mobirise Website Builder v5.5.8, https://mobirise.com -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="generator" content="Mobirise v5.5.8, mobirise.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="assets/images/whatsapp-image-2021-12-17-at-14.30.08-96x29.jpg" type="image/x-icon">
+    <meta name="description" content="">
 
-    <div class="py-12">
-{{--        regular dashboard content--}}
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're not logged in!
+
+    <title>Home</title>
+    <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="assets/parallax/jarallax.css">
+    <link rel="stylesheet" href="assets/animatecss/animate.css">
+    <link rel="stylesheet" href="assets/dropdown/css/style.css">
+    <link rel="stylesheet" href="assets/socicon/css/styles.css">
+    <link rel="stylesheet" href="assets/theme/css/style.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
+    <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+
+
+
+</head>
+<body>
+
+<section data-bs-version="5.1" class="menu menu1 cid-sTd3LiLcWy" once="menu" id="menu1-0">
+
+
+    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="index.html">
+                        <img src="assets/images/whatsapp-image-2021-12-17-at-14.30.08-96x29.jpg" alt="Demyhealth" style="height: 3.6rem;">
+                    </a>
+                </span>
+
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">COVID 19</a><div class="dropdown-menu" aria-labelledby="dropdown-undefined"><a class="text-black dropdown-item text-primary display-4" href="covid19-pcr-testing.html">Covid-19 PCR Test</a><a class="text-black dropdown-item text-primary display-4" href="covid19-pcr-testing.html">Covid-19 Rapid Antigen Test</a></div></li><li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="pcr-and-reagents.html">PCR &amp; Reagents</a></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle show display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Our Business Units</a><div class="dropdown-menu show" aria-labelledby="dropdown-undefined" data-bs-popper="none"><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle show display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our Products</a><div class="dropdown-menu dropdown-submenu show" aria-labelledby="dropdown-undefined" data-bs-popper="none"><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Medical Devices</a><div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="pcr-and-reagents.html">PCR &amp; Reagents</a><a class="text-black show dropdown-item text-primary display-4" href="hospital-and-laboratory-products.html">Hospital and Laboratory products</a><a class="text-black show dropdown-item text-primary display-4" href="pharmaceuticals.html">Pharmaceuticals</a></div></div><a class="text-black dropdown-item show text-primary display-4" href="procurement-and-supply.html">Procurement and Supply</a></div></div><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our Services</a><div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="pcr-diag-research.html">PCR testing, diagnostics and research</a><a class="text-black show dropdown-item text-primary display-4" href="biomedical-engineering.html">Biomedical Engineering</a><a class="text-black show dropdown-item text-primary display-4" href="sequencing-and-biorepository-services.html">Sequencing and Biorepository  Services</a><a class="text-black show dropdown-item text-primary display-4" href="molecular-biology-training.html">Molecular Biology Training</a></div></div></div></li><li class="nav-item"><a class="nav-link link text-black show display-4" href="#" data-bs-auto-close="outside" aria-expanded="false">Set up your lab</a></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Lab Tests</a><div class="dropdown-menu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="#" data-bs-auto-close="outside" aria-expanded="false">Take a test</a><a class="text-black show dropdown-item display-4" href="#" data-bs-auto-close="outside" aria-expanded="false">Test Results</a></div></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            About us</a><div class="dropdown-menu" aria-labelledby="dropdown-undefined"><a class="text-black dropdown-item text-primary display-4" href="AboutUs.html">About Us<br></a><a class="text-black dropdown-item text-primary display-4" href="OurTeam.html">Our Team</a><a class="text-black dropdown-item text-primary display-4" href="missionstatement.html">Mission Statement</a></div></li>
+
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="Contact.html">Contact</a>
+                    </li></ul>
+
+
+            </div>
+        </div>
+    </nav>
+</section>
+
+<section data-bs-version="5.1" class="slider1 cid-sTd3USXYRO" id="slider1-1">
+
+    <div class="carousel slide carousel-fade" id="sVlSk6EMlJ" data-interval="5000" data-bs-interval="5000">
+        <ol class="carousel-indicators">
+            <li data-slide-to="0" data-bs-slide-to="0" class="active" data-target="#sVlSk6EMlJ" data-bs-target="#sVlSk6EMlJ"></li>
+            <li data-slide-to="1" data-bs-slide-to="1" data-target="#sVlSk6EMlJ" data-bs-target="#sVlSk6EMlJ"></li>
+            <li data-slide-to="2" data-bs-slide-to="2" data-target="#sVlSk6EMlJ" data-bs-target="#sVlSk6EMlJ"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item slider-image item active">
+                <div class="item-wrapper">
+                    <img class="d-block w-100" src="assets/images/mbr.jpg" data-slide-to="0" data-bs-slide-to="0">
+
+                    <div class="carousel-caption">
+                        <h5 class="mbr-section-subtitle mbr-fonts-style display-5"><strong>We are leading Africa’s healthcare innovation and accessibility, impacting lives</strong></h5>
+                        <p class="mbr-section-text mbr-fonts-style display-7">Placeholder Subtitle Text</p>
+                    </div>
+                </div>
+            </div><div class="carousel-item slider-image item">
+                <div class="item-wrapper">
+                    <img class="d-block w-100" src="assets/images/mbr-1.jpg" data-slide-to="2" data-bs-slide-to="2">
+
+                    <div class="carousel-caption">
+                        <h5 class="mbr-section-subtitle mbr-fonts-style display-5"><strong>We are leading Africa’s healthcare innovation and accessibility, impacting lives</strong></h5>
+                        <p class="mbr-section-text mbr-fonts-style display-7">Placeholder Subtitle Text</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item slider-image item">
+                <div class="item-wrapper">
+                    <img class="d-block w-100" src="assets/images/mbr-3.jpg" data-slide-to="3" data-bs-slide-to="4">
+
+                    <div class="carousel-caption">
+                        <h5 class="mbr-section-subtitle mbr-fonts-style display-5"><strong>We are leading Africa’s healthcare innovation and accessibility, impacting lives</strong></h5>
+                        <p class="mbr-section-text mbr-fonts-style display-7">Placeholder Subtitle Text</p>
+                    </div>
                 </div>
             </div>
         </div>
-{{--        laravel default welcome content--}}
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                    <g clip-path="url(#clip0)" fill="#EF3B2D">
-                        <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"/>
-                    </g>
-                </svg>
+        <a class="carousel-control carousel-control-prev" role="button" data-slide="prev" data-bs-slide="prev" href="#sVlSk6EMlJ">
+            <span class="mobi-mbri mobi-mbri-arrow-prev" aria-hidden="true"></span>
+            <span class="sr-only visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control carousel-control-next" role="button" data-slide="next" data-bs-slide="next" href="#sVlSk6EMlJ">
+            <span class="mobi-mbri mobi-mbri-arrow-next" aria-hidden="true"></span>
+            <span class="sr-only visually-hidden">Next</span>
+        </a>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="clients1 cid-sTd4ipcvUZ" id="clients1-2">
+
+    <div class="images-container container">
+        <div class="mbr-section-head">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <strong>Our Partners</strong></h3>
+
+
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-3 card">
+                <img src="assets/images/partners-1-240x81.png" alt="">
+            </div>
+            <div class="col-md-3 card">
+                <img src="assets/images/partners1-240x100.png" alt="">
+            </div>
+            <div class="col-md-3 card">
+                <img src="assets/images/partners2-240x82.png" alt="">
             </div>
 
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                        </div>
 
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                            </div>
-                        </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="features4 cid-sTd4OqzRZ2" id="features4-3">
+
+    <div class="mbr-overlay"></div>
+    <div class="container">
+        <div class="mbr-section-head">
+            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <strong>Services</strong></h4>
+
+        </div>
+        <div class="row mt-4">
+            <div class="item features-image сol-12 col-md-6 col-lg-6">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <img src="assets/images/mbr-4.jpg" alt="" title="">
                     </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                            </div>
-                        </div>
+                    <div class="item-content">
+                        <h5 class="item-title mbr-fonts-style display-5"><strong>Medical Equipment</strong></h5>
+                        <h6 class="item-subtitle mbr-fonts-style mt-1 display-7">We provide various medical equipment</h6>
+                        <p class="mbr-text mbr-fonts-style mt-3 display-7">Medical Devices - PCR &amp; Reagents, Hospital and Laboratory products, Pharmaceutical products, Life Science Research equipment such as Sequencers, Primer synthesis and Biobanking equipment.<br>     <br>Biomedical Engineering - structural laboratory design and set up, 3D rendering and architectural design, Equipment installation and preventive maintenance.<br><br>Procurement and supply chain</p>
                     </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                            </div>
-                        </div>
+                    <div class="mbr-section-btn item-footer mt-2"><a href="" class="btn item-btn btn-primary display-7" target="_blank">Learn More &gt;</a></div>
+                </div>
+            </div>
+            <div class="item features-image сol-12 col-md-6 col-lg-6">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <img src="assets/images/mbr-6.jpg" alt="" title="">
                     </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                            </div>
-                        </div>
+                    <div class="item-content">
+                        <h5 class="item-title mbr-fonts-style display-5"><strong>Diagnosis</strong></h5>
+                        <h6 class="item-subtitle mbr-fonts-style mt-1 display-7">
+                            We offer diagnostic services</h6>
+                        <p class="mbr-text mbr-fonts-style mt-3 display-7">PCR, Diagnostics &amp; Research -&nbsp;Infectious disease testing, Genetic testing,&nbsp;Oncology, Forensics and DNA Paternity<br><br>Sequencing services<br><br>Biorepository Services <br><br>Primer design and synthesis  <br><br>Medical laboratory testing services -&nbsp;Clinical chemistry, Microbiology, Hematology, Pathology</p>
                     </div>
+                    <div class="mbr-section-btn item-footer mt-2"><a href="" class="btn item-btn btn-primary display-7" target="_blank">Learn More &gt;</a></div>
                 </div>
             </div>
 
-            <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                <div class="text-center text-sm text-gray-500 sm:text-left">
-                    <div class="flex items-center">
-                        <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
 
-                        <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                            Shop
-                        </a>
+        </div>
+    </div>
+</section>
 
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                        </svg>
+<section data-bs-version="5.1" class="features23 cid-sTd4ZztOiV" id="features23-4">
 
-                        <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                            Sponsor
-                        </a>
+
+
+
+    <div class="container">
+        <div class="card-wrapper">
+            <div class="card-box align-left">
+
+
+
+            </div>
+        </div>
+        <!-- col-12 col-md-6 col-lg-4 -->
+        <div class="row justify-content-center content-row mt-4">
+            <div class="card p-4 p-md-3 col-md-6 col-lg-4">
+                <div class="card-box">
+                    <div class="title">
+                        <span class="num mbr-fonts-style display-2"><strong>1,000,000</strong></span>
                     </div>
+                    <h4 class="card-title mbr-fonts-style display-5"><strong>Individuals served</strong></h4>
+                    <p class="mbr-text card-text mbr-fonts-style display-7">Our innovations have helped more than 1 million individuals across Nigeria access quality medical diagnostics.</p>
                 </div>
+            </div>
+            <div class="card p-4 p-md-3 col-md-6 col-lg-4">
+                <div class="card-box">
+                    <div class="title">
+                        <span class="num mbr-fonts-style display-2"><strong>300</strong></span>
+                    </div>
+                    <h4 class="card-title mbr-fonts-style display-5">
+                        <strong>Institutions assisted</strong></h4>
+                    <p class="mbr-text card-text mbr-fonts-style display-7">
+                        We have assisted more than 300 institutions to enable them provide quality diagnostics
+                    </p>
+                </div>
+            </div>
+            <div class="card p-4 p-md-3 col-md-6 col-lg-4">
+                <div class="card-box">
+                    <div class="title">
+                        <span class="num mbr-fonts-style display-2"><strong>3,000</strong></span>
+                    </div>
+                    <h4 class="card-title mbr-fonts-style display-5"><strong>Projects completed</strong></h4>
+                    <p class="mbr-text card-text mbr-fonts-style display-7">
+                        We have completed over three thousand separate molecular projects.
+                    </p>
+                </div>
+            </div>
 
-                <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                    Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                </div>
+
+
+
+
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="form5 cid-sTd59uLJvm" id="form5-6">
+
+
+    <div class="container">
+        <div class="mbr-section-head">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                <strong>Contact us</strong>
+            </h3>
+
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
+                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="ovVFq2hbkg62a/JTnnwMkpS/xD2De3rGDuCp0Ow53QaDWJK7G8bY+dO+guyyKTHGi1ENTYtIM1SGrYUXlvPJ0XZgfeo50qCf/RgFlQBOK8lSs7pxVKEbmC3qTJu2r5cK">
+                    <div class="row">
+                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
+                            the form!</div>
+                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
+                            problem!</div>
+                    </div>
+                    <div class="dragArea row">
+                        <div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                            <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form5-6">
+                        </div>
+                        <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                            <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form5-6">
+                        </div>
+
+                        <div class="col-12 form-group mb-3" data-for="textarea">
+                            <textarea name="textarea" placeholder="Message" data-form-field="textarea" class="form-control" id="textarea-form5-6"></textarea>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+                            <button type="submit" class="btn btn-primary display-4">Send message</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</x-guest-layout>
+</section>
+
+<section data-bs-version="5.1" class="footer6 cid-sTd5nEsUE7 mbr-parallax-background" once="footers" id="footer6-7">
+
+
+
+    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(11, 35, 80);"></div>
+
+    <div class="container">
+        <div class="row content mbr-white">
+            <div class="col-12 col-md-3 mbr-fonts-style display-7">
+                <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
+                    <strong>Address</strong>
+                </h5>
+                <p class="mbr-text mbr-fonts-style display-7">DemyHealth Building, Plot 418A,<br>Opposite D Close,<br>
+                    1st Avenue,<br>Gwarinpa,<br>FCT Abuja<br>Nigeria.</p> <br>
+                <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 mt-4 display-7">
+                    <strong>Contacts</strong>
+                </h5>
+                <p class="mbr-text mbr-fonts-style mb-4 display-7">
+                    Email: info@demyhealth.com <br>
+                    Phone: 08092276069<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0809277602<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;07015362458</p>
+            </div>
+            <div class="col-12 col-md-3 mbr-fonts-style display-7">
+                <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
+                    <strong>Links</strong>
+                </h5>
+                <ul class="list mbr-fonts-style mb-4 display-4">
+                    <li class="mbr-text item-wrap"><a class="text-info" href="#">Genomic Technologies Ltd</a></li>
+                    <li class="mbr-text item-wrap"><a class="text-info" href="#">LIMS</a></li>
+                    <li class="mbr-text item-wrap"><a class="text-info" href="#">Link 3</a></li>
+                </ul>
+                <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 mt-5 display-7">
+                    <strong>Feedback</strong>
+                </h5>
+                <p class="mbr-text mbr-fonts-style mb-4 display-7">
+                    Please send us your ideas, bug reports, suggestions! Any feedback would be appreciated.
+                </p>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCNveGQ9bfpKFwWzQLLftrR9hNiHwdqQG8&amp;q=Demyhealth building, Gwarinpa" allowfullscreen=""></iframe></div>
+            </div>
+            <div class="col-md-6">
+                <div class="social-list align-left">
+                    <div class="soc-item">
+                        <a href="https://twitter.com/mobirise" target="_blank">
+                            <span class="mbr-iconfont mbr-iconfont-social socicon-linkedin socicon"></span>
+                        </a>
+                    </div>
+                    <div class="soc-item">
+                        <a href="https://www.facebook.com/pages/Mobirise/1616226671953247" target="_blank">
+                            <span class="socicon-facebook socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div>
+                    <div class="soc-item">
+                        <a href="https://www.youtube.com/c/mobirise" target="_blank">
+                            <span class="mbr-iconfont mbr-iconfont-social socicon-twitter socicon"></span>
+                        </a>
+                    </div>
+                    <div class="soc-item">
+                        <a href="https://instagram.com/mobirise" target="_blank">
+                            <span class="socicon-instagram socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-lower">
+            <div class="media-container-row">
+                <div class="col-sm-12">
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12 copyright pl-0">
+                <p class="mbr-text mbr-fonts-style mbr-white display-7">
+                    © Copyright 2022 DemyHealth - All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </div>
+</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/v" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;"><a href="https://mobirise.site/q" style="color:#aaa;">This page</a> was designed with Mobirise website template</p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>
+
+
+<input name="animation" type="hidden">
+</body>
+</html>
