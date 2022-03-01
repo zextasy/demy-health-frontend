@@ -13,32 +13,78 @@ class FrontendController extends Controller
 
     public function covid19PCRTesting()
     {
-        return view('content.covid-19-pcr-testing');
+        return view('frontend.covid19-pcr-testing');
     }
 
     public function allServices()
     {
-        return view('content.services.all-services');
+        return view('frontend.services.all-services');
     }
 
-    public function labTests()
+    public function allProducts()
     {
-        return view('welcome');
+        return view('frontend.products.all-products');
     }
 
-    public function revolutionaryPanelTesting()
+
+    public function pcrAndReagents()
     {
-        return view('welcome');
+        return view('frontend.pcr-and-reagents');
     }
 
-    public function molecularDiagnosis()
+    public function hospitalAndLaboratoryProducts()
     {
-        return view('welcome');
+        return view('frontend.hospital-and-laboratory-products');
     }
 
-    public function portfolio()
+    public function pharmaceuticals()
     {
-        return view('welcome');
+        return view('frontend.pharmaceuticals');
+    }
+
+    public function procurementAndSupply()
+    {
+        return view('frontend.procurement-and-supply');
+    }
+
+    public function pcrDiagResearch()
+    {
+        return view('frontend.pcr-diag-research');
+    }
+
+    public function biomedicalEngineering()
+    {
+        return view('frontend.biomedical-engineering');
+    }
+
+    public function sequencingAndBiorepositoryServices()
+    {
+        return view('frontend.sequencing-and-biorepository-services');
+    }
+
+    public function molecularBiologyTraining()
+    {
+        return view('frontend.molecular-biology-training');
+    }
+
+    public function setUpYourLab()
+    {
+        return view('frontend.set-up-your-lab');
+    }
+
+    public function TakeATest()
+    {
+        return view('frontend.take-a-test');
+    }
+
+    public function TestResults()
+    {
+        return view('frontend.test-results');
+    }
+
+    public function placeholder()
+    {
+        return view('frontend.');
     }
 
     public function aboutUs()
@@ -59,5 +105,10 @@ class FrontendController extends Controller
     public function contactUs()
     {
         return view('welcome');
+    }
+
+    public function frontend()
+    {
+        return view('frontend.');
     }
 }
