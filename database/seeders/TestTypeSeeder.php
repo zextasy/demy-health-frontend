@@ -12,6 +12,6 @@ class TestTypeSeeder extends Seeder
 
     public function run()
     {
-        //
+        $this->call(TestCategorySeeder::class);
     }
 }

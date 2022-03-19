@@ -15,7 +15,13 @@ class CreateTestTypesTable extends Migration
     {
         Schema::create('test_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('test_id')->unique();
+            $table->foreignId('test_category_id')->constrained();
+            $table->foreignId('specimen_type_id')->constrained();
+            $table->integer('minimum_tat');
+            $table->integer('maximum_tat');
+            $table->unsignedDecimal('price');
+            $table->text('description');
             $table->timestamps();
         });
     }
