@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TestType;
+use App\Models\TestCenter;
 use Illuminate\Http\Request;
+use App\Models\TestCategory;
 
 class FrontendController extends Controller
 {
@@ -74,7 +77,10 @@ class FrontendController extends Controller
 
     public function TakeATest()
     {
-        return view('frontend.take-a-test');
+        $data['testCenters'] = TestCenter::all();
+        $data['testCategories'] = TestCategory::all();
+        $data['testTypes'] = TestType::all();
+        return view('frontend.take-a-test', $data);
     }
 
     public function TestResults()
@@ -110,5 +116,11 @@ class FrontendController extends Controller
     public function frontend()
     {
         return view('frontend.');
+    }
+
+    public function bookATest(){
+//        flash('Your test has been booked.')->important();
+        return redirect('index.html');
+//        return redirect()->action('FrontendController@home');
     }
 }

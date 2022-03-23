@@ -8,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/whatsapp-image-2021-12-17-at-14.30.08-96x29.jpg" type="image/x-icon">
   <meta name="description" content="">
-  
-  
+
+
   <title>Set up your lab</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
@@ -24,15 +24,15 @@
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
-  
-  
-  
+
+
+
+
 </head>
 <body>
-  
+
   <section data-bs-version="5.1" class="menu menu1 cid-sUA16QtR2W" once="menu" id="menu1-s">
-    
+
 
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container-fluid">
@@ -42,7 +42,7 @@
                         <img src="assets/images/whatsapp-image-2021-12-17-at-14.30.08-96x29.jpg" alt="Demyhealth" style="height: 3.6rem;">
                     </a>
                 </span>
-                
+
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
@@ -53,13 +53,13 @@
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">COVID 19</a><div class="dropdown-menu" aria-labelledby="dropdown-undefined"><a class="text-black dropdown-item text-primary display-4" href="covid19-pcr-testing.html">Covid-19 PCR Test</a><a class="text-black dropdown-item text-primary display-4" href="covid19-pcr-testing.html">Covid-19 Rapid Antigen Test</a></div></li><li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="pcr-and-reagents.html">PCR &amp; Reagents</a></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle show display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Our Business Units</a><div class="dropdown-menu show" aria-labelledby="dropdown-undefined" data-bs-popper="none"><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle show display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our Products</a><div class="dropdown-menu dropdown-submenu show" aria-labelledby="dropdown-undefined" data-bs-popper="none"><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Medical Devices</a><div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="pcr-and-reagents.html">PCR &amp; Reagents</a><a class="text-black show dropdown-item text-primary display-4" href="hospital-and-laboratory-products.html">Hospital and Laboratory products</a><a class="text-black show dropdown-item text-primary display-4" href="pharmaceuticals.html">Pharmaceuticals</a></div></div><a class="text-black dropdown-item show text-primary display-4" href="procurement-and-supply.html">Procurement and Supply</a></div></div><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our Services</a><div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="pcr-diag-research.html">PCR testing, diagnostics and research</a><a class="text-black show dropdown-item text-primary display-4" href="biomedical-engineering.html">Biomedical Engineering</a><a class="text-black show dropdown-item text-primary display-4" href="sequencing-and-biorepository-services.html">Sequencing and Biorepository  Services</a><a class="text-black show dropdown-item text-primary display-4" href="molecular-biology-training.html">Molecular Biology Training</a></div></div></div></li><li class="nav-item"><a class="nav-link link text-black show display-4" href="#" data-bs-auto-close="outside" aria-expanded="false">Set up your lab</a></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Lab Tests</a><div class="dropdown-menu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="#" data-bs-auto-close="outside" aria-expanded="false">Take a test</a><a class="text-black show dropdown-item display-4" href="#" data-bs-auto-close="outside" aria-expanded="false">Test Results</a></div></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">COVID 19</a><div class="dropdown-menu" aria-labelledby="dropdown-undefined"><a class="text-black dropdown-item text-primary display-4" href="covid19-pcr-testing.html">Covid-19 PCR Test</a><a class="text-black dropdown-item text-primary display-4" href="covid19-pcr-testing.html">Covid-19 Rapid Antigen Test</a></div></li><li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="pcr-and-reagents.html">PCR &amp; Reagents</a></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle show display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Our Business Units</a><div class="dropdown-menu show" aria-labelledby="dropdown-undefined" data-bs-popper="none"><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle show display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our Products</a><div class="dropdown-menu dropdown-submenu show" aria-labelledby="dropdown-undefined" data-bs-popper="none"><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Medical Devices</a><div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="pcr-and-reagents.html">PCR &amp; Reagents</a><a class="text-black show dropdown-item text-primary display-4" href="hospital-and-laboratory-products.html">Hospital and Laboratory products</a><a class="text-black show dropdown-item text-primary display-4" href="pharmaceuticals.html">Pharmaceuticals</a></div></div><a class="text-black dropdown-item show text-primary display-4" href="procurement-and-supply.html">Procurement and Supply</a></div></div><div class="dropdown"><a class="text-black dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our Services</a><div class="dropdown-menu dropdown-submenu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="pcr-diag-research.html">PCR testing, diagnostics and research</a><a class="text-black show dropdown-item text-primary display-4" href="biomedical-engineering.html">Biomedical Engineering</a><a class="text-black show dropdown-item text-primary display-4" href="sequencing-and-biorepository-services.html">Sequencing and Biorepository  Services</a><a class="text-black show dropdown-item text-primary display-4" href="molecular-biology-training.html">Molecular Biology Training</a></div></div></div></li><li class="nav-item"><a class="nav-link link text-black show display-4" href="#" data-bs-auto-close="outside" aria-expanded="false">Set up your lab</a></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Lab Tests</a><div class="dropdown-menu" aria-labelledby="dropdown-undefined"><a class="text-black show dropdown-item text-primary display-4" href="take-a-test.html" data-bs-auto-close="outside" aria-expanded="false">Take a test</a><a class="text-black show dropdown-item display-4" href="test-results.html" data-bs-auto-close="outside" aria-expanded="false">Test Results</a></div></li><li class="nav-item dropdown"><a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             About us</a><div class="dropdown-menu" aria-labelledby="dropdown-undefined"><a class="text-black dropdown-item text-primary display-4" href="AboutUs.html">About Us<br></a><a class="text-black dropdown-item text-primary display-4" href="OurTeam.html">Our Team</a><a class="text-black dropdown-item text-primary display-4" href="missionstatement.html">Mission Statement</a></div></li>
-                    
+
                     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="Contact.html">Contact</a>
                     </li></ul>
-                
-                
+
+
             </div>
         </div>
     </nav>
@@ -67,9 +67,9 @@
 
 <section data-bs-version="5.1" class="header14 cid-sUA6yB5nHx" id="header14-z">
 
-    
 
-    
+
+
 
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
@@ -92,19 +92,19 @@
 
 <section data-bs-version="5.1" class="features5 cid-sUA8NffnmF" id="features6-11">
 
-    
 
-    
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="card col-12 col-lg-6">
                 <div class="card-wrapper mbr-flex">
                     <div class="card-box align-left">
-                        
-                        
+
+
                         <p class="mbr-text mbr-fonts-style mb-3 display-4">
                             We provide world class contractual services to help other labs set up their own molecular laboratories at the most affordable cost. We have collaborated with more than 70% of the molecular labs in Nigeria through our product sales and services delivery.</p>
-                        
+
                     </div>
                     <div class="img-wrapper img1 align-center">
                         <span class="mbr-iconfont mobi-mbri-globe-2 mobi-mbri"></span>
@@ -115,11 +115,11 @@
             <div class="card col-12 col-lg-6">
                 <div class="card-wrapper mbr-flex">
                     <div class="card-box align-left">
-                        
-                        
+
+
                         <p class="mbr-text mbr-fonts-style mb-3 display-4">
                             DemyHealth and Genomic Technologies have set up over 30 fully functional biosafety level 2 and level 3 molecular laboratories in Nigeria. In the last two and half years, we have sold and installed 45 PCR machines, 25 automated nucleic acid extractors and many other biotechnology solutions in Nigeria. Sold over 2.5 million Tests of molecular diagnostic kits, research test kits and consumables in Nigeria.</p>
-                        
+
                     </div>
                     <div class="img-wrapper img2 align-center">
                         <span class="mbr-iconfont mbri-delivery"></span>
@@ -132,18 +132,18 @@
 
 <section data-bs-version="5.1" class="features5 cid-sUA9Itv23Z" id="features6-12">
 
-    
 
-    
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="card col-12 col-lg-6">
                 <div class="card-wrapper mbr-flex">
                     <div class="card-box align-left">
-                        
-                        
+
+
                         <p class="mbr-text mbr-fonts-style mb-3 display-4">Due to our above industry standard equipment and test kits, our in-house molecular lab developed wide range capabilities and contributed to the existing body of knowledge in the Nigerian infectious disease segment by closing the country’s Hep C genotype testing gap.<br></p>
-                        
+
                     </div>
                     <div class="img-wrapper img1 align-center">
                         <span class="mbr-iconfont mobi-mbri-user mobi-mbri"></span>
@@ -154,11 +154,11 @@
             <div class="card col-12 col-lg-6">
                 <div class="card-wrapper mbr-flex">
                     <div class="card-box align-left">
-                        
-                        
+
+
                         <p class="mbr-text mbr-fonts-style mb-3 display-4">
                             DemyHealth’s lab became the first molecular lab in Nigeria to identify mixed Hepatitis C virus infections involving three (3) sero-groups in the Nigerian population—an uncommon feat. This earned us double space to present our findings at the Nigerian Gastroenterology and Hepatology Conference, in August, 2018.</p>
-                        
+
                     </div>
                     <div class="img-wrapper img2 align-center">
                         <span class="mbr-iconfont mobi-mbri-success mobi-mbri"></span>
@@ -171,19 +171,19 @@
 
 <section data-bs-version="5.1" class="features5 cid-sUA9Ji9TmT" id="features6-13">
 
-    
 
-    
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="card col-12 col-lg-6">
                 <div class="card-wrapper mbr-flex">
                     <div class="card-box align-left">
-                        
-                        
+
+
                         <p class="mbr-text mbr-fonts-style mb-3 display-4">
                             Our team comprises of professionals trained in highly rated institutions, with advanced degrees in: Molecular biology, biotechnology, Biomedical engineering and Bioinformatics. We are well experienced and versed in these fields.</p>
-                        
+
                     </div>
                     <div class="img-wrapper img1 align-center">
                         <span class="mbr-iconfont mobi-mbri-globe-2 mobi-mbri"></span>
@@ -194,10 +194,10 @@
             <div class="card col-12 col-lg-6">
                 <div class="card-wrapper mbr-flex">
                     <div class="card-box align-left">
-                        
-                        
+
+
                         <p class="mbr-text mbr-fonts-style mb-3 display-4">Your molecular laboratory set up<br>For hands-on trainings and capacity<br>building in molecular techniques.<br>gtl@demyhealth.com<br></p>
-                        
+
                     </div>
                     <div class="img-wrapper img2 align-center">
                         <span class="mbr-iconfont socicon-mail socicon"></span>
@@ -209,14 +209,14 @@
 </section>
 
 <section data-bs-version="5.1" class="form5 cid-sUAagix4DL" id="form5-15">
-    
-    
+
+
     <div class="container">
         <div class="mbr-section-head">
             <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
                 <strong>Contact Us</strong>
             </h3>
-            
+
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
@@ -252,7 +252,7 @@
 
 <section data-bs-version="5.1" class="footer6 cid-sUA16V4HrO mbr-parallax-background" once="footers" id="footer6-y">
 
-    
+
 
     <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(11, 35, 80);"></div>
 
@@ -312,8 +312,8 @@
                             <span class="socicon-instagram socicon mbr-iconfont mbr-iconfont-social"></span>
                         </a>
                     </div>
-                    
-                    
+
+
                 </div>
             </div>
         </div>
@@ -330,9 +330,9 @@
             </div>
         </div>
     </div>
-</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/z" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Created with Mobirise <a href="https://mobirise.site/u" style="color:#aaa;">web page</a> templates</p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
-  
-  
+</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/z" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Created with Mobirise <a href="https://mobirise.site/u" style="color:#aaa;">web page</a> templates</p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>
+
+
   <input name="animation" type="hidden">
   </body>
 </html>

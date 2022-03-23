@@ -10,7 +10,7 @@
   <meta name="description" content="">
 
 
-  <title>Sequencing and Biorepository Services</title>
+  <title>COVID-19 PCR Testing</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
@@ -30,7 +30,7 @@
 </head>
 <body>
 
-  <section data-bs-version="5.1" class="menu menu1 cid-sVluBrkSFs" once="menu" id="menu1-2a">
+  <section data-bs-version="5.1" class="menu menu1 cid-sTd3LiLcWy" once="menu" id="menu1-8">
 
 
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
@@ -64,7 +64,7 @@
     </nav>
 </section>
 
-<section data-bs-version="5.1" class="info3 cid-sVluBqJ6ql" id="info3-29">
+<section data-bs-version="5.1" class="info3 cid-sUiuU4aNwh" id="info3-b">
 
 
 
@@ -76,9 +76,10 @@
             <div class="card col-12 col-lg-10">
                 <div class="card-wrapper">
                     <div class="card-box align-center">
-                        <h4 class="card-title mbr-fonts-style align-center mb-4 display-1"><strong>Sequencing and Biorepository Services</strong></h4>
+                        <h4 class="card-title mbr-fonts-style align-center mb-4 display-1">
+                            <strong>Our Centers</strong></h4>
                         <p class="mbr-text mbr-fonts-style mb-4 display-7">
-                            See a list of our services below.</p>
+                            Book a test at any of our centers below.</p>
 
                     </div>
                 </div>
@@ -87,176 +88,172 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="content8 cid-sVlvu3XvIt" id="content8-2c">
+  <section data-bs-version="5.1" class="form5 cid-sTd59uLJvm" id="form5-6">
+
+
+      <div class="container">
+          <div class="mbr-section-head">
+              <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                  <strong>Book</strong>
+              </h3>
+
+          </div>
+          <div class="row justify-content-center mt-4">
+              <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
+                  <form action="{{url('book-a-test.html')}}" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="ovVFq2hbkg62a/JTnnwMkpS/xD2De3rGDuCp0Ow53QaDWJK7G8bY+dO+guyyKTHGi1ENTYtIM1SGrYUXlvPJ0XZgfeo50qCf/RgFlQBOK8lSs7pxVKEbmC3qTJu2r5cK">
+                      @csrf
+                      <div class="row">
+                          <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
+                              the form!</div>
+                          <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
+                              problem!</div>
+                      </div>
+                      <div class="col-12 form-group mb-3" data-for="textarea">
+                          <select class="form-control" name="category_id">
+
+                              <option value="" selected>Choose Center</option>
+
+                              @foreach($testCenters as $testCenter)
+
+                                  <option value="{{ $testCenter->id }}">{{ $testCenter->name }}</option>
+
+                              @endforeach
+
+                          </select>
+                      </div>
+                      <div class="dragArea row">
+                          <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
+                              <select class="form-control" name="category_id">
+
+                                  <option value="" selected>Choose Category</option>
+
+                                  @foreach($testCategories as $testCategory)
+
+                                      <option value="{{ $testCategory->id }}">{{ $testCategory->name }}</option>
+
+                                  @endforeach
+
+                              </select>
+                          </div>
+                          <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
+                              <select class="form-control" name="category_id">
+
+                                  <option value="" selected>Choose Test</option>
+
+                                  @foreach($testTypes as $testType)
+
+                                      <option value="{{ $testType->id }}">{{ $testType->description }}</option>
+
+                                  @endforeach
+
+                              </select>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+                              <button type="submit" class="btn btn-primary display-4">Book Test</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </section>
+
+<section data-bs-version="5.1" class="features8 cid-sUisQ06fKm" xmlns="http://www.w3.org/1999/html" id="features9-a">
 
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="counter-container col-md-12 col-lg-10">
-                <h4 class="mbr-section-title mbr-fonts-style mb-4 display-5"><strong>DemyHealth’s Integrated Business Model</strong></h4>
-                <div class="mbr-text mbr-fonts-style display-7">
-                    <ul>
-                        <li>Multi-platform business model: B2B and B2C</li>
-                        <li>Large, global market opportunities.</li>
-                        <li>Partnerships with agencies, organizations and biopharma companies.</li><li>Innovation and expertise driven by key collaborations.</li><li>Increasing growth and multiple revenue streams</li>
-                    </ul>
+        <div class="card">
+            <div class="card-wrapper">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-4">
+                        <div class="image-wrapper">
+                            <img src="assets/images/mbr-816x577.jpg" alt="Mobirise">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-md">
+                                    <h6 class="card-title mbr-fonts-style display-5"><strong>DemyHealth Building</strong></h6>
+                                    <p class="mbr-text mbr-fonts-style display-7">Plot 418A, Opposite D close, Along 1st Avenue, Gwarinpa, Abuja.
+                                    </p>
+                                </div>
+                                <div class="col-md-auto">
+
+                                    <div class="mbr-section-btn"><a href="#" class="btn btn-primary display-4">
+                                            Book Now
+                                        </a></div>
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-wrapper">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-4">
+                        <div class="image-wrapper">
+                            <img src="assets/images/mbr-816x487.jpg" alt="Mobirise">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-md">
+                                    <h6 class="card-title mbr-fonts-style display-5"><strong>Chescon Park</strong></h6>
+                                    <p class="mbr-text mbr-fonts-style display-7">Beside Millennium Garden, Opposite Transcorp Hilton, Maitama District, Abuja.
+                                    </p>
+                                </div>
+                                <div class="col-md-auto">
+
+                                    <div class="mbr-section-btn"><a href="#" class="btn btn-primary display-4">
+                                            Book Now
+                                        </a></div>
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-wrapper">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-4">
+                        <div class="image-wrapper">
+                            <img src="assets/images/mbr-816x435.jpg" alt="Mobirise">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-md">
+                                    <h6 class="card-title mbr-fonts-style display-5">
+                                        <strong>Lagos</strong></h6>
+                                    <p class="mbr-text mbr-fonts-style display-7">
+                                        Plot 2, Aina Close, Beside Justrite Super Stores, Opposite New Page Plaza, Kosoko Road, Ojodu Berger, Lagos State
+                                    </p>
+                                </div>
+                                <div class="col-md-auto">
+
+                                    <div class="mbr-section-btn"><a href="#" class="btn btn-primary display-4">
+                                            Book Now
+                                        </a></div>
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section data-bs-version="5.1" class="clients2 cid-sVlwpQf1wI" id="clients2-2d">
-
-
-
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card col-12 col-md-6 col-lg-3">
-                <div class="card-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/mbr-280x277.png" alt="Mobirise">
-                    </div>
-                    <div class="card-box align-center">
-
-                        <h5 class="card-title mbr-fonts-style mb-3 display-7"><strong>INDUSTRY GAPS</strong></h5>
-                        <p class="mbr-text mbr-fonts-style mb-4 display-4">
-                            There are many identifiable problems leading to obvious disparity in the African molecular diagnostic and Genomic Medicine space. </p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card col-12 col-md-6 col-lg-3">
-                <div class="card-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/mbr-1-280x187.jpg" alt="Mobirise">
-                    </div>
-                    <div class="card-box align-center">
-
-                        <h5 class="card-title mbr-fonts-style mb-3 display-7"><strong>PRODUCT GAPS</strong></h5>
-                        <p class="mbr-text mbr-fonts-style mb-4 display-4">Molecular labs are struggling with stocking the right test kits, lab reagents and consumables.<br><br>Beyond pricing most labs are unable to properly select the right reagents with improved features that helps to avoid test reruns and prolong turnaround times. Scientists are faced with daily dilemma.  <br><br>Most labs don’t have back up equipment such as PCR or Automated extractors. Non availability of Genomic Medicine tools such as Sequencers, Computational Infrastructure, Biobanking equipment, Nucleic acid Quantitators and Analyzers</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card col-12 col-md-6 col-lg-3">
-                <div class="card-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/mbr-3.jpg" alt="Mobirise">
-                    </div>
-                    <div class="card-box align-center">
-
-                        <h5 class="card-title mbr-fonts-style mb-3 display-7"><strong>SERVICE GAPS</strong></h5>
-                        <p class="mbr-text mbr-fonts-style mb-4 display-4">Labs are green and are struggling with expanding their services beyond covid-19 PCR testing.<br><br>Labs don’t have access to competent engineers to carry out preventive maintenance of vital equipment.<br><br>Aside the basic DNA/RNA extraction and simple PCR detection, most Labs have little or no expertise in advance diagnostics and Genomic Medicine. Genomic medicine knowledge / tools are seriously lacking.<br><br>Organizations and companies participating in drug discovery and vaccine development are increasingly requiring cohort data inclusive of diverse population to undertake novel research and analysis for better disease understanding.&nbsp;</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card col-12 col-md-6 col-lg-3">
-                <div class="card-wrapper">
-                    <div class="img-wrapper">
-                        <img src="assets/images/mbr-280x254.png" alt="Mobirise">
-                    </div>
-                    <div class="card-box align-center">
-
-                        <h5 class="card-title mbr-fonts-style mb-3 display-7"><strong>IMPACTS OF THE GAP</strong></h5>
-                        <p class="mbr-text mbr-fonts-style mb-4 display-4">These gaps are responsible for the under develop African molecular diagnostic industry with paucity of African genomic data leading to disproportionate representation of African data in global genomics data.<br><br><strong>This presents major limitation in the current drive towards precision medicine and modern drug discovery.</strong><br><br><strong>The world population stands at about 7.9 billion while Africa’s population is about 1.3 billion, but less than 3% of genomic data represented in global research is from African populations.<br></strong><br><strong>DemyHealth aims to narrow this disparity gap via our state-of-the-art biorepository which will be inclusive of clinical, phenotypic and genetic data of Africans.</strong><br></p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="features19 cid-sVlyqCn1Kw" id="features20-2f">
-
-
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-lg-9">
-                <div class="card-wrapper pb-4">
-                    <div class="card-box align-center">
-                        <h4 class="card-title mbr-fonts-style mb-4 display-5"><strong>HERE IS HOW WE SOLVE THESE PROBLEMS</strong></h4>
-                        <p class="mbr-text mbr-fonts-style mb-4 display-7">
-                            Provide the labs with the needed capabilities by:</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-8">
-                <div class="item mbr-flex">
-                    <div class="icon-box">
-                        <span class="step-number mbr-fonts-style display-5">1</span>
-                    </div>
-                    <div class="text-box">
-                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-7"><strong>Stock up your lab with the right quantity of carefully selected reagents and consumables.</strong></h4>
-
-                    </div>
-                </div>
-                <div class="item mbr-flex">
-                    <div class="icon-box">
-                        <span class="step-number mbr-fonts-style display-5">2</span>
-                    </div>
-                    <div class="text-box">
-                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-7"><strong>Keep the right stock of reagents that improve your laboratory’s efficiency, speed and quality results.</strong></h4>
-
-                    </div>
-                </div>
-                <div class="item mbr-flex last">
-                    <div class="icon-box">
-                        <span class="step-number mbr-fonts-style display-5">3</span>
-                    </div>
-                    <div class="text-box">
-                        <h4 class="icon-title card-title mbr-black mbr-fonts-style display-7"><strong>Making advance Genomic Medicine tool, training and services available, accessible and affordable.</strong></h4>
-
-                    </div>
-                </div>
-
-
-
-
-
-
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="content6 cid-sVlAloQilP" id="content6-2g">
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-lg-10">
-                <hr class="line">
-                <p class="mbr-text align-center mbr-fonts-style my-4 display-5">At DemyHealth, one of our major goals is to tackle this gap in precision medicine by building one of the world’s largest biorepositories from the world’s most genetically diverse populations which will provide more accurate data-driven insights tailored for better health and therapeutics.&nbsp;</p>
-                <hr class="line">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="content14 cid-sVlAxOcnWn" id="content14-2h">
-
-
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-lg-10">
-                    <h3 class="mbr-section-title mbr-fonts-style mb-4 display-5"><strong>To achieve this, we have to implement infrastructure that enables:</strong></h3>
-                <ul class="list mbr-fonts-style display-7">
-                    <li><strong>Provision of advanced Next Generation sequencing services to support research and clinical programs.</strong><br></li>
-                    <li><strong>Research that provides companies with data to create products that are inclusive of African populations.</strong><br></li>
-                    <li><strong>Provision of inclusive genomics data through our new biorepository.</strong></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="footer6 cid-sVluBrRMhp mbr-parallax-background" once="footers" id="footer6-2b">
+<section data-bs-version="5.1" class="footer6 cid-sTd5nEsUE7 mbr-parallax-background" once="footers" id="footer6-9">
 
 
 
@@ -294,7 +291,7 @@
                 </p>
             </div>
             <div class="col-12 col-md-6">
-                <div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDk89J4FSunMF33ruMVWJaJht_Ro0kvoXs&amp;q=Demyhealth building, Gwarinpa" allowfullscreen=""></iframe></div>
+                <div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCZI5F_k6S1k46ujh0SNrapM89f7mJxd30&amp;q=Demyhealth building, Gwarinpa" allowfullscreen=""></iframe></div>
             </div>
             <div class="col-md-6">
                 <div class="social-list align-left">
@@ -336,7 +333,7 @@
             </div>
         </div>
     </div>
-</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/j" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Page was <a href="https://mobirise.site/h" style="color:#aaa;">made with</a> Mobirise</p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>
+</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/r" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Created with <a href="https://mobirise.site/a" style="color:#aaa;">Mobirise</a></p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>
 
 
   <input name="animation" type="hidden">

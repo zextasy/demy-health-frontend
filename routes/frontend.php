@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 
+Route::get('index.html', [FrontendController::class, 'home'])
+    ->name('home');
 Route::get('covid19-pcr-testing.html', [FrontendController::class, 'covid19PCRTesting'])
     ->name('covid-19-pcr-testing');
 Route::get('/products/all-products', [FrontendController::class, 'allProducts'])
@@ -39,3 +41,7 @@ Route::get('missionstatement.html', [FrontendController::class, 'missionStatemen
     ->name('about.mission-statement');
 Route::get('Contact.html', [FrontendController::class, 'contactUs'])
     ->name('contact');
+
+
+Route::post('book-a-test.html', [FrontendController::class, 'BookATest'])
+    ->name('book-a-test');
