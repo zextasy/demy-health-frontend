@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Forms\Select;
 
 use Livewire\Component;
 
-class Twoleveldropdown extends Component
+class TwoLevelDependant extends Component
 {
     public $firstLevelCollection;
     public $firstLevelModelName;
@@ -28,7 +28,7 @@ class Twoleveldropdown extends Component
 
     public function render()
     {
-        return view('livewire.twoleveldropdown');
+        return view('livewire.forms.select.two-level-dependant');
     }
 
     public function updatedSecondLevel($firstLevelModelId)

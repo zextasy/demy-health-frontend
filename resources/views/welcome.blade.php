@@ -21,6 +21,6 @@
 
     <section data-bs-version="5.1" class="form5 cid-sTd59uLJvm" id="form5-6">
 
-        @include('components.mobirise.contactUs')
+        @include('components.mobirise.contact-us')
     </section>
 </x-mobirise-layout>

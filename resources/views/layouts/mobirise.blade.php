@@ -10,6 +10,7 @@
 
 
     <title>Home</title>
+    <!-- Mobirise Styles -->
     <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
@@ -25,8 +26,10 @@
     </noscript>
     <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css">
     <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-
-    <!-- Scripts -->
+    <!-- Laravel Styles -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @livewireStyles
+    <!-- Laravel Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -34,6 +37,9 @@
 <section data-bs-version="5.1" class="menu menu1 cid-sTd3LiLcWy" once="menu" id="menu1-0">
 
     @include('layouts.mobirise.navigation')
+</section>
+<section>
+    <livewire:flash-container />
 </section>
 <!-- Page Content -->
 <main>
@@ -64,5 +70,6 @@
 <!-- X Page Scripts -->
 
 <input name="animation" type="hidden">
+@livewireScripts
 </body>
 </html>

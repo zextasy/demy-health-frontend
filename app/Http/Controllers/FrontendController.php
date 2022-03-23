@@ -11,6 +11,9 @@ class FrontendController extends Controller
 {
     public function home()
     {
+        flash()->overlay('Overlay.');
+        flash('Flash.')->notDismissable();
+        flash()->message('Message.','warning');
         return view('welcome');
     }
 
@@ -77,10 +80,10 @@ class FrontendController extends Controller
 
     public function TakeATest()
     {
-        $data['testCenters'] = TestCenter::all();
-        $data['testCategories'] = TestCategory::all();
-        $data['testTypes'] = TestType::all();
-        return view('frontend.take-a-test', $data);
+//        $data['testCenters'] = TestCenter::all();
+//        $data['testCategories'] = TestCategory::all();
+//        $data['testTypes'] = TestType::all();
+        return view('frontend.take-a-test'); //, $data
     }
 
     public function TestResults()
@@ -119,7 +122,7 @@ class FrontendController extends Controller
     }
 
     public function bookATest(){
-//        flash('Your test has been booked.')->important();
+        flash()->message('Your test has been booked.','success');
         return redirect('index.html');
 //        return redirect()->action('FrontendController@home');
     }
