@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Str;
 // for heroku
-$DATABASE_URL=parse_url('postgres://mfaytvnlrsjyzh:28034364881abdcf9b96d2381d8323df8cc6eb83faf58986cfc128eeca2525b3@ec2-54-157-160-218.compute-1.amazonaws.com:5432/dcd9dsk4vad6rp');
+$dbConfigUrl = config('DATABASE_URL');
+$DATABASE_URL=parse_url($dbConfigUrl);
 return [
 
 
