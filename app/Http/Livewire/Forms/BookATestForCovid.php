@@ -10,7 +10,7 @@ use App\Models\TestBooking;
 use App\Models\TestCategory;
 use App\Models\LocalGovernmentArea;
 
-class BookATest extends Component
+class BookATestForCovid extends Component
 {
     public $testCenters;
     public $states;
@@ -52,7 +52,7 @@ class BookATest extends Component
 
     public function render()
     {
-        return view('livewire.forms.book-a-test');
+        return view('livewire.forms.book-a-test-for-covid');
     }
 
     public function submit()
@@ -61,7 +61,7 @@ class BookATest extends Component
 //        ray($this);
 //        TestBooking::create($validatedData);
         flash()->overlay('Your test has been booked.','success')->livewire($this);
-//        return redirect()->to('/index.html');
+//        return redirect()->to('/form');
     }
 
     public function updatedSelectedTestCategory($testCategoryId)

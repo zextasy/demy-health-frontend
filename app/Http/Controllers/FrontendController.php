@@ -11,9 +11,6 @@ class FrontendController extends Controller
 {
     public function home()
     {
-        flash()->overlay('Overlay.');
-        flash('Flash.')->notDismissable();
-        flash()->message('Message.','warning');
         return view('welcome');
     }
 

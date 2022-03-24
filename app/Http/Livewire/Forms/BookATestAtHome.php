@@ -10,7 +10,7 @@ use App\Models\TestBooking;
 use App\Models\TestCategory;
 use App\Models\LocalGovernmentArea;
 
-class BookATest extends Component
+class BookATestAtHome extends Component
 {
     public $testCenters;
     public $states;
@@ -52,16 +52,13 @@ class BookATest extends Component
 
     public function render()
     {
-        return view('livewire.forms.book-a-test');
+        return view('livewire.forms.book-a-test-at-home');
     }
 
     public function submit()
     {
         $this->validate();
-//        ray($this);
-//        TestBooking::create($validatedData);
         flash()->overlay('Your test has been booked.','success')->livewire($this);
-//        return redirect()->to('/index.html');
     }
 
     public function updatedSelectedTestCategory($testCategoryId)
