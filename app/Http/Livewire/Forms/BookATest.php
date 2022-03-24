@@ -17,7 +17,7 @@ class BookATest extends Component
     public $selectedTestCategory = NULL;
     public $testCenter = NULL;
     public $testType = NULL;
-    public $customerIdentifier = NULL;
+    public $customerEmail = NULL;
 
     /**
      * Write code on Method
@@ -39,7 +39,7 @@ class BookATest extends Component
     public function submit()
     {
         $validatedData = $this->validate([
-            'customerIdentifier' => 'required',
+            'customerEmail' => 'required|email',
             'testCenter' => 'required',
             'testType' => 'required',
 

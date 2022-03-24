@@ -29,8 +29,6 @@
     <!-- Laravel Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @livewireStyles
-    <!-- Laravel Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
 
@@ -70,6 +68,8 @@
 <!-- X Page Scripts -->
 
 <input name="animation" type="hidden">
+<!-- Laravel Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 @livewireScripts
 </body>
 </html>

@@ -2,8 +2,8 @@
 
     @csrf
     <div class="col-12 form-group mb-3" data-for="email">
-        <input type="text" wire:model="customerIdentifier" class="form-control" placeholder="Please enter your email or phone number">
-        @error('customerIdentifier') <span class="error">{{ $message }}</span> @enderror
+        <input type="text" wire:model="customerEmail" class="form-control" placeholder="Please enter your email">
+        @error('customerEmail') <span class="error">{{ $message }}</span> @enderror
     </div>
     <div class="col-12 form-group mb-3" data-for="textarea">
         <select wire:model="testCenter" class="form-control">
