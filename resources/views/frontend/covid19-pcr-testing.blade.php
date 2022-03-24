@@ -1,6 +1,6 @@
 <x-mobirise-layout>
     <section data-bs-version="5.1" class="info3 cid-sUiuU4aNwh" id="info3-b">
-        @include('components.mobirise.title', ['title' => 'Book a COVID-19 Test', 'subTitle' => 'Book a COVID-19 test at any of our centers below.'])
+        @include('components.mobirise.title', ['title' => 'Book a COVID-19 Test', 'subTitle' => 'Book a COVID-19 test at any of our centers, or request a home sample collection.'])
 
     </section>
 
@@ -9,7 +9,7 @@
         <div class="container">
             <div class="mbr-section-head">
                 <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                    <strong>Book</strong>
+                    <strong>COVID 19</strong>
                 </h3>
 
             </div>

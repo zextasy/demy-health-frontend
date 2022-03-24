@@ -9,9 +9,12 @@ use App\Models\TestCenter;
 use App\Models\TestBooking;
 use App\Models\TestCategory;
 use App\Models\LocalGovernmentArea;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BookATestAtHome extends Component
 {
+    use LivewireAlert;
+
     public $testCenters;
     public $states;
     public $localGovernmentAreas;
@@ -58,7 +61,7 @@ class BookATestAtHome extends Component
     public function submit()
     {
         $this->validate();
-        flash()->overlay('Your test has been booked.','success')->livewire($this);
+        $this->flash('success', 'Your test has been booked!', [], '/');
     }
 
     public function updatedSelectedTestCategory($testCategoryId)

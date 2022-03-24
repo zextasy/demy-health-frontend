@@ -9,9 +9,12 @@ use App\Models\TestCenter;
 use App\Models\TestBooking;
 use App\Models\TestCategory;
 use App\Models\LocalGovernmentArea;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BookATest extends Component
 {
+    use LivewireAlert;
+
     public $testCenters;
     public $states;
     public $localGovernmentAreas;
@@ -60,8 +63,7 @@ class BookATest extends Component
         $this->validate();
 //        ray($this);
 //        TestBooking::create($validatedData);
-        flash()->overlay('Your test has been booked.','success')->livewire($this);
-//        return redirect()->to('/index.html');
+        $this->flash('success', 'Your test has been booked!', [], '/');
     }
 
     public function updatedSelectedTestCategory($testCategoryId)

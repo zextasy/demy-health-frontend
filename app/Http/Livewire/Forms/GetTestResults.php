@@ -3,9 +3,12 @@
 namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class GetTestResults extends Component
 {
+    use LivewireAlert;
+
     public $testBookingReference;
 
     protected $rules = [
@@ -22,7 +25,6 @@ class GetTestResults extends Component
         $this->validate();
         //        ray($this);
         //        TestBooking::create($validatedData);
-        flash()->overlay('Your test has been booked.','success');
-        return redirect()->to('/index.html');
+        $this->flash('success', 'Your results will be sent via email!', [], '/');
     }
 }

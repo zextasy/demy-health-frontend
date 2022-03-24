@@ -31,13 +31,12 @@
     @livewireStyles
 </head>
 <body>
-
 <section data-bs-version="5.1" class="menu menu1 cid-sTd3LiLcWy" once="menu" id="menu1-0">
 
     @include('layouts.mobirise.navigation')
 </section>
 <section>
-    <livewire:flash-container />
+    {{-- extra - flash, etc--}}
 </section>
 <!-- Page Content -->
 <main>
@@ -71,5 +70,7 @@
 <!-- Laravel Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 @livewireScripts
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<x-livewire-alert::scripts/>
 </body>
 </html>
