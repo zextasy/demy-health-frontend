@@ -46,7 +46,7 @@ class BookATestForCovid extends Component
         $this->testCenters = TestCenter::all();
         $this->states = State::where('is_ready_for_sample_collection', true)->get();
         $this->localGovernmentAreas = collect();
-        $this->testCategories = TestCategory::all();
+        $this->testCategories = TestCategory::where('name','LIKE','%COVID%')->get();
         $this->testTypes = collect();
     }
 
