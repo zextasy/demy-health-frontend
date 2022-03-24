@@ -95,22 +95,22 @@ class FrontendController extends Controller
 
     public function aboutUs()
     {
-        return view('welcome');
+        return view('frontend.about-us');
     }
 
     public function ourTeam()
     {
-        return view('welcome');
+        return view('frontend.our-team');
     }
 
     public function missionStatement()
     {
-        return view('welcome');
+        return view('frontend.mission-statement');
     }
 
     public function contactUs()
     {
-        return view('welcome');
+        return view('frontend.contact-us');
     }
 
     public function frontend()
