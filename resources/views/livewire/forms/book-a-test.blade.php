@@ -1,8 +1,12 @@
-<form action="{{url('book-a-test.html')}}" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
-    <input type="hidden" name="email" data-form-email="true" value="ovVFq2hbkg62a/JTnnwMkpS/xD2De3rGDuCp0Ow53QaDWJK7G8bY+dO+guyyKTHGi1ENTYtIM1SGrYUXlvPJ0XZgfeo50qCf/RgFlQBOK8lSs7pxVKEbmC3qTJu2r5cK">
+<form wire:submit.prevent="submit" class="mbr-form form-with-styler" data-form-title="Form Name">
+
     @csrf
+    <div class="col-12 form-group mb-3" data-for="email">
+        <input type="text" wire:model="customerIdentifier" class="form-control" placeholder="Please enter your email or phone number">
+        @error('customerIdentifier') <span class="error">{{ $message }}</span> @enderror
+    </div>
     <div class="col-12 form-group mb-3" data-for="textarea">
-        <select class="form-control" name="category_id">
+        <select wire:model="testCenter" class="form-control">
 
             <option value="" selected>Choose Center</option>
 
@@ -13,8 +17,8 @@
             @endforeach
 
         </select>
+        @error('testCenter') <span class="error">{{ $message }}</span> @enderror
     </div>
-    <div class="dragArea row">
         <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
             <select wire:model="selectedTestCategory" class="form-control">
 
@@ -29,7 +33,7 @@
             </select>
         </div>
         <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
-            <select class="form-control" name="test_type_id">
+            <select wire:model="testType" class="form-control">
 
                 <option value="" selected>Choose Test</option>
 
@@ -40,9 +44,9 @@
                 @endforeach
 
             </select>
+            @error('testType') <span class="error">{{ $message }}</span> @enderror
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
             <button type="submit" class="btn btn-primary display-4">Book Test</button>
         </div>
-    </div>
 </form>

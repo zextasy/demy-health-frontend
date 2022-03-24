@@ -23,7 +23,7 @@
 
     <section data-bs-version="5.1" class="features8 cid-sUisQ06fKm" xmlns="http://www.w3.org/1999/html" id="features9-a">
 
-    @include('components.mobirise.centers')
+{{--    @include('components.mobirise.centers')--}}
     </section>
 
 </x-mobirise-layout>
