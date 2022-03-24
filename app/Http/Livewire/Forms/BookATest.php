@@ -18,6 +18,7 @@ class BookATest extends Component
     public $testCenter = NULL;
     public $testType = NULL;
     public $customerEmail = NULL;
+    public $location = NULL;
 
     /**
      * Write code on Method
