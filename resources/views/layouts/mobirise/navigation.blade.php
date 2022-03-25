@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="index.html">
+                    <a href="/">
                         <img src="assets/images/whatsapp-image-2021-12-17-at-14.30.08-96x29.jpg" alt="Demyhealth" style="height: 3.6rem;">
                     </a>
                 </span>
@@ -35,7 +35,7 @@
                         Business Units</a>
                     <div class="dropdown-menu show" aria-labelledby="dropdown-undefined" data-bs-popper="none">
                         <div class="dropdown">
-                            <a class="text-black dropdown-item dropdown-toggle show display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our
+                            <a class="text-black dropdown-item dropdown-toggle show display-4" href="all-products.html" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our
                                 Products</a>
                             <div class="dropdown-menu dropdown-submenu show" aria-labelledby="dropdown-undefined" data-bs-popper="none">
                                 <div class="dropdown">
@@ -67,7 +67,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link text-black show display-4" href="#" data-bs-auto-close="outside" aria-expanded="false">Set
+                    <a class="nav-link link text-black show display-4" href="set-up-your-lab.html" data-bs-auto-close="outside" aria-expanded="false">Set
                         up your lab</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link link text-black dropdown-toggle display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Lab

@@ -24,31 +24,8 @@ class FrontendController extends Controller
         return view('frontend.services.all-services');
     }
 
-    public function allProducts()
-    {
-        return view('frontend.products.all-products');
-    }
 
 
-    public function pcrAndReagents()
-    {
-        return view('frontend.pcr-and-reagents');
-    }
-
-    public function hospitalAndLaboratoryProducts()
-    {
-        return view('frontend.hospital-and-laboratory-products');
-    }
-
-    public function pharmaceuticals()
-    {
-        return view('frontend.pharmaceuticals');
-    }
-
-    public function procurementAndSupply()
-    {
-        return view('frontend.procurement-and-supply');
-    }
 
     public function pcrDiagResearch()
     {
