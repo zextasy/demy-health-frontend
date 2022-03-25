@@ -5,6 +5,5 @@
     </section>
 
 </x-mobirise-layout>
-<body>
 
 

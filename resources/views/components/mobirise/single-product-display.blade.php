@@ -14,7 +14,7 @@
                             <p class="mbr-text mbr-fonts-style display-7">{{$description}}</p>
                         </div>
                         <div class="col-md-auto">
-                            <p class="price mbr-fonts-style display-2">$29</p>
+                            <p class="price mbr-fonts-style display-2">NGN {{$price}}</p>
                             <div class="mbr-section-btn"><a href="{{$buttonUrl}}" class="btn btn-primary display-4">
                                     {{$buttonText}}
                                 </a></div>

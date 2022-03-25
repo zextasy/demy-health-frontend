@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use Illuminate\Database\Seeder;
+use App\Models\ProductCategory;
 
 class ProductSeeder extends Seeder
 {
@@ -18,31 +19,46 @@ class ProductSeeder extends Seeder
             'name' => 'Linegene K Plus Real time PCR',
             'model' => 'Bioer/LinegeneK Plus',
             'country' => null,
-            'price' => 9783100
+            'price' => 9783100,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'Linegene 9600 Real time PCR',
             'model' => 'Bioer/Linegene 9600,',
             'country' => 'Germany',
-            'price' => 12580000
+            'price' => 12580000,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'Quantgene 9600 Real time PCR',
             'model' => 'Bioer/Quantgene 9600',
             'country' => 'Germany',
-            'price' => 13788700
+            'price' => 13788700,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'PCR Cabinet / Lamina flow',
             'model' => 'Searchtech AH172',
             'country' => null,
-            'price' => 1384400
+            'price' => 1384400,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'PCR Cabinet / Lamina flow',
             'model' => 'Biobase/BBS-V680',
             'country' => null,
-            'price' => 1319400
+            'price' => 1319400,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'Autoclave (50L)',
@@ -138,7 +154,10 @@ class ProductSeeder extends Seeder
             'name' => 'PCR Tube Rack',
             'model' => null,
             'country' => null,
-            'price' => 18700
+            'price' => 18700,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'Pipette Tips Rack (0.5-10ul)',
@@ -180,49 +199,70 @@ class ProductSeeder extends Seeder
             'name' => 'Eppendorf Tube',
             'model' => 'Axygen',
             'country' => null,
-            'price' => 14600
+            'price' => 14600,
         ],
         [
             'name' => '96 Tube',
             'model' => null,
             'country' => null,
-            'price' => 33200
+            'price' => 33200,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'PCR Tube (0.2ml)',
             'model' => null,
             'country' => null,
-            'price' => 25800
+            'price' => 25800,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'PCR Tube (0.1ml)',
             'model' => null,
             'country' => null,
-            'price' => 77600
+            'price' => 77600,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => '0.2ml 96-well PCR plate (half-skirted) (10pcs/lot)',
             'model' => 'Bioer',
             'country' => null,
-            'price' => 19800
+            'price' => 19800,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'Optical sealing Film (compatible for qPCR)',
             'model' => 'Bioer',
             'country' => null,
-            'price' => 19800
+            'price' => 19800,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => '0.2ml PCR 8-Stip tubes',
             'model' => 'Bioer',
             'country' => null,
-            'price' => 33200
+            'price' => 33200,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => '0.2ml PCR 8-Stip Caps',
             'model' => 'Bioer',
             'country' => null,
-            'price' => 13600
+            'price' => 13600,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => '2-Well Magnetic Rack (6pcs/lot)',
@@ -234,7 +274,10 @@ class ProductSeeder extends Seeder
             'name' => '0.2ml PCR Tube Rack-96 well',
             'model' => null,
             'country' => null,
-            'price' => 6400
+            'price' => 6400,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => '10ul Pipette Tips',
@@ -288,7 +331,10 @@ class ProductSeeder extends Seeder
             'name' => 'HIV-1 PCR Fluorescence Quantitative Kit',
             'model' => 'Bioer',
             'country' => 'Germany',
-            'price' => 342100
+            'price' => 342100,
+            'extra_information' => [
+                'Category Name' => 'PCR and Reagents',
+            ],
         ],
         [
             'name' => 'ELIGENE HBV RT KIT',
@@ -359,7 +405,8 @@ class ProductSeeder extends Seeder
                 'NO OF CHANNELS' => 6,
                 'NO OF WELLS' => 96,
                 'PRECALIBRATED DYES' => 'FAM, SYBR Green I, HEX/VIC, TET/JOE/CY3/NED/TAMRA, ROX, TEXAS-RED, Cy5, Cy5.5,  reserved path',
-                'Delivery Timeline' => '5-6 weeks after payment confirmation'
+                'Delivery Timeline' => '5-6 weeks after payment confirmation',
+                'Category Name' => 'PCR and Reagents'
             ],
         ],
         [
@@ -371,14 +418,24 @@ class ProductSeeder extends Seeder
                 'NO OF CHANNELS' => 6,
                 'NO OF WELLS' => 96,
                 'PRECALIBRATED DYES' => 'FAM、SYBR Green I, VIC、 HEX. TET、 JOE、 TAMRA、CY3、NED, ROX. Texas-Red, Cy5, Cy5.5, For Customized',
-                'Delivery Timeline' => '2-3 weeks after payment confirmation'
+                'Delivery Timeline' => '2-3 weeks after payment confirmation',
+                'Category Name' => 'PCR and Reagents'
             ],
         ],
     ];
+
+    //'PCR and Reagents', 'Hospital and Laboratory Products', 'Pharmaceuticals', 'Procurement and Supply'
     public function run()
     {
         foreach ($this->products as $product){
-            Product::updateOrCreate(['name' => $product['name']], $product);
+            $productModel = Product::updateOrCreate(['name' => $product['name']], $product);
+            if (array_key_exists('extra_information', $product)){
+                $extraInformation = $product['extra_information'];
+                if (array_key_exists('Category Name', $extraInformation)){
+                    $productCategory = ProductCategory::query()->where('name', $extraInformation['Category Name'])->first();
+                    $productCategory->products()->save($productModel);
+                }
+            }
         }
     }
 }
