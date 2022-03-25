@@ -8,12 +8,16 @@ use App\Models\ProductCategory;
 
 class ProductSeeder extends Seeder
 {
+
     protected $products = [
         [
             'name' => 'Biosafety Cabinet (Class 2 A2)',
             'model' => 'Biobase/BSC-1100IIA2-X',
             'country' => null,
-            'price' => 4740400
+            'price' => 4740400,
+            'extra_information' => [
+                'Category Name' => 'Hospital and Laboratory Products',
+            ],
         ],
         [
             'name' => 'Linegene K Plus Real time PCR',
@@ -429,11 +433,16 @@ class ProductSeeder extends Seeder
     {
         foreach ($this->products as $product){
             $productModel = Product::updateOrCreate(['name' => $product['name']], $product);
+
             if (array_key_exists('extra_information', $product)){
                 $extraInformation = $product['extra_information'];
+
                 if (array_key_exists('Category Name', $extraInformation)){
                     $productCategory = ProductCategory::query()->where('name', $extraInformation['Category Name'])->first();
-                    $productCategory->products()->save($productModel);
+
+                    if (isset($productCategory)){
+                        $productCategory->products()->save($productModel);
+                    }
                 }
             }
         }
