@@ -10,6 +10,9 @@ class ProductCategory extends Model
 {
     use HasFactory;
 
+    protected $dates =['created_at','updated_at'];
+    protected $guarded = ['id'];
+
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'products_product_categories');

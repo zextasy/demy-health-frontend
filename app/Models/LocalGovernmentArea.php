@@ -10,6 +10,9 @@ class LocalGovernmentArea extends Model
 {
     use HasFactory;
 
+    protected $dates =['created_at','updated_at'];
+    protected $guarded = ['id'];
+
     public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);

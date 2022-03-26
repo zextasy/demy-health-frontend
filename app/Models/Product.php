@@ -10,6 +10,9 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $dates =['created_at','updated_at'];
+    protected $guarded = ['id'];
+
     protected $casts = [
         'extra_information' => 'array'
     ];

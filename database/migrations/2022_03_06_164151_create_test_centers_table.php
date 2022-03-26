@@ -16,7 +16,7 @@ class CreateTestCentersTable extends Migration
         Schema::create('test_centers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('address');
+            $table->text('address_text');
             $table->timestamps();
         });
     }

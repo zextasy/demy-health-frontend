@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\SocialMediaLinks;
+namespace App\Enums\SocialMediaLink;
 
 enum SiteEnum: int
 {

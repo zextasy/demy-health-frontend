@@ -1,17 +1,17 @@
 <form wire:submit.prevent="submit" class="mbr-form form-with-styler" data-form-title="Form Name">
     @csrf
     <div class="col-12 form-group mb-3" data-for="email">
-        <input type="radio" id="html" wire:model="location" value="home">
+        <input type="radio" id="html" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::Home->value}}">
         <label for="html">Home sample collection</label><br>
-        <input type="radio" id="css" wire:model="location" value="center">
+        <input type="radio" id="css" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::Center->value}}">
         <label for="css">Take the Test at a center</label><br>
-        @error('location') <span class="error">{{ $message }}</span> @enderror
+        @error('locationType') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-12 form-group mb-3" data-for="email">
         <input type="text" wire:model="customerEmail" class="form-control" placeholder="Please enter your email">
-        @error('customerEmail') <span class="error">{{ $message }}</span> @enderror
+        @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
-    @if ($location == 'home')
+    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Home->value)
         <div class="col-12 form-group mb-3" data-for="textarea">
             <select wire:model="selectedState" class="form-control">
                 <option value="" selected>Choose State</option>
@@ -21,7 +21,7 @@
                 @endforeach
 
             </select>
-            @error('selectedState') <span class="error">{{ $message }}</span> @enderror
+            @error('selectedState') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         @if (!is_null($selectedState))
         <div class="col-12 form-group mb-3" data-for="textarea">
@@ -32,15 +32,19 @@
                 @endforeach
 
             </select>
-            @error('localGovernmentArea') <span class="error">{{ $message }}</span> @enderror
+            @error('localGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         @endif
         <div class="col-12 form-group mb-3" data-for="email">
+            <input type="textarea" wire:model="city" class="form-control" placeholder="Please enter your city">
+            @error('city') <span class="alert-danger">{{ $message }}</span> @enderror
+        </div>
+        <div class="col-12 form-group mb-3" data-for="email">
             <input type="textarea" wire:model="address" class="form-control" placeholder="Please enter your address">
-            @error('address') <span class="error">{{ $message }}</span> @enderror
+            @error('address') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
-    @if ($location == 'center')
+    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Center->value)
         <div class="col-12 form-group mb-3" data-for="textarea">
             <select wire:model="testCenter" class="form-control">
                 <option value="" selected>Choose Center</option>
@@ -50,7 +54,7 @@
                 @endforeach
 
             </select>
-            @error('testCenter') <span class="error">{{ $message }}</span> @enderror
+            @error('testCenter') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
     <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
@@ -62,7 +66,7 @@
             @endforeach
 
         </select>
-        @error('selectedTestCategory') <span class="error">{{ $message }}</span> @enderror
+        @error('selectedTestCategory') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     @if (!is_null($selectedTestCategory))
         <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
@@ -74,10 +78,20 @@
                 @endforeach
 
             </select>
-            @error('testType') <span class="error">{{ $message }}</span> @enderror
+            @error('testType') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
+    <div class="col-12 form-group mb-3" data-for="email">
+        <label for="startTime">Date: </label>
+        <input type="date"  wire:model="dueDate" min="{{today()}}">
+        @error('dueDate') <span class="alert-danger">{{ $message }}</span> @enderror
+        <label for="startTime">Start time: </label>
+        <input type="time" wire:model="startTime">
+        @error('startTime') <span class="alert-danger">{{ $message }}</span> @enderror
+    </div>
     <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
         <button type="submit" class="btn btn-primary display-4">Book Test</button>
     </div>
 </form>
+
+
