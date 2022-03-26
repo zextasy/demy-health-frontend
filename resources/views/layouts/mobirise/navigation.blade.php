@@ -82,13 +82,44 @@
                     <a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         About us</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
-                        <a class="text-black dropdown-item text-primary display-4" href="AboutUs.html">About Us<br></a><a class="text-black dropdown-item text-primary display-4" href="OurTeam.html">Our
-                            Team</a><a class="text-black dropdown-item text-primary display-4" href="missionstatement.html">Mission
-                            Statement</a></div>
+                        <a class="text-black dropdown-item text-primary display-4" href="AboutUs.html">About Us<br></a>
+                        <a class="text-black dropdown-item text-primary display-4" href="OurTeam.html">Our Team</a>
+                        <a class="text-black dropdown-item text-primary display-4" href="missionstatement.html">Mission Statement</a>
+                        <a class="text-black dropdown-item text-primary display-4" href="Contact.html">Contact</a>
+                    </div>
+
                 </li>
 
-                <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="Contact.html">Contact</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        My Account</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
+                        @auth
+                            @if(auth()->user()->hasPermissionTo('backend'))
+                                <a class="text-black dropdown-item text-primary display-4" href="{{route('dashboard')}}">Admin Section</a>
+                            @endif
+                            <a class="text-black dropdown-item text-primary display-4" href="#">My Cart</a>
+                            <a class="text-black dropdown-item text-primary display-4" href="#">My Results</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-responsive-nav-link :href="route('logout')"
+                                                           class="text-black dropdown-item text-primary display-4"
+                                                           onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-responsive-nav-link>
+                                </form>
+                        @else
+                            <a class="text-black dropdown-item text-primary display-4" href="{{ route('login') }}">Login<br></a>
+                            @if (Route::has('register'))
+                                <a class="text-black dropdown-item text-primary display-4" href="{{ route('register') }}">Register<br></a>
+                            @endif
+                        @endauth
+                    </div>
+
                 </li>
+
             </ul>
 
 

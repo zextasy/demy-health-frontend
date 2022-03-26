@@ -17,52 +17,6 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('covid-19-pcr-testing')" :active="request()->routeIs('covid-19-pcr-testing')">
-                        {{ __('COVID-19 PCR TESTING') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link-parent :href="'#'" :active="request()->routeIs('services.*')">
-                        <x-slot name="name">{{ __('Services') }}</x-slot>
-                        <x-slot name="children">
-                            <a href="{{route('services.all-services')}}">All Services</a>
-                            <span class="separator"></span>
-                            <a href="{{route('services.lab-tests')}}">Lab Tests</a>
-                            <span class="separator"></span>
-                            <a href="{{route('services.revolutionary-panel-testing')}}">Revolutionary Panel Testing</a>
-                            <span class="separator"></span>
-                            <a href="{{route('services.molecular-diagnosis')}}">Molecular Diagnosis</a>
-                        </x-slot>
-                    </x-nav-link-parent>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('portfolio')" :active="request()->routeIs('portfolio')">
-                        {{ __('Portfolio') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link-parent :href="'#'" :active="request()->routeIs('about.*')">
-                        <x-slot name="name">{{ __('About') }}</x-slot>
-                        <x-slot name="children">
-                            <a href="{{route('about.about-us')}}">About Us</a>
-                            <span class="separator"></span>
-                            <a href="{{route('about.our-team')}}">Our Team</a>
-                            <span class="separator"></span>
-                            <a href="{{route('about.mission-statement')}}">Mission Statement</a>
-                        </x-slot>
-                    </x-nav-link-parent>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('contact')" :active="request()->routeIs('login')">
-                        {{ __('Contact') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('login')">
-                        {{ __('Genomic Technologies') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Login') }}
                     </x-nav-link>
@@ -86,58 +40,6 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('dashboard')">
                 {{ __('Home') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('covid-19-pcr-testing')" :active="request()->routeIs('dashboard')">
-                {{ __('COVID-19 PCR TESTING') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link-parent :href="'#'" :active="request()->routeIs('services.*')">
-                <x-slot name="name">{{ __('Services') }}</x-slot>
-                <x-slot name="children">
-                    <a href="{{route('services.all-services')}}">All Services</a>
-                    <span class="separator"></span>
-                    <a href="{{route('services.lab-tests')}}">Lab Tests</a>
-                    <span class="separator"></span>
-                    <a href="{{route('services.revolutionary-panel-testing')}}">Revolutionary Panel Testing</a>
-                    <span class="separator"></span>
-                    <a href="{{route('services.molecular-diagnosis')}}">Molecular Diagnosis</a>
-                </x-slot>
-            </x-responsive-nav-link-parent>
-        </div>
-
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('portfolio')" :active="request()->routeIs('portfolio')">
-                {{ __('Portfolio') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link-parent :href="'#'" :active="request()->routeIs('about.*')">
-                <x-slot name="name">{{ __('About') }}</x-slot>
-                <x-slot name="children">
-                    <a href="{{route('about.about-us')}}">About Us</a>
-                    <span class="separator"></span>
-                    <a href="{{route('about.our-team')}}">Our Team</a>
-                    <span class="separator"></span>
-                    <a href="{{route('about.mission-statement')}}">Mission Statement</a>
-                </x-slot>
-            </x-responsive-nav-link-parent>
-        </div>
-
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
-                {{ __('Contact Us') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('services.all-services')" :active="request()->routeIs('dashboard')">
-                {{ __('Genomic Technologies') }}
             </x-responsive-nav-link>
         </div>
 
