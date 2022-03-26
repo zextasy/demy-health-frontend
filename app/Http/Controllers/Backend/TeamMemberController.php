@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\StoreSpecimenTypeRequest;
-use App\Http\Requests\UpdateSpecimenTypeRequest;
-use App\Models\SpecimenType;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTeamMemberRequest;
+use App\Http\Requests\UpdateTeamMemberRequest;
+use App\Models\TeamMember;
 
-class SpecimenTypeController extends Controller
+class TeamMemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class SpecimenTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSpecimenTypeRequest  $request
+     * @param  \App\Http\Requests\StoreTeamMemberRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSpecimenTypeRequest $request)
+    public function store(StoreTeamMemberRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class SpecimenTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SpecimenType  $specimenType
+     * @param  \App\Models\TeamMember  $teamMember
      * @return \Illuminate\Http\Response
      */
-    public function show(SpecimenType $specimenType)
+    public function show(TeamMember $teamMember)
     {
         //
     }
@@ -53,10 +54,10 @@ class SpecimenTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SpecimenType  $specimenType
+     * @param  \App\Models\TeamMember  $teamMember
      * @return \Illuminate\Http\Response
      */
-    public function edit(SpecimenType $specimenType)
+    public function edit(TeamMember $teamMember)
     {
         //
     }
@@ -64,11 +65,11 @@ class SpecimenTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSpecimenTypeRequest  $request
-     * @param  \App\Models\SpecimenType  $specimenType
+     * @param  \App\Http\Requests\UpdateTeamMemberRequest  $request
+     * @param  \App\Models\TeamMember  $teamMember
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSpecimenTypeRequest $request, SpecimenType $specimenType)
+    public function update(UpdateTeamMemberRequest $request, TeamMember $teamMember)
     {
         //
     }
@@ -76,10 +77,10 @@ class SpecimenTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SpecimenType  $specimenType
+     * @param  \App\Models\TeamMember  $teamMember
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SpecimenType $specimenType)
+    public function destroy(TeamMember $teamMember)
     {
         //
     }

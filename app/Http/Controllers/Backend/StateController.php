@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\StoreTeamMemberRequest;
-use App\Http\Requests\UpdateTeamMemberRequest;
-use App\Models\TeamMember;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStateRequest;
+use App\Http\Requests\UpdateStateRequest;
+use App\Models\State;
 
-class TeamMemberController extends Controller
+class StateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class TeamMemberController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTeamMemberRequest  $request
+     * @param  \App\Http\Requests\StoreStateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTeamMemberRequest $request)
+    public function store(StoreStateRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class TeamMemberController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TeamMember  $teamMember
+     * @param  \App\Models\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function show(TeamMember $teamMember)
+    public function show(State $state)
     {
         //
     }
@@ -53,10 +54,10 @@ class TeamMemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TeamMember  $teamMember
+     * @param  \App\Models\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function edit(TeamMember $teamMember)
+    public function edit(State $state)
     {
         //
     }
@@ -64,11 +65,11 @@ class TeamMemberController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTeamMemberRequest  $request
-     * @param  \App\Models\TeamMember  $teamMember
+     * @param  \App\Http\Requests\UpdateStateRequest  $request
+     * @param  \App\Models\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTeamMemberRequest $request, TeamMember $teamMember)
+    public function update(UpdateStateRequest $request, State $state)
     {
         //
     }
@@ -76,10 +77,10 @@ class TeamMemberController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TeamMember  $teamMember
+     * @param  \App\Models\State  $state
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TeamMember $teamMember)
+    public function destroy(State $state)
     {
         //
     }

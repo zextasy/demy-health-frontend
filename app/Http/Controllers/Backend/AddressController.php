@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\StoreSocialMediaLinkRequest;
-use App\Http\Requests\UpdateSocialMediaLinkRequest;
-use App\Models\SocialMediaLink;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAddressRequest;
+use App\Http\Requests\UpdateAddressRequest;
+use App\Models\Address;
 
-class SocialMediaLinkController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class SocialMediaLinkController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSocialMediaLinkRequest  $request
+     * @param  \App\Http\Requests\StoreAddressRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSocialMediaLinkRequest $request)
+    public function store(StoreAddressRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class SocialMediaLinkController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SocialMediaLink  $socialMediaLink
+     * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function show(SocialMediaLink $socialMediaLink)
+    public function show(Address $address)
     {
         //
     }
@@ -53,10 +54,10 @@ class SocialMediaLinkController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SocialMediaLink  $socialMediaLink
+     * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function edit(SocialMediaLink $socialMediaLink)
+    public function edit(Address $address)
     {
         //
     }
@@ -64,11 +65,11 @@ class SocialMediaLinkController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSocialMediaLinkRequest  $request
-     * @param  \App\Models\SocialMediaLink  $socialMediaLink
+     * @param  \App\Http\Requests\UpdateAddressRequest  $request
+     * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSocialMediaLinkRequest $request, SocialMediaLink $socialMediaLink)
+    public function update(UpdateAddressRequest $request, Address $address)
     {
         //
     }
@@ -76,10 +77,10 @@ class SocialMediaLinkController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SocialMediaLink  $socialMediaLink
+     * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SocialMediaLink $socialMediaLink)
+    public function destroy(Address $address)
     {
         //
     }

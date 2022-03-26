@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\StoreTestCategoryRequest;
-use App\Http\Requests\UpdateTestCategoryRequest;
-use App\Models\TestCategory;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSpecimenTypeRequest;
+use App\Http\Requests\UpdateSpecimenTypeRequest;
+use App\Models\SpecimenType;
 
-class TestCategoryController extends Controller
+class SpecimenTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class TestCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTestCategoryRequest  $request
+     * @param  \App\Http\Requests\StoreSpecimenTypeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTestCategoryRequest $request)
+    public function store(StoreSpecimenTypeRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class TestCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TestCategory  $testCategory
+     * @param  \App\Models\SpecimenType  $specimenType
      * @return \Illuminate\Http\Response
      */
-    public function show(TestCategory $testCategory)
+    public function show(SpecimenType $specimenType)
     {
         //
     }
@@ -53,10 +54,10 @@ class TestCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TestCategory  $testCategory
+     * @param  \App\Models\SpecimenType  $specimenType
      * @return \Illuminate\Http\Response
      */
-    public function edit(TestCategory $testCategory)
+    public function edit(SpecimenType $specimenType)
     {
         //
     }
@@ -64,11 +65,11 @@ class TestCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTestCategoryRequest  $request
-     * @param  \App\Models\TestCategory  $testCategory
+     * @param  \App\Http\Requests\UpdateSpecimenTypeRequest  $request
+     * @param  \App\Models\SpecimenType  $specimenType
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTestCategoryRequest $request, TestCategory $testCategory)
+    public function update(UpdateSpecimenTypeRequest $request, SpecimenType $specimenType)
     {
         //
     }
@@ -76,10 +77,10 @@ class TestCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TestCategory  $testCategory
+     * @param  \App\Models\SpecimenType  $specimenType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TestCategory $testCategory)
+    public function destroy(SpecimenType $specimenType)
     {
         //
     }

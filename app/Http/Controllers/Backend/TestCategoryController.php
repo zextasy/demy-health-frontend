@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\StoreStateRequest;
-use App\Http\Requests\UpdateStateRequest;
-use App\Models\State;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTestCategoryRequest;
+use App\Http\Requests\UpdateTestCategoryRequest;
+use App\Models\TestCategory;
 
-class StateController extends Controller
+class TestCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class StateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreStateRequest  $request
+     * @param  \App\Http\Requests\StoreTestCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStateRequest $request)
+    public function store(StoreTestCategoryRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class StateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\State  $state
+     * @param  \App\Models\TestCategory  $testCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(State $state)
+    public function show(TestCategory $testCategory)
     {
         //
     }
@@ -53,10 +54,10 @@ class StateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\State  $state
+     * @param  \App\Models\TestCategory  $testCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(State $state)
+    public function edit(TestCategory $testCategory)
     {
         //
     }
@@ -64,11 +65,11 @@ class StateController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateStateRequest  $request
-     * @param  \App\Models\State  $state
+     * @param  \App\Http\Requests\UpdateTestCategoryRequest  $request
+     * @param  \App\Models\TestCategory  $testCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStateRequest $request, State $state)
+    public function update(UpdateTestCategoryRequest $request, TestCategory $testCategory)
     {
         //
     }
@@ -76,10 +77,10 @@ class StateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\State  $state
+     * @param  \App\Models\TestCategory  $testCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(State $state)
+    public function destroy(TestCategory $testCategory)
     {
         //
     }
