@@ -3,7 +3,7 @@
         <div class="navbar-brand">
                 <span class="navbar-logo">
                     <a href="/">
-                        <img src="assets/images/whatsapp-image-2021-12-17-at-14.30.08-96x29.jpg" alt="Demyhealth" style="height: 3.6rem;">
+                        <img src="assets/images/logo-landscape-381x58.png" alt="Demyhealth" style="height: 3.6rem;">
                     </a>
                 </span>
 
