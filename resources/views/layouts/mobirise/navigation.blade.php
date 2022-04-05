@@ -27,9 +27,15 @@
                             Test</a><a class="text-black dropdown-item text-primary display-4" href="covid19-pcr-testing.html">Covid-19
                             Rapid Antigen Test</a></div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link link text-black text-primary display-4" href="pcr-and-reagents.html">PCR
-                        &amp; Reagents</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link link text-black dropdown-toggle display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Lab
+                        Tests</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
+                        <a class="text-black show dropdown-item text-primary display-4" href="take-a-test.html" data-bs-auto-close="outside" aria-expanded="false">Take
+                            a
+                            test</a><a class="text-black show dropdown-item display-4" href="test-results.html" data-bs-auto-close="outside" aria-expanded="false">Test
+                            Results</a></div>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link link text-black dropdown-toggle show display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Our
                         Business Units</a>
@@ -67,17 +73,12 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link link text-black text-primary display-4" href="pcr-and-reagents.html">PCR
+                        &amp; Reagents</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link link text-black show display-4" href="set-up-your-lab.html" data-bs-auto-close="outside" aria-expanded="false">Set
                         up your lab</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link link text-black dropdown-toggle display-4" href="#" data-bs-auto-close="outside" aria-expanded="false" data-toggle="dropdown-submenu" data-bs-toggle="dropdown">Lab
-                        Tests</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
-                        <a class="text-black show dropdown-item text-primary display-4" href="take-a-test.html" data-bs-auto-close="outside" aria-expanded="false">Take
-                            a
-                            test</a><a class="text-black show dropdown-item display-4" href="test-results.html" data-bs-auto-close="outside" aria-expanded="false">Test
-                            Results</a></div>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         About us</a>

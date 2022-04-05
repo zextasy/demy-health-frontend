@@ -4,19 +4,14 @@
     <div class="row content mbr-white">
         <div class="col-12 col-md-3 mbr-fonts-style display-7">
             <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
-                <strong>Address</strong>
+                <strong>Head Office</strong>
             </h5>
             <p class="mbr-text mbr-fonts-style display-7">DemyHealth Building, Plot 418A,<br>Opposite D Close,<br>
                 1st Avenue,<br>Gwarinpa,<br>FCT Abuja<br>Nigeria.</p> <br>
-            <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 mt-4 display-7">
-                <strong>Contacts</strong>
-            </h5>
             <p class="mbr-text mbr-fonts-style mb-4 display-7">
-                Email: info@demyhealth.com <br>
-                Phone: 08092276069<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0809277602<br>&nbsp; &nbsp; &nbsp;
+                Email: care@demyhealth.com <br>
+                Phone: 08092776022<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;08092776069<br>&nbsp; &nbsp; &nbsp;
                 &nbsp; &nbsp; &nbsp;07015362458</p>
-        </div>
-        <div class="col-12 col-md-3 mbr-fonts-style display-7">
             <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
                 <strong>Links</strong>
             </h5>
@@ -25,11 +20,21 @@
                 <li class="mbr-text item-wrap"><a class="text-info" href="#">LIMS</a></li>
                 <li class="mbr-text item-wrap"><a class="text-info" href="#">Link 3</a></li>
             </ul>
+        </div>
+        <div class="col-12 col-md-3 mbr-fonts-style display-7">
+            <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
+                <strong>Lagos Office</strong>
+            </h5>
+            <p class="mbr-text mbr-fonts-style display-7">No 3 Aina close,<br>Beside Justrite Supermarket,<br>Ojudu Berger,<br>Lagos<br>Nigeria.</p>
+            <br>
+            <p class="mbr-text mbr-fonts-style mb-4 display-7">
+                Email: lag@demyhealth.com <br>
+                Phone: 08092776065<br>&nbsp; &nbsp; &nbsp; 07065838743</p>
             <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 mt-5 display-7">
                 <strong>Feedback</strong>
             </h5>
             <p class="mbr-text mbr-fonts-style mb-4 display-7">
-                Please send us your ideas, bug reports, suggestions! Any feedback would be appreciated.
+                Any feedback would be appreciated.
             </p>
         </div>
         <div class="col-12 col-md-6">

@@ -5,9 +5,6 @@
     </section>
 
     <section data-bs-version="5.1" class="contacts3 map1 cid-sVgRGtoy0z" id="contacts3-20">
-
-
-
         <div class="container">
 
             <div class="row justify-content-center mt-4">
@@ -43,8 +40,6 @@
     </section>
 
     <section data-bs-version="5.1" class="form5 cid-sVgSPxv14A" id="form5-22">
-
-
         <div class="container">
             <div class="mbr-section-head">
                 <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
@@ -57,6 +52,10 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <section data-bs-version="5.1" class="features8 cid-sUisQ06fKm" xmlns="http://www.w3.org/1999/html" id="features9-a">
+        @include('components.mobirise.centers')
     </section>
 
 </x-mobirise-layout>

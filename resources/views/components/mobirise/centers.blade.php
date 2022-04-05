@@ -19,9 +19,11 @@
                                 </p>
                             </div>
                             <div class="col-md-auto">
-                                <div class="mbr-section-btn"><a href="#" class="btn btn-primary display-4">
-                                        Book Now
-                                    </a></div>
+                                <div class="mbr-section-btn">
+                                    <a href="#" class="btn btn-primary display-4">
+                                        Details
+                                    </a>
+                                </div>
                             </div>
                             <div></div>
                         </div>
@@ -50,9 +52,11 @@
                             </div>
                             <div class="col-md-auto">
 
-                                <div class="mbr-section-btn"><a href="#" class="btn btn-primary display-4">
-                                        Book Now
-                                    </a></div>
+                                <div class="mbr-section-btn">
+                                    <a href="#" class="btn btn-primary display-4">
+                                        Details
+                                    </a>
+                                </div>
                             </div>
                             <div></div>
                         </div>
@@ -82,9 +86,11 @@
                             </div>
                             <div class="col-md-auto">
 
-                                <div class="mbr-section-btn"><a href="#" class="btn btn-primary display-4">
-                                        Book Now
-                                    </a></div>
+                                <div class="mbr-section-btn">
+                                    <a href="#" class="btn btn-primary display-4">
+                                        Details
+                                    </a>
+                                </div>
                             </div>
                             <div></div>
                         </div>
