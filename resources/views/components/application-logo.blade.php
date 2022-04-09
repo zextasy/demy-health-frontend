@@ -1,1 +1,1 @@
-<img src="demyhealth/images/logo.jpeg" alt="DemyHealth Logo">
+<img src="demyhealth/images/logo.png" alt="DemyHealth Logo">
