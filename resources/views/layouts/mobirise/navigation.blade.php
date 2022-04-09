@@ -3,7 +3,7 @@
         <div class="navbar-brand">
                 <span class="navbar-logo">
                     <a href="/">
-                        <img src="assets/images/logo-landscape-381x58.png" alt="Demyhealth" style="height: 3.6rem;">
+                        <img src="assets/images/logo-landscape-350x53.png" alt="Demyhealth" style="height: 3.6rem;">
                     </a>
                 </span>
 
