@@ -17,7 +17,7 @@
                             <h6 class="card-title mbr-fonts-style mb-1 display-5">
                                 <strong>Phone</strong>
                             </h6>
-                            <p class="mbr-text mbr-fonts-style display-7">+234809 277 6069<br>+234809 277 6022</p>
+                            <p class="mbr-text mbr-fonts-style display-7">08092776022<br>08092776065</p>
                         </div>
                     </div>
                     <div class="card-wrapper">
@@ -28,7 +28,7 @@
                             <h6 class="card-title mbr-fonts-style mb-1 display-5">
                                 <strong>Email</strong>
                             </h6>
-                            <p class="mbr-text mbr-fonts-style display-7">care@demyhealth.com<br>molecular@demyhealth.com</p>
+                            <p class="mbr-text mbr-fonts-style display-7">care@demyhealth.com<br>lag@demyhealth.com</p>
                         </div>
                     </div>
                 </div>

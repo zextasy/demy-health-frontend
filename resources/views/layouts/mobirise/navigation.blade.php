@@ -55,8 +55,9 @@
                                             products</a><a class="text-black show dropdown-item text-primary display-4" href="pharmaceuticals.html">Pharmaceuticals</a>
                                     </div>
                                 </div>
-                                <a class="text-black dropdown-item show text-primary display-4" href="procurement-and-supply.html">Procurement
-                                    and Supply</a></div>
+{{--                                <a class="text-black dropdown-item show text-primary display-4" href="procurement-and-supply.html">Procurement--}}
+{{--                                    and Supply</a>--}}
+                            </div>
                         </div>
                         <div class="dropdown">
                             <a class="text-black dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Our

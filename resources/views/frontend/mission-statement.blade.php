@@ -100,7 +100,7 @@
                     <div class="mbr-text mbr-fonts-style display-7">
                         <ul>
                             <li>Provide timely, accessible, affordable and accurate diagnostic and genomic information to support healthcare providers in diagnosing and treating patients.</li>
-                            <li>Integrate cutting edge technology with our extensive specialty resources to offer advanced molecular laboratory diagnostics, setting the pace in West Africa.</li>
+                            <li>Integrate cutting edge technology with our extensive specialty resources to offer advanced molecular diagnostics, setting the pace in West Africa.</li>
                             <li>Innovate for improved outcomes and scientific discovery and educate future molecular biologists, pathologists and laboratory scientists using state-of-the-art technologies and resources.</li><li>Actively apply science and pathology tools in support of public health and the expansion of medical knowledge and expertise.</li>
                         </ul>
                     </div>
