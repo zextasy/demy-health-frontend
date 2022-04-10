@@ -9,11 +9,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="counter-container col-md-12 col-lg-10">
-
+                    <h4 class="mbr-section-title mbr-fonts-style mb-4 display-5"><strong>We Have</strong></h4>
                     <div class="mbr-text mbr-fonts-style display-7">
                         <ul>
                             <li>Simplified and promoted life science research for tertiary level education students and lecturers in private and public institutions.</li>
-                            <li><br></li>
+{{--                            <li><br></li>--}}
                         </ul>
                     </div>
                 </div>

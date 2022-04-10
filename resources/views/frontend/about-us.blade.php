@@ -27,7 +27,8 @@
                 </div>
                 <div class="p-0 col-12 col-lg-6 md-pb">
                     <div class="image-wrapper">
-                        <img src="assets/images/demyabstract-450x336.png" alt="Mobirise">
+{{--                        <img src="assets/images/demyabstract-450x336.png" alt="Mobirise">--}}
+                        <img src="assets/images/logo-landscape-350x53.png" alt="Demyhealth">
                     </div>
                 </div>
             </div>
@@ -44,7 +45,9 @@
                         <ul>
                             <li>Greatly impacted the molecular diagnostic space in Nigeria by significantly increasing the affordability of high-end quality molecular tests.</li>
                             <li>Contributed to the body of knowledge in the infectious disease sub-specialization by closing the country’s Hepatitis C genotype testing gap. We were the first molecular lab in Nigeria to identify mixed Hepatitis C virus infections involving 3 sero-groups in the national population—an uncommon feat. This earned us a double slot to present our findings at the Nigerian Gastroenterology and Hepatology Conference in August 2018.</li>
-                            <li>Set up over 30 fully functional biosafety level 2 and level 3 molecular laboratories in Nigeria.</li><li>Sold and installed 45 PCR machines, 25 automated nucleic acid extractors and many other biotechnology solutions in Nigeria since 2018. 1We have also sold over 2 million molecular diagnostic test kits, research test kits and consumables.</li><li>Simplified and promoted life science research for tertiary level education students and lecturers in private and public institutions.</li>
+                            <li>Set up over 40 fully functional biosafety level 2 and level 3 molecular laboratories in Nigeria.</li>
+                            <li>Sold and installed 50 PCR machines, 30 automated nucleic acid extractors and many other biotechnology solutions in Nigeria since 2018. We have also sold over 2 million molecular diagnostic test kits, research test kits and consumables.</li>
+                            <li>Simplified and promoted life science research for tertiary level education students and lecturers in private and public institutions.</li>
                         </ul>
                     </div>
                 </div>

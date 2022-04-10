@@ -21,7 +21,9 @@
                 <div class="col-12 col-lg">
                     <div class="text-wrapper">
 
-                        <p class="mbr-text mbr-fonts-style display-7">DemyHealth provides cross-functional management; we direct biomedical engineering projects—including, structural laboratory design, set up molecular laboratories, install and maintain equipment, run molecular biology training workshops, conduct life science research, and manage logistics and supply chain.<br><br>Our CEO is an established thought leader in the field of molecular biology and biotechnology and has both directly and indirectly mentored many young molecular biologists and biotechnologists.<br><br>We build and maintain professional relationships with domestic and international partners, potential investors and the world's leading biotechnology manufacturing companies. We also exclusively represent some of the best biotechnology companies in the world, such as IT-IS Life Science, UK, Elisabeth Pharmacon Group, and Bioer Technology.</p>
+                        <p class="mbr-text mbr-fonts-style display-7">DemyHealth provides cross-functional management; we direct biomedical engineering projects—including, structural laboratory design, set up molecular laboratories, install and maintain equipment, run molecular biology training workshops, conduct life science research, and manage logistics and supply chain.
+{{--                            <br><br>Our CEO is an established thought leader in the field of molecular biology and biotechnology and has both directly and indirectly mentored many young molecular biologists and biotechnologists.--}}
+                            <br><br>We build and maintain professional relationships with domestic and international partners, potential investors and the world's leading biotechnology manufacturing companies. We also exclusively represent some of the best biotechnology companies in the world, such as IT-IS Life Science, UK, Elisabeth Pharmacon Group, and Bioer Technology.</p>
                     </div>
                 </div>
             </div>

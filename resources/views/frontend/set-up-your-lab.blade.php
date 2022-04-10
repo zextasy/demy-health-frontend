@@ -19,7 +19,9 @@
                     <div class="text-wrapper">
                         <h1 class="mbr-section-title mbr-fonts-style mb-3 display-2"><strong>Molecular Lab Set up</strong></h1>
                         <p class="mbr-text mbr-fonts-style display-7">
-                            We are here to help, support and guide you in setting up your own molecular laboratory at the most affordable cost.<br><br>Find out about our ongoing promotions on lab equipment, reagents and test kits. Fill the customer inquiry form or send an email to gtl@demyhealth.com<br></p>
+                            We are here to help, support and guide you in setting up your own molecular laboratory at the most affordable cost.<br>
+                            <br>Find out about our ongoing promotions on lab equipment, reagents and test kits. Fill the customer inquiry form or send an email to molecular@demyhealth.com<br>
+                        </p>
                         <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="#">Explore
                                 all features</a>
                             <a class="btn btn-black-outline display-4" href="#">Get a quote &gt;</a></div>
