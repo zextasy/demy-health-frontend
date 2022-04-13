@@ -15,4 +15,14 @@ class AppLayout extends Component
     {
         return view('layouts.app');
     }
+
+    public function titlePrefix(): string
+    {
+        return '|';
+    }
+
+    public function titleAppendix(): string
+    {
+        return '|';
+    }
 }
