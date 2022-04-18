@@ -18,6 +18,7 @@ class CreateLocalGovernmentAreasTable extends Migration
             $table->string('name');
             $table->foreignId('state_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

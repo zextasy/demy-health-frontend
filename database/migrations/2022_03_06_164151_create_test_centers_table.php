@@ -18,6 +18,7 @@ class CreateTestCentersTable extends Migration
             $table->string('name');
             $table->text('address_text');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

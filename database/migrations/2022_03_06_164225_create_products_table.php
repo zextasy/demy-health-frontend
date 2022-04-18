@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 24)->nullable();
             $table->json('extra_information')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

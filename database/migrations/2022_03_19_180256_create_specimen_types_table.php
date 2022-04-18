@@ -18,6 +18,7 @@ class CreateSpecimenTypesTable extends Migration
             $table->string('key')->unique();
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

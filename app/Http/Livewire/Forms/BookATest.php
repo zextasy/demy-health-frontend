@@ -42,7 +42,6 @@ class BookATest extends Component
 
     public function stateToParent($value)
     {
-        ray($this);
         $this->selectedState = $value;
     }
 
@@ -70,7 +69,6 @@ class BookATest extends Component
 
     public function submit()
     {
-        ray($this);
         $this->validate();
         $possibleUser = User::query()->where('email',$this->customerEmail)->first();
         $locationTypeEnum = LocationTypeEnum::from($this->locationType);

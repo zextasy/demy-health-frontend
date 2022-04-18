@@ -18,6 +18,7 @@ class CreateStatesTable extends Migration
             $table->text('name');
             $table->boolean('is_ready_for_sample_collection')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

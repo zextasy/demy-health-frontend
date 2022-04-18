@@ -19,6 +19,7 @@ class CreateSocialMediaLinksTable extends Migration
             $table->unsignedTinyInteger('site');//SiteEnum
             $table->morphs('linkable');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

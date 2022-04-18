@@ -23,6 +23,7 @@ class CreateTeamMembersTable extends Migration
             $table->string('qualifications');
             $table->longText('bio');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

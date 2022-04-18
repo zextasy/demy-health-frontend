@@ -23,6 +23,7 @@ class CreateTestTypesTable extends Migration
             $table->unsignedDecimal('price');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
