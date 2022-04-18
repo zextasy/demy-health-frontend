@@ -18,7 +18,7 @@ class AddressPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -30,7 +30,7 @@ class AddressPolicy
      */
     public function view(User $user, Address $address)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -41,7 +41,7 @@ class AddressPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -53,7 +53,7 @@ class AddressPolicy
      */
     public function update(User $user, Address $address)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -65,7 +65,7 @@ class AddressPolicy
      */
     public function delete(User $user, Address $address)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -77,7 +77,7 @@ class AddressPolicy
      */
     public function restore(User $user, Address $address)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -89,6 +89,6 @@ class AddressPolicy
      */
     public function forceDelete(User $user, Address $address)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 }

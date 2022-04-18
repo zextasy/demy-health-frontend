@@ -18,7 +18,7 @@ class TestCenterPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -30,7 +30,7 @@ class TestCenterPolicy
      */
     public function view(User $user, TestCenter $testCenter)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -41,7 +41,7 @@ class TestCenterPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -53,7 +53,7 @@ class TestCenterPolicy
      */
     public function update(User $user, TestCenter $testCenter)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -65,7 +65,7 @@ class TestCenterPolicy
      */
     public function delete(User $user, TestCenter $testCenter)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -77,7 +77,7 @@ class TestCenterPolicy
      */
     public function restore(User $user, TestCenter $testCenter)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -89,6 +89,6 @@ class TestCenterPolicy
      */
     public function forceDelete(User $user, TestCenter $testCenter)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 }

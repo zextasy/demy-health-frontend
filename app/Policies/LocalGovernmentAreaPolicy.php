@@ -18,7 +18,7 @@ class LocalGovernmentAreaPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -30,7 +30,7 @@ class LocalGovernmentAreaPolicy
      */
     public function view(User $user, LocalGovernmentArea $localGovernmentArea)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -41,7 +41,7 @@ class LocalGovernmentAreaPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -53,7 +53,7 @@ class LocalGovernmentAreaPolicy
      */
     public function update(User $user, LocalGovernmentArea $localGovernmentArea)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -65,7 +65,7 @@ class LocalGovernmentAreaPolicy
      */
     public function delete(User $user, LocalGovernmentArea $localGovernmentArea)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -77,7 +77,7 @@ class LocalGovernmentAreaPolicy
      */
     public function restore(User $user, LocalGovernmentArea $localGovernmentArea)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -89,6 +89,6 @@ class LocalGovernmentAreaPolicy
      */
     public function forceDelete(User $user, LocalGovernmentArea $localGovernmentArea)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 }
