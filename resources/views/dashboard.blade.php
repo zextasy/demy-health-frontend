@@ -6,11 +6,11 @@
     </x-slot>
 
 
-        <x-basic-div>
+        <x-basic.basic-div>
             You're logged in Now !
-        </x-basic-div>
+        </x-basic.basic-div>
         <br>
-        <x-basic-div>
+        <x-basic.basic-div>
             Extra info
-        </x-basic-div>
+        </x-basic.basic-div>
 </x-app-layout>

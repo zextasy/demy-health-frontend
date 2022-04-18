@@ -6,7 +6,7 @@ use App\Traits\Relationships\HasSocialMediaLinks;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TeamMember extends Model
+class TeamMember extends BaseModel
 {
     use HasFactory, HasSocialMediaLinks;
 

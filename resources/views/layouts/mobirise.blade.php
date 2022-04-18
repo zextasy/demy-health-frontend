@@ -72,6 +72,9 @@
 <!-- Laravel Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 @livewireScripts
+@livewireSelectScripts
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<!-- sweet alert scripts -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <x-livewire-alert::scripts/>
 </body>

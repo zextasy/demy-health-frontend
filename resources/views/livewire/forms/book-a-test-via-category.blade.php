@@ -13,23 +13,28 @@
     </div>
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Home->value)
         <div class="col-12 form-group mb-3" data-for="textarea">
-            <livewire:forms.select.livewire-select.state-select
-                name="selectedState"
-                :value="$selectedState"
-                placeholder="Choose a State"
-                :is-for-sample="true"
-            />
+            <select wire:model="selectedState" class="form-control">
+                <option value="" selected>Choose State</option>
+
+                @foreach($states as $state)
+                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                @endforeach
+
+            </select>
             @error('selectedState') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
+        @if (!is_null($selectedState))
         <div class="col-12 form-group mb-3" data-for="select">
-            <livewire:forms.select.livewire-select.local-government-area-select
-                name="selectedLocalGovernmentArea"
-                :value="$selectedLocalGovernmentArea"
-                placeholder="Choose a Local Government Area"
-                :depends-on="['selectedState']"
-            />
-            @error('selectedLocalGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
+            <select wire:model="localGovernmentArea" class="form-control">
+                <option value="" selected>Choose LGA</option>
+                @foreach($localGovernmentAreas as $localGovernmentArea)
+                    <option value="{{ $localGovernmentArea->id }}">{{ $localGovernmentArea->name }}</option>
+                @endforeach
+
+            </select>
+            @error('localGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
+        @endif
         <div class="col-12 form-group mb-3" data-for="textarea">
             <input type="textarea" wire:model="city" class="form-control" placeholder="Please enter your city">
             @error('city') <span class="alert-danger">{{ $message }}</span> @enderror
@@ -41,23 +46,41 @@
     @endif
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Center->value)
         <div class="col-12 form-group mb-3" data-for="select">
-            <livewire:forms.select.livewire-select.test-center-select
-                name="selectedTestCenter"
-                :value="$selectedTestCenter"
-                placeholder="Choose a Center"
-            />
-            @error('selectedTestCenter') <span class="alert-danger">{{ $message }}</span> @enderror
+            <select wire:model="testCenter" class="form-control">
+                <option value="" selected>Choose Center</option>
+
+                @foreach($testCenters as $testCenter)
+                    <option value="{{ $testCenter->id }}">{{ $testCenter->name }}</option>
+                @endforeach
+
+            </select>
+            @error('testCenter') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
-    <div class="col-12 form-group mb-3" data-for="select">
-        <livewire:forms.select.livewire-select.test-type-select
-            name="selectedTestType"
-            :value="$selectedTestType"
-            placeholder="Choose a Test"
-            :searchable="true"
-        />
-        @error('selectedTestType') <span class="alert-danger">{{ $message }}</span> @enderror
+    <div class="col-md col-sm-12 form-group mb-3" data-for="select">
+        <select wire:model="selectedTestCategory" class="form-control">
+            <option value="" selected>Choose Category</option>
+
+            @foreach($testCategories as $testCategory)
+                <option value="{{ $testCategory->id }}">{{ $testCategory->name }}</option>
+            @endforeach
+
+        </select>
+        @error('selectedTestCategory') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
+    @if (!is_null($selectedTestCategory))
+        <div class="col-md col-sm-12 form-group mb-3" data-for="select">
+            <select wire:model="testType" class="form-control">
+                <option value="" selected>Choose Test</option>
+
+                @foreach($testTypes as $testType)
+                    <option value="{{ $testType->id }}">{{ $testType->description }}</option>
+                @endforeach
+
+            </select>
+            @error('testType') <span class="alert-danger">{{ $message }}</span> @enderror
+        </div>
+    @endif
     <div class="col-12 form-group mb-3" data-for="text">
         <label for="startTime">Date: </label>
         <input type="date"  wire:model="dueDate" min="{{today()}}">
@@ -70,3 +93,5 @@
         <button type="submit" class="btn btn-primary display-4">Book Test</button>
     </div>
 </form>
+
+

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestBooking extends Model
+class TestBooking extends BaseModel
 {
     use HasFactory, HasAddress;
 

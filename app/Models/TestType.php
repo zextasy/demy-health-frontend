@@ -6,7 +6,7 @@ use App\Traits\Relationships\HasTestBookings;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestType extends Model
+class TestType extends BaseModel
 {
     use HasFactory, HasTestBookings;
 
