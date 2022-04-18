@@ -18,7 +18,7 @@ class TestCategoryPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class TestCategoryPolicy
      */
     public function view(User $user, TestCategory $testCategory)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class TestCategoryPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class TestCategoryPolicy
      */
     public function update(User $user, TestCategory $testCategory)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class TestCategoryPolicy
      */
     public function delete(User $user, TestCategory $testCategory)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class TestCategoryPolicy
      */
     public function restore(User $user, TestCategory $testCategory)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class TestCategoryPolicy
      */
     public function forceDelete(User $user, TestCategory $testCategory)
     {
-        //
+        return true;
     }
 }

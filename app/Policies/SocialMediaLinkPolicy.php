@@ -18,7 +18,7 @@ class SocialMediaLinkPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class SocialMediaLinkPolicy
      */
     public function view(User $user, SocialMediaLink $socialMediaLink)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class SocialMediaLinkPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class SocialMediaLinkPolicy
      */
     public function update(User $user, SocialMediaLink $socialMediaLink)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class SocialMediaLinkPolicy
      */
     public function delete(User $user, SocialMediaLink $socialMediaLink)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class SocialMediaLinkPolicy
      */
     public function restore(User $user, SocialMediaLink $socialMediaLink)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class SocialMediaLinkPolicy
      */
     public function forceDelete(User $user, SocialMediaLink $socialMediaLink)
     {
-        //
+        return true;
     }
 }

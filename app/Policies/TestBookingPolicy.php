@@ -18,7 +18,7 @@ class TestBookingPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class TestBookingPolicy
      */
     public function view(User $user, TestBooking $testBooking)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class TestBookingPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class TestBookingPolicy
      */
     public function update(User $user, TestBooking $testBooking)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class TestBookingPolicy
      */
     public function delete(User $user, TestBooking $testBooking)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class TestBookingPolicy
      */
     public function restore(User $user, TestBooking $testBooking)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class TestBookingPolicy
      */
     public function forceDelete(User $user, TestBooking $testBooking)
     {
-        //
+        return true;
     }
 }

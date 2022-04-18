@@ -18,7 +18,7 @@ class SpecimenTypePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class SpecimenTypePolicy
      */
     public function view(User $user, SpecimenType $specimenType)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class SpecimenTypePolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class SpecimenTypePolicy
      */
     public function update(User $user, SpecimenType $specimenType)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class SpecimenTypePolicy
      */
     public function delete(User $user, SpecimenType $specimenType)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class SpecimenTypePolicy
      */
     public function restore(User $user, SpecimenType $specimenType)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class SpecimenTypePolicy
      */
     public function forceDelete(User $user, SpecimenType $specimenType)
     {
-        //
+        return true;
     }
 }

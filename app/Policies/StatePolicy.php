@@ -18,7 +18,7 @@ class StatePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class StatePolicy
      */
     public function view(User $user, State $state)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class StatePolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class StatePolicy
      */
     public function update(User $user, State $state)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class StatePolicy
      */
     public function delete(User $user, State $state)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class StatePolicy
      */
     public function restore(User $user, State $state)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class StatePolicy
      */
     public function forceDelete(User $user, State $state)
     {
-        //
+        return true;
     }
 }

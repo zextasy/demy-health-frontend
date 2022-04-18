@@ -18,7 +18,7 @@ class TeamMemberPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class TeamMemberPolicy
      */
     public function view(User $user, TeamMember $teamMember)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class TeamMemberPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class TeamMemberPolicy
      */
     public function update(User $user, TeamMember $teamMember)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class TeamMemberPolicy
      */
     public function delete(User $user, TeamMember $teamMember)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class TeamMemberPolicy
      */
     public function restore(User $user, TeamMember $teamMember)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,6 +89,6 @@ class TeamMemberPolicy
      */
     public function forceDelete(User $user, TeamMember $teamMember)
     {
-        //
+        return true;
     }
 }
