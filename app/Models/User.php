@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Spatie\Permission\Traits\HasRoles;
 use App\Traits\Relationships\HasAddress;
+use Filament\Models\Contracts\FilamentUser;
 use Spatie\Permission\Traits\HasPermissions;
 use App\Traits\Relationships\HasTestBookings;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions,HasTestBookings, HasAddress, SoftDeletes;
 
@@ -48,4 +49,9 @@ class User extends Authenticatable
     ];
 
     protected $dates =['created_at','updated_at'];
+
+    public function canAccessFilament(): bool
+    {
+        return $this->hasPermissionTo('backend');
+    }
 }
