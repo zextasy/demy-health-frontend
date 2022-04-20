@@ -98,7 +98,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
                         @auth
                             @if(auth()->user()->hasPermissionTo('backend'))
-                                <a class="text-black dropdown-item text-primary display-4" href="{{route('dashboard')}}">Admin Section</a>
+                                <a class="text-black dropdown-item text-primary display-4" href="/admin">Admin Section</a>
                             @endif
                             <a class="text-black dropdown-item text-primary display-4" href="#">My Cart</a>
                             <a class="text-black dropdown-item text-primary display-4" href="#">My Results</a>
