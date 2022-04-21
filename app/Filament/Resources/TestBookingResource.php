@@ -60,7 +60,8 @@ class TestBookingResource extends Resource
                     ->date(),
                 Tables\Columns\TextColumn::make('customer_email'),
                 Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\BadgeColumn::make('location_type')->enum(LocationTypeEnum::cases()),
+                Tables\Columns\BadgeColumn::make('location_type')
+                    ->enum(LocationTypeEnum::options()),
             ])
             ->filters([
                 //

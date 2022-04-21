@@ -36,6 +36,7 @@
                 </div>
             </main>
         </div>
+        <x-impersonate::banner/>
         @livewireScripts
         @livewireSelectScripts
         <!-- sweetalert scripts -->
