@@ -51,10 +51,7 @@ class TestTypeResource extends Resource
                 Tables\Columns\TextColumn::make('maximum_tat'),
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+
             ])
             ->filters([
                 //

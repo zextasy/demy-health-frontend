@@ -36,10 +36,7 @@ class SpecimenTypeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('key'),
                 Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+
             ])
             ->filters([
                 //

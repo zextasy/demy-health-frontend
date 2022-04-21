@@ -33,12 +33,9 @@ class LocalGovernmentAreaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('state_id'),
+                Tables\Columns\TextColumn::make('state.name'),
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+
             ])
             ->filters([
                 //

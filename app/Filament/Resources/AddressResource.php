@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\State;
+use App\Models\LocalGovernmentArea;
 use App\Filament\Resources\AddressResource\Pages;
 use App\Filament\Resources\AddressResource\RelationManagers;
 use App\Models\Address;
@@ -21,9 +23,13 @@ class AddressResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('state_id')
+                Forms\Components\BelongsToSelect::make('state_id')
+                    ->relationship('state', 'name')
+                    ->searchable()
                     ->required(),
-                Forms\Components\TextInput::make('local_government_area_id')
+                Forms\Components\BelongsToSelect::make('local_government_area_id')
+                    ->relationship('localGovernmentArea', 'name')
+                    ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('line_1')
                     ->required()
@@ -44,17 +50,11 @@ class AddressResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('state_id'),
-                Tables\Columns\TextColumn::make('local_government_area_id'),
+                Tables\Columns\TextColumn::make('state.name'),
+                Tables\Columns\TextColumn::make('localGovernmentArea.name'),
                 Tables\Columns\TextColumn::make('line_1'),
                 Tables\Columns\TextColumn::make('line_2'),
-                Tables\Columns\TextColumn::make('city'),
-                Tables\Columns\TextColumn::make('addressable_type'),
-                Tables\Columns\TextColumn::make('addressable_id'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('city')
             ])
             ->filters([
                 //
@@ -72,7 +72,7 @@ class AddressResource extends Resource
     {
         return [
             'index' => Pages\ListAddresses::route('/'),
-            'create' => Pages\CreateAddress::route('/create'),
+//            'create' => Pages\CreateAddress::route('/create'),
             'edit' => Pages\EditAddress::route('/{record}/edit'),
         ];
     }

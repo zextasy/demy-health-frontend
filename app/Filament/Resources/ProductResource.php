@@ -42,10 +42,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('country'),
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('extra_information'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+
             ])
             ->filters([
                 //
