@@ -30,6 +30,8 @@ class ProductResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price'),
                 Forms\Components\TextInput::make('extra_information'),
+                Forms\Components\BelongsToManyMultiSelect::make('categories')
+                ->relationship('categories', 'name')
             ]);
     }
 

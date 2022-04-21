@@ -21,7 +21,9 @@ class LocalGovernmentAreaResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('state_id')
+                Forms\Components\BelongsToSelect::make('state_id')
+                    ->relationship('state', 'name')
+                    ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()

@@ -21,18 +21,21 @@ class TestTypeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('test_category_id')
-                    ->required(),
-                Forms\Components\TextInput::make('specimen_type_id')
-                    ->required(),
                 Forms\Components\TextInput::make('test_id')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('price')
+                    ->required(),
+                Forms\Components\BelongsToSelect::make('test_category_id')
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->required(),
+                Forms\Components\BelongsToSelect::make('specimen_type_id')
+                    ->relationship('specimenType', 'description')
+                    ->required(),
                 Forms\Components\TextInput::make('minimum_tat')
                     ->required(),
                 Forms\Components\TextInput::make('maximum_tat')
-                    ->required(),
-                Forms\Components\TextInput::make('price')
                     ->required(),
                 Forms\Components\Textarea::make('description')
                     ->required()
@@ -44,13 +47,14 @@ class TestTypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('test_category_id'),
-                Tables\Columns\TextColumn::make('specimen_type_id'),
                 Tables\Columns\TextColumn::make('test_id'),
-                Tables\Columns\TextColumn::make('minimum_tat'),
-                Tables\Columns\TextColumn::make('maximum_tat'),
-                Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('category.name'),
+                Tables\Columns\TextColumn::make('specimenType.description'),
+                Tables\Columns\TextColumn::make('tat'),
+
+
 
             ])
             ->filters([

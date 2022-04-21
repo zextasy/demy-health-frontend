@@ -24,6 +24,10 @@ class ProductCategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\BelongsToSelect::make('product_category_id')
+                    ->relationship('parent', 'name')
+                    ->searchable()
+                    ->required(),
             ]);
     }
 

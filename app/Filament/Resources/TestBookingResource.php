@@ -47,9 +47,9 @@ class TestBookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('test_type_id'),
-                Tables\Columns\TextColumn::make('user_id'),
-                Tables\Columns\TextColumn::make('test_center_id'),
+                Tables\Columns\TextColumn::make('test_type.name'),
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('test_center.name'),
                 Tables\Columns\TextColumn::make('reference'),
                 Tables\Columns\TextColumn::make('customer_email'),
                 Tables\Columns\BooleanColumn::make('location_type'),
@@ -75,7 +75,7 @@ class TestBookingResource extends Resource
     {
         return [
             'index' => Pages\ListTestBookings::route('/'),
-            'create' => Pages\CreateTestBooking::route('/create'),
+//            'create' => Pages\CreateTestBooking::route('/create'),
             'edit' => Pages\EditTestBooking::route('/{record}/edit'),
         ];
     }

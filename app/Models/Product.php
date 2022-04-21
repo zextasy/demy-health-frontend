@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $dates =['created_at','updated_at'];
     protected $guarded = ['id'];
