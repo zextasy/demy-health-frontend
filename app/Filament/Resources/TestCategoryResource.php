@@ -51,6 +51,7 @@ class TestCategoryResource extends Resource
         return [
             'index' => Pages\ListTestCategories::route('/'),
             'create' => Pages\CreateTestCategory::route('/create'),
+            'view' => Pages\ViewTestCategory::route('/{record}'),
             'edit' => Pages\EditTestCategory::route('/{record}/edit'),
         ];
     }

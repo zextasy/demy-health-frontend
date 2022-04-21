@@ -26,6 +26,7 @@ class ProductCategoryResource extends Resource
                     ->maxLength(255),
                 Forms\Components\BelongsToSelect::make('product_category_id')
                     ->relationship('parent', 'name')
+//                    ->placeholder(' ')
                     ->searchable()
                     ->required(),
             ]);
@@ -55,6 +56,7 @@ class ProductCategoryResource extends Resource
         return [
             'index' => Pages\ListProductCategories::route('/'),
             'create' => Pages\CreateProductCategory::route('/create'),
+            'view' => Pages\ViewProductCategory::route('/{record}'),
             'edit' => Pages\EditProductCategory::route('/{record}/edit'),
         ];
     }

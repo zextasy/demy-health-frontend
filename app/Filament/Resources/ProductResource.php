@@ -29,7 +29,7 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('country')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price'),
-                Forms\Components\TextInput::make('extra_information'),
+                Forms\Components\KeyValue::make('extra_information'),
                 Forms\Components\BelongsToManyMultiSelect::make('categories')
                 ->relationship('categories', 'name')
             ]);
@@ -63,6 +63,7 @@ class ProductResource extends Resource
         return [
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
+            'view' => Pages\ViewProduct::route('/{record}'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }

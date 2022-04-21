@@ -21,13 +21,13 @@ class LocalGovernmentAreaResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\BelongsToSelect::make('state_id')
                     ->relationship('state', 'name')
                     ->searchable()
                     ->required(),
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
             ]);
     }
 
@@ -56,6 +56,7 @@ class LocalGovernmentAreaResource extends Resource
         return [
             'index' => Pages\ListLocalGovernmentAreas::route('/'),
             'create' => Pages\CreateLocalGovernmentArea::route('/create'),
+            'view' => Pages\ViewLocalGovernmentArea::route('/{record}'),
             'edit' => Pages\EditLocalGovernmentArea::route('/{record}/edit'),
         ];
     }

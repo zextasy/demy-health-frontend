@@ -23,6 +23,11 @@ class AddressResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('line_1')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('line_2')
+                    ->maxLength(255),
                 Forms\Components\BelongsToSelect::make('state_id')
                     ->relationship('state', 'name')
                     ->searchable()
@@ -31,18 +36,8 @@ class AddressResource extends Resource
                     ->relationship('localGovernmentArea', 'name')
                     ->searchable()
                     ->required(),
-                Forms\Components\TextInput::make('line_1')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('line_2')
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('city')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('addressable_type')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('addressable_id')
-                    ->required(),
+                    ->maxLength(255)
             ]);
     }
 
@@ -73,6 +68,7 @@ class AddressResource extends Resource
         return [
             'index' => Pages\ListAddresses::route('/'),
 //            'create' => Pages\CreateAddress::route('/create'),
+            'view' => Pages\ViewAddress::route('/{record}'),
             'edit' => Pages\EditAddress::route('/{record}/edit'),
         ];
     }

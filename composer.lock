@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d842e98debc71724bf899856699ba845",
+    "content-hash": "56ad80be31ef645a03c57376d7002daf",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -70,6 +70,52 @@
                 "source": "https://github.com/akaunting/laravel-money/tree/2.0.1"
             },
             "time": "2022-01-31T17:11:27+00:00"
+        },
+        {
+            "name": "archtechx/enums",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/archtechx/enums.git",
+                "reference": "7e17b844510c0087868b20f12f8556191caf4501"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/archtechx/enums/zipball/7e17b844510c0087868b20f12f8556191caf4501",
+                "reference": "7e17b844510c0087868b20f12f8556191caf4501",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "nunomaduro/larastan": "^1.0|^2.0",
+                "orchestra/testbench": "^6.9|^7.0",
+                "pestphp/pest": "^1.2",
+                "pestphp/pest-plugin-laravel": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ArchTech\\Enums\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Štancl",
+                    "email": "samuel@archte.ch"
+                }
+            ],
+            "description": "Helpers for making PHP enums more lovable.",
+            "support": {
+                "issues": "https://github.com/archtechx/enums/issues",
+                "source": "https://github.com/archtechx/enums/tree/v0.3.0"
+            },
+            "time": "2022-03-29T18:34:54+00:00"
         },
         {
             "name": "asantibanez/livewire-select",

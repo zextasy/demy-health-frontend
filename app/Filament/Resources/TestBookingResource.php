@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
 use App\Models\TestBooking;
@@ -21,10 +22,6 @@ class TestBookingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('test_type_id')
-                    ->required(),
-                Forms\Components\TextInput::make('user_id'),
-                Forms\Components\TextInput::make('test_center_id'),
                 Forms\Components\TextInput::make('reference')
                     ->required()
                     ->maxLength(255),
@@ -32,7 +29,17 @@ class TestBookingResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Toggle::make('location_type')
+                Forms\Components\BelongsToSelect::make('testType')
+                    ->relationship('testType','description')
+                    ->required(),
+                Forms\Components\BelongsToSelect::make('user')
+                    ->relationship('user', 'name')
+                    ->placeholder(''),
+                Forms\Components\BelongsToSelect::make('testCenter')
+                    ->relationship('testCenter', 'name')
+                    ->placeholder(''),
+                Forms\Components\Select::make('location_type')
+                    ->options(LocationTypeEnum::options())
                     ->required(),
                 Forms\Components\DatePicker::make('due_date')
                     ->required(),
@@ -47,17 +54,13 @@ class TestBookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('test_type.name'),
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('test_center.name'),
                 Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('customer_email'),
-                Tables\Columns\BooleanColumn::make('location_type'),
+                Tables\Columns\TextColumn::make('testType.description'),
                 Tables\Columns\TextColumn::make('due_date')
                     ->date(),
-                Tables\Columns\TextColumn::make('start_time'),
-                Tables\Columns\TextColumn::make('duration_minutes'),
-
+                Tables\Columns\TextColumn::make('customer_email'),
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\BadgeColumn::make('location_type')->enum(LocationTypeEnum::cases()),
             ])
             ->filters([
                 //
@@ -76,6 +79,7 @@ class TestBookingResource extends Resource
         return [
             'index' => Pages\ListTestBookings::route('/'),
 //            'create' => Pages\CreateTestBooking::route('/create'),
+            'view' => Pages\ViewTestBooking::route('/{record}'),
             'edit' => Pages\EditTestBooking::route('/{record}/edit'),
         ];
     }

@@ -32,6 +32,7 @@ class TestTypeResource extends Resource
                     ->required(),
                 Forms\Components\BelongsToSelect::make('specimen_type_id')
                     ->relationship('specimenType', 'description')
+                    ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('minimum_tat')
                     ->required(),
@@ -74,6 +75,7 @@ class TestTypeResource extends Resource
         return [
             'index' => Pages\ListTestTypes::route('/'),
             'create' => Pages\CreateTestType::route('/create'),
+            'view' => Pages\ViewTestType::route('/{record}'),
             'edit' => Pages\EditTestType::route('/{record}/edit'),
         ];
     }

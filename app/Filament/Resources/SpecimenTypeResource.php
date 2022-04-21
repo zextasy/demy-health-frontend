@@ -55,6 +55,7 @@ class SpecimenTypeResource extends Resource
         return [
             'index' => Pages\ListSpecimenTypes::route('/'),
             'create' => Pages\CreateSpecimenType::route('/create'),
+            'view' => Pages\ViewSpecimenType::route('/{record}'),
             'edit' => Pages\EditSpecimenType::route('/{record}/edit'),
         ];
     }
