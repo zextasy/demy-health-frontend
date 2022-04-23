@@ -30,10 +30,6 @@ class TestTypeResource extends Resource
                     ->relationship('category', 'name')
                     ->searchable()
                     ->required(),
-                Forms\Components\BelongsToSelect::make('specimen_type_id')
-                    ->relationship('specimenType', 'description')
-                    ->searchable()
-                    ->required(),
                 Forms\Components\TextInput::make('minimum_tat')
                     ->required(),
                 Forms\Components\TextInput::make('maximum_tat')
@@ -52,7 +48,6 @@ class TestTypeResource extends Resource
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('category.name'),
-                Tables\Columns\TextColumn::make('specimenType.description'),
                 Tables\Columns\TextColumn::make('tat'),
 
 
@@ -66,7 +61,7 @@ class TestTypeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\SpecimenTypesRelationManager::class,
         ];
     }
 

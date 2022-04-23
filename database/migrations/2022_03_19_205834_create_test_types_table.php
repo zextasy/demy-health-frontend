@@ -17,9 +17,9 @@ class CreateTestTypesTable extends Migration
             $table->id();
             $table->string('test_id')->unique();
             $table->foreignId('test_category_id')->constrained();
-            $table->foreignId('specimen_type_id')->constrained();
             $table->integer('minimum_tat');
             $table->integer('maximum_tat');
+            $table->integer('tat_hours')->default(0);
             $table->unsignedDecimal('price');
             $table->text('description');
             $table->timestamps();

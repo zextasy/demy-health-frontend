@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Relationships\HasTestBookings;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +27,7 @@ class TestType extends BaseModel
         return $this->belongsTo(TestCategory::class);
     }
 
-    public function specimenType() : BelongsTo{
-        return $this->belongsTo(SpecimenType::class);
+    public function specimenTypes() : BelongsToMany{
+        return $this->belongsToMany(SpecimenType::class,'specimen_types_test_types');
     }
 }

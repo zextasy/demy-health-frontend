@@ -9,5 +9,6 @@ class TestCategorySeeder extends Seeder
     public function run()
     {
        $this->call(TestCategorySeeder1::class);
+        $this->call(TestCategorySeeder2::class);
     }
 }
