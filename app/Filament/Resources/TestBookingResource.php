@@ -39,7 +39,7 @@ class TestBookingResource extends Resource
                     ->relationship('testCenter', 'name')
                     ->placeholder(''),
                 Forms\Components\Select::make('location_type')
-                    ->options(LocationTypeEnum::options())
+                    ->options(LocationTypeEnum::optionsAsSelectArray())
                     ->required(),
                 Forms\Components\DatePicker::make('due_date')
                     ->required(),
@@ -61,7 +61,7 @@ class TestBookingResource extends Resource
                 Tables\Columns\TextColumn::make('customer_email'),
                 Tables\Columns\TextColumn::make('user.name'),
                 Tables\Columns\BadgeColumn::make('location_type')
-                    ->enum(LocationTypeEnum::options()),
+                    ->enum(LocationTypeEnum::optionsAsSelectArray()),
             ])
             ->filters([
                 //
@@ -81,7 +81,7 @@ class TestBookingResource extends Resource
             'index' => Pages\ListTestBookings::route('/'),
 //            'create' => Pages\CreateTestBooking::route('/create'),
             'view' => Pages\ViewTestBooking::route('/{record}'),
-            'edit' => Pages\EditTestBooking::route('/{record}/edit'),
+//            'edit' => Pages\EditTestBooking::route('/{record}/edit'),
         ];
     }
 }
