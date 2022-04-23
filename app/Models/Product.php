@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Product extends BaseModel
+class Product extends BaseModel implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $dates =['created_at','updated_at'];
+    protected $dates = ['created_at', 'updated_at'];
     protected $guarded = ['id'];
 
     protected $casts = [
-        'extra_information' => 'array'
+        'extra_information' => 'array',
     ];
 
     public function categories(): BelongsToMany

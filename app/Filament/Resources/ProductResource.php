@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
@@ -21,6 +22,10 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
+                SpatieMediaLibraryFileUpload::make('pictures')
+                    ->image()
+                    ->multiple()
+                    ->enableReordering(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),

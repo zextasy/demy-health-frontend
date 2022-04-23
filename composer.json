@@ -12,6 +12,7 @@
         "doctrine/dbal": "^3.3",
         "filament/filament": "^2.10",
         "filament/spatie-laravel-media-library-plugin": "^2.0",
+        "flowframe/laravel-trend": "^0.1.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "jantinnerezo/livewire-alert": "^2.2",
