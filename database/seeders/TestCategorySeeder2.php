@@ -18,7 +18,9 @@ class TestCategorySeeder2 extends Seeder
     {
         $specimenTypeP = SpecimenType::where('key', 'P')->first();
         $specimenTypeSW = SpecimenType::where('key', 'SW')->first();
+
         $testCategory = TestCategory::create(['name' => 'HIV AND ASSOCIATED DISEASES BY PCR METHOD']);
+
         $test = new TestType;
         $test->test_id = 'GTL 014';
         $test->description = 'HIV RNA QUANTITATIVE DETECTION(VIRAL LOAD)';
@@ -100,6 +102,7 @@ class TestCategorySeeder2 extends Seeder
         $test->specimenTypes()->save($specimenTypeP);
 
         $testCategory = TestCategory::create(['name' => 'INFECTIOUS DISEASES BY PCR METHOD (MULTIPLEX)']);
+
         $test = new TestType;
         $test->test_id = 'GTL 022';
         $test->description = 'HBV/HDV REAL-TIME PCR TEST FOR SIMULTANEOUS DETECTION OF HBV AND HDV';
@@ -131,6 +134,7 @@ class TestCategorySeeder2 extends Seeder
         $test->specimenTypes()->save($specimenTypeP);
 
         $testCategory = TestCategory::create(['name' => 'COVID-19 BY PCR METHOD']);
+
         $test = new TestType;
         $test->test_id = 'GTL CV01';
         $test->description = 'COVID – 19 DETECTION (NON TRAVELLERS)';
@@ -150,46 +154,5 @@ class TestCategorySeeder2 extends Seeder
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeSW);
-
-        $testCategory = TestCategory::create(['name' => 'HUMAN PAPILLOMA VIRUS BY PCR METHOD']);
-        $test = new TestType;
-        $test->test_id = 'GTL 027';
-        $test->description = 'HPV DNA QUANTITATIVE DETECTION& GENOTYPING OF 12 HIGH RISK (F7 & F9 GROUP)';
-        $test->minimum_tat = 5;
-        $test->price = 30000;
-        $test->maximum_tat = 5;
-        $test->test_category_id = $testCategory->id;
-        $test->save();
-        $test->specimenTypes()->save($specimenTypeSW);
-
-        $test = new TestType;
-        $test->test_id = 'GTL 028';
-        $test->description = 'HPV DNA GENOTYPING OF 14 HIGH RISK';
-        $test->minimum_tat = 10;
-        $test->price = 30000;
-        $test->maximum_tat = 10;
-        $test->test_category_id = $testCategory->id;
-        $test->save();
-        $test->specimenTypes()->save($specimenTypeSW);
-
-        $test = new TestType;
-        $test->test_id = 'GTL 029';
-        $test->description = 'HPV DNA SCREENING OF ALL HIGH RISK & LOW RISK';
-        $test->price = 25000;
-        $test->minimum_tat = 14;
-        $test->maximum_tat = 14;
-        $test->test_category_id = $testCategory->id;
-        $test->save();
-        $test->specimenTypes()->save($specimenTypeSW);
     }
 }
-
-//$test = new TestType;
-//$test->test_id = '';
-//$test->description = '';
-//$test->minimum_tat = 0;
-//$test->maximum_tat = 0;
-//$test->price = 0;
-//$test->test_category_id = $testCategory->id;
-//$test->save();
-//$test->specimenTypes()->save($specimenTypeSW);

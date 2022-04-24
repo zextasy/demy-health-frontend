@@ -20,7 +20,11 @@ class SpecimenTypeSeeder extends Seeder
         ['key' => 'BC', 'description' => 'Blood Culture bottle'],
         ['key' => 'LBC', 'description' => 'Liquid base Cytology Kit'],
         ['key' => 'SP', 'description' => 'Special bottle'],
-        ['key' => 'H & T', 'description' => 'Hair or tissue (for cadavers above 36 hours)']
+        ['key' => 'H & T', 'description' => 'Hair or tissue (for cadavers above 36 hours)'],
+        ['key' => 'TSC', 'description' => 'Not listed, but appears on test list. Please change description'],
+        ['key' => 'P(WB)', 'description' => 'Not listed, but appears on test list. Please change description'],
+        ['key' => 'T', 'description' => 'Not listed, but appears on test list. Please change description'],
+        ['key' => 'URINE', 'description' => 'Urine']
     ];
     public function run()
     {

@@ -33,6 +33,8 @@ class ProductResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('country')
                     ->maxLength(255),
+                Forms\Components\Toggle::make('should_call_in_for_details')
+                    ->required(),
                 Forms\Components\TextInput::make('price'),
                 Forms\Components\KeyValue::make('extra_information'),
                 Forms\Components\BelongsToManyMultiSelect::make('categories')
@@ -47,7 +49,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('model'),
                 Tables\Columns\TextColumn::make('country'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('formatted_price')->label('price'),
                 Tables\Columns\TextColumn::make('extra_information'),
 
             ])

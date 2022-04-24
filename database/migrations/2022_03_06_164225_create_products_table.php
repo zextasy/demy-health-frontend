@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('model')->nullable();
             $table->string('country')->nullable();
+            $table->boolean('should_call_in_for_details')->default(false);
             $table->decimal('price', 24)->nullable();
             $table->json('extra_information')->nullable();
             $table->timestamps();

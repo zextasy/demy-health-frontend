@@ -16,7 +16,17 @@ class Product extends BaseModel implements HasMedia
 
     protected $casts = [
         'extra_information' => 'array',
+        'should_call_in_for_details' => 'boolean',
     ];
+
+    public function getformattedPriceAttribute($value)
+    {
+        if ($this->should_call_in_for_details){
+            return "Call In";
+        }
+
+        return number_format($this->price);
+    }
 
     public function categories(): BelongsToMany
     {

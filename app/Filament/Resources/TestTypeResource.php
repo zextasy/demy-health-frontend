@@ -24,15 +24,20 @@ class TestTypeResource extends Resource
                 Forms\Components\TextInput::make('test_id')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('price')
-                    ->required(),
                 Forms\Components\BelongsToSelect::make('test_category_id')
                     ->relationship('category', 'name')
                     ->searchable()
                     ->required(),
+                Forms\Components\Toggle::make('should_call_in_for_details')
+                    ->required(),
+                Forms\Components\TextInput::make('price')
+                    ->numeric()
+                    ->required(),
                 Forms\Components\TextInput::make('minimum_tat')
+                    ->numeric()
                     ->required(),
                 Forms\Components\TextInput::make('maximum_tat')
+                    ->numeric()
                     ->required(),
                 Forms\Components\Textarea::make('description')
                     ->required()
@@ -46,7 +51,7 @@ class TestTypeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('test_id'),
                 Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('formatted_price')->label('price'),
                 Tables\Columns\TextColumn::make('category.name'),
                 Tables\Columns\TextColumn::make('tat'),
 
