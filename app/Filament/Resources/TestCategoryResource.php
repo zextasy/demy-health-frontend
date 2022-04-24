@@ -42,7 +42,7 @@ class TestCategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TestTypesRelationManager::class,
         ];
     }
 

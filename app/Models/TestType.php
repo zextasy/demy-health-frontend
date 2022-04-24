@@ -28,6 +28,10 @@ class TestType extends BaseModel
             return "{$this->maximum_tat} days";
         }
 
+        if ($this->minimum_tat == 0 && $this->maximum_tat == 0){
+            return "{$this->tat_hours} hours";
+        }
+
         return "{$this->minimum_tat} - {$this->maximum_tat} days";
     }
 

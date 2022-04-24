@@ -33,10 +33,10 @@ class TestCategorySeeder8 extends Seeder
         $test->specimenTypes()->save($specimenTypeSW);
     }
 
-    private function getTest($testCategory, string $testId, string $description, int $minTAT, int $maxTAT, float $price): TestType
+    private function getTest(string $prefix, $testCategory, string $testId, string $description, int $minTAT, int $maxTAT, float $price): TestType
     {
         $test = new TestType;
-        $test->test_id = $testId;
+        $test->test_id = "GTL {$prefix} {$testId}";
         $test->description = $description;
         $test->minimum_tat = $minTAT;
         $test->maximum_tat = $maxTAT;

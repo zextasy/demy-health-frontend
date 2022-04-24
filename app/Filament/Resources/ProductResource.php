@@ -22,23 +22,32 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                SpatieMediaLibraryFileUpload::make('pictures')
-                    ->image()
-                    ->multiple()
-                    ->enableReordering(),
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('model')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('country')
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('should_call_in_for_details')
-                    ->required(),
-                Forms\Components\TextInput::make('price'),
-                Forms\Components\KeyValue::make('extra_information'),
-                Forms\Components\BelongsToManyMultiSelect::make('categories')
-                ->relationship('categories', 'name')
+                Forms\Components\Fieldset::make('Pictures')->schema([
+                    SpatieMediaLibraryFileUpload::make('pictures')
+                        ->image()
+                        ->multiple()
+                        ->enableReordering(),
+                ])->columns(1),
+                Forms\Components\Fieldset::make('General Info')->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('model')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('country')
+                        ->maxLength(255),
+                    Forms\Components\BelongsToManyMultiSelect::make('categories')
+                        ->relationship('categories', 'name')
+                ]),
+                Forms\Components\Fieldset::make('Pricing')->schema([
+                    Forms\Components\Toggle::make('should_call_in_for_details')
+                        ->required(),
+                    Forms\Components\TextInput::make('price'),
+                ]),
+                Forms\Components\Fieldset::make('Extra Info')->schema([
+                    Forms\Components\KeyValue::make('extra_information'),
+                ])->columns(1),
+
             ]);
     }
 

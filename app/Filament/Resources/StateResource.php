@@ -22,11 +22,12 @@ class StateResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Textarea::make('name')
-                    ->required()
-                    ->maxLength(65535),
-                Forms\Components\Toggle::make('is_ready_for_sample_collection')
+                Forms\Components\TextInput::make('name')
                     ->required(),
+                Forms\Components\Fieldset::make('Sample Collection')->schema([
+                    Forms\Components\Toggle::make('is_ready_for_sample_collection')
+                        ->required(),
+                ]),
             ]);
     }
 

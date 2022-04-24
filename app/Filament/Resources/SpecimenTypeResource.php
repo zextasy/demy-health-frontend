@@ -46,7 +46,7 @@ class SpecimenTypeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TestTypesRelationManager::class,
         ];
     }
 

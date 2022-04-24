@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms\Components\Fieldset;
 use App\Filament\Resources\TestTypeResource\Pages;
 use App\Filament\Resources\TestTypeResource\RelationManagers;
 use App\Models\TestType;
@@ -21,27 +22,43 @@ class TestTypeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('test_id')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\BelongsToSelect::make('test_category_id')
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->required(),
-                Forms\Components\Toggle::make('should_call_in_for_details')
-                    ->required(),
-                Forms\Components\TextInput::make('price')
-                    ->numeric()
-                    ->required(),
-                Forms\Components\TextInput::make('minimum_tat')
-                    ->numeric()
-                    ->required(),
-                Forms\Components\TextInput::make('maximum_tat')
-                    ->numeric()
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->maxLength(65535),
+                Fieldset::make('General Info')->schema([
+                    Forms\Components\TextInput::make('test_id')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\BelongsToSelect::make('test_category_id')
+                        ->relationship('category', 'name')
+                        ->searchable()
+                        ->required(),
+                ]),
+                Fieldset::make('Pricing')->schema([
+                    Forms\Components\Toggle::make('should_call_in_for_details')
+                        ->required(),
+                    Forms\Components\TextInput::make('price')
+                        ->numeric()
+                        ->required(),
+                ]),
+                Fieldset::make('Turn around time')
+                    ->schema([
+                        Forms\Components\TextInput::make('minimum_tat')
+                            ->label('Minimum (days)')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\TextInput::make('maximum_tat')
+                            ->label('Maximum (days)')
+                            ->numeric()
+                            ->required(),
+                        Forms\Components\TextInput::make('tat_hours')
+                            ->label('Hours')
+                            ->helperText('Please set minimum and maximum days to 0 to display this')
+                            ->numeric(),
+                    ])->columns(3),
+                Fieldset::make('Description')->schema([
+                    Forms\Components\Textarea::make('description')
+                        ->required()
+                        ->maxLength(65535),
+                ])->columns(1),
+
             ]);
     }
 
