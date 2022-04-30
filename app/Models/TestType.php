@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\FilamentHelper;
 use App\Traits\Relationships\HasTestBookings;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -46,7 +47,7 @@ class TestType extends BaseModel
 
     public function getFilamentUrlAttribute():string
     {
-        return ViewTestType::getUrl($this->id);
+        return FilamentHelper::getResourceURL('test-types')."/{$this->id}";
     }
 
     public function category() : BelongsTo{

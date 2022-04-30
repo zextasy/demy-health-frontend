@@ -52,8 +52,8 @@ class InternalTestBookingNotification extends Notification
         return (new MailMessage)
             ->subject($this->subject)
             ->line($this->message)
-//            ->action('View Booking', url($this->testBooking->filament_url))
-            ->line('Thank you for using our application!');
+            ->action('View Booking', $this->testBooking->filament_url)
+            ->line('Please attend to this as soon as possible');
     }
 
     /**
