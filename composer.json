@@ -21,6 +21,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "livewire/livewire": "^2.10",
+        "predis/predis": "^1.1",
         "pxlrbt/filament-excel": "^0.1.2",
         "saade/filament-fullcalendar": "^0.2.1",
         "spatie/laravel-activitylog": "^3.17",
@@ -30,7 +31,8 @@
         "spatie/laravel-searchable": "^1.11",
         "spatie/laravel-tags": "^3.1",
         "stechstudio/filament-impersonate": "^2.4",
-        "webbingbrasil/filament-advancedfilter": "^1.0"
+        "webbingbrasil/filament-advancedfilter": "^1.0",
+        "webbingbrasil/filament-notification": "^0.1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

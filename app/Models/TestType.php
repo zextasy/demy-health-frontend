@@ -6,7 +6,7 @@ use App\Traits\Relationships\HasTestBookings;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\TestTypeResource\Pages\ViewTestType;
 
 class TestType extends BaseModel
 {
@@ -43,6 +43,12 @@ class TestType extends BaseModel
 
         return number_format($this->price);
     }
+
+    public function getFilamentUrlAttribute():string
+    {
+        return ViewTestType::getUrl($this->id);
+    }
+
     public function category() : BelongsTo{
         return $this->belongsTo(TestCategory::class,'test_category_id');
     }

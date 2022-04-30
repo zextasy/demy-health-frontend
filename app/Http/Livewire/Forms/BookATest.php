@@ -10,6 +10,7 @@ use App\Models\TestType;
 use App\Models\TestCenter;
 use App\Models\TestBooking;
 use App\Models\TestCategory;
+use App\Events\TestBookedEvent;
 use App\Models\LocalGovernmentArea;
 use App\Enums\TestBooking\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -97,6 +98,7 @@ class BookATest extends Component
         }
 
         if ($this->success){
+            TestBookedEvent::dispatch($testBooking);
             $this->flash('success', 'Your test has been booked!', [], '/');
 
         } else{
