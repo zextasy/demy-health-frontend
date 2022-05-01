@@ -8,9 +8,10 @@ class TestBookingObserver
 {
     public function creating (TestBooking $testBooking)
     {
-        $padding = str_pad($testBooking->id, 9, "0", STR_PAD_LEFT);
-        $timeStamp = floor(time()-999999999);
-        $testBooking->reference = 'DM-TB-'.$timeStamp;
+
+        $padding = str_pad($testBooking->getNextId(), 9, "0", STR_PAD_LEFT);
+//        $timeStamp = floor(time()-999999999);
+        $testBooking->reference = 'DM-TB-'.$padding;
     }
     public function created(TestBooking $testBooking)
     {
