@@ -11,6 +11,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use App\Filament\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
 
 class TestBookingResource extends Resource
 {
@@ -82,6 +83,13 @@ class TestBookingResource extends Resource
 //            'create' => Pages\CreateTestBooking::route('/create'),
             'view' => Pages\ViewTestBooking::route('/{record}'),
 //            'edit' => Pages\EditTestBooking::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            TestBookingCalendarWidget::class,
         ];
     }
 }

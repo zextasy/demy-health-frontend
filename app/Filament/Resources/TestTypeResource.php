@@ -18,6 +18,8 @@ class TestTypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $recordTitleAttribute = 'description';
+
     public static function form(Form $form): Form
     {
         return $form
