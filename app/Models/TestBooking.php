@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Helpers\FilamentHelper;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Traits\Relationships\HasAddress;
 use App\Enums\TestBooking\LocationTypeEnum;
+use App\Filament\Resources\TestBookingResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Filament\Resources\TestBookingResource\Pages\ViewTestBooking;
 
 class TestBooking extends BaseModel
 {
@@ -21,9 +21,25 @@ class TestBooking extends BaseModel
         'location_type' => LocationTypeEnum::class,
     ];
 
+    public function getNextId()
+    {
+        $statement = DB::select("show table status like 'test_bookings'");
+        return $statement[0]->Auto_increment;
+    }
+
     public function getFilamentUrlAttribute():string
     {
-        return FilamentHelper::getResourceURL('test-bookings')."/{$this->id}";
+        return TestBookingResource::getUrl('view', ['record' => $this->id]);
+    }
+
+    public function toFullCalenderEventArray():array
+    {
+        return [
+            'id' => $this->id,
+            'title' => "{$this->testType->description} for {$this->customer_email}",
+            'start' => Carbon::make($this->due_date)->setTimeFromTimeString($this->start_time),
+            'url' => $this->filament_url,
+        ];
     }
 
     public function testType():BelongsTo
