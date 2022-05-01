@@ -81,7 +81,6 @@ class InternalTestBookingNotification extends Notification
             ButtonAction::make('viewBooking')
                 ->label('View Booking')
                 ->action(function ($record, $livewire) {
-                    ray($record);
                     $record->markAsRead();
                     return redirect()->to($record->data['bookingUrl']);
                 })

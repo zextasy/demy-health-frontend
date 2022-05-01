@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use PDO;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Traits\Relationships\HasAddress;
@@ -23,8 +24,14 @@ class TestBooking extends BaseModel
 
     public function getNextId()
     {
-        $statement = DB::select("show table status like 'test_bookings'");
-        return $statement[0]->Auto_increment;
+        switch(DB::connection()->getPDO()->getAttribute(PDO::ATTR_DRIVER_NAME)) {
+            case 'mysql':
+                $statement = DB::select("show table status like 'test_bookings'");
+                return $statement[0]->Auto_increment;
+
+            default:
+                return floor(time() - 999999999);
+        }
     }
 
     public function getFilamentUrlAttribute():string
