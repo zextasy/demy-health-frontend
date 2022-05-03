@@ -29,7 +29,7 @@ class BookATest extends Component
 
     public $customerEmail = null;
     public $locationType = null;
-    public $address = null;
+    public $addressLine1 = null;
     public $city = null;
     public $dueDate;
     public $startTime;
@@ -46,7 +46,7 @@ class BookATest extends Component
         'customerEmail' => 'required|email',
 //        'test_center_id' => "required_if:locationType,1",//LocationTypeEnum::Center
 //        'state_id' => 'required_if:locationType,2',//LocationTypeEnum::Home
-        'address' => 'required_if:location_type,2',//LocationTypeEnum::Home
+        'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
 //        'test_type_id' => 'required',
         'dueDate' => 'required',
         'startTime' => 'required',
@@ -86,7 +86,7 @@ class BookATest extends Component
 
         if ($locationTypeEnum == LocationTypeEnum::Home){
             $newAddress = Address::create([
-                'line_1' => $this->address,
+                'line_1' => $this->addressLine1,
                 'city' => $this->city,
                 'state_id' => $this->selectedState,
                 'local_government_area_id' => $this->selectedLocalGovernmentArea,

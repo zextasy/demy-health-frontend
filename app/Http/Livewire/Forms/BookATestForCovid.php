@@ -32,7 +32,7 @@ class BookATestForCovid extends Component
     public $localGovernmentArea = null;
     public $customerEmail = null;
     public $locationType = null;
-    public $address = null;
+    public $addressLine1 = null;
     public $city = null;
     public $dueDate;
     public $startTime;
@@ -42,18 +42,13 @@ class BookATestForCovid extends Component
         'customerEmail' => 'required|email',
         'testCenter' => "required_if:locationType,1",//LocationTypeEnum::Center
         'selectedState' => 'required_if:locationType,2',//LocationTypeEnum::Home
-        'address' => 'required_if:location_type,2',//LocationTypeEnum::Home
+        'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
         'selectedTestCategory' => 'required',
         'testType' => 'required',
         'dueDate' => 'required',
         'startTime' => 'required',
 
     ];
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
 
     public function mount()
     {
@@ -87,8 +82,8 @@ class BookATestForCovid extends Component
         $this->success = isset($testBooking);
 
         if ($locationTypeEnum == LocationTypeEnum::Home){
-            $address = Address::create([
-                'line_1' => $this->address,
+            $NewAddress = Address::create([
+                'line_1' => $this->addressLine1,
                 'city' => $this->city,
                 'state_id' => $this->selectedState,
                 'local_government_area_id' => $this->localGovernmentArea,
@@ -96,7 +91,7 @@ class BookATestForCovid extends Component
                 'addressable_id' => $testBooking->id,
             ]);
 
-            $this->success = isset($address);
+            $this->success = isset($NewAddress);
         }
 
         if ($this->success){
