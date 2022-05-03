@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Enums\TestBooking\StatusEnum;
 use App\Traits\Relationships\HasAddresses;
 use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource;
@@ -20,6 +21,7 @@ class TestBooking extends BaseModel
     protected $guarded = ['id'];
 
     protected $casts = [
+        'status' => StatusEnum::class,
         'location_type' => LocationTypeEnum::class,
     ];
 

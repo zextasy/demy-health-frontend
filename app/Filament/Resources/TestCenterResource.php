@@ -35,13 +35,7 @@ class TestCenterResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-//                Tables\Columns\TextColumn::make('latestAddress.line_1')
-//                    ->label('address'),
-//                Tables\Columns\TextColumn::make('latestAddress.state.name')
-//                    ->label('state'),
-//                Tables\Columns\TextColumn::make('latestAddress.localGovernmentArea.name')
-//                    ->label('LGA'),
+                Tables\Columns\TextColumn::make('name')->searchable(),
             ])
             ->filters([
                 //

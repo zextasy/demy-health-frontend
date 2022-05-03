@@ -45,11 +45,11 @@ class AddressResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('state.name'),
-                Tables\Columns\TextColumn::make('localGovernmentArea.name'),
-                Tables\Columns\TextColumn::make('line_1'),
-                Tables\Columns\TextColumn::make('line_2'),
-                Tables\Columns\TextColumn::make('city'),
+                Tables\Columns\TextColumn::make('state.name')->searchable(),
+                Tables\Columns\TextColumn::make('localGovernmentArea.name')->searchable(),
+                Tables\Columns\TextColumn::make('line_1')->searchable(),
+                Tables\Columns\TextColumn::make('line_2')->searchable(),
+                Tables\Columns\TextColumn::make('city')->searchable(),
             ])
             ->filters([
                 //

@@ -39,8 +39,8 @@ class LocalGovernmentAreaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('state.name'),
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('state.name')->searchable(),
+                Tables\Columns\TextColumn::make('name')->searchable(),
 
             ])
             ->filters([

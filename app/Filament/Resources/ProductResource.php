@@ -59,11 +59,11 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('model'),
-                Tables\Columns\TextColumn::make('country'),
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('model')->searchable(),
+                Tables\Columns\TextColumn::make('country')->searchable(),
                 Tables\Columns\TextColumn::make('formatted_price')->label('price'),
-                Tables\Columns\TextColumn::make('extra_information'),
+                Tables\Columns\TextColumn::make('extra_information')->searchable(),
 
             ])
             ->filters([

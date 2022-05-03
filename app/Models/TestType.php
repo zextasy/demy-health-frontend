@@ -21,8 +21,6 @@ class TestType extends BaseModel
     protected $guarded = ['id'];
     protected $casts = [
         'should_call_in_for_details' => 'boolean',
-        'location_type' => LocationTypeEnum::class,
-        'status' => StatusEnum::class,
     ];
 
     public function getTatAttribute(): string

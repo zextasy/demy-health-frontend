@@ -40,7 +40,16 @@ class ProductCategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('products_count')
+                    ->counts('Products')
+                    ->label('Products')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('parent.name')->searchable(),
+                Tables\Columns\TextColumn::make('children_count')
+                    ->counts('children')
+                    ->label('Children')
+                    ->sortable(),
 
             ])
             ->filters([

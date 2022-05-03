@@ -40,8 +40,8 @@ class SpecimenTypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('key'),
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('key')->searchable(),
+                Tables\Columns\TextColumn::make('description')->searchable(),
 
             ])
             ->filters([

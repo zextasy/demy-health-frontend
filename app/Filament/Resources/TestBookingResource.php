@@ -28,34 +28,42 @@ class TestBookingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('reference')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('status')
-                    ->options(StatusEnum::optionsAsSelectArray())
-                    ->required(),
-                Forms\Components\TextInput::make('customer_email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\BelongsToSelect::make('testType')
-                    ->relationship('testType','description')
-                    ->required(),
-                Forms\Components\BelongsToSelect::make('user')
-                    ->relationship('user', 'name')
-                    ->placeholder(''),
-                Forms\Components\BelongsToSelect::make('testCenter')
-                    ->relationship('testCenter', 'name')
-                    ->placeholder(''),
-                Forms\Components\Select::make('location_type')
-                    ->options(LocationTypeEnum::optionsAsSelectArray())
-                    ->required(),
-                Forms\Components\DatePicker::make('due_date')
-                    ->required(),
-                Forms\Components\TextInput::make('start_time')
-                    ->required(),
-                Forms\Components\TextInput::make('duration_minutes')
-                    ->required(),
+                Forms\Components\Fieldset::make('General Info')->schema([
+                    Forms\Components\TextInput::make('reference')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\BelongsToSelect::make('testType')
+                        ->relationship('testType','description')
+                        ->required(),
+                    Forms\Components\Select::make('status')
+                        ->options(StatusEnum::optionsAsSelectArray())
+                        ->required(),
+                ])->columns(1),
+                Forms\Components\Fieldset::make('Customer Details')->schema([
+                    Forms\Components\TextInput::make('customer_email')
+                        ->email()
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\BelongsToSelect::make('user')
+                        ->relationship('user', 'name')
+                        ->placeholder(''),
+                ]),
+                Forms\Components\Fieldset::make('Schedule')->schema([
+                    Forms\Components\DatePicker::make('due_date')
+                        ->required(),
+                    Forms\Components\TextInput::make('start_time')
+                        ->required(),
+                    Forms\Components\TextInput::make('duration_minutes')
+                        ->required(),
+                ])->columns(3),
+                Forms\Components\Fieldset::make('Location')->schema([
+                    Forms\Components\Select::make('location_type')
+                        ->options(LocationTypeEnum::optionsAsSelectArray())
+                        ->required(),
+                    Forms\Components\BelongsToSelect::make('testCenter')
+                        ->relationship('testCenter', 'name')
+                        ->placeholder(''),
+                ]),
             ]);
     }
 
@@ -63,20 +71,20 @@ class TestBookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('testType.description'),
+                Tables\Columns\TextColumn::make('reference')->searchable(),
+                Tables\Columns\TextColumn::make('testType.description')->searchable(),
                 Tables\Columns\TextColumn::make('due_date')
                     ->date(),
                 Tables\Columns\TextColumn::make('customer_email'),
-                Tables\Columns\TextColumn::make('user.name'),
                 Tables\Columns\BadgeColumn::make('status')
-                    ->enum(StatusEnum::optionsAsSelectArray())
-                    ->colors([
-                        'primary',
-                        'danger' => 'draft',
-                        'warning' => 'reviewing',
-                        'success' => 'complete',
-                    ]),
+                    ->enum(StatusEnum::optionsAsSelectArray()),
+//            ->colors([
+//                'gray' => StatusEnum::Booked->value,
+//                'primary'=> '1',//Booked
+//                'danger' => 'none',
+//                'warning' => 'reviewing',
+//                'success' => 'complete',
+//            ])
                 Tables\Columns\BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray()),
             ])
