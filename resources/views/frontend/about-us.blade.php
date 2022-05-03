@@ -28,7 +28,7 @@
                 <div class="p-0 col-12 col-lg-6 md-pb">
                     <div class="image-wrapper">
 {{--                        <img src="assets/images/demyabstract-450x336.png" alt="Mobirise">--}}
-                        <img src="assets/images/logo-landscape-350x53.png" alt="Demyhealth">
+                        <img src="assets/images/mbr-2.jpg" alt="Demyhealth">
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@
                         </p>
                         <div class="mbr-section-btn mt-3"><a class="btn btn-secondary display-4" href="#">Explore
                                 all features</a>
-                            <a class="btn btn-black-outline display-4" href="#">Get a quote &gt;</a></div>
+                            <a class="btn btn-black-outline display-4" href="#form5-15">Get a quote &gt;</a></div>
                     </div>
                 </div>
             </div>

@@ -146,11 +146,11 @@ class TestCategorySeeder2 extends Seeder
         $test->specimenTypes()->save($specimenTypeSW);
 
         $test = new TestType;
-        $test->test_id = 'GTL 026';
-        $test->description = 'HPV DNA DETECTION/GENOTYPING TYPE 16 & 18';
-        $test->minimum_tat = 5;
-        $test->price = 10000;
-        $test->maximum_tat = 5;
+        $test->test_id = 'GTL CV02';
+        $test->description = 'COVID-19 DETECTION (TRAVELLERS)';
+        $test->minimum_tat = 1;
+        $test->price = 30000;
+        $test->maximum_tat = 1;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeSW);

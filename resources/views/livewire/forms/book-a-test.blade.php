@@ -1,15 +1,15 @@
 <form wire:submit.prevent="submit" class="mbr-form form-with-styler" data-form-title="Form Name">
     @csrf
     <div class="col-12 form-group mb-3" data-for="email">
+        <input type="text" wire:model="customerEmail" class="form-control" placeholder="Please enter your email" value="{{$customerEmail}}">
+        @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
+    </div>
+    <div class="col-12 form-group mb-3" data-for="radio">
         <input type="radio" id="html" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::Home->value}}">
         <label for="html">Home sample collection</label><br>
         <input type="radio" id="css" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::Center->value}}">
         <label for="css">Take the Test at a center</label><br>
         @error('locationType') <span class="alert-danger">{{ $message }}</span> @enderror
-    </div>
-    <div class="col-12 form-group mb-3" data-for="email">
-        <input type="text" wire:model="customerEmail" class="form-control" placeholder="Please enter your email">
-        @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Home->value)
         <div class="col-12 form-group mb-3" data-for="textarea">
@@ -58,7 +58,7 @@
         />
         @error('selectedTestType') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
-    <div class="col-12 form-group mb-3" data-for="text">
+    <div class="col-12 form-group mb-3" data-for="date">
         <label for="startTime">Date: </label>
         <input type="date"  wire:model="dueDate" min="{{today()}}">
         @error('dueDate') <span class="alert-danger">{{ $message }}</span> @enderror

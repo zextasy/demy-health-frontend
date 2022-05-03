@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Forms\Select\LivewireSelect;
 use App\Models\State;
 use App\Models\TestCenter;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Asantibanez\LivewireSelect\LivewireSelect;
 
 class TestCenterSelect extends LivewireSelect
@@ -22,7 +23,7 @@ class TestCenterSelect extends LivewireSelect
                 $query->where('test_category_id', $this->getDependingValue('test_category_id'));
             })
             ->when($searchTerm, function ($query, $searchTerm) {
-                $query->where('name', 'like', "%$searchTerm%");
+                $query->where(DB::raw('LOWER(name)'), 'like', '%'. strtolower($searchTerm) .'%');
             })
             ->get()
             ->toLivewireSelectCollection();

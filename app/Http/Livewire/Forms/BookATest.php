@@ -41,11 +41,6 @@ class BookATest extends Component
         'selectedTestTypeUpdated' => 'setSelectedTestType',
     ];
 
-    public function stateToParent($value)
-    {
-        $this->selectedState = $value;
-    }
-
     protected $rules = [
         'locationType' => 'required',
         'customerEmail' => 'required|email',
@@ -58,9 +53,14 @@ class BookATest extends Component
 
     ];
 
-    public function updated($propertyName)
+    public function mount()
     {
-        $this->validateOnly($propertyName);
+        $this->customerEmail = optional(auth()->user())->email;
+    }
+
+    public function stateToParent($value)
+    {
+        $this->selectedState = $value;
     }
 
     public function render()
