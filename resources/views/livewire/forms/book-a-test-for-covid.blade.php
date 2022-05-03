@@ -25,28 +25,32 @@
         </div>
         @if (!is_null($selectedState))
         <div class="col-12 form-group mb-3" data-for="textarea">
-            <select wire:model="localGovernmentArea" class="form-control"  required>
+            <select wire:model="selectedLocalGovernmentArea" class="form-control"  required>
                 <option value="" selected>Choose LGA</option>
                 @foreach($localGovernmentAreas as $localGovernmentArea)
                     <option value="{{ $localGovernmentArea->id }}">{{ $localGovernmentArea->name }}</option>
                 @endforeach
 
             </select>
-            @error('localGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
+            @error('selectedLocalGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         @endif
-        <div class="col-12 form-group mb-3" data-for="email">
+        <div class="col-12 form-group mb-3" data-for="text">
             <input type="textarea" wire:model="city" class="form-control" placeholder="Please enter your city" required>
             @error('city') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
-        <div class="col-12 form-group mb-3" data-for="email">
+        <div class="col-12 form-group mb-3" data-for="text">
             <input type="textarea" wire:model="addressLine1" class="form-control" placeholder="Please enter your address" required>
             @error('addressLine1') <span class="alert-danger">{{ $message }}</span> @enderror
+        </div>
+        <div class="col-12 form-group mb-3" data-for="text">
+            <input type="textarea" wire:model="addressLine2" class="form-control" placeholder="Please enter your address Line 2 (optional)">
+            @error('addressLine2') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Center->value)
         <div class="col-12 form-group mb-3" data-for="textarea">
-            <select wire:model="testCenter" class="form-control"  required>
+            <select wire:model="selectedTestCenter" class="form-control"  required>
                 <option value="" selected>Choose Center</option>
 
                 @foreach($testCenters as $testCenter)
@@ -54,7 +58,7 @@
                 @endforeach
 
             </select>
-            @error('testCenter') <span class="alert-danger">{{ $message }}</span> @enderror
+            @error('selectedTestCenter') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
     <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
@@ -70,7 +74,7 @@
     </div>
     @if (!is_null($selectedTestCategory))
         <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
-            <select wire:model="testType" class="form-control"  required>
+            <select wire:model="selectedTestType" class="form-control"  required>
                 <option value="" selected>Choose Test</option>
 
                 @foreach($testTypes as $testType)
@@ -78,7 +82,7 @@
                 @endforeach
 
             </select>
-            @error('testType') <span class="alert-danger">{{ $message }}</span> @enderror
+            @error('selectedTestType') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
     <div class="col-12 form-group mb-3" data-for="email">

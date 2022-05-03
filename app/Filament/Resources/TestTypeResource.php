@@ -20,6 +20,8 @@ class TestTypeResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'description';
 
+    protected static ?string $navigationGroup = 'Tests';
+
     public static function form(Form $form): Form
     {
         return $form

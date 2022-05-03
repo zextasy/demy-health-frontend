@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Address extends BaseModel
 {
@@ -22,7 +21,18 @@ class Address extends BaseModel
         return $this->belongsTo(LocalGovernmentArea::class);
     }
 
-    public function addressable () : MorphTo{
-        return $this->morphTo('addressable');
+    public function users () : MorphToMany
+    {
+        return $this->morphedByMany(User::class,'addressable');
+    }
+
+    public function TestCenters () : MorphToMany
+    {
+        return $this->morphedByMany(TestCenter::class,'addressable');
+    }
+
+    public function TestBookings () : MorphToMany
+    {
+        return $this->morphedByMany(TestBooking::class,'addressable');
     }
 }

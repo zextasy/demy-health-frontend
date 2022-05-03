@@ -28,7 +28,7 @@ class InternalTestBookingNotification extends Notification
     {
         $this->testBooking = $testBooking;
         $testType = $testBooking->testType;
-        $this->message = "{$testType->description} was booked by a customer, email: {$testBooking->customer_email} on {$testBooking->created_at}";
+        $this->message = "{$testType->description} was booked by a customer, reference: {$testBooking->reference} email: {$testBooking->customer_email} on {$testBooking->created_at}";
         $this->subject = 'A test has been Booked';
         $this->bookingUrl = $testBooking->filament_url;
     }
@@ -80,7 +80,7 @@ class InternalTestBookingNotification extends Notification
         return [
             ButtonAction::make('viewBooking')
                 ->label('View Booking')
-                ->action(function ($record, $livewire) {
+                ->action(function ($record) {
                     $record->markAsRead();
                     return redirect()->to($record->data['bookingUrl']);
                 })

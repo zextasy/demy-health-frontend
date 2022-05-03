@@ -19,6 +19,8 @@ class ProductCategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $navigationGroup = 'Products';
+
     public static function form(Form $form): Form
     {
         return $form

@@ -10,6 +10,7 @@ use App\Models\TestType;
 use App\Models\TestCenter;
 use App\Models\TestBooking;
 use App\Models\TestCategory;
+use App\Events\TestBookedEvent;
 use App\Models\LocalGovernmentArea;
 use App\Enums\TestBooking\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -27,12 +28,13 @@ class BookATestForCovid extends Component
 
     public $selectedTestCategory = null;
     public $selectedState = null;
-    public $testCenter = null;
-    public $testType = null;
-    public $localGovernmentArea = null;
+    public $selectedTestCenter = null;
+    public $selectedTestType = null;
+    public $selectedLocalGovernmentArea = null;
     public $customerEmail = null;
     public $locationType = null;
     public $addressLine1 = null;
+    public $addressLine2 = null;
     public $city = null;
     public $dueDate;
     public $startTime;
@@ -40,15 +42,16 @@ class BookATestForCovid extends Component
     protected $rules = [
         'locationType' => 'required',
         'customerEmail' => 'required|email',
-        'testCenter' => "required_if:locationType,1",//LocationTypeEnum::Center
+        'selectedTestCenter' => "required_if:locationType,1",//LocationTypeEnum::Center
         'selectedState' => 'required_if:locationType,2',//LocationTypeEnum::Home
         'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
         'selectedTestCategory' => 'required',
-        'testType' => 'required',
+        'selectedTestType' => 'required',
         'dueDate' => 'required',
         'startTime' => 'required',
 
     ];
+
 
     public function mount()
     {
@@ -71,30 +74,38 @@ class BookATestForCovid extends Component
         $possibleUser = User::query()->where('email',$this->customerEmail)->first();
         $locationTypeEnum = LocationTypeEnum::from($this->locationType);
         $testBooking = TestBooking::create([
-            'test_type_id' => $this->testType,
+            'test_type_id' => $this->selectedTestType,
             'user_id' => optional($possibleUser)->id,
             'customer_email' => $this->customerEmail,
             'location_type' => $locationTypeEnum,
-            'test_center_id' => $this->testCenter,
+            'test_center_id' => $this->selectedTestCenter,
             'due_date' => $this->dueDate,
             'start_time' => $this->startTime,
         ]);
         $this->success = isset($testBooking);
 
         if ($locationTypeEnum == LocationTypeEnum::Home){
-            $NewAddress = Address::create([
+            $newAddress = Address::create([
                 'line_1' => $this->addressLine1,
+                'line_2' => $this->addressLine2,
                 'city' => $this->city,
                 'state_id' => $this->selectedState,
-                'local_government_area_id' => $this->localGovernmentArea,
+                'local_government_area_id' => $this->selectedLocalGovernmentArea,
                 'addressable_type' => get_class($testBooking),
                 'addressable_id' => $testBooking->id,
             ]);
+            $newAddress->TestBookings()->save($testBooking);
+            $this->success = isset($newAddress);
+        }
 
-            $this->success = isset($NewAddress);
+        if ($locationTypeEnum == LocationTypeEnum::Center){
+            $testCenter = TestCenter::find($this->selectedTestCenter);
+            $centerAddress =$testCenter->getLatestAddress();
+            $centerAddress->TestBookings()->save($testBooking);
         }
 
         if ($this->success){
+            TestBookedEvent::dispatch($testBooking);
             $this->flash('success', 'Your test has been booked!', [], '/');
 
         } else{

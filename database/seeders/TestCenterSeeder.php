@@ -2,21 +2,53 @@
 
 namespace Database\Seeders;
 
+use App\Models\State;
+use App\Models\Address;
 use App\Models\TestCenter;
 use Illuminate\Database\Seeder;
+use App\Models\LocalGovernmentArea;
 
 class TestCenterSeeder extends Seeder
 {
-    protected $testCenters = [
-        ['name' => 'DemyHealth Building', 'address_text' =>  "Plot 418A, Opposite D close, Along 1st Avenue, Gwarinpa, Abuja."],
-        ['name' =>  'Chescon Park', 'address_text' => "Beside Millennium Garden, Opposite Transcorp Hilton, Maitama District, Abuja."],
-        ['name' => 'Lagos Office', 'address_text' => "Plot 2, Aina Close, Beside Justrite Super Stores, Opposite New Page Plaza, Kosoko Road, Ojodu Berger, Lagos State."]
-    ];//FIXME Add  cities and LGAs as relationships, or add an address model
 
     public function run()
     {
-        foreach ($this->testCenters as $testCenter){
-            TestCenter::updateOrCreate(['name' => $testCenter['name']], $testCenter);
-        }
+        $stateAbuja = State::where('name', 'FCT')->first();
+        $stateLagos = State::where('name','Lagos')->first();
+        $lgaMunicipal = LocalGovernmentArea::where('name', 'Abuja Municipal')->first();
+        $lgaIkeja = LocalGovernmentArea::where('name','Ikeja')->first();
+
+        $testCenter = TestCenter::create(['name' => 'DemyHealth Building']);
+        $address = Address::create([
+            'line_1' =>'Plot 418A, Opposite D close',
+            'line_2' =>'Along 1st Avenue',
+            'city' =>'Gwarinpa',
+            'state_id' => $stateAbuja->id,
+            'local_government_area_id' => $lgaMunicipal->id,
+        ]);
+
+        $address->TestCenters()->save($testCenter);
+
+        $testCenter = TestCenter::create(['name' => 'Chescon Park']);
+        $address = Address::create([
+            'line_1' =>'Beside Millennium Garden',
+            'line_2' =>'Opposite Transcorp Hilton',
+            'city' =>'Maitama District',
+            'state_id' => $stateAbuja->id,
+            'local_government_area_id' => $lgaMunicipal->id,
+        ]);
+
+        $address->TestCenters()->save($testCenter);
+
+        $testCenter = TestCenter::create(['name' => 'Lagos Office']);
+        $address = Address::create([
+            'line_1' =>'Plot 2, Aina Close, Beside Justrite Super Stores',
+            'line_2' =>'Opposite New Page Plaza, Kosoko Road',
+            'city' =>'Ojodu Berger',
+            'state_id' => $stateLagos->id,
+            'local_government_area_id' => $lgaIkeja->id,
+        ]);
+
+        $address->TestCenters()->save($testCenter);
     }
 }

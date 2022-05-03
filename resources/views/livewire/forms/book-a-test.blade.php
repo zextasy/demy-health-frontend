@@ -30,13 +30,17 @@
             />
             @error('selectedLocalGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
-        <div class="col-12 form-group mb-3" data-for="textarea">
+        <div class="col-12 form-group mb-3" data-for="text">
             <input type="textarea" wire:model="city" class="form-control" placeholder="Please enter your city"  required>
             @error('city') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
-        <div class="col-12 form-group mb-3" data-for="textarea">
+        <div class="col-12 form-group mb-3" data-for="text">
             <input type="textarea" wire:model="addressLine1" class="form-control" placeholder="Please enter your address"  required>
             @error('addressLine1') <span class="alert-danger">{{ $message }}</span> @enderror
+        </div>
+        <div class="col-12 form-group mb-3" data-for="text">
+            <input type="textarea" wire:model="addressLine2" class="form-control" placeholder="Please enter your address Line 2 (optional)">
+            @error('addressLine2') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Center->value)

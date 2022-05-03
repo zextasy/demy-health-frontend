@@ -20,7 +20,6 @@ class CreateAddressesTable extends Migration
             $table->string('city')->nullable();
             $table->foreignId('state_id')->constrained();
             $table->foreignId('local_government_area_id')->constrained();
-            $table->morphs('addressable');
             $table->timestamps();
             $table->softDeletes();
         });

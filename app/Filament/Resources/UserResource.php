@@ -21,6 +21,11 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static function getNavigationGroup(): ?string
+    {
+        return __('filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -58,7 +63,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\AddressesRelationManager::class,
         ];
     }
 
@@ -67,6 +72,7 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
+            'view' => Pages\ViewUser::route('/{record}'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }

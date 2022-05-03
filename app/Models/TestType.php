@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Helpers\FilamentHelper;
+use App\Enums\TestBooking\StatusEnum;
+use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestTypeResource;
 use App\Traits\Relationships\HasTestBookings;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +20,8 @@ class TestType extends BaseModel
     protected $guarded = ['id'];
     protected $casts = [
         'should_call_in_for_details' => 'boolean',
+        'location_type' => LocationTypeEnum::class,
+        'status' => StatusEnum::class,
     ];
 
     public function getTatAttribute(): string

@@ -2,16 +2,14 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\State;
-use App\Models\LocalGovernmentArea;
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\Address;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use App\Filament\Resources\AddressResource\Pages;
 use App\Filament\Resources\AddressResource\RelationManagers;
-use App\Models\Address;
-use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
 
 class AddressResource extends Resource
 {
@@ -19,15 +17,12 @@ class AddressResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Locations';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('line_1')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('line_2')
-                    ->maxLength(255),
                 Forms\Components\BelongsToSelect::make('state_id')
                     ->relationship('state', 'name')
                     ->searchable()
@@ -36,8 +31,13 @@ class AddressResource extends Resource
                     ->relationship('localGovernmentArea', 'name')
                     ->searchable()
                     ->required(),
+                Forms\Components\TextInput::make('line_1')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('line_2')
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('city')
-                    ->maxLength(255)
+                    ->maxLength(255),
             ]);
     }
 
@@ -49,7 +49,7 @@ class AddressResource extends Resource
                 Tables\Columns\TextColumn::make('localGovernmentArea.name'),
                 Tables\Columns\TextColumn::make('line_1'),
                 Tables\Columns\TextColumn::make('line_2'),
-                Tables\Columns\TextColumn::make('city')
+                Tables\Columns\TextColumn::make('city'),
             ])
             ->filters([
                 //
@@ -59,7 +59,8 @@ class AddressResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TestBookingsRelationManager::class,
+            RelationManagers\TestCentersRelationManager::class,
         ];
     }
 
@@ -67,7 +68,7 @@ class AddressResource extends Resource
     {
         return [
             'index' => Pages\ListAddresses::route('/'),
-//            'create' => Pages\CreateAddress::route('/create'),
+            //            'create' => Pages\CreateAddress::route('/create'),
             'view' => Pages\ViewAddress::route('/{record}'),
             'edit' => Pages\EditAddress::route('/{record}/edit'),
         ];

@@ -2,24 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LocalGovernmentAreaResource\Pages;
-use App\Filament\Resources\LocalGovernmentAreaResource\RelationManagers;
-use App\Models\LocalGovernmentArea;
+use App\Filament\Resources\TestCenterResource\Pages;
+use App\Filament\Resources\TestCenterResource\RelationManagers;
+use App\Models\TestCenter;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 
-class LocalGovernmentAreaResource extends Resource
+class TestCenterResource extends Resource
 {
-    protected static ?string $model = LocalGovernmentArea::class;
+    protected static ?string $model = TestCenter::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Locations';
+    protected static ?string $navigationGroup = 'Tests';
 
     public static function form(Form $form): Form
     {
@@ -28,10 +28,6 @@ class LocalGovernmentAreaResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\BelongsToSelect::make('state_id')
-                    ->relationship('state', 'name')
-                    ->searchable()
-                    ->required(),
             ]);
     }
 
@@ -39,9 +35,13 @@ class LocalGovernmentAreaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('state.name'),
                 Tables\Columns\TextColumn::make('name'),
-
+//                Tables\Columns\TextColumn::make('latestAddress.line_1')
+//                    ->label('address'),
+//                Tables\Columns\TextColumn::make('latestAddress.state.name')
+//                    ->label('state'),
+//                Tables\Columns\TextColumn::make('latestAddress.localGovernmentArea.name')
+//                    ->label('LGA'),
             ])
             ->filters([
                 //
@@ -51,17 +51,17 @@ class LocalGovernmentAreaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\AddressesRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListLocalGovernmentAreas::route('/'),
-            'create' => Pages\CreateLocalGovernmentArea::route('/create'),
-            'view' => Pages\ViewLocalGovernmentArea::route('/{record}'),
-            'edit' => Pages\EditLocalGovernmentArea::route('/{record}/edit'),
+            'index' => Pages\ListTestCenters::route('/'),
+            'create' => Pages\CreateTestCenter::route('/create'),
+            'view' => Pages\ViewTestCenter::route('/{record}'),
+            'edit' => Pages\EditTestCenter::route('/{record}/edit'),
         ];
     }
 }

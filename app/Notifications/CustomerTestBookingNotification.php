@@ -19,6 +19,7 @@ class CustomerTestBookingNotification extends Notification
     private string $messageLine2;
     private string $messageLine3;
     private string $messageLine4;
+    private string $messageLine5;
 
     /**
      * Create a new notification instance.
@@ -31,13 +32,14 @@ class CustomerTestBookingNotification extends Notification
         $testType = $testBooking->testType;
         $this->subject = 'Your test has been Booked';
         $this->messageLine1 = "You have successfully booked {$testType->description} on {$testBooking->created_at}. ";
-        $this->messageLine2 = "Your booking is for {$testBooking->due_date} on {$testBooking->start_time}. ";
-        $this->messageLine3 = match ($testBooking->location_type) {
-            LocationTypeEnum::Home => 'Please be at your stated address',
-            LocationTypeEnum::Center => 'Please be at the center',
+        $this->messageLine2 = "Your booking reference is {$testBooking->reference}. Please keep this number safe. It will be used to retrieve your booking information";
+        $this->messageLine3 = "Your booking is scheduled for {$testBooking->due_date} on {$testBooking->start_time}";
+        $this->messageLine4 = match ($testBooking->location_type) {
+            LocationTypeEnum::Home => "Please be at your stated address : {$testBooking->resolved_address_text}",
+            LocationTypeEnum::Center => "Please be at the center : {$testBooking->resolved_address_text}",
             default => '',
         };
-        $this->messageLine4 = $testType->should_call_in_for_details ? "Please call us for further details." : "Your results should be ready in {$testType->tat}.";
+        $this->messageLine5 = $testType->should_call_in_for_details ? "Please call us for further details." : "Your results should be ready in {$testType->tat}.";
     }
 
     /**
@@ -65,6 +67,7 @@ class CustomerTestBookingNotification extends Notification
             ->line($this->messageLine2)
             ->line($this->messageLine3)
             ->line($this->messageLine4)
+            ->line($this->messageLine5)
             ->line('Thank you for Choosing DemyHealth!');
     }
 

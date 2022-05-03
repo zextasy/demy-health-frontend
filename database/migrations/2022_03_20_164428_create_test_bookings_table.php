@@ -24,6 +24,7 @@ class CreateTestBookingsTable extends Migration
             $table->date('due_date');
             $table->time('start_time');
             $table->unsignedSmallInteger('duration_minutes')->default(15);
+            $table->unsignedTinyInteger('status')->default(1);//StatusEnum
             $table->timestamps();
             $table->softDeletes();
         });

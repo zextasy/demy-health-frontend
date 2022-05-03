@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\TestBooking\StatusEnum;
 use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
@@ -19,6 +20,10 @@ class TestBookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $recordTitleAttribute = 'reference';
+
+    protected static ?string $navigationGroup = 'Tests';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -26,6 +31,9 @@ class TestBookingResource extends Resource
                 Forms\Components\TextInput::make('reference')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('status')
+                    ->options(StatusEnum::optionsAsSelectArray())
+                    ->required(),
                 Forms\Components\TextInput::make('customer_email')
                     ->email()
                     ->required()
@@ -61,18 +69,20 @@ class TestBookingResource extends Resource
                     ->date(),
                 Tables\Columns\TextColumn::make('customer_email'),
                 Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\BadgeColumn::make('status')
+                    ->enum(StatusEnum::optionsAsSelectArray()),
                 Tables\Columns\BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray()),
             ])
             ->filters([
-                //
+
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\AddressesRelationManager::class,
         ];
     }
 

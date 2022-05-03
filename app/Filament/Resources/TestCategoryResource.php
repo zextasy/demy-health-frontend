@@ -19,6 +19,8 @@ class TestCategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $navigationGroup = 'Tests';
+
     public static function form(Form $form): Form
     {
         return $form

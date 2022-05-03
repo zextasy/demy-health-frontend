@@ -5,15 +5,16 @@ namespace App\Models;
 use PDO;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Traits\Relationships\HasAddress;
+use App\Traits\Relationships\HasAddresses;
 use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class TestBooking extends BaseModel
 {
-    use HasFactory, HasAddress;
+    use HasFactory, HasAddresses;
 
     protected $dates =['created_at','updated_at'];
     protected $guarded = ['id'];
