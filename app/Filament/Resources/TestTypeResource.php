@@ -72,9 +72,13 @@ class TestTypeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('test_id'),
                 Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('formatted_price')->label('price'),
+                Tables\Columns\TextColumn::make('formatted_price')->label('Price'),
                 Tables\Columns\TextColumn::make('category.name'),
                 Tables\Columns\TextColumn::make('tat'),
+                Tables\Columns\TextColumn::make('test_bookings_count')
+                    ->counts('testBookings')
+                    ->label('Bookings')
+                    ->sortable(),
 
 
 
@@ -87,6 +91,7 @@ class TestTypeResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\TestBookingsRelationManager::class,
             RelationManagers\SpecimenTypesRelationManager::class,
         ];
     }

@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Filament\Resources\AddressResource\RelationManagers;
+namespace App\Filament\Resources\TestTypeResource\RelationManagers;
 
 use Filament\Forms;
+use Filament\Tables;
 use Filament\Resources\Form;
+use Filament\Resources\Table;
 use App\Enums\TestBooking\StatusEnum;
 use App\Enums\TestBooking\LocationTypeEnum;
-use Filament\Resources\RelationManagers\MorphToManyRelationManager;
-use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Resources\RelationManagers\HasManyRelationManager;
 
-class TestBookingsRelationManager extends MorphToManyRelationManager
+class TestBookingsRelationManager extends HasManyRelationManager
 {
     protected static string $relationship = 'testBookings';
 
@@ -31,7 +31,6 @@ class TestBookingsRelationManager extends MorphToManyRelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('testType.description'),
                 Tables\Columns\TextColumn::make('due_date')
                     ->date(),
                 Tables\Columns\BadgeColumn::make('status')

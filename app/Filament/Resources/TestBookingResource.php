@@ -70,7 +70,13 @@ class TestBookingResource extends Resource
                 Tables\Columns\TextColumn::make('customer_email'),
                 Tables\Columns\TextColumn::make('user.name'),
                 Tables\Columns\BadgeColumn::make('status')
-                    ->enum(StatusEnum::optionsAsSelectArray()),
+                    ->enum(StatusEnum::optionsAsSelectArray())
+                    ->colors([
+                        'primary',
+                        'danger' => 'draft',
+                        'warning' => 'reviewing',
+                        'success' => 'complete',
+                    ]),
                 Tables\Columns\BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray()),
             ])

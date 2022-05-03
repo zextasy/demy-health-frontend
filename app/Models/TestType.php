@@ -7,6 +7,7 @@ use App\Enums\TestBooking\StatusEnum;
 use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestTypeResource;
 use App\Traits\Relationships\HasTestBookings;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -62,4 +63,6 @@ class TestType extends BaseModel
     public function specimenTypes() : BelongsToMany{
         return $this->belongsToMany(SpecimenType::class,'specimen_types_test_types');
     }
+
+
 }
