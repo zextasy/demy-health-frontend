@@ -27,7 +27,7 @@ class BookATestForCovid extends Component
     public $testTypes;
 
     public $selectedTestCategory = null;
-    public $selectedState = null;
+    public $selectedState;
     public $selectedTestCenter = null;
     public $selectedTestType = null;
     public $selectedLocalGovernmentArea = null;
@@ -39,11 +39,17 @@ class BookATestForCovid extends Component
     public $dueDate;
     public $startTime;
 
+    protected $listeners = [
+        'selectedTestCenterUpdated' => 'setSelectedTestCenter',
+        'selectedStateUpdated' => 'setSelectedState',
+        'selectedLocalGovernmentAreaUpdated' => 'setSelectedLocalGovernmentArea',
+        'selectedTestTypeUpdated' => 'setSelectedTestType',
+    ];
+
     protected $rules = [
         'locationType' => 'required',
         'customerEmail' => 'required|email',
         'selectedTestCenter' => "required_if:locationType,1",//LocationTypeEnum::Center
-        'selectedState' => 'required_if:locationType,2',//LocationTypeEnum::Home
         'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
         'selectedTestCategory' => 'required',
         'selectedTestType' => 'required',
@@ -100,7 +106,7 @@ class BookATestForCovid extends Component
 
         if ($locationTypeEnum == LocationTypeEnum::Center){
             $testCenter = TestCenter::find($this->selectedTestCenter);
-            $centerAddress =$testCenter->getLatestAddress();
+            $centerAddress =$testCenter->latest_address;
             $centerAddress->TestBookings()->save($testBooking);
         }
 
@@ -120,10 +126,23 @@ class BookATestForCovid extends Component
         }
     }
 
-    public function updatedSelectedState($stateId)
+    public function setSelectedTestCenter($object)
     {
-        if (!is_null($stateId)) {
-            $this->localGovernmentAreas = LocalGovernmentArea::where('state_id', $stateId)->get();
-        }
+        $this->selectedTestCenter = $object['value'];
+    }
+
+    public function setSelectedState($object)
+    {
+        $this->selectedState = $object['value'];
+    }
+
+    public function setSelectedLocalGovernmentArea($object)
+    {
+        $this->selectedLocalGovernmentArea = $object['value'];
+    }
+
+    public function setSelectedTestType($object)
+    {
+        $this->selectedTestType = $object['value'];
     }
 }

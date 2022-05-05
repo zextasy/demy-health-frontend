@@ -24,7 +24,14 @@ class StoreTestBookingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'locationType' => 'required',
+            'customerEmail' => 'required|email',
+            //        'test_center_id' => "required_if:locationType,1",//LocationTypeEnum::Center
+            //        'state_id' => 'required_if:locationType,2',//LocationTypeEnum::Home
+            'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
+            //        'test_type_id' => 'required',
+            'dueDate' => 'required',
+            'startTime' => 'required',
         ];
     }
 }

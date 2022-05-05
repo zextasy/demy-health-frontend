@@ -1,7 +1,7 @@
 <form wire:submit.prevent="submit" class="mbr-form form-with-styler" data-form-title="Form Name">
     @csrf
     <div class="col-12 form-group mb-3" data-for="email">
-        <input type="text" wire:model="customerEmail" class="form-control" placeholder="Please enter your email" value="{{$customerEmail}}" required>
+        <input type="text" wire:model.lazy="customerEmail" class="form-control" placeholder="Please enter your email" value="{{$customerEmail}}" required>
         @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-12 form-group mb-3" data-for="radio">
@@ -31,15 +31,15 @@
             @error('selectedLocalGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model="city" class="form-control" placeholder="Please enter your city"  required>
+            <input type="textarea" wire:model.defer="city" class="form-control" placeholder="Please enter your city"  required>
             @error('city') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model="addressLine1" class="form-control" placeholder="Please enter your address"  required>
+            <input type="textarea" wire:model.lazy="addressLine1" class="form-control" placeholder="Please enter your address"  required>
             @error('addressLine1') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model="addressLine2" class="form-control" placeholder="Please enter your address Line 2 (optional)">
+            <input type="textarea" wire:model.defer="addressLine2" class="form-control" placeholder="Please enter your address Line 2 (optional)">
             @error('addressLine2') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
@@ -64,10 +64,10 @@
     </div>
     <div class="col-12 form-group mb-3" data-for="date">
         <label for="startTime">Date: </label>
-        <input type="date"  wire:model="dueDate" min="{{today()}}" required>
+        <input type="date"  wire:model.defer="dueDate" min="{{today()}}" required>
         @error('dueDate') <span class="alert-danger">{{ $message }}</span> @enderror
         <label for="startTime">Start time: </label>
-        <input type="time" wire:model="startTime" required>
+        <input type="time" wire:model.defer="startTime" required>
         @error('startTime') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">

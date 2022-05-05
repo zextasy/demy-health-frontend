@@ -7,23 +7,28 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasAddresses
 {
+    public function initializeHasAddressesTrait()
+    {
+        $this->append('latest_address');
+    }
 
     public function addresses(): MorphToMany
     {
         return $this->morphToMany(Address::class, 'addressable');
     }
 
-    public function getLatestAddress()
+    public function getLatestAddressAttribute()
     {
         return $this->addresses()->latest()->first();
     }
 
     public function getResolvedAddressTextAttribute():string
     {
-        $resolvedAddress = $this->getLatestAddress();
+        $resolvedAddress = $this->latest_address;
         if (empty($resolvedAddress)){
             return "Address Not Found!";
         }
-        return $resolvedAddress->line_1.', '.$resolvedAddress->line_2.', '.$resolvedAddress->localGovernmentArea->name.', '.$resolvedAddress->state->name;
+        $nullableAddressLine2 = empty($resolvedAddress->line_2) ? '': $resolvedAddress->line_2.', ';
+        return $resolvedAddress->line_1.', '.$nullableAddressLine2.$resolvedAddress->localGovernmentArea->name.', '.$resolvedAddress->state->name;
     }
 }

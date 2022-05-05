@@ -102,7 +102,7 @@ class BookATest extends Component
 
         if ($locationTypeEnum == LocationTypeEnum::Center){
             $testCenter = TestCenter::find($this->selectedTestCenter);
-            $centerAddress =$testCenter->getLatestAddress();
+            $centerAddress =$testCenter->latest_address;
             $centerAddress->TestBookings()->save($testBooking);
         }
 
