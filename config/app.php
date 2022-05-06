@@ -161,7 +161,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        \App\Providers\CustomFilamentServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -175,7 +174,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        /*
+         * Custom Service Providers...
+         */
+        \App\Providers\CustomFilamentServiceProvider::class,
+        \App\Providers\MacroServiceProvider::class,
     ],
 
     /*
