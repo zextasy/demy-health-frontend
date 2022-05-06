@@ -9,6 +9,7 @@
         "althinect/filament-spatie-roles-permissions": "dev-main",
         "archtechx/enums": "^0.3.0",
         "asantibanez/livewire-select": "^2.1",
+        "darryldecode/cart": "^4.2",
         "doctrine/dbal": "^3.3",
         "filament/filament": "^2.10",
         "filament/spatie-laravel-media-library-plugin": "^2.0",
