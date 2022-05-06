@@ -30,7 +30,7 @@ class CustomerTestBookingNotification extends Notification
     {
         $this->testBooking = $testBooking;
         $testType = $testBooking->testType;
-        $this->subject = 'Your test has been Booked';
+        $this->subject = 'Your test has been booked';
         $this->messageLine1 = "You have successfully booked {$testType->description} on {$testBooking->created_at}. ";
         $this->messageLine2 = "Your booking reference is {$testBooking->reference}. Please keep this number safe. It will be used to retrieve your booking information";
         $this->messageLine3 = "Your booking is scheduled for {$testBooking->due_date} on {$testBooking->start_time}";

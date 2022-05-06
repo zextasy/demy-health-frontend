@@ -14,6 +14,7 @@ use App\Events\TestBookedEvent;
 use App\Models\LocalGovernmentArea;
 use App\Enums\TestBooking\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Actions\Addresses\CreateAddressAction;
 
 class BookATest extends Component
 {
@@ -86,16 +87,7 @@ class BookATest extends Component
         $this->success = isset($testBooking);
 
         if ($locationTypeEnum == LocationTypeEnum::Home){
-            $newAddress = Address::create([
-                'line_1' => $this->addressLine1,
-                'line_2' => $this->addressLine2,
-                'city' => $this->city,
-                'state_id' => $this->selectedState,
-                'local_government_area_id' => $this->selectedLocalGovernmentArea,
-                'addressable_type' => get_class($testBooking),
-                'addressable_id' => $testBooking->id,
-            ]);
-
+            $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea);
             $newAddress->TestBookings()->save($testBooking);
             $this->success = isset($newAddress);
         }
@@ -134,4 +126,6 @@ class BookATest extends Component
     {
         $this->selectedTestType = $object['value'];
     }
+
+
 }

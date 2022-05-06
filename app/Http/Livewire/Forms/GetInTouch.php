@@ -3,14 +3,19 @@
 namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
+use App\Events\GetInTouchFormSubmittedEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class GetInTouch extends Component
 {
     use LivewireAlert;
 
-    protected $rules = [
+    public $customerName = null;
+    public $customerEmail = null;
+    public $message = null;
 
+    protected $rules = [
+        'customerEmail' => 'required|email',
     ];
 
     public function render()
@@ -20,7 +25,8 @@ class GetInTouch extends Component
 
     public function submit()
     {
-//        $this->validate();
+        $this->validate();
+        GetInTouchFormSubmittedEvent::dispatch($this->customerEmail, $this->customerName, $this->message);
         $this->flash('success', 'Thank you for reaching out!', [], '/');
     }
 }
