@@ -61,11 +61,9 @@ class BookATestForCovid extends Component
 
     public function mount()
     {
-        $this->testCenters = TestCenter::all();
-        $this->states = State::where('is_ready_for_sample_collection', true)->get();
-        $this->localGovernmentAreas = collect();
         $this->testCategories = TestCategory::query()->where('name','like','%COVID%')->get();
         $this->testTypes = collect();
+        $this->customerEmail = optional(auth()->user())->email;
     }
 
     public function render()

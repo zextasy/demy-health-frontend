@@ -14,5 +14,9 @@ enum StatusEnum: int
 
 
     case Booked = 1;
-    case Processing = 2;
+    case PaymentReceived = 2;
+    case AwaitingSample = 3;
+    case SampleReceived = 4;
+    case Processing = 5;
+    case Processed = 6;
 }

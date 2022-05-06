@@ -44,6 +44,7 @@ class RolesAndPermissionsMigrate extends Migration
         'admin',
          'backend',
         'frontend',
+        'process test booking',
     ];
 
     private $roles       = [
@@ -56,8 +57,8 @@ class RolesAndPermissionsMigrate extends Migration
     private function rolePermissions($role){
 
         $role_permissions = [
-            'admin' => ['admin', 'backend', 'frontend',],
-             'manager' => ['backend'],
+            'admin' => ['admin', 'backend', 'frontend','process test booking',],
+             'manager' => ['backend','process test booking',],
             'editor' => ['backend'],
              'customer' => ['frontend'],
         ];

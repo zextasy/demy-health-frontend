@@ -9,7 +9,25 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BaseModel extends Model
 {
     use SoftDeletes;
+    //region CONFIG
 
+    //endregion
+
+    //region ATTRIBUTES
+
+    //endregion
+
+    //region HELPERS
+
+    //endregion
+
+    //region SCOPES
+
+    //endregion
+
+    //region RELATIONSHIPS
+
+    //endregion
     public function newCollection(array $models = []): BaseCollection
     {
         return new BaseCollection($models);

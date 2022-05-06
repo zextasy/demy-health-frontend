@@ -31,7 +31,7 @@ class NotifyAdminOfTestBookingConfirmationListener implements ShouldQueue
      */
     public function handle(TestBookedEvent $event)
     {
-        $usersToNotify = User::all();
+        $usersToNotify = User::query()->permission('process test booking')->get();
         Notification::send($usersToNotify, new InternalTestBookingNotification($event->testBooking));
     }
 }
