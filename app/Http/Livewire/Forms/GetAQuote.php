@@ -4,8 +4,11 @@ namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
 use App\Events\GetAQuoteFormSubmittedEvent;
+use App\Events\ContactUsFormSubmittedEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Actions\Addresses\CreateAddressAction;
+use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
+use App\Actions\CRM\CustomerEnquiries\CreateCustomerEnquiryAction;
 
 class GetAQuote extends Component
 {
@@ -22,6 +25,8 @@ class GetAQuote extends Component
 
     protected $rules = [
         'customerEmail' => 'required|email',
+        'selectedState' => 'required',
+        'selectedLocalGovernmentArea' => 'required',
     ];
 
     protected $listeners = [
@@ -43,8 +48,9 @@ class GetAQuote extends Component
     {
         $this->validate();
         $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea);
-        //TODO create Lab setup Service,link address
-        GetAQuoteFormSubmittedEvent::dispatch($this->customerEmail, $this->customerName, $this->message, $newAddress->id);
+        $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::LabSetUp)->run($this->customerEmail, $this->customerName, $this->message);
+        $newAddress->customerEnquiries()->save($customerEnquiry);
+        ContactUsFormSubmittedEvent::dispatch($customerEnquiry->id);
         $this->flash('success', 'We will get in touch with you for a quote!', [], '/');
     }
 

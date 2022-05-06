@@ -46,10 +46,11 @@ class BookATest extends Component
     protected $rules = [
         'locationType' => 'required',
         'customerEmail' => 'required|email',
-//        'test_center_id' => "required_if:locationType,1",//LocationTypeEnum::Center
-//        'state_id' => 'required_if:locationType,2',//LocationTypeEnum::Home
+        'selectedTestCenter' => "required_if:locationType,1",//LocationTypeEnum::Center
+        'selectedState' => 'required_if:location_type,2',
+        'selectedLocalGovernmentArea' => 'required_if:location_type,2',
         'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
-//        'test_type_id' => 'required',
+        'selectedTestType' => 'required',
         'dueDate' => 'required',
         'startTime' => 'required',
 

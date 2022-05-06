@@ -51,6 +51,8 @@ class BookATestForCovid extends Component
         'locationType' => 'required',
         'customerEmail' => 'required|email',
         'selectedTestCenter' => "required_if:locationType,1",//LocationTypeEnum::Center
+        'selectedState' => 'required_if:location_type,2',
+        'selectedLocalGovernmentArea' => 'required_if:location_type,2',
         'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
         'selectedTestCategory' => 'required',
         'selectedTestType' => 'required',

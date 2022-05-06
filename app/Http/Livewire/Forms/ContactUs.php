@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Forms;
 use Livewire\Component;
 use App\Events\ContactUsFormSubmittedEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
+use App\Actions\CRM\CustomerEnquiries\CreateCustomerEnquiryAction;
 
 class ContactUs extends Component
 {
@@ -26,7 +28,8 @@ class ContactUs extends Component
     public function submit()
     {
         $this->validate();
-        ContactUsFormSubmittedEvent::dispatch($this->customerEmail, $this->customerName, $this->message);
+        $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::General)->run($this->customerEmail, $this->customerName, $this->message);
+        ContactUsFormSubmittedEvent::dispatch($customerEnquiry->id);
         $this->flash('success', 'Your request has been sent!', [], '/');
     }
 }

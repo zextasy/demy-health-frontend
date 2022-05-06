@@ -3,34 +3,38 @@
 namespace App\Notifications;
 
 use App\Models\TestBooking;
+use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
+use App\Models\CRM\CustomerEnquiry;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Webbingbrasil\FilamentNotification\Actions\ButtonAction;
 use Webbingbrasil\FilamentNotification\Notifications\NotificationLevel;
 
-class InternalTestBookingNotification extends Notification
+class InternalCustomerEnquiryNotification extends Notification
 {
     use Queueable;
 
-    private TestBooking $testBooking;
-    private string $message;
     private string $subject;
-    public string $bookingUrl;
+    private string $message;
+    private mixed $customerMessage;
+    private mixed $actionUrl;
+
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(TestBooking $testBooking)
+    public function __construct(CustomerEnquiry $customerEnquiry)
     {
-        $this->testBooking = $testBooking;
-        $testType = $testBooking->testType;
-        $this->message = "{$testType->description} was booked by a customer, reference: {$testBooking->reference} email: {$testBooking->customer_email} on {$testBooking->created_at}";
-        $this->subject = 'A test has been booked';
-        $this->bookingUrl = $testBooking->filament_url;
+        $this->subject = 'An enquiry has been made';
+        $enquiryTypeTitle = Str::camelCaseToWords($customerEnquiry->type->name);
+        $enquiryTypeLower = Str::lower($enquiryTypeTitle);
+        $this->message = "A {$enquiryTypeLower} enquiry was made by a customer, {$customerEnquiry->customer_name} , email: {$customerEnquiry->customer_email}";
+        $this->customerMessage = $customerEnquiry->customer_message;
+        $this->actionUrl = $customerEnquiry->filament_url;
     }
 
     /**
@@ -55,7 +59,8 @@ class InternalTestBookingNotification extends Notification
         return (new MailMessage)
             ->subject($this->subject)
             ->line($this->message)
-            ->action('View Booking', $this->bookingUrl)
+            ->line($this->customerMessage)
+            ->action('View Enquiry', $this->actionUrl)
             ->line('Please attend to this as soon as possible');
     }
 
@@ -71,18 +76,18 @@ class InternalTestBookingNotification extends Notification
             'level' => NotificationLevel::INFO,
             'title' => $this->subject,
             'message' => $this->message,
-            'bookingUrl' => $this->bookingUrl
+            'actionUrl' => $this->actionUrl
         ];
     }
 
     static public function notificationFeedActions()
     {
         return [
-            ButtonAction::make('viewBooking')
-                ->label('View Booking')
+            ButtonAction::make('viewEnquiry')
+                ->label('View Enquiry')
                 ->action(function ($record) {
                     $record->markAsRead();
-                    return redirect()->to($record->data['bookingUrl']);
+                    return redirect()->to($record->data['actionUrl']);
                 })
                 ->outlined()
                 ->color('blue'),

@@ -2,20 +2,20 @@
 
 namespace App\Listeners\Subscribers;
 
+use App\Models\User;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\CustomerCommunicationReceiptConfirmation;
+use App\Notifications\InternalCustomerEnquiryNotification;
 
-class SendCustomerCommunicationConfirmationEmailSubscriber implements ShouldQueue
+class SendAdminSiteContactFormNotificationSubscriber implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    const SEND_EMAIL_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationConfirmationEmailSubscriber@sendCustomerCommunicationConfirmationEmail';
+    const SEND_EMAIL_FUNCTION = 'App\Listeners\Subscribers\SendAdminSiteContactFormNotificationSubscriber@sendNotificationForContactEnquiry';
 
     /**
      * Create the event listener.
-     *
      * @return void
      */
     public function __construct()
@@ -23,16 +23,10 @@ class SendCustomerCommunicationConfirmationEmailSubscriber implements ShouldQueu
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
-    public function sendCustomerCommunicationConfirmationEmail($event)
+    public function sendNotificationForContactEnquiry($event)
     {
-        Notification::route('mail', $event->customerEnquiry->customer_email)
-            ->notify(new CustomerCommunicationReceiptConfirmation($event->customerEnquiry->customer_name));
+        $usersToNotify = User::query()->permission('process test booking')->get();
+        Notification::send($usersToNotify, new InternalCustomerEnquiryNotification($event->customerEnquiry));
     }
 
     public function subscribe($events)

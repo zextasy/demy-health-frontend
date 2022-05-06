@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\CRM\CustomerEnquiry;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,22 +15,17 @@ class GetAQuoteFormSubmittedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public string $customerEmail;
-    public string $customerName;
-    public string $message;
-    public int $addressId;
+    public CustomerEnquiry $customerEnquiry;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(string $customerEmail, string $customerName, string $message, int $addressId)
+    public function __construct(int $customerEnquiryId)
     {
-        $this->customerEmail = $customerEmail;
-        $this->customerName = $customerName;
-        $this->message = $message;
-        $this->addressId = $addressId;
+        $customerEnquiry = CustomerEnquiry::find($customerEnquiryId);
+        $this->customerEnquiry = $customerEnquiry;
     }
 
     /**

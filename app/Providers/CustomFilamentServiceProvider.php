@@ -28,6 +28,7 @@ class CustomFilamentServiceProvider extends ServiceProvider
             Filament::registerNavigationGroups([
                 'Tests',
                 'Products',
+                'CRM',
                 'Locations',
             ]);
         });
