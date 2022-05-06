@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
            'name' => 'Admin',
             'email' => 'admin@lzl.com',
             'password' => bcrypt(self::DefaultPassword),
+            'email_verified_at' => now(),
         ]);
         $admin->assignRole('admin');
 
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Manager',
             'email' => 'manager@lzl.com',
             'password' => bcrypt(self::DefaultPassword),
+            'email_verified_at' => now(),
         ]);
         $manager->assignRole('manager');
 
@@ -46,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Editor',
             'email' => 'editor@lzl.com',
             'password' => bcrypt(self::DefaultPassword),
+            'email_verified_at' => now(),
         ]);
         $editor->assignRole('editor');
 
@@ -53,6 +56,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test Customer 1',
             'email' => 'customer@lzl.com',
             'password' => bcrypt(self::DefaultPassword),
+            'email_verified_at' => now(),
         ]);
         $customer->assignRole('customer');
     }
