@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\TestBooking;
+use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TestBookingPolicy
+class PermissionPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class TestBookingPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermissionTo('frontend');
+        return $user->hasPermissionTo('backend');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \Spatie\Permission\Models\Permission  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, TestBooking $testBooking)
+    public function view(User $user, Permission $model)
     {
-        return $user->hasPermissionTo('backend') || $testBooking->user_id == $user->id;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -48,10 +48,10 @@ class TestBookingPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \Spatie\Permission\Models\Permission  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, TestBooking $testBooking)
+    public function update(User $user, Permission $model)
     {
         return $user->hasPermissionTo('backend');
     }
@@ -60,10 +60,10 @@ class TestBookingPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \Spatie\Permission\Models\Permission  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, TestBooking $testBooking)
+    public function delete(User $user, Permission $model)
     {
         return $user->hasPermissionTo('backend');
     }
@@ -72,10 +72,10 @@ class TestBookingPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \Spatie\Permission\Models\Permission  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, TestBooking $testBooking)
+    public function restore(User $user, Permission $model)
     {
         return $user->hasPermissionTo('backend');
     }
@@ -84,10 +84,10 @@ class TestBookingPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \Spatie\Permission\Models\Permission  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, TestBooking $testBooking)
+    public function forceDelete(User $user, Permission $model)
     {
         return $user->hasPermissionTo('backend');
     }

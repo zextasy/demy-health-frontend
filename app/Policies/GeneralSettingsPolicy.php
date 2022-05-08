@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\TestBooking;
+use App\Settings\GeneralSettings;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TestBookingPolicy
+class GeneralSettingsPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class TestBookingPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermissionTo('frontend');
+        return $user->hasPermissionTo('admin');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \App\Settings\GeneralSettings  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, TestBooking $testBooking)
+    public function view(User $user, GeneralSettings $model)
     {
-        return $user->hasPermissionTo('backend') || $testBooking->user_id == $user->id;
+        return $user->hasPermissionTo('admin');
     }
 
     /**
@@ -41,54 +41,54 @@ class TestBookingPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->hasPermissionTo('admin');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \App\Settings\GeneralSettings  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, TestBooking $testBooking)
+    public function update(User $user, GeneralSettings $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->hasPermissionTo('admin');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \App\Settings\GeneralSettings  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, TestBooking $testBooking)
+    public function delete(User $user, GeneralSettings $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->hasPermissionTo('admin');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \App\Settings\GeneralSettings  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, TestBooking $testBooking)
+    public function restore(User $user, GeneralSettings $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->hasPermissionTo('admin');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\TestBooking  $testBooking
+     * @param  \App\Settings\GeneralSettings  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, TestBooking $testBooking)
+    public function forceDelete(User $user, GeneralSettings $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->hasPermissionTo('admin');
     }
 }

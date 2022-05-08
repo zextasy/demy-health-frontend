@@ -13,6 +13,16 @@ class SiteSettings extends SettingsPage
 
     protected static string $settings = GeneralSettings::class;
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('admin');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->hasPermissionTo('admin'), 403);
+    }
+
     protected function getFormSchema(): array
     {
         return [

@@ -66,4 +66,9 @@ class TestBooking extends BaseModel
     {
         return $this->belongsTo(TestCenter::class);
     }
+
+//    public function specimenSample() :hasMany
+//    {
+//        return $this->hasMany();
+//    }
 }
