@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\TestBooking;
+use App\Helpers\ModelHelper;
 use App\Settings\GeneralSettings;
 
 class TestBookingObserver
@@ -10,8 +11,8 @@ class TestBookingObserver
     public function creating (TestBooking $testBooking)
     {
 
-        $padding = str_pad($testBooking->getNextId(), 9, "0", STR_PAD_LEFT);
-//        $timeStamp = floor(time()-999999999);
+        $nextId = (new ModelHelper)->getNextId('test_bookings');
+        $padding = str_pad($nextId, 9, "0", STR_PAD_LEFT);
         $testBooking->reference = app(GeneralSettings::class)->test_booking_prefix.$padding;
     }
 
