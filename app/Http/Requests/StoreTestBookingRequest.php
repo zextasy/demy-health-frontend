@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTestBookingRequest extends FormRequest
 {
+    const VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME = "required_if:locationType,2";
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,14 +26,28 @@ class StoreTestBookingRequest extends FormRequest
     public function rules()
     {
         return [
-            'locationType' => 'required',
-            'customerEmail' => 'required|email',
-            //        'test_center_id' => "required_if:locationType,1",//LocationTypeEnum::Center
-            //        'state_id' => 'required_if:locationType,2',//LocationTypeEnum::Home
-            'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
-            //        'test_type_id' => 'required',
-            'dueDate' => 'required',
-            'startTime' => 'required',
+            "locationType" => "required",
+            "customerEmail" => "required|email",
+            "selectedTestCenter" => "required_if:locationType,1",//LocationTypeEnum::Center
+            "selectedState" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
+            "selectedLocalGovernmentArea" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
+            "addressLine1" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,//LocationTypeEnum::Home
+            "selectedTestType" => "required",
+            "dueDate" => "required|after_or_equal:today",
+            "startTime" => "required",
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'locationType.required' => 'Please choose a location type',
+            'selectedTestCenter.required_if' => 'Please choose a center',
+            'selectedState.required_if' => 'Please choose a state',
+            'selectedLocalGovernmentArea.required_if' => 'Please choose a local government area',
+            'addressLine1.required_if' => 'Please enter your address',
+            'selectedTestType.required' => 'Please choose a test',
+            'dueDate.after_or_equal' => 'The date must be in the future',
         ];
     }
 }

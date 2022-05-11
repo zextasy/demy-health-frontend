@@ -15,6 +15,7 @@ use App\Models\LocalGovernmentArea;
 use App\Enums\TestBooking\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Actions\Addresses\CreateAddressAction;
+use App\Http\Requests\StoreTestBookingRequest;
 
 class BookATestForCovid extends Component
 {
@@ -47,20 +48,15 @@ class BookATestForCovid extends Component
         'selectedTestTypeUpdated' => 'setSelectedTestType',
     ];
 
-    protected $rules = [
-        'locationType' => 'required',
-        'customerEmail' => 'required|email',
-        'selectedTestCenter' => "required_if:locationType,1",//LocationTypeEnum::Center
-        'selectedState' => 'required_if:location_type,2',
-        'selectedLocalGovernmentArea' => 'required_if:location_type,2',
-        'addressLine1' => 'required_if:location_type,2',//LocationTypeEnum::Home
-        'selectedTestCategory' => 'required',
-        'selectedTestType' => 'required',
-        'dueDate' => 'required',
-        'startTime' => 'required',
+    protected function rules () : array
+    {
+        return (new StoreTestBookingRequest())->rules();
+    }
 
-    ];
-
+    protected function getMessages()
+    {
+        return (new StoreTestBookingRequest())->messages();
+    }
 
     public function mount()
     {
