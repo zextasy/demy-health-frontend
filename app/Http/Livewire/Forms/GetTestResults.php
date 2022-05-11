@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
 use App\Models\TestBooking;
-use App\Enums\TestBooking\StatusEnum;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\LinkAction;
@@ -12,7 +11,6 @@ use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Filament\Tables\Concerns\InteractsWithTable;
-use App\Filament\Resources\TestBookingResource\Pages\ViewTestBooking;
 
 class GetTestResults extends Component implements HasTable
 {
@@ -36,16 +34,15 @@ class GetTestResults extends Component implements HasTable
     {
         return [
             BadgeColumn::make('status')
-                ->label('Booking status')
-                ->enum(StatusEnum::optionsAsSelectArray())->wrap(false),
+                ->label('Booking status'),
             TextColumn::make('reference'),
             TextColumn::make('testType.description')->wrap(),
             TextColumn::make('due_date')
                 ->label('Booked for')
                 ->date(),
-//            TextColumn::make('latestSpecimenSample.created_at')
-//                ->label('Sample collected on')
-//                ->date(),
+            //            TextColumn::make('latestSpecimenSample.created_at')
+            //                ->label('Sample collected on')
+            //                ->date(),
         ];
     }
 
@@ -53,8 +50,8 @@ class GetTestResults extends Component implements HasTable
     {
         return [
             LinkAction::make('View')
-                ->url(fn (TestBooking $record): string => $record->filament_url)
-                ->hidden(fn (TestBooking $record): bool => $record->user()->doesntExist())
+                ->url(fn(TestBooking $record): string => $record->filament_url)
+                ->hidden(fn(TestBooking $record): bool => $record->user()->doesntExist()),
         ];
     }
 
@@ -63,8 +60,9 @@ class GetTestResults extends Component implements HasTable
         $this->validateOnly($propertyName);
     }
 
-    public function mount(){
-//        $this->table->shouldRender(false);
+    public function mount()
+    {
+        //        $this->table->shouldRender(false);
     }
 
     public function render()
@@ -75,15 +73,16 @@ class GetTestResults extends Component implements HasTable
     public function getTestResults()
     {
         $this->validate();
-        $testBooking = TestBooking::query()->where('reference',$this->testBookingReference)->first();
+        $testBooking = TestBooking::query()->where('reference', $this->testBookingReference)->first();
 
-        if ($testBooking->customer_email != $this->customerEmail){
+        if ($testBooking->customer_email != $this->customerEmail) {
             $this->testBookingReference = null;
-            $this->alert('error','The email does not match booking reference');
+            $this->alert('error', 'The email does not match booking reference');
+
             return;
         }
 
-        if ($testBooking instanceof TestBooking){
+        if ($testBooking instanceof TestBooking) {
             $this->testBookingId = $testBooking->id;
         }
 

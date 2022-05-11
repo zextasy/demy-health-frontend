@@ -30,7 +30,7 @@ class TestBookingPolicy
      */
     public function view(User $user, TestBooking $testBooking)
     {
-        return $user->hasPermissionTo('backend') || $testBooking->user_id == $user->id;
+        return $user->hasPermissionTo('backend') || $testBooking->customer_email == $user->email;
     }
 
     /**

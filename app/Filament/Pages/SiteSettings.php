@@ -16,7 +16,7 @@ class SiteSettings extends SettingsPage
     protected static function shouldRegisterNavigation(): bool
     {
         return false;
-        return auth()->user()->hasPermissionTo('admin');
+//        return auth()->user()->hasPermissionTo('admin');
     }
 
     public function mount(): void

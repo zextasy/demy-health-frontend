@@ -10,12 +10,15 @@ use App\Models\TestType;
 use App\Models\TestCenter;
 use App\Models\TestBooking;
 use App\Models\TestCategory;
+use Illuminate\Support\Carbon;
 use App\Events\TestBookedEvent;
+use Illuminate\Support\Facades\DB;
 use App\Models\LocalGovernmentArea;
 use App\Enums\TestBooking\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Actions\Addresses\CreateAddressAction;
 use App\Http\Requests\StoreTestBookingRequest;
+use App\Actions\TestBookings\CreateTestBookingAction;
 
 class BookATest extends Component
 {
@@ -71,35 +74,32 @@ class BookATest extends Component
 
     public function submit()
     {
-        ray($this->startTime);
         $this->validate();
-        $possibleUser = User::query()->where('email',$this->customerEmail)->first();
-        $locationTypeEnum = LocationTypeEnum::from($this->locationType);
-        $testBooking = TestBooking::create([
-            'test_type_id' => $this->selectedTestType,
-            'user_id' => optional($possibleUser)->id,
-            'customer_email' => $this->customerEmail,
-            'location_type' => $locationTypeEnum,
-            'test_center_id' => $this->selectedTestCenter,
-            'due_date' => $this->dueDate,
-            'start_time' => $this->startTime,
-        ]);
-        $this->success = isset($testBooking);
+        DB::transaction(function (){
+            $locationTypeEnum = LocationTypeEnum::from($this->locationType);
+            $carbonDueDate = Carbon::make($this->dueDate);
+            $testBooking = (new CreateTestBookingAction)
+                ->atTestCenter($this->selectedTestCenter)
+                ->run($this->selectedTestType, $this->customerEmail, $locationTypeEnum, $carbonDueDate);
+            $this->success = isset($testBooking);
 
-        if ($locationTypeEnum == LocationTypeEnum::Home){
-            $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea);
-            $newAddress->TestBookings()->save($testBooking);
-            $this->success = isset($newAddress);
-        }
+            if ($locationTypeEnum == LocationTypeEnum::Home){
+                $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea);
+                $newAddress->TestBookings()->save($testBooking);
+                $this->success = isset($newAddress);
+            }
 
-        if ($locationTypeEnum == LocationTypeEnum::Center){
-            $testCenter = TestCenter::find($this->selectedTestCenter);
-            $centerAddress =$testCenter->latest_address;
-            $centerAddress->TestBookings()->save($testBooking);
-        }
+            if ($locationTypeEnum == LocationTypeEnum::Center){
+                $testCenter = TestCenter::find($this->selectedTestCenter);
+                $centerAddress =$testCenter->latest_address;
+                $centerAddress->TestBookings()->save($testBooking);
+            }
+            TestBookedEvent::dispatch($testBooking);
+        });
+
 
         if ($this->success){
-            TestBookedEvent::dispatch($testBooking);
+
             $this->flash('success', 'Your test has been booked!', [], '/');
 
         } else{

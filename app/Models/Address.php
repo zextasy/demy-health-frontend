@@ -11,9 +11,24 @@ class Address extends BaseModel
 {
     use HasFactory;
 
+    //region CONFIG
     protected $dates =['created_at','updated_at'];
     protected $guarded = ['id'];
+    //endregion
 
+    //region ATTRIBUTES
+
+    //endregion
+
+    //region HELPERS
+
+    //endregion
+
+    //region SCOPES
+
+    //endregion
+
+    //region RELATIONSHIPS
     public function state () : BelongsTo{
         return $this->belongsTo(State::class);
     }
@@ -41,4 +56,5 @@ class Address extends BaseModel
     {
         return $this->morphedByMany(CustomerEnquiry::class,'addressable');
     }
+    //endregion
 }

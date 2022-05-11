@@ -33,8 +33,7 @@ class StoreTestBookingRequest extends FormRequest
             "selectedLocalGovernmentArea" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
             "addressLine1" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,//LocationTypeEnum::Home
             "selectedTestType" => "required",
-            "dueDate" => "required|after_or_equal:today",
-            "startTime" => "required",
+            "dueDate" => "required|after_or_equal:now",
         ];
     }
 

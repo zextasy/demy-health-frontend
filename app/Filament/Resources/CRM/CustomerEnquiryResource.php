@@ -2,16 +2,15 @@
 
 namespace App\Filament\Resources\CRM;
 
-use App\Enums\CRM\CustomerEnquiry\StatusEnum;
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use App\Models\CRM\CustomerEnquiry;
 use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
 use App\Filament\Resources\CRM\CustomerEnquiryResource\Pages;
 use App\Filament\Resources\CRM\CustomerEnquiryResource\RelationManagers;
-use App\Models\CRM\CustomerEnquiry;
-use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
 
 class CustomerEnquiryResource extends Resource
 {
@@ -46,11 +45,8 @@ class CustomerEnquiryResource extends Resource
                 ])->columns(1),
                 Forms\Components\Fieldset::make('General Info')->schema([
                     Forms\Components\Select::make('type')
-                        ->options(EnquiryTypeEnum::optionsAsSelectArray())
-                        ->required(),
-                    Forms\Components\Select::make('status')
-                        ->options(StatusEnum::optionsAsSelectArray())
-                        ->required(),
+                        ->options(EnquiryTypeEnum::optionsAsSelectArray()),
+                    Forms\Components\TextInput::make('status'),
                 ])->columns(2),
             ]);
     }
@@ -61,8 +57,7 @@ class CustomerEnquiryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('customer_name')->searchable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable(),
-                Tables\Columns\BadgeColumn::make('status')
-                    ->enum(StatusEnum::optionsAsSelectArray()),
+                Tables\Columns\BadgeColumn::make('status'),
                 Tables\Columns\BadgeColumn::make('type')
                     ->enum(EnquiryTypeEnum::optionsAsSelectArray()),
             ])
@@ -84,7 +79,7 @@ class CustomerEnquiryResource extends Resource
             'index' => Pages\ListCustomerEnquiries::route('/'),
             'create' => Pages\CreateCustomerEnquiry::route('/create'),
             'view' => Pages\ViewCustomerEnquiry::route('/{record}'),
-//            'edit' => Pages\EditCustomerEnquiry::route('/{record}/edit'),
+            //            'edit' => Pages\EditCustomerEnquiry::route('/{record}/edit'),
         ];
     }
 }

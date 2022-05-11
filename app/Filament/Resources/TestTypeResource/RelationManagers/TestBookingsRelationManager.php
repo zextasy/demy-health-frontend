@@ -6,7 +6,6 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
-use App\Enums\TestBooking\StatusEnum;
 use App\Enums\TestBooking\LocationTypeEnum;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 
@@ -33,8 +32,7 @@ class TestBookingsRelationManager extends HasManyRelationManager
                 Tables\Columns\TextColumn::make('reference'),
                 Tables\Columns\TextColumn::make('due_date')
                     ->date(),
-                Tables\Columns\BadgeColumn::make('status')
-                    ->enum(StatusEnum::optionsAsSelectArray()),
+                Tables\Columns\BadgeColumn::make('status'),
                 Tables\Columns\BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray()),
             ])

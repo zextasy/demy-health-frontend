@@ -12,7 +12,7 @@ class TestBookingCalendarWidget extends FullCalendarWidget
     public function getViewData(): array
     {
         return TestBooking::with('testType')
-            ->get(['test_type_id','id','customer_email','due_date','start_time'])
+            ->get(['test_type_id','id','customer_email','due_date'])
             ->map(function ($item, $key) {
                 return $item->toFullCalenderEventArray();
             })->toArray();

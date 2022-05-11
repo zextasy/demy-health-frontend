@@ -11,6 +11,9 @@ class GeneralSettings extends Settings
     public string $test_booking_prefix;
     public string $specimen_sample_prefix;
 
+    public $business_start_hour;
+    public $business_end_hour;
+
     public static function group(): string
     {
         return 'general';

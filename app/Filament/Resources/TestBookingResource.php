@@ -2,16 +2,15 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\TestBooking\StatusEnum;
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\TestBooking;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
-use App\Models\TestBooking;
-use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
 use App\Filament\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
 
 class TestBookingResource extends Resource
@@ -43,10 +42,9 @@ class TestBookingResource extends Resource
                         ->required()
                         ->maxLength(255),
                     Forms\Components\BelongsToSelect::make('testType')
-                        ->relationship('testType','description')
+                        ->relationship('testType', 'description')
                         ->required(),
                     Forms\Components\Select::make('status')
-                        ->options(StatusEnum::optionsAsSelectArray())
                         ->required(),
                 ])->columns(1),
                 Forms\Components\Fieldset::make('Customer Details')->schema([
@@ -59,9 +57,8 @@ class TestBookingResource extends Resource
                         ->placeholder(''),
                 ]),
                 Forms\Components\Fieldset::make('Schedule')->schema([
-                    Forms\Components\DatePicker::make('due_date')
-                        ->required(),
-                    Forms\Components\TextInput::make('start_time')
+                    Forms\Components\DateTimePicker::make('due_date')
+                        ->label('Scheduled For')
                         ->required(),
                     Forms\Components\TextInput::make('duration_minutes')
                         ->required(),
@@ -84,17 +81,16 @@ class TestBookingResource extends Resource
                 Tables\Columns\TextColumn::make('reference')->searchable(),
                 Tables\Columns\TextColumn::make('testType.description')->searchable(),
                 Tables\Columns\TextColumn::make('due_date')
-                    ->date(),
+                    ->dateTime(),
                 Tables\Columns\TextColumn::make('customer_email'),
-                Tables\Columns\BadgeColumn::make('status')
-                    ->enum(StatusEnum::optionsAsSelectArray()),
-//            ->colors([
-//                'gray' => StatusEnum::Booked->value,
-//                'primary'=> '1',//Booked
-//                'danger' => 'none',
-//                'warning' => 'reviewing',
-//                'success' => 'complete',
-//            ])
+                Tables\Columns\BadgeColumn::make('status'),
+                //            ->colors([
+                //                'gray' => StatusEnum::Booked->value,
+                //                'primary'=> '1',//Booked
+                //                'danger' => 'none',
+                //                'warning' => 'reviewing',
+                //                'success' => 'complete',
+                //            ])
                 Tables\Columns\BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray()),
             ])
@@ -114,9 +110,9 @@ class TestBookingResource extends Resource
     {
         return [
             'index' => Pages\ListTestBookings::route('/'),
-//            'create' => Pages\CreateTestBooking::route('/create'),
+            //            'create' => Pages\CreateTestBooking::route('/create'),
             'view' => Pages\ViewTestBooking::route('/{record}'),
-//            'edit' => Pages\EditTestBooking::route('/{record}/edit'),
+            //            'edit' => Pages\EditTestBooking::route('/{record}/edit'),
         ];
     }
 

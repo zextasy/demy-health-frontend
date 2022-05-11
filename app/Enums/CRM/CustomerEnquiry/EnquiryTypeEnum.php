@@ -12,7 +12,7 @@ enum EnquiryTypeEnum: int
 {
     use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
 
-
+//TODO delete this  and use standard enquiry workflow
     case General = 1;
     case LabSetUp = 2;
 }

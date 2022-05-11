@@ -4,7 +4,6 @@ namespace App\Models\CRM;
 
 use App\Models\BaseModel;
 use App\Traits\Relationships\HasAddresses;
-use App\Enums\CRM\CustomerEnquiry\StatusEnum;
 use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Filament\Resources\CRM\CustomerEnquiryResource;
@@ -17,10 +16,11 @@ class CustomerEnquiry extends BaseModel
 
     protected $casts = [
         'type' => EnquiryTypeEnum::class,
-        'status' => StatusEnum::class,
     ];
 
-    public function getFilamentUrlAttribute():string
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function getFilamentUrlAttribute(): string
     {
         return CustomerEnquiryResource::getUrl('view', ['record' => $this->id]);
     }

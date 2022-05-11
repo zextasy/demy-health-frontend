@@ -77,13 +77,10 @@
             @error('selectedTestType') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
-    <div class="col-12 form-group mb-3" data-for="email">
-        <label for="startTime">Date: </label>
-        <input type="date"  wire:model.defer="dueDate" min="{{today()}}" required>
+    <div class="col-12 form-group mb-3" data-for="date">
+        <label for="startTime">Date and Time: </label>
+        <input type="datetime-local" wire:model.defer="dueDate" class="form-control" required>
         @error('dueDate') <span class="alert-danger">{{ $message }}</span> @enderror
-        <label for="startTime">Start time: </label>
-        <input type="time" wire:model.defer="startTime" required>
-        @error('startTime') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
         <button type="submit" class="btn btn-primary display-4">Book Test</button>

@@ -2,73 +2,128 @@
 
 namespace App\Models;
 
-use PDO;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use App\Enums\TestBooking\StatusEnum;
 use App\Traits\Relationships\HasAddresses;
 use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class TestBooking extends BaseModel
 {
     use HasFactory, HasAddresses;
 
-    protected $dates =['created_at','updated_at'];
+    //region CONFIG
+    protected $dates = ['created_at', 'updated_at','due_date'];
     protected $guarded = ['id'];
 
     protected $casts = [
-        'status' => StatusEnum::class,
         'location_type' => LocationTypeEnum::class,
     ];
+    //endregion
 
-    public function getNextId()
-    {
-        switch(DB::connection()->getPDO()->getAttribute(PDO::ATTR_DRIVER_NAME)) {
-            case 'mysql':
-                $statement = DB::select("show table status like 'test_bookings'");
-                return $statement[0]->Auto_increment;
-
-            default:
-                return floor(time() - 999999999);
-        }
-    }
-
-    public function getFilamentUrlAttribute():string
+    //region ATTRIBUTES
+    public function getFilamentUrlAttribute(): string
     {
         return TestBookingResource::getUrl('view', ['record' => $this->id]);
     }
+    //endregion
 
-    public function toFullCalenderEventArray():array
+    //region HELPERS
+    public function toFullCalenderEventArray(): array
     {
         return [
             'id' => $this->id,
             'title' => "{$this->testType->description} for {$this->customer_email}",
-            'start' => Carbon::make($this->due_date)->setTimeFromTimeString($this->start_time),
+            'start' => $this->due_date,
             'url' => $this->filament_url,
         ];
     }
 
-    public function testType():BelongsTo
+    public function paymentHasBeenReceived(): bool
+    {
+        return $this->payment_received_at !== null;
+    }
+
+    public function sampleCollectionHasBeenApproved(): bool
+    {
+        return $this->sample_collection_approved_at !== null;
+    }
+
+    public function sampleHasBeenReceived(): bool
+    {
+        return $this->sample_received_at !== null;
+    }
+
+    public function processingHasBeenInitiated(): bool
+    {
+        return $this->processing_initiated_at !== null;
+    }
+
+    public function processingIsComplete(): bool
+    {
+        return $this->processing_completed_at !== null;
+    }
+
+    public function resultHasBeenApproved(): bool
+    {
+        return $this->result_approved_at !== null;
+    }
+
+    public function sampleWasRejected(): bool
+    {
+        return $this->sample_rejected_at !== null;
+    }
+    //endregion
+
+    //region SCOPES
+
+    //endregion
+
+    //region RELATIONSHIPS`
+    public function testType(): BelongsTo
     {
         return $this->belongsTo(TestType::class);
     }
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'customer_email','email');
     }
 
-    public function testCenter():BelongsTo
+    public function testCenter(): BelongsTo
     {
         return $this->belongsTo(TestCenter::class);
     }
 
-//    public function specimenSample() :hasMany
-//    {
-//        return $this->hasMany();
-//    }
+    //    public function specimenSample() :hasMany
+    //    {
+    //        return $this->hasMany();
+    //    }
+
+    public function paymentRecordedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'payment_recorded_by');
+    }
+
+    public function sampleCollectionApprovedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'sample_collection_approved_by');
+    }
+
+    public function sampleReceivedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'sample_received_by');
+    }
+
+    public function resultApprovedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'result_approved_by');
+    }
+
+    public function sampleRejectedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'sample_rejected_by');
+    }
+    //endregion
 }

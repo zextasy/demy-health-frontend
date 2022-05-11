@@ -4,7 +4,6 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use App\Models\TestBooking;
-use App\Enums\TestBooking\StatusEnum;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\LinkAction;
@@ -16,6 +15,10 @@ class MyTestBookings extends Page implements HasTable
 {
     use InteractsWithTable;
 
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationGroup = 'Personal';
+    protected static string $view = 'filament.pages.my-test-bookings';
+
     public function getTableQuery(): Builder
     {
         return TestBooking::query()->where('user_id', auth()->user()->id);
@@ -25,8 +28,7 @@ class MyTestBookings extends Page implements HasTable
     {
         return [
             BadgeColumn::make('status')
-                ->label('Booking status')
-                ->enum(StatusEnum::optionsAsSelectArray())->wrap(false),
+                ->label('Booking status'),
             TextColumn::make('reference'),
             TextColumn::make('testType.description')->wrap(),
             TextColumn::make('due_date')
@@ -42,14 +44,8 @@ class MyTestBookings extends Page implements HasTable
     {
         return [
             LinkAction::make('View')
-                ->url(fn (TestBooking $record): string => $record->filament_url)
-                ->hidden(fn (TestBooking $record): bool => $record->user()->doesntExist())
+                ->url(fn(TestBooking $record): string => $record->filament_url)
+                ->hidden(fn(TestBooking $record): bool => $record->user()->doesntExist()),
         ];
     }
-
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
-    protected static ?string $navigationGroup = 'Personal';
-
-    protected static string $view = 'filament.pages.my-test-bookings';
 }

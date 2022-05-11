@@ -3,12 +3,11 @@
 namespace App\Filament\Resources\AddressResource\RelationManagers;
 
 use Filament\Forms;
+use Filament\Tables;
 use Filament\Resources\Form;
-use App\Enums\TestBooking\StatusEnum;
+use Filament\Resources\Table;
 use App\Enums\TestBooking\LocationTypeEnum;
 use Filament\Resources\RelationManagers\MorphToManyRelationManager;
-use Filament\Resources\Table;
-use Filament\Tables;
 
 class TestBookingsRelationManager extends MorphToManyRelationManager
 {
@@ -34,8 +33,7 @@ class TestBookingsRelationManager extends MorphToManyRelationManager
                 Tables\Columns\TextColumn::make('testType.description'),
                 Tables\Columns\TextColumn::make('due_date')
                     ->date(),
-                Tables\Columns\BadgeColumn::make('status')
-                    ->enum(StatusEnum::optionsAsSelectArray()),
+                Tables\Columns\BadgeColumn::make('status'),
                 Tables\Columns\BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray()),
             ])
