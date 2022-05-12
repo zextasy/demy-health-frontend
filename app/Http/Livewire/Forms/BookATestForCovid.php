@@ -83,20 +83,17 @@ class BookATestForCovid extends Component
             $testBooking = (new CreateTestBookingAction)
                 ->atTestCenter($this->selectedTestCenter)
                 ->run($this->selectedTestType, $this->customerEmail, $locationTypeEnum, $carbonDueDate);
-            $this->success = isset($testBooking);
 
-            if ($locationTypeEnum == LocationTypeEnum::Home){
-                $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea);
-                $newAddress->TestBookings()->save($testBooking);
-                $this->success = isset($newAddress);
-            }
+            $address = match ($locationTypeEnum){
+                LocationTypeEnum::Home => (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea),
+                LocationTypeEnum::Center => TestCenter::find($this->selectedTestCenter)->latest_address,
+            };
 
-            if ($locationTypeEnum == LocationTypeEnum::Center){
-                $testCenter = TestCenter::find($this->selectedTestCenter);
-                $centerAddress =$testCenter->latest_address;
-                $centerAddress->TestBookings()->save($testBooking);
-            }
+            $address->TestBookings()->save($testBooking);
+
             TestBookedEvent::dispatch($testBooking);
+
+            $this->success = isset($testBooking,$address);
         });
 
         if ($this->success){
