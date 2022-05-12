@@ -21,6 +21,7 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+
     protected static function getNavigationGroup(): ?string
     {
         return __('filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions');
@@ -51,15 +52,16 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email')
+                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('email')->sortable()
             ])
             ->filters([
                 //
             ])
             ->prependActions([
                 Impersonate::make('impersonate'), // <---
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

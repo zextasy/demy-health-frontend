@@ -35,11 +35,11 @@ class TestCenterResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])->defaultSort('name');
     }
 
     public static function getRelations(): array

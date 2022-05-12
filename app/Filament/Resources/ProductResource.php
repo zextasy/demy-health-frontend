@@ -59,16 +59,17 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('model')->searchable(),
-                Tables\Columns\TextColumn::make('country')->searchable(),
-                Tables\Columns\TextColumn::make('formatted_price')->label('price'),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('model')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('country')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('formatted_price')->label('price')->sortable(),
                 Tables\Columns\TextColumn::make('extra_information')->searchable(),
 
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('name');
     }
 
     public static function getRelations(): array

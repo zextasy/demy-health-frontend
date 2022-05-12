@@ -40,13 +40,13 @@ class SpecimenTypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('key')->searchable(),
-                Tables\Columns\TextColumn::make('description')->searchable(),
+                Tables\Columns\TextColumn::make('key')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('description')->searchable()->sortable(),
 
             ])
             ->filters([
                 //
-            ]);
+            ])->defaultSort('key');
     }
 
     public static function getRelations(): array

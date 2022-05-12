@@ -70,11 +70,11 @@ class TestTypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('test_id')->searchable(),
-                Tables\Columns\TextColumn::make('description')->searchable(),
-                Tables\Columns\TextColumn::make('formatted_price')->label('Price'),
-                Tables\Columns\TextColumn::make('category.name')->searchable(),
-                Tables\Columns\TextColumn::make('tat'),
+                Tables\Columns\TextColumn::make('test_id')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('description')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('formatted_price')->label('Price')->sortable(),
+                Tables\Columns\TextColumn::make('category.name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('tat')->sortable(),
                 Tables\Columns\TextColumn::make('test_bookings_count')
                     ->counts('testBookings')
                     ->label('Bookings')
@@ -85,7 +85,8 @@ class TestTypeResource extends Resource
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('test_id');
     }
 
     public static function getRelations(): array

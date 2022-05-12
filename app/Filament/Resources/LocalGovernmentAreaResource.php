@@ -39,13 +39,14 @@ class LocalGovernmentAreaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('state.name')->searchable(),
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('state.name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
 
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('name');
     }
 
     public static function getRelations(): array

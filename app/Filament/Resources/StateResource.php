@@ -39,13 +39,16 @@ class StateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\BooleanColumn::make('is_ready_for_sample_collection'),
-
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\BooleanColumn::make('is_ready_for_sample_collection')->sortable(),
+                Tables\Columns\TextColumn::make('local_government_areas_count')
+                    ->counts('localGovernmentAreas')
+                    ->label('LGAs')
+                    ->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])->defaultSort('name');
     }
 
     public static function getRelations(): array

@@ -45,15 +45,16 @@ class AddressResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('state.name')->searchable(),
-                Tables\Columns\TextColumn::make('localGovernmentArea.name')->searchable(),
-                Tables\Columns\TextColumn::make('line_1')->searchable(),
+                Tables\Columns\TextColumn::make('state.name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('localGovernmentArea.name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('line_1')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('line_2')->searchable(),
-                Tables\Columns\TextColumn::make('city')->searchable(),
+                Tables\Columns\TextColumn::make('city')->searchable()->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

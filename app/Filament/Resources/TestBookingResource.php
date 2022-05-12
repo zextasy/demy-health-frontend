@@ -78,12 +78,13 @@ class TestBookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('reference')->searchable(),
-                Tables\Columns\TextColumn::make('testType.description')->searchable(),
+                Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('testType.description')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('due_date')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('customer_email'),
-                Tables\Columns\BadgeColumn::make('status'),
+                    ->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('customer_email')->sortable(),
+                Tables\Columns\BadgeColumn::make('status')
+                    ->sortable(),
                 //            ->colors([
                 //                'gray' => StatusEnum::Booked->value,
                 //                'primary'=> '1',//Booked
@@ -92,11 +93,12 @@ class TestBookingResource extends Resource
                 //                'success' => 'complete',
                 //            ])
                 Tables\Columns\BadgeColumn::make('location_type')
-                    ->enum(LocationTypeEnum::optionsAsSelectArray()),
+                    ->enum(LocationTypeEnum::optionsAsSelectArray())
+                    ->sortable(),
             ])
             ->filters([
 
-            ]);
+            ])->defaultSort('created_at','desc');
     }
 
     public static function getRelations(): array

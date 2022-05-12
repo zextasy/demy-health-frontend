@@ -55,15 +55,16 @@ class CustomerEnquiryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('customer_name')->searchable(),
-                Tables\Columns\TextColumn::make('customer_email')->searchable(),
-                Tables\Columns\BadgeColumn::make('status'),
+                Tables\Columns\TextColumn::make('customer_name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
+                Tables\Columns\BadgeColumn::make('status')->sortable(),
                 Tables\Columns\BadgeColumn::make('type')
-                    ->enum(EnquiryTypeEnum::optionsAsSelectArray()),
+                    ->enum(EnquiryTypeEnum::optionsAsSelectArray())->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
