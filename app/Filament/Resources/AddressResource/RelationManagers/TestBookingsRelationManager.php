@@ -29,16 +29,18 @@ class TestBookingsRelationManager extends MorphToManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('testType.description'),
+                Tables\Columns\TextColumn::make('reference')->sortable(),
+                Tables\Columns\TextColumn::make('testType.description')->sortable(),
                 Tables\Columns\TextColumn::make('due_date')
-                    ->date(),
-                Tables\Columns\BadgeColumn::make('status'),
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\BadgeColumn::make('status')->sortable(),
                 Tables\Columns\BadgeColumn::make('location_type')
-                    ->enum(LocationTypeEnum::optionsAsSelectArray()),
+                    ->enum(LocationTypeEnum::optionsAsSelectArray())
+                    ->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])->defaultSort('created_at', 'desc');
     }
 }

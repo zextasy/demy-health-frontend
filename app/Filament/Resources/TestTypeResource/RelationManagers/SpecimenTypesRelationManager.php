@@ -31,11 +31,12 @@ class SpecimenTypesRelationManager extends BelongsToManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('key'),
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('key')->sortable(),
+                Tables\Columns\TextColumn::make('description')->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('key');
     }
 }

@@ -40,14 +40,15 @@ class AddressesRelationManager extends MorphToManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('state.name'),
-                Tables\Columns\TextColumn::make('localGovernmentArea.name'),
-                Tables\Columns\TextColumn::make('line_1'),
-                Tables\Columns\TextColumn::make('line_2'),
-                Tables\Columns\TextColumn::make('city'),
+                Tables\Columns\TextColumn::make('state.name')->sortable(),
+                Tables\Columns\TextColumn::make('localGovernmentArea.name')->sortable(),
+                Tables\Columns\TextColumn::make('line_1')->sortable(),
+                Tables\Columns\TextColumn::make('line_2')->sortable(),
+                Tables\Columns\TextColumn::make('city')->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('created_at','desc');
     }
 }

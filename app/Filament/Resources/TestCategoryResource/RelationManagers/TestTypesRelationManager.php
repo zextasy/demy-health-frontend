@@ -41,12 +41,13 @@ class TestTypesRelationManager extends HasManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('test_id'),
-                Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('formatted_price')->label('price'),
+                Tables\Columns\TextColumn::make('test_id')->sortable(),
+                Tables\Columns\TextColumn::make('description')->sortable(),
+                Tables\Columns\TextColumn::make('formatted_price')->label('price')->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('test_id');
     }
 }

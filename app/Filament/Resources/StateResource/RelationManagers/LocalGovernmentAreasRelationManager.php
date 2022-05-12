@@ -28,10 +28,11 @@ class LocalGovernmentAreasRelationManager extends HasManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('name');
     }
 }

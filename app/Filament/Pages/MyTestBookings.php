@@ -19,6 +19,9 @@ class MyTestBookings extends Page implements HasTable
     protected static ?string $navigationGroup = 'Personal';
     protected static string $view = 'filament.pages.my-test-bookings';
 
+    public $tableSortColumn ='created_at';
+    public $tableSortDirection = 'desc';
+
     public function getTableQuery(): Builder
     {
         return TestBooking::query()->where('user_id', auth()->user()->id);

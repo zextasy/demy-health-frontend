@@ -28,10 +28,11 @@ class CategoriesRelationManager extends BelongsToManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('name');
     }
 }

@@ -28,10 +28,11 @@ class TestCentersRelationManager extends MorphToManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('name');
     }
 }

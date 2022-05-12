@@ -31,12 +31,13 @@ class ProductsRelationManager extends BelongsToManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('model'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('model')->sortable(),
+                Tables\Columns\TextColumn::make('price')->sortable(),
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('name');
     }
 }
