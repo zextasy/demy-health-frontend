@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col-12 col-md-4">
                 <div class="image-wrapper">
-                    <a href="#"><img src="{{$imageUrl}}" alt="Mobirise"></a>
+                    <a href="#"><img src="{{$imageUrl}}" alt="Product image"></a>
                 </div>
             </div>
             <div class="col-12 col-md">
