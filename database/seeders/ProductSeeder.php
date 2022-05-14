@@ -435,9 +435,7 @@ class ProductSeeder extends Seeder
             $productModel = Product::updateOrCreate(['name' => $product['name']], $product);
             $mediaUrl = public_path("demyhealth/images/products/default-product-image.png");
             $ProductUrl = public_path("demyhealth/images/products/{$product['name']}.jpg");
-            ray($ProductUrl);
             if (file_exists($ProductUrl)){
-                ray('file exist!');
                 $mediaUrl = $ProductUrl;
             }
             $productModel->copyMedia($mediaUrl)->toMediaCollection('pictures');

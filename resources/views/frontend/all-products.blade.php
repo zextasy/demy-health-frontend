@@ -8,7 +8,7 @@
 
         <div class="container">
             @foreach($products as $product)
-                @include('components.mobirise.single-product-display',['imageUrl'=>'assets/images/mbr-816x540.jpg', 'title' => $product->name, 'description' =>$product->description, 'price' => $product->price ,'buttonUrl'=>'#','buttonText' =>'Order Now'])
+                @include('components.mobirise.single-product-display',['imageUrl'=>"$product->latest_picture_url", 'title' => $product->name, 'description' =>$product->description, 'price' => $product->price ,'buttonUrl'=>'#','buttonText' =>'Order Now'])
             @endforeach
 
         </div>

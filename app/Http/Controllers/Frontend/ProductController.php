@@ -8,19 +8,9 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index(): Response
-    {
-        return view('frontend.pharmaceuticals');
-    }
-
-    public function show(Product $product): Response
-    {
-        return view('frontend.pharmaceuticals');
-    }
-
     public function allProducts()
     {
-        $products = Product::query()->inRandomOrder()->limit(5)->get();
+        $products = Product::with(['media'])->inRandomOrder()->limit(5)->get();
 
         $data['products'] = $products;
 
