@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\HerokuHelper;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,9 @@ class Product extends BaseModel implements HasMedia
 
     public function getLatestPictureUrlAttribute() : string
     {
+        if (HerokuHelper::isRunningHeroku()){
+            return asset("demyhealth/images/products/default-product-image.png");
+        }
         if ($this->media->count() > 0){
             return $this->media->first()->getUrl();
         }
