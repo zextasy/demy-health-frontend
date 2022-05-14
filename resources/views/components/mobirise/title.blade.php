@@ -10,7 +10,6 @@
                         <strong>{{$title}}</strong></h4>
                     <p class="mbr-text mbr-fonts-style mb-4 display-7">
                         {{$subTitle}}</p>
-
                 </div>
             </div>
         </div>
