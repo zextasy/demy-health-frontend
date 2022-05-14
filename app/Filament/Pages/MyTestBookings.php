@@ -22,7 +22,7 @@ class MyTestBookings extends Page implements HasTable
 
     public function getTableQuery(): Builder
     {
-        return TestBooking::query()->where('user_id', auth()->user()->id);
+        return TestBooking::query()->where('customer_email', auth()->user()->email);
     }
 
     protected function getTableColumns(): array

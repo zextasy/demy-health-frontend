@@ -30,7 +30,7 @@ class Product extends BaseModel implements HasMedia
 
     public function getLatestPictureUrlAttribute() : string
     {
-        if ($this->media->first()->exists()){
+        if ($this->media->count() > 0){
             return $this->media->first()->getUrl();
         }
         return asset("demyhealth/images/products/default-product-image.png");

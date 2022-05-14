@@ -14,14 +14,14 @@
                             <p class="mbr-text mbr-fonts-style display-7">{{$description}}</p>
                         </div>
                         <div class="col-md-auto">
-                            <p class="price mbr-fonts-style display-2">NGN {{$price}}</p>
+                            <p class="price mbr-fonts-style display-2">{{$displayPrice}}</p>
                             <div class="mbr-section-btn">
-                                <a href="#" class="btn btn-primary display-4">
-                                    Show
-                                </a>
-                                <a href="{{$buttonUrl}}" class="btn btn-primary display-4">
-                                    {{$buttonText}}
-                                </a>
+                                <button wire:click="showProduct" class="btn btn-primary display-4">
+                                    View Product
+                                </button>
+                                <button wire:click="addToCart" class="btn btn-primary display-4">
+                                    Add to Cart
+                                </button>
                             </div>
                         </div>
                         <div></div>

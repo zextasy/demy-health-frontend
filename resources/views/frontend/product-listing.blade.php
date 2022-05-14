@@ -8,7 +8,9 @@
 
         <div class="container">
             @foreach($products as $product)
-                @include('components.mobirise.single-product-display',['imageUrl'=>"$product->latest_picture_url", 'title' => $product->name, 'description' =>$product->description, 'price' => $product->price ,'buttonUrl'=>'#','buttonText' =>'Order Now'])
+                <livewire:cards.product-item-display
+                    :product="$product">
+                </livewire:cards.product-item-display>
             @endforeach
 
         </div>

@@ -19,6 +19,11 @@ class FrontendController extends Controller
         return view('frontend.covid19-pcr-testing');
     }
 
+    public function covid19RapidAntigenTesting()
+    {
+        return view('frontend.covid-19-rapid-antigen-testing');
+    }
+
     public function allServices()
     {
         return view('frontend.services.all-services');
@@ -93,11 +98,5 @@ class FrontendController extends Controller
     public function frontend()
     {
         return view('frontend.');
-    }
-
-    public function bookATest(){
-        flash()->message('Your test has been booked.','success');
-        return redirect('index.html');
-//        return redirect()->action('FrontendController@home');
     }
 }

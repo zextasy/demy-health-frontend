@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Response;
+use App\Models\ProductCategory;
 use App\Http\Controllers\Controller as Controller;
 use App\Models\Product;
 
@@ -10,16 +11,26 @@ class ProductController extends Controller
 {
     public function allProducts()
     {
-        $products = Product::with(['media'])->inRandomOrder()->limit(5)->get();
+        $products = Product::with('media')->inRandomOrder()->limit(5)->get();
 
         $data['products'] = $products;
 
-        return view('frontend.all-products', $data);
+        return view('frontend.product-listing', $data);
+    }
+
+    public function viewProduct()
+    {
+        return view('frontend.pcr-and-reagents');
     }
 
     public function pcrAndReagents()
     {
-        return view('frontend.pcr-and-reagents');
+        $category = ProductCategory::query()->where('name','PCR and Reagents')->firstOrFail();
+        $products = $category->products()->with('media')->get();
+
+        $data['products'] = $products;
+
+        return view('frontend.product-listing', $data);
     }
 
     public function hospitalAndLaboratoryProducts()
