@@ -48,6 +48,7 @@ class CartDisplay extends Component
         ray('Checkout function');
 //        $cartItems = \Cart::getContent();
 //        OrderMadeEvent::dispatch($cartItems);
+        \Cart::clear();
         $this->flash('success', 'Your order has been booked!', [], '/');
     }
 }
