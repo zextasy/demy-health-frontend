@@ -23,8 +23,4 @@ class MyTestResults extends Page  implements HasTable
 
     protected static string $view = 'filament.pages.my-test-results';
 
-    public $tableSortColumn ='created_at';
-
-    public $tableSortDirection = 'desc';
-
 }

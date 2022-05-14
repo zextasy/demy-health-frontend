@@ -19,8 +19,6 @@ class MyTestBookings extends Page implements HasTable
     protected static ?string $navigationGroup = 'Personal';
     protected static string $view = 'filament.pages.my-test-bookings';
 
-    public $tableSortColumn ='created_at';
-    public $tableSortDirection = 'desc';
 
     public function getTableQuery(): Builder
     {
@@ -31,12 +29,13 @@ class MyTestBookings extends Page implements HasTable
     {
         return [
             BadgeColumn::make('status')
-                ->label('Booking status'),
-            TextColumn::make('reference'),
+                ->label('Booking status')->sortable(),
+            TextColumn::make('reference')->sortable(),
             TextColumn::make('testType.description')->wrap(),
             TextColumn::make('due_date')
                 ->label('Booked for')
-                ->date(),
+                ->date()
+            ->sortable(),
             //            TextColumn::make('latestSpecimenSample.created_at')
             //                ->label('Sample collected on')
             //                ->date(),

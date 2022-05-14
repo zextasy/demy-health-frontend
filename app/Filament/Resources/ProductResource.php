@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
@@ -30,6 +31,7 @@ class ProductResource extends Resource
                     SpatieMediaLibraryFileUpload::make('pictures')
                         ->image()
                         ->multiple()
+                        ->collection('pictures')
                         ->enableReordering(),
                 ])->columns(1),
                 Forms\Components\Fieldset::make('General Info')->schema([
@@ -59,6 +61,7 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                SpatieMediaLibraryImageColumn::make('picture')->collection('pictures'),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('model')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('country')->searchable()->sortable(),
