@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BackendController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\AddressController;
@@ -26,7 +27,10 @@ use App\Http\Controllers\Backend\LocalGovernmentAreaController;
 |
 */
 
-Route::middleware(['backend'])->prefix('backend')->name('backend.')->group(function () {
+Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->group(function () {
+    Route::get('/info', [BackendController::class, 'info'])
+        ->name('info');
+
     Route::resource('address', AddressController::class, [
         'names' => [
             'index' => 'address.index',
