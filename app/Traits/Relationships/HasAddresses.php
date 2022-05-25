@@ -2,33 +2,34 @@
 
 namespace App\Traits\Relationships;
 
+use App\Models\User;
 use App\Models\Address;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use App\Models\TestCenter;
+use App\Models\TestBooking;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 trait HasAddresses
 {
-    public function initializeHasAddressesTrait()
+
+    public function addresses(): HasMany
     {
-        $this->append('latest_address');
+        return $this->hasMany(Address::class);
     }
 
-    public function addresses(): MorphToMany
+    public function TestBookings(): HasManyThrough
     {
-        return $this->morphToMany(Address::class, 'addressable');
+        return $this->hasManyThrough(TestBooking::class, Address::class);
     }
 
-    public function getLatestAddressAttribute()
+    public function TestCenters(): HasManyThrough
     {
-        return $this->addresses()->latest()->first();
+        //TODO implement hasmanydeep on all 3 relationships and retest. check stackoverflow - hasmanythrough morph
+        return $this->hasManyThrough(TestCenter::class, Address::class);
     }
 
-    public function getResolvedAddressTextAttribute():string
+    public function users(): HasManyThrough
     {
-        $resolvedAddress = $this->latest_address;
-        if (empty($resolvedAddress)){
-            return "Address Not Found!";
-        }
-        $nullableAddressLine2 = empty($resolvedAddress->line_2) ? '': $resolvedAddress->line_2.', ';
-        return $resolvedAddress->line_1.', '.$nullableAddressLine2.$resolvedAddress->localGovernmentArea->name.', '.$resolvedAddress->state->name;
+        return $this->hasManyThrough(User::class, Address::class);
     }
 }

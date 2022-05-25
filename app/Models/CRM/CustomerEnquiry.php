@@ -3,14 +3,14 @@
 namespace App\Models\CRM;
 
 use App\Models\BaseModel;
-use App\Traits\Relationships\HasAddresses;
+use App\Traits\Relationships\MorphsAddresses;
 use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Filament\Resources\CRM\CustomerEnquiryResource;
 
 class CustomerEnquiry extends BaseModel
 {
-    use HasFactory, HasAddresses;
+    use HasFactory, MorphsAddresses;
 
     protected $guarded = ['id'];
 

@@ -29,11 +29,13 @@ class Address extends BaseModel
     //endregion
 
     //region RELATIONSHIPS
-    public function state () : BelongsTo{
+    public function state () : BelongsTo
+    {
         return $this->belongsTo(State::class);
     }
 
-    public function localGovernmentArea () : BelongsTo{
+    public function localGovernmentArea () : BelongsTo
+    {
         return $this->belongsTo(LocalGovernmentArea::class);
     }
 

@@ -5,7 +5,7 @@ namespace App\Traits\Relationships;
 use App\Models\SocialMediaLink;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait HasSocialMediaLinks
+trait MorphsSocialMediaLinks
 {
 
     public function socialMediaLinks(): MorphMany

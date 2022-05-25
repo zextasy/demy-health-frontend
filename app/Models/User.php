@@ -5,7 +5,7 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
-use App\Traits\Relationships\HasAddresses;
+use App\Traits\Relationships\MorphsAddresses;
 use Filament\Models\Contracts\FilamentUser;
 use Spatie\Permission\Traits\HasPermissions;
 use App\Traits\Relationships\HasTestBookings;
@@ -17,7 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, HasAddresses, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, MorphsAddresses, SoftDeletes;
 
     //region CONFIG
     protected $fillable = [

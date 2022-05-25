@@ -11,9 +11,14 @@ use Asantibanez\LivewireSelect\LivewireSelect;
 
 class LocalGovernmentAreaSelect extends LivewireSelect
 {
+    public bool $isForSample = false;
+
     public function options($searchTerm = null): Collection
     {
         return LocalGovernmentArea::query()
+            ->when($this->isForSample, function ($query) {
+                $query->where('is_ready_for_sample_collection', true);
+            })
             ->when($this->hasDependency('selectedState'), function ($query) {
                 $query->where('state_id', $this->getDependingValue('selectedState'));
             })

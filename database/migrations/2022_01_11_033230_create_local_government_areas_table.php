@@ -16,6 +16,7 @@ class CreateLocalGovernmentAreasTable extends Migration
         Schema::create('local_government_areas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('is_ready_for_sample_collection')->default(false);
             $table->foreignId('state_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

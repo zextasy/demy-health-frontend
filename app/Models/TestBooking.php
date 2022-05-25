@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Carbon;
-use App\Traits\Relationships\HasAddresses;
+use App\Traits\Relationships\MorphsAddresses;
 use App\Enums\TestBooking\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TestBooking extends BaseModel
 {
-    use HasFactory, HasAddresses;
+    use HasFactory, MorphsAddresses;
 
     //region CONFIG
     protected $dates = ['created_at', 'updated_at','due_date'];
