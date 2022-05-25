@@ -34,6 +34,7 @@
     @stack('styles')
 </head>
 <body>
+@include('sweetalert::alert')
 <section data-bs-version="5.1" class="menu menu1 cid-sTd3LiLcWy" once="menu" id="menu1-0">
 
     @include('layouts.mobirise.navigation')

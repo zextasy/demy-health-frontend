@@ -15,7 +15,7 @@ class CreateTestBookingAction {
     /**
      * @var TestCenter|int|mixed
      */
-    private ?int $testCenterId;
+    private ?int $testCenterId = null;
 
     public function run(TestType|int $testType, string $customerEmail, LocationTypeEnum $locationTypeEnum, Carbon $dueDate) : TestBooking
     {
