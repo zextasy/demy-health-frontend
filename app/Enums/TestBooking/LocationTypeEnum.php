@@ -13,6 +13,6 @@ enum LocationTypeEnum: int
     use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
 
 
-    case Center = 1;
-    case Home = 2;
+    case CENTER = 1;
+    case HOME = 2;
 }

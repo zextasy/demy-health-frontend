@@ -4,7 +4,7 @@ namespace App\Enums\SocialMediaLink;
 
 enum SiteEnum: int
 {
-    case Facebook = 1;
-    case Twitter = 2;
-    case LinkedIn = 3;
+    case FACEBOOK = 1;
+    case TWITTER = 2;
+    case LINKEDIN = 3;
 }

@@ -18,10 +18,10 @@ class GetAQuote extends Component
     public $customerEmail = null;
     public $selectedState;
     public $selectedLocalGovernmentArea;
-    public $city = null;
-    public $addressLine1 = null;
-    public $addressLine2 = null;
-    public $message = null;
+    public $city = "-";
+    public $addressLine1 = "-";
+    public $addressLine2 = "-";
+    public $message = "-";
 
     protected $rules = [
         'customerEmail' => 'required|email',
@@ -48,7 +48,7 @@ class GetAQuote extends Component
     {
         $this->validate();
         $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea);
-        $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::LabSetUp)->run($this->customerEmail, $this->customerName, $this->message);
+        $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::QUOTE)->run($this->customerEmail, $this->customerName, $this->message);
         $newAddress->customerEnquiries()->save($customerEnquiry);
         ContactUsFormSubmittedEvent::dispatch($customerEnquiry->id);
         $this->flash('success', 'We will get in touch with you for a quote!', [], '/');

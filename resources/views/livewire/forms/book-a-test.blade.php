@@ -5,13 +5,13 @@
         @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-12 form-group mb-3" data-for="radio">
-        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::Home->value}}">
+        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::HOME->value}}">
         <label for="html">Home sample collection</label><br>
-        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::Center->value}}">
+        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::CENTER->value}}">
         <label for="css">Take the Test at a center</label><br>
         @error('locationType') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
-    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Home->value)
+    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::HOME->value)
         <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.state-select
                 name="selectedState"
@@ -31,19 +31,19 @@
             @error('selectedLocalGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model.defer="city" class="form-control" placeholder="Please enter your city"  required>
+            <input type="text" wire:model.defer="city" class="form-control" placeholder="Please enter your city"  required>
             @error('city') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model.lazy="addressLine1" class="form-control" placeholder="Please enter your address"  required>
+            <input type="text" wire:model.lazy="addressLine1" class="form-control" placeholder="Please enter your address"  required>
             @error('addressLine1') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model.defer="addressLine2" class="form-control" placeholder="Please enter your address Line 2 (optional)">
+            <input type="text" wire:model.defer="addressLine2" class="form-control" placeholder="Please enter your address Line 2 (optional)">
             @error('addressLine2') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
-    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::Center->value)
+    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::CENTER->value)
         <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.test-center-select
                 name="selectedTestCenter"

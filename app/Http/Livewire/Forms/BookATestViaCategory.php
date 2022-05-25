@@ -86,7 +86,7 @@ class BookATestViaCategory extends Component
         ]);
         $this->success = isset($testBooking);
 
-        if ($locationTypeEnum == LocationTypeEnum::Home){
+        if ($locationTypeEnum == LocationTypeEnum::HOME){
             $newAddress = Address::create([
                 'line_1' => $this->address,
                 'city' => $this->city,

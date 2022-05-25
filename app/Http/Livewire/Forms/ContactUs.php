@@ -28,7 +28,7 @@ class ContactUs extends Component
     public function submit()
     {
         $this->validate();
-        $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::General)->run($this->customerEmail, $this->customerName, $this->message);
+        $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::GENERAL)->run($this->customerEmail, $this->customerName, $this->message);
         ContactUsFormSubmittedEvent::dispatch($customerEnquiry->id);
         $this->flash('success', 'Your request has been sent!', [], '/');
     }

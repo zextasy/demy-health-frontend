@@ -86,8 +86,8 @@ class BookATestAtHome extends Component
         ]);
         $this->success = isset($testBooking);
 
-        if ($locationTypeEnum == LocationTypeEnum::Home){
-            $address = Address::create([
+        if ($locationTypeEnum == LocationTypeEnum::HOME){
+            $NewAddress = Address::create([
                 'line_1' => $this->address,
                 'city' => $this->city,
                 'state_id' => $this->selectedState,
@@ -96,7 +96,7 @@ class BookATestAtHome extends Component
                 'addressable_id' => $testBooking->id,
             ]);
 
-            $this->success = isset($address);
+            $this->success = isset($NewAddress);
         }
 
         if ($this->success){

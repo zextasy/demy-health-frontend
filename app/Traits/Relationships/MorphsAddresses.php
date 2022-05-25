@@ -29,6 +29,6 @@ trait MorphsAddresses
             return "Address Not Found!";
         }
         $nullableAddressLine2 = empty($resolvedAddress->line_2) ? '': $resolvedAddress->line_2.', ';
-        return $resolvedAddress->line_1.', '.$nullableAddressLine2.$resolvedAddress->localGovernmentArea->name.', '.$resolvedAddress->state->name;
+        return $resolvedAddress->line_1.', '.$nullableAddressLine2.$resolvedAddress->city.', '.$resolvedAddress->localGovernmentArea->name.', '.$resolvedAddress->state->name;
     }
 }

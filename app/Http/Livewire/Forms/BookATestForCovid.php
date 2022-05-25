@@ -85,8 +85,8 @@ class BookATestForCovid extends Component
                 ->run($this->selectedTestType, $this->customerEmail, $locationTypeEnum, $carbonDueDate);
 
             $address = match ($locationTypeEnum){
-                LocationTypeEnum::Home => (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea),
-                LocationTypeEnum::Center => TestCenter::find($this->selectedTestCenter)->latest_address,
+                LocationTypeEnum::HOME => (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea),
+                LocationTypeEnum::CENTER => TestCenter::find($this->selectedTestCenter)->latest_address,
             };
 
             $address->TestBookings()->save($testBooking);

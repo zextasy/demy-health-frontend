@@ -35,8 +35,8 @@ class CustomerTestBookingNotification extends Notification
         $this->messageLine2 = "Your booking reference is {$testBooking->reference}. Please keep this number safe. It will be used to retrieve your booking information";
         $this->messageLine3 = "Your booking is scheduled for {$testBooking->due_date} on {$testBooking->start_time}";
         $this->messageLine4 = match ($testBooking->location_type) {
-            LocationTypeEnum::Home => "Please be at your stated address : {$testBooking->resolved_address_text}",
-            LocationTypeEnum::Center => "Please be at the center : {$testBooking->resolved_address_text}",
+            LocationTypeEnum::HOME => "Please be at your stated address : {$testBooking->resolved_address_text}",
+            LocationTypeEnum::CENTER => "Please be at the center : {$testBooking->resolved_address_text}",
             default => '',
         };
         $this->messageLine5 = $testType->should_call_in_for_details ? "Please call us for further details." : "Your results should be ready in {$testType->tat}.";

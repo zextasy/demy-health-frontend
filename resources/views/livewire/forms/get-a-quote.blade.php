@@ -24,18 +24,18 @@
             />
             @error('selectedLocalGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
-        <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model.defer="city" class="form-control" placeholder="Please enter your city"  required>
-            @error('city') <span class="alert-danger">{{ $message }}</span> @enderror
-        </div>
-        <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model.lazy="addressLine1" class="form-control" placeholder="Please enter your address"  required>
-            @error('addressLine1') <span class="alert-danger">{{ $message }}</span> @enderror
-        </div>
-        <div class="col-12 form-group mb-3" data-for="text">
-            <input type="textarea" wire:model.defer="addressLine2" class="form-control" placeholder="Please enter your address Line 2 (optional)">
-            @error('addressLine2') <span class="alert-danger">{{ $message }}</span> @enderror
-        </div>
+{{--        <div class="col-12 form-group mb-3" data-for="text">--}}
+{{--            <input type="textarea" wire:model.defer="city" class="form-control" placeholder="Please enter your city"  required>--}}
+{{--            @error('city') <span class="alert-danger">{{ $message }}</span> @enderror--}}
+{{--        </div>--}}
+{{--        <div class="col-12 form-group mb-3" data-for="text">--}}
+{{--            <input type="textarea" wire:model.lazy="addressLine1" class="form-control" placeholder="Please enter your address"  required>--}}
+{{--            @error('addressLine1') <span class="alert-danger">{{ $message }}</span> @enderror--}}
+{{--        </div>--}}
+{{--        <div class="col-12 form-group mb-3" data-for="text">--}}
+{{--            <input type="textarea" wire:model.defer="addressLine2" class="form-control" placeholder="Please enter your address Line 2 (optional)">--}}
+{{--            @error('addressLine2') <span class="alert-danger">{{ $message }}</span> @enderror--}}
+{{--        </div>--}}
         <div class="col-12 form-group mb-3" data-for="textarea">
             <textarea wire:model.lazy="message" placeholder="Message" data-form-field="textarea" class="form-control" id="textarea-form5-15"></textarea>
         </div>
