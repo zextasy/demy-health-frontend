@@ -21,7 +21,7 @@ class GetAQuote extends Component
     public $city = "-";
     public $addressLine1 = "-";
     public $addressLine2 = "-";
-    public $message = "-";
+    public $message = null;
 
     protected $rules = [
         'customerEmail' => 'required|email',
