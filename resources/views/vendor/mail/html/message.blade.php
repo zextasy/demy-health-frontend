@@ -2,7 +2,8 @@
 {{-- Header --}}
 @slot('header')
 @component('mail::header', ['url' => config('app.url')])
-{{ config('app.name') }}
+{{-- TODO switch to use system settings logo url --}}
+<img src="{{asset('demyhealth/images/logo.png')}}" alt="{{config('app.name')}}">
 @endcomponent
 @endslot
 
