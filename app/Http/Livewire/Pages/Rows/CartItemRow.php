@@ -11,10 +11,10 @@ class CartItemRow extends Component
     public mixed $updatedQuantity;
     public float $subTotal;
     public string $itemName;
-    public string $pictureUrl;
-    public string $model;
+    public ?string $pictureUrl;
+    public ?string $model;
     public ?string $description;
-    public string $itemPrice;
+    public ?string $itemPrice;
 
     public function mount(int $cartItemId)
     {
@@ -28,7 +28,6 @@ class CartItemRow extends Component
         $this->pictureUrl = $cartItem->associatedModel->latest_picture_url;
         $this->model = $cartItem->associatedModel->model;
         $this->description = $cartItem->associatedModel->description;
-        //        ray($this->cartItem)->purple();
     }
 
     public function render()

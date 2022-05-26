@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('model')->nullable();
             $table->string('country')->nullable();
             $table->boolean('should_call_in_for_details')->default(false);
-            $table->decimal('price', 24)->nullable();
+            $table->unsignedDecimal('price',12)->nullable();
             $table->json('extra_information')->nullable();
             $table->timestamps();
             $table->softDeletes();

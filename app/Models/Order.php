@@ -3,30 +3,37 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Order extends BaseModel
 {
     use HasFactory;
 
-        //region CONFIG
+    //region CONFIG
 
-        //endregion
+    //endregion
 
-        //region ATTRIBUTES
+    //region ATTRIBUTES
 
-        //endregion
+    //endregion
 
-        //region HELPERS
+    //region HELPERS
 
-        //endregion
+    //endregion
 
-        //region SCOPES
+    //region SCOPES
 
-        //endregion
+    //endregion
 
-        //region RELATIONSHIPS
+    //region RELATIONSHIPS
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
-        //endregion
+    public function orderable()
+    {
+        return $this->morphTo('orderable');
+    }
+    //endregion
 
 }

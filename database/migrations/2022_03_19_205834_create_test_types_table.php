@@ -21,7 +21,7 @@ class CreateTestTypesTable extends Migration
             $table->integer('minimum_tat');
             $table->integer('maximum_tat');
             $table->integer('tat_hours')->default(0);
-            $table->unsignedDecimal('price');
+            $table->unsignedDecimal('price',12);
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();

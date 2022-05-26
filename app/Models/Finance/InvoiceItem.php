@@ -3,30 +3,40 @@
 namespace App\Models\Finance;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class InvoiceItem extends BaseModel
 {
     use HasFactory;
 
-        //region CONFIG
+    //region CONFIG
 
-        //endregion
+    //endregion
 
-        //region ATTRIBUTES
+    //region ATTRIBUTES
 
-        //endregion
+    //endregion
 
-        //region HELPERS
+    //region HELPERS
 
-        //endregion
+    //endregion
 
-        //region SCOPES
+    //region SCOPES
 
-        //endregion
+    //endregion
 
-        //region RELATIONSHIPS
+    //region RELATIONSHIPS
 
-        //endregion
+    public function invoice(): BelongsTo
+    {
+        return $this->belongsTo(Invoice::class);
+    }
+
+    public function invoiceableItem()
+    {
+        return $this->morphTo('invoiceable_item');
+    }
+    //endregion
 
 }

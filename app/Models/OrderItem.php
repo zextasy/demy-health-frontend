@@ -2,31 +2,39 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends BaseModel
 {
     use HasFactory;
 
-        //region CONFIG
+    //region CONFIG
 
-        //endregion
+    //endregion
 
-        //region ATTRIBUTES
+    //region ATTRIBUTES
 
-        //endregion
+    //endregion
 
-        //region HELPERS
+    //region HELPERS
 
-        //endregion
+    //endregion
 
-        //region SCOPES
+    //region SCOPES
 
-        //endregion
+    //endregion
 
-        //region RELATIONSHIPS
+    //region RELATIONSHIPS
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
 
-        //endregion
+    public function orderableItem()
+    {
+        return $this->morphTo('orderable_item');
+    }
+    //endregion
 
 }

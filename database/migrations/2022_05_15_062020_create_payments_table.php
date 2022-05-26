@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\Finance\Payment\PaymentTypeEnum;
 
 return new class extends Migration
 {
@@ -15,6 +16,10 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->string('reference')->unique();
+            $table->unsignedDecimal('amount',12);
+            $table->unsignedSmallInteger('type')->default(PaymentTypeEnum::OTHER);
+            $table->morphs('payable');
             $table->timestamps();
         });
     }
