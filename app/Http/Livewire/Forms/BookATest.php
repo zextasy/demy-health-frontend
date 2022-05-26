@@ -7,6 +7,7 @@ use App\Models\TestCenter;
 use Illuminate\Support\Carbon;
 use App\Events\TestBookedEvent;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\FlashMessageHelper;
 use App\Enums\TestBooking\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Actions\Addresses\CreateAddressAction;
@@ -90,10 +91,10 @@ class BookATest extends Component
 
         if ($this->success){
 
-            $this->flash('success', 'Your test has been booked!', [], '/');
+            $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');
 
         } else{
-            $this->alert('error','There was a problem');
+            $this->alert('error',FlashMessageHelper::GENERAL_ERROR);
         }
     }
 

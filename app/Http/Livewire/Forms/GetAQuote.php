@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
+use App\Helpers\FlashMessageHelper;
 use App\Events\GetAQuoteFormSubmittedEvent;
 use App\Events\ContactUsFormSubmittedEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -51,7 +52,7 @@ class GetAQuote extends Component
         $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::QUOTE)->run($this->customerEmail, $this->customerName, $this->message);
         $newAddress->customerEnquiries()->save($customerEnquiry);
         ContactUsFormSubmittedEvent::dispatch($customerEnquiry->id);
-        $this->flash('success', 'We will get in touch with you for a quote!', [], '/');
+        $this->flash('success', FlashMessageHelper::QUOTE_ENQUIRY_REQUEST_SUCCESSFUL, [], '/');
     }
 
     public function setSelectedState($object)
