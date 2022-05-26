@@ -3,29 +3,21 @@
 namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
-use App\Models\TestCenter;
-use Illuminate\Support\Carbon;
-use App\Events\TestBookedEvent;
-use Illuminate\Support\Facades\DB;
+use App\Models\TestBooking;
 use App\Helpers\FlashMessageHelper;
-use App\Enums\TestBooking\LocationTypeEnum;
+use App\Events\TestAddedToCartEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Actions\Addresses\CreateAddressAction;
 use App\Http\Requests\StoreTestBookingRequest;
-use App\Actions\TestBookings\CreateTestBookingAction;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class BookATest extends Component
 {
     use LivewireAlert;
 
-    private bool $success = false;
-
     public $selectedTestCenter;
     public $selectedState;
     public $selectedLocalGovernmentArea;
     public $selectedTestType;
-
-
     public $customerEmail = null;
     public $locationType = null;
     public $addressLine1 = null;
@@ -33,15 +25,16 @@ class BookATest extends Component
     public $city = null;
     public $dueDate;
     public $startTime;
-
     protected $listeners = [
         'selectedTestCenterUpdated' => 'setSelectedTestCenter',
         'selectedStateUpdated' => 'setSelectedState',
         'selectedLocalGovernmentAreaUpdated' => 'setSelectedLocalGovernmentArea',
         'selectedTestTypeUpdated' => 'setSelectedTestType',
     ];
+    private bool $success = false;
+    private ?TestBooking $testBooking = null;
 
-    protected function rules () : array
+    protected function rules(): array
     {
         return (new StoreTestBookingRequest())->rules();
     }
@@ -69,32 +62,41 @@ class BookATest extends Component
     public function submit()
     {
         $this->validate();
-        DB::transaction(function (){
-            $locationTypeEnum = LocationTypeEnum::from($this->locationType);
-            $carbonDueDate = Carbon::make($this->dueDate);
-            $testBooking = (new CreateTestBookingAction)
-                ->atTestCenter($this->selectedTestCenter)
-                ->run($this->selectedTestType, $this->customerEmail, $locationTypeEnum, $carbonDueDate);
+        $initialCartItemCount = Cart::getContent()->count();
 
-            $address = match ($locationTypeEnum){
-                LocationTypeEnum::HOME => (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea),
-                LocationTypeEnum::CENTER => TestCenter::find($this->selectedTestCenter)->latest_address,
-            };
+        Cart::add(array(
+            'id' => 'Test Booking - ' . $this->testBooking->id,
+            'name' => $this->testBooking->testType->description,
+            'price' => $this->testBooking->testType->price,
+            'quantity' => 1,
+            'attributes' => array(
+                'type' => 'TestBooking',
+                'customerEmail' => $this->customerEmail,
+                'locationType' => $this->locationType,
+                'dueDate' => $this->dueDate,
+                'selectedTestCenter' => $this->selectedTestCenter,
+                'selectedTestType' => $this->selectedTestType,
+                'addressLine1' => $this->addressLine1,
+                'addressLine2' => $this->addressLine2,
+                'city' => $this->city,
+                'selectedState' => $this->selectedState,
+                'selectedLocalGovernmentArea' => $this->selectedLocalGovernmentArea,
+            ),
+        ));
 
-            $address->TestBookings()->save($testBooking);
+        $finalCartItemCount = Cart::getContent()->count();
 
-            TestBookedEvent::dispatch($testBooking);
+        $this->success = $initialCartItemCount > $finalCartItemCount;
 
-            $this->success = isset($testBooking,$address);
-        });
+        if ($this->success) {
 
-
-        if ($this->success){
+            TestAddedToCartEvent::dispatch();
 
             $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');
 
-        } else{
-            $this->alert('error',FlashMessageHelper::GENERAL_ERROR);
+        }
+        else {
+            $this->alert('error', FlashMessageHelper::GENERAL_ERROR);
         }
     }
 

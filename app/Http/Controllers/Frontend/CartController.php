@@ -9,15 +9,15 @@ class CartController extends Controller
 {
     public function show()
     {
-        return view('frontend.show-cart');
+        return view('frontend.cart-show');
     }
 
     public function checkOut()
     {
-        return redirect()->back();
+        return view('frontend.cart-checkout');
     }
 
-    public function clear(TestCenter $testCenter)
+    public function clear()
     {
         \Cart::clear();
         return redirect()->back();

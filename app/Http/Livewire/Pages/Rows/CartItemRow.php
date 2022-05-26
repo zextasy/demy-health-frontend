@@ -3,10 +3,11 @@
 namespace App\Http\Livewire\Pages\Rows;
 
 use Livewire\Component;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class CartItemRow extends Component
 {
-    public int $cartItemId;
+    public string $cartItemId;
     public int $initialQuantity;
     public mixed $updatedQuantity;
     public float $subTotal;
@@ -16,11 +17,11 @@ class CartItemRow extends Component
     public ?string $description;
     public ?string $itemPrice;
 
-    public function mount(int $cartItemId)
+    public function mount(string $cartItemId)
     {
         $this->cartItemId = $cartItemId;
-        $cartItem = \Cart::get($this->cartItemId);
-        $this->subTotal = \Cart::get($cartItemId)->getPriceSum();
+        $cartItem = Cart::get($this->cartItemId);
+        $this->subTotal = Cart::get($cartItemId)->getPriceSum();
         $this->updatedQuantity = $cartItem->quantity;
         $this->initialQuantity = $cartItem->quantity;
         $this->itemPrice = $cartItem->price;
@@ -37,9 +38,7 @@ class CartItemRow extends Component
 
     public function itemDeleted()
     {
-        $cartItem = \Cart::get($this->cartItemId);
-        ray($cartItem, $cartItem->id)->orange();
-        $this->emit('cartItemDeleted', $cartItem->id);
+        $this->emit('cartItemDeleted', $this->cartItemId);
     }
 
     public function itemQuantityUpdated()
@@ -47,14 +46,21 @@ class CartItemRow extends Component
         $integerQuantity = intval($this->updatedQuantity);
 
         if ($integerQuantity > 0) {
-            \Cart::update($this->cartItemId, array(
+            Cart::update($this->cartItemId, array(
                 'quantity' => array(
                     'relative' => false,
                     'value' => $integerQuantity,
                 ),
             ));
             $this->initialQuantity = $integerQuantity;
+            $this->updateCartItemSubTotal();
+            $this->emit('cartItemQuantityUpdated');
         }
 
+    }
+
+    public function updateCartItemSubTotal()
+    {
+        $this->subTotal = Cart::get($this->cartItemId)->getPriceSum();
     }
 }

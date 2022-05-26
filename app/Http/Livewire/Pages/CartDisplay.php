@@ -4,7 +4,9 @@ namespace App\Http\Livewire\Pages;
 
 use Livewire\Component;
 use Illuminate\Support\Collection;
+use App\Helpers\FlashMessageHelper;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class CartDisplay extends Component
 {
@@ -16,19 +18,19 @@ class CartDisplay extends Component
 
     protected $listeners = [
         'cartItemDeleted' => 'removeItem',
+        'cartItemQuantityUpdated' => 'updateCartTotals'
     ];
 
     public function mount()
     {
-        $this->cartTotal = \Cart::getTotal();
-        $this->cartSubTotal = \Cart::getSubTotal();
-        $this->cartItems = \Cart::getContent();
+        $this->updateCartTotals();
+        $this->cartItems = Cart::getContent();
     }
 
-    public function updated()
+    public function updateCartTotals()
     {
-        $this->cartTotal = \Cart::getTotal();
-        $this->cartSubTotal = \Cart::getSubTotal();
+        $this->cartTotal = Cart::getTotal();
+        $this->cartSubTotal = Cart::getSubTotal();
     }
 
     public function render()
@@ -38,17 +40,13 @@ class CartDisplay extends Component
 
     public function removeItem(int $itemId)
     {
-        \Cart::remove($itemId);
+        Cart::remove($itemId);
         $currentUrl = request()->header('Referer');
         $this->flash('success', 'Removed!', [], $currentUrl);
     }
 
     public function proceedToCheckout()
     {
-        ray('Checkout function');
-//        $cartItems = \Cart::getContent();
-//        OrderMadeEvent::dispatch($cartItems);
-        \Cart::clear();
-        $this->flash('success', 'Your order has been booked!', [], '/');
+        $this->flash('success', FlashMessageHelper::BLANK, [], route('frontend.cart.checkout'));
     }
 }

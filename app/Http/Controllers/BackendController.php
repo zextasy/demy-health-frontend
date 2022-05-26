@@ -27,7 +27,7 @@ class BackendController extends Controller
 
     public function clear(TestCenter $testCenter)
     {
-        \Cart::clear();
+        Cart::clear();
         return redirect()->back();
     }
 

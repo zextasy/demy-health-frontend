@@ -4,9 +4,10 @@ namespace App\Http\Livewire\Cards;
 
 use Livewire\Component;
 use App\Models\Product;
+use App\Helpers\FlashMessageHelper;
+use App\Events\ProductAddedToCartEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-
-//use Cart;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class ProductItemDisplay extends Component
 {
@@ -39,17 +40,20 @@ class ProductItemDisplay extends Component
     }
 
     public function addToCart(){
-        \Cart::add(array(
-            'id' => $this->productId,
+        Cart::add(array(
+            'id' => 'Product - '.$this->productId,
             'name' => $this->title,
             'price' => $this->productPrice,
             'quantity' => 1,
-            'attributes' => array(),
+            'attributes' => array(
+                'type' => 'Product'
+            ),
             'associatedModel' => $this->product
         ));
 
         $currentUrl = request()->header('Referer');
-        $this->flash('success', 'Added!', [], $currentUrl);
+        ProductAddedToCartEvent::dispatch();
+        $this->flash('success', FlashMessageHelper::PRODUCT_ADD_TO_CART_SUCCESSFUL, [], $currentUrl);
     }
 
     public function showProduct(){

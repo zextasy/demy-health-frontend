@@ -644,10 +644,10 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Darryldecode\\Cart\\CartServiceProvider"
+                        "Darryldecode/Cart/CartServiceProvider"
                     ],
                     "aliases": {
-                        "Cart": "Darryldecode\\Cart\\Facades\\CartFacade"
+                        "Cart": "Darryldecode/Cart/Facades/CartFacade"
                     }
                 }
             },
