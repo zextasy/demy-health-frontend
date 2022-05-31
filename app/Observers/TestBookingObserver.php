@@ -8,59 +8,37 @@ use App\Settings\GeneralSettings;
 
 class TestBookingObserver
 {
-    public function creating (TestBooking $testBooking)
+    public function creating (TestBooking $model)
     {
+        if (empty($model->reference)){
+            $nextId = (new ModelHelper)->getNextId('test_bookings');
+            $padding = str_pad($nextId, 9, "0", STR_PAD_LEFT);
+            $model->reference = app(GeneralSettings::class)->test_booking_prefix.$padding;
+        }
 
-        $nextId = (new ModelHelper)->getNextId('test_bookings');
-        $padding = str_pad($nextId, 9, "0", STR_PAD_LEFT);
-        $testBooking->reference = app(GeneralSettings::class)->test_booking_prefix.$padding;
     }
 
-    public function created(TestBooking $testBooking)
-    {
-        //
-    }
-
-    /**
-     * Handle the TestBooking "updated" event.
-     *
-     * @param  \App\Models\TestBooking  $testBooking
-     * @return void
-     */
-    public function updated(TestBooking $testBooking)
+    public function created(TestBooking $model)
     {
         //
     }
 
-    /**
-     * Handle the TestBooking "deleted" event.
-     *
-     * @param  \App\Models\TestBooking  $testBooking
-     * @return void
-     */
-    public function deleted(TestBooking $testBooking)
+    public function updated(TestBooking $model)
     {
         //
     }
 
-    /**
-     * Handle the TestBooking "restored" event.
-     *
-     * @param  \App\Models\TestBooking  $testBooking
-     * @return void
-     */
-    public function restored(TestBooking $testBooking)
+    public function deleted(TestBooking $model)
     {
         //
     }
 
-    /**
-     * Handle the TestBooking "force deleted" event.
-     *
-     * @param  \App\Models\TestBooking  $testBooking
-     * @return void
-     */
-    public function forceDeleted(TestBooking $testBooking)
+    public function restored(TestBooking $model)
+    {
+        //
+    }
+
+    public function forceDeleted(TestBooking $model)
     {
         //
     }

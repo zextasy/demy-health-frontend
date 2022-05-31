@@ -71,10 +71,12 @@ class BookATest extends Component
                 LocationTypeEnum::HOME => $this->selectedStateForHomeBooking,
             };
 
+            $testType = TestType::find($this->selectedTestType);
+
             Cart::add(array(
-                'id' => 'Test Booking - ' . (new ModelHelper)->getNextId('test_bookings'),
-                'name' => TestType::find($this->selectedTestType)->description,
-                'price' => TestType::find($this->selectedTestType)->price,
+                'id' => 'Test Booking - '. $testType->test_id,
+                'name' => $testType->description,
+                'price' => $testType->price,
                 'quantity' => 1,
                 'attributes' => array(
                     'type' => 'TestBooking',

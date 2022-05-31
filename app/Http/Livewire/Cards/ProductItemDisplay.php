@@ -19,6 +19,7 @@ class ProductItemDisplay extends Component
     public string $displayPrice;
     public float$productPrice;
     public int $productId;
+    public string $sku;
     public Product $product;
 
 
@@ -26,6 +27,7 @@ class ProductItemDisplay extends Component
     {
         $this->product = $product;
         $this->productId = $product->id;
+        $this->sku = $product->sku;
         $this->imageUrl = $product->latest_picture_url;
         $this->title = $product->name;
         $this->description = $product->description;
@@ -41,7 +43,7 @@ class ProductItemDisplay extends Component
 
     public function addToCart(){
         Cart::add(array(
-            'id' => 'Product - '.$this->productId,
+            'id' => 'Product - '.$this->sku,
             'name' => $this->title,
             'price' => $this->productPrice,
             'quantity' => 1,

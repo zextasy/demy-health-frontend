@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
 use App\Models\TestBooking;
+use App\Observers\ProductObserver;
 use App\Observers\TestBookingObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
@@ -30,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading(! app()->isProduction());
         //register model Observers TODO move elsewhere? google
         TestBooking::observe(TestBookingObserver::class);
+        Product::observe(ProductObserver::class);
     }
 }
