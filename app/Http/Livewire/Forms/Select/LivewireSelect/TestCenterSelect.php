@@ -18,9 +18,12 @@ class TestCenterSelect extends LivewireSelect
 
     public function options($searchTerm = null): Collection
     {
-        return TestCenter::query()
+        return TestCenter::query()->with('addresses')
             ->when($this->hasDependency('test_category_id'), function ($query) {
                 $query->where('test_category_id', $this->getDependingValue('test_category_id'));
+            })
+            ->when($this->hasDependency('selectedStateForTestCenterBooking'), function ($query) {
+                $query->inState($this->getDependingValue('selectedStateForTestCenterBooking'));
             })
             ->when($searchTerm, function ($query, $searchTerm) {
                 $query->where(DB::raw('LOWER(name)'), 'like', '%'. strtolower($searchTerm) .'%');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f05a677f5a4116ec6ce1b600feb5921f",
+    "content-hash": "747b9a3fa1e4cd87b4eec09a07fa74ef",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -6798,6 +6798,58 @@
                 }
             ],
             "time": "2022-03-10T21:14:19+00:00"
+        },
+        {
+            "name": "staudenmeir/eloquent-has-many-deep",
+            "version": "v1.15.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staudenmeir/eloquent-has-many-deep.git",
+                "reference": "c21dcb2bfa9618e8eaaeda95541d2ffb3f421ecd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staudenmeir/eloquent-has-many-deep/zipball/c21dcb2bfa9618e8eaaeda95541d2ffb3f421ecd",
+                "reference": "c21dcb2bfa9618e8eaaeda95541d2ffb3f421ecd",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^9.0",
+                "php": "^8.0.2"
+            },
+            "require-dev": {
+                "illuminate/pagination": "^9.0",
+                "phpunit/phpunit": "^9.5",
+                "staudenmeir/eloquent-eager-limit": "^1.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Staudenmeir\\EloquentHasManyDeep\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonas Staudenmeir",
+                    "email": "mail@jonas-staudenmeir.de"
+                }
+            ],
+            "description": "Laravel Eloquent HasManyThrough relationships with unlimited levels",
+            "support": {
+                "issues": "https://github.com/staudenmeir/eloquent-has-many-deep/issues",
+                "source": "https://github.com/staudenmeir/eloquent-has-many-deep/tree/v1.15.1"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/JonasStaudenmeir",
+                    "type": "custom"
+                }
+            ],
+            "time": "2022-03-15T20:45:07+00:00"
         },
         {
             "name": "stechstudio/filament-impersonate",

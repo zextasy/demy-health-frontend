@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Traits\Relationships\HasAddresses;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class State extends BaseModel
 {

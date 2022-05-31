@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreTestBookingRequest extends FormRequest
 {
     const VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME = "required_if:locationType,2";
+    const VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER = "required_if:locationType,1";
 
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +29,9 @@ class StoreTestBookingRequest extends FormRequest
         return [
             "locationType" => "required",
             "customerEmail" => "required|email",
-            "selectedTestCenter" => "required_if:locationType,1",//LocationTypeEnum::Center
-            "selectedState" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
+            "selectedStateForTestCenterBooking" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER,
+            "selectedTestCenter" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER,
+            "selectedStateForHomeBooking" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
             "selectedLocalGovernmentArea" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
             "addressLine1" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,//LocationTypeEnum::Home
             "selectedTestType" => "required",

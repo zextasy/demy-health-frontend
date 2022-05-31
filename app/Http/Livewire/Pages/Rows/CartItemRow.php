@@ -26,9 +26,9 @@ class CartItemRow extends Component
         $this->initialQuantity = $cartItem->quantity;
         $this->itemPrice = $cartItem->price;
         $this->itemName = $cartItem->name;
-        $this->pictureUrl = $cartItem->associatedModel->latest_picture_url;
-        $this->model = $cartItem->associatedModel->model;
-        $this->description = $cartItem->associatedModel->description;
+        $this->pictureUrl = optional($cartItem->associatedModel)->latest_picture_url;
+        $this->model = optional($cartItem->associatedModel)->model;
+        $this->description = optional($cartItem->associatedModel)->description;
     }
 
     public function render()

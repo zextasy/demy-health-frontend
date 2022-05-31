@@ -35,6 +35,7 @@
         "spatie/laravel-settings": "^2.4",
         "spatie/laravel-tags": "^4",
         "staudenmeir/belongs-to-through": "^2.12",
+        "staudenmeir/eloquent-has-many-deep": "^1.7",
         "stechstudio/filament-impersonate": "^2.4",
         "webbingbrasil/filament-advancedfilter": "^1.0",
         "webbingbrasil/filament-notification": "^0.1.0"

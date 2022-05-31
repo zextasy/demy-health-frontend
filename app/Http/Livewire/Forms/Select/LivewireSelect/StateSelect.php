@@ -20,7 +20,7 @@ class StateSelect extends LivewireSelect
                 $query->where('is_ready_for_sample_collection', true);
             })
             ->when($this->isForTestCenter, function ($query) {
-                $query->where('is_ready_for_sample_collection', true);
+                $query->has('testCenters');
             })
             ->when($this->hasDependency('test_category_id'), function ($query) {
                 $query->where('test_category_id', $this->getDependingValue('test_category_id'));

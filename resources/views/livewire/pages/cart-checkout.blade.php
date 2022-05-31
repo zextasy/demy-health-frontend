@@ -13,12 +13,12 @@
         </div>
         @foreach($cartItems as $cartItem)
             <x-cart-item-row
-                :picture-url="$cartItem->associatedModel->latest_picture_url"
+                :picture-url="optional($cartItem->associatedModel)->latest_picture_url"
                 :quantity="$cartItem->quantity"
                 :item-name="$cartItem->name"
                 :item-price="$cartItem->price"
-                :model="$cartItem->associatedModel->model"
-                :description="$cartItem->associatedModel->description"
+                :model="optional($cartItem->associatedModel)->model"
+                :description="optional($cartItem->associatedModel)->description"
                 :sub-total="Cart::get($cartItem->id)->getPriceSum()">
 
             </x-cart-item-row>

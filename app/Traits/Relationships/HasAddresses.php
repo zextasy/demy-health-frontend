@@ -6,30 +6,33 @@ use App\Models\User;
 use App\Models\Address;
 use App\Models\TestCenter;
 use App\Models\TestBooking;
+use App\Models\Pivots\Addressable;
+use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 trait HasAddresses
 {
+    use HasRelationships;
 
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
     }
 
-    public function TestBookings(): HasManyThrough
+    public function testBookings(): HasManyDeep
     {
-        return $this->hasManyThrough(TestBooking::class, Address::class);
+        return $this->hasManyDeepFromRelations($this->addresses(),(new Address)->testBookings());
     }
 
-    public function TestCenters(): HasManyThrough
+    public function testCenters(): HasManyDeep
     {
-        //TODO implement hasmanydeep on all 3 relationships and retest. check stackoverflow - hasmanythrough morph
-        return $this->hasManyThrough(TestCenter::class, Address::class);
+        return $this->hasManyDeepFromRelations($this->addresses(),(new Address)->testCenters());
     }
 
-    public function users(): HasManyThrough
+    public function users(): HasManyDeep
     {
-        return $this->hasManyThrough(User::class, Address::class);
+        return $this->hasManyDeepFromRelations($this->addresses(),(new Address)->users());
     }
 }

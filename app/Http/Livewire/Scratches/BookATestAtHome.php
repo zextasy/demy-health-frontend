@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Forms;
+namespace App\Http\Livewire\Scratches;
 
 use App\Models\User;
 use App\Models\State;
@@ -67,7 +67,7 @@ class BookATestAtHome extends Component
 
     public function render()
     {
-        return view('livewire.forms.book-a-test-at-home');
+        return view('livewire.scratches.book-a-test-at-home');
     }
 
     public function submit()

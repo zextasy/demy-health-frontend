@@ -3,19 +3,26 @@
 namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
+use App\Models\TestType;
 use App\Models\TestBooking;
+use App\Helpers\ModelHelper;
 use App\Helpers\FlashMessageHelper;
+use Illuminate\Contracts\View\View;
 use App\Events\TestAddedToCartEvent;
+use Illuminate\Contracts\View\Factory;
+use App\Enums\TestBooking\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Http\Requests\StoreTestBookingRequest;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Illuminate\Contracts\Foundation\Application;
 
 class BookATest extends Component
 {
     use LivewireAlert;
 
     public $selectedTestCenter;
-    public $selectedState;
+    public $selectedStateForTestCenterBooking;
+    public $selectedStateForHomeBooking;
     public $selectedLocalGovernmentArea;
     public $selectedTestType;
     public $customerEmail = null;
@@ -25,14 +32,14 @@ class BookATest extends Component
     public $city = null;
     public $dueDate;
     public $startTime;
+
     protected $listeners = [
         'selectedTestCenterUpdated' => 'setSelectedTestCenter',
-        'selectedStateUpdated' => 'setSelectedState',
+        'selectedStateForHomeBookingUpdated' => 'setSelectedStateForHomeBooking',
+        'selectedStateForTestCenterBookingUpdated' => 'setSelectedStateForTestCenterBooking',
         'selectedLocalGovernmentAreaUpdated' => 'setSelectedLocalGovernmentArea',
         'selectedTestTypeUpdated' => 'setSelectedTestType',
     ];
-    private bool $success = false;
-    private ?TestBooking $testBooking = null;
 
     protected function rules(): array
     {
@@ -49,55 +56,47 @@ class BookATest extends Component
         $this->customerEmail = optional(auth()->user())->email;
     }
 
-    public function stateToParent($value)
-    {
-        $this->selectedState = $value;
-    }
-
-    public function render()
+    public function render(): Factory|View|Application
     {
         return view('livewire.forms.book-a-test');
     }
 
     public function submit()
     {
-        $this->validate();
-        $initialCartItemCount = Cart::getContent()->count();
+        try{
+            $this->validate();
 
-        Cart::add(array(
-            'id' => 'Test Booking - ' . $this->testBooking->id,
-            'name' => $this->testBooking->testType->description,
-            'price' => $this->testBooking->testType->price,
-            'quantity' => 1,
-            'attributes' => array(
-                'type' => 'TestBooking',
-                'customerEmail' => $this->customerEmail,
-                'locationType' => $this->locationType,
-                'dueDate' => $this->dueDate,
-                'selectedTestCenter' => $this->selectedTestCenter,
-                'selectedTestType' => $this->selectedTestType,
-                'addressLine1' => $this->addressLine1,
-                'addressLine2' => $this->addressLine2,
-                'city' => $this->city,
-                'selectedState' => $this->selectedState,
-                'selectedLocalGovernmentArea' => $this->selectedLocalGovernmentArea,
-            ),
-        ));
+            $selectedState = match (LocationTypeEnum::from($this->locationType)){
+                LocationTypeEnum::CENTER => $this->selectedStateForTestCenterBooking,
+                LocationTypeEnum::HOME => $this->selectedStateForHomeBooking,
+            };
 
-        $finalCartItemCount = Cart::getContent()->count();
-
-        $this->success = $initialCartItemCount > $finalCartItemCount;
-
-        if ($this->success) {
-
+            Cart::add(array(
+                'id' => 'Test Booking - ' . (new ModelHelper)->getNextId('test_bookings'),
+                'name' => TestType::find($this->selectedTestType)->description,
+                'price' => TestType::find($this->selectedTestType)->price,
+                'quantity' => 1,
+                'attributes' => array(
+                    'type' => 'TestBooking',
+                    'customerEmail' => $this->customerEmail,
+                    'locationType' => $this->locationType,
+                    'dueDate' => $this->dueDate,
+                    'selectedTestCenter' => $this->selectedTestCenter,
+                    'selectedTestType' => $this->selectedTestType,
+                    'addressLine1' => $this->addressLine1,
+                    'addressLine2' => $this->addressLine2,
+                    'city' => $this->city,
+                    'selectedState' => $selectedState,
+                    'selectedLocalGovernmentArea' => $this->selectedLocalGovernmentArea,
+                ),
+            ));
             TestAddedToCartEvent::dispatch();
 
             $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');
-
-        }
-        else {
+        } catch(\Exception $e){
             $this->alert('error', FlashMessageHelper::GENERAL_ERROR);
         }
+
     }
 
     public function setSelectedTestCenter($object)
@@ -105,9 +104,14 @@ class BookATest extends Component
         $this->selectedTestCenter = $object['value'];
     }
 
-    public function setSelectedState($object)
+    public function setSelectedStateForTestCenterBooking($object)
     {
-        $this->selectedState = $object['value'];
+        $this->selectedStateForTestCenterBooking = $object['value'];
+    }
+
+    public function setSelectedStateForHomeBooking($object)
+    {
+        $this->selectedStateForHomeBooking = $object['value'];
     }
 
     public function setSelectedLocalGovernmentArea($object)
