@@ -32,6 +32,10 @@ class LocalGovernmentAreaResource extends Resource
                     ->relationship('state', 'name')
                     ->searchable()
                     ->required(),
+                Forms\Components\Fieldset::make('Sample Collection')->schema([
+                    Forms\Components\Toggle::make('is_ready_for_sample_collection')
+                        ->required(),
+                ]),
             ]);
     }
 
@@ -41,6 +45,7 @@ class LocalGovernmentAreaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('state.name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\BooleanColumn::make('is_ready_for_sample_collection')->sortable(),
 
             ])
             ->filters([

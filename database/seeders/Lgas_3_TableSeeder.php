@@ -696,102 +696,122 @@ class Lgas_3_TableSeeder extends Seeder
         // Lagos
         DB::table('local_government_areas')->insert([
             'name' => 'Agege',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Ajeromi-Ifelodun',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Alimosho',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Amuwo-Odofin',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Apapa',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Badagry',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Epe',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Eti-Osa',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Ibeju/Lekki',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Ifako-Ijaye',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Ikeja',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Ikorodu',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Kosofe',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Lagos Island',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Lagos Mainland',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Mushin',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Ojo',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Oshodi-Isolo',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Shomolu',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Surulere',
-            'state_id' => '24'
+            'state_id' => '24',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         // Nasarawa

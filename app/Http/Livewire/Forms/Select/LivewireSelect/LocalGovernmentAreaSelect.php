@@ -19,8 +19,8 @@ class LocalGovernmentAreaSelect extends LivewireSelect
             ->when($this->isForSample, function ($query) {
                 $query->where('is_ready_for_sample_collection', true);
             })
-            ->when($this->hasDependency('selectedState'), function ($query) {
-                $query->where('state_id', $this->getDependingValue('selectedState'));
+            ->when($this->hasDependency('selectedStateForHomeBooking'), function ($query) {
+                $query->where('state_id', $this->getDependingValue('selectedStateForHomeBooking'));
             })
             ->when($searchTerm, function ($query, $searchTerm) {
                 $query->where(DB::raw('LOWER(name)'), 'like', '%'. strtolower($searchTerm) .'%');

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('reference')->unique();
             $table->unsignedDecimal('amount',12);
-            $table->unsignedSmallInteger('type')->default(PaymentTypeEnum::OTHER);
+            $table->unsignedSmallInteger('type')->default(PaymentTypeEnum::OTHER->value);
             $table->morphs('payable');
             $table->timestamps();
         });

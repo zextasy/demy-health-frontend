@@ -891,32 +891,38 @@ class Lgas_4_TableSeeder extends Seeder
         //FCT
         DB::table('local_government_areas')->insert([
             'name' => 'Gwagwalada ',
-            'state_id' => '37'
+            'state_id' => '37',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Kuje',
-            'state_id' => '37'
+            'state_id' => '37',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Abaji',
-            'state_id' => '37'
+            'state_id' => '37',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Abuja Municipal',
-            'state_id' => '37'
+            'state_id' => '37',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Bwari',
-            'state_id' => '37'
+            'state_id' => '37',
+            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('local_government_areas')->insert([
             'name' => 'Kwali',
-            'state_id' => '37'
+            'state_id' => '37',
+            'is_ready_for_sample_collection' => true,
         ]);
     }
 }
