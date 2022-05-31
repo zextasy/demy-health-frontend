@@ -166,7 +166,7 @@ return [
          * Package Service Providers...
          */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-//        Darryldecode\Cart\CartServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -236,7 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //extras - zee
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-//        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
 
     ],
 
