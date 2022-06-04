@@ -8,6 +8,16 @@ FRONTEND:
 
 FILAMENT:
 
+* morphMany for LGAs (Similar to addresses)
+
+* look into filament docs for form builder (MorphManyRepeater)
+
+* add customer enquiries and users to address relation managers
+
+* add customer bookings to LGA relation managers
+
 * logo and name settings
 
 * Build out home collection process (filament)
+
+

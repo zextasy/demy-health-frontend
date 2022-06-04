@@ -13,13 +13,14 @@ class State extends BaseModel
     //region CONFIG
     protected $dates = ['created_at', 'updated_at'];
     protected $guarded = ['id'];
+    protected $appends = ['is_ready_for_sample_collection'];
     //endregion
 
     //region ATTRIBUTES
     protected function isReadyForSampleCollection(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->localGovernmentAreas()->isReadyForSampleCollection()->exists(),
+            get: fn () => $this->localGovernmentAreasWithHomeSampleCollection->count() > 0,
         );
     }
     //endregion
@@ -41,6 +42,11 @@ class State extends BaseModel
     public function localGovernmentAreas(): HasMany
     {
         return $this->hasMany(LocalGovernmentArea::class);
+    }
+
+    public function localGovernmentAreasWithHomeSampleCollection(): HasMany
+    {
+        return $this->hasMany(LocalGovernmentArea::class)->isReadyForSampleCollection();
     }
     //endregion
 }

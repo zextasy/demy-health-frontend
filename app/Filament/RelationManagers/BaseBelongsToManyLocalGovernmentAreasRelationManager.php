@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Filament\Resources\StateResource\RelationManagers;
+namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
-use App\Filament\RelationManagers\BaseBelongsToManyLocalGovernmentAreasRelationManager;
+use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
 
-class LocalGovernmentAreasRelationManager extends HasManyRelationManager
+class BaseBelongsToManyLocalGovernmentAreasRelationManager extends BelongsToManyRelationManager
 {
     protected static string $relationship = 'localGovernmentAreas';
 
@@ -23,7 +24,7 @@ class LocalGovernmentAreasRelationManager extends HasManyRelationManager
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_ready_for_sample_collection')
-                    ->required()->inline(false),
+                    ->required(),
             ]);
     }
 
@@ -31,12 +32,12 @@ class LocalGovernmentAreasRelationManager extends HasManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('state.name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\BooleanColumn::make('is_ready_for_sample_collection')->sortable(),
             ])
             ->filters([
                 //
-            ])
-            ->defaultSort('name');
+            ]);
     }
 }

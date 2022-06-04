@@ -4,10 +4,12 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\State;
 use App\Models\Address;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use App\Models\LocalGovernmentArea;
 use App\Filament\Resources\AddressResource\Pages;
 use App\Filament\Resources\AddressResource\RelationManagers;
 
@@ -26,9 +28,18 @@ class AddressResource extends Resource
                 Forms\Components\BelongsToSelect::make('state_id')
                     ->relationship('state', 'name')
                     ->searchable()
+                    ->reactive()
+                    ->afterStateUpdated(fn( callable $set) => $set('local_government_area_id', null))
                     ->required(),
-                Forms\Components\BelongsToSelect::make('local_government_area_id')
-                    ->relationship('localGovernmentArea', 'name')
+                Forms\Components\Select::make('local_government_area_id')
+                    ->label('local Government Area')
+                    ->options(function (callable $get) {
+                        $state = State::find($get('state_id'));
+                        if (! $state){
+                            return [];
+                        }
+                        return $state->localGovernmentAreas->toSelectArray();
+                    })
                     ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('line_1')
