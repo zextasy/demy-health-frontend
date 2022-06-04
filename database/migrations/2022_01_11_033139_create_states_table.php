@@ -16,7 +16,6 @@ class CreateStatesTable extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->boolean('is_ready_for_sample_collection')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

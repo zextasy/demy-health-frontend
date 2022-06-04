@@ -11,7 +11,7 @@ class CreateGeneralSettings extends SettingsMigration
         $this->migrator->add('general.test_booking_prefix', 'DM-TB-');
         $this->migrator->add('general.specimen_sample_prefix', 'DM-SS-');
         $this->migrator->add('general.product_sku_prefix', 'DM-PROD-');
-        $this->migrator->add('general.business_start_hour', '09:00');
-        $this->migrator->add('general.business_end_hour', '17:00');
+        $this->migrator->add('general.business_start_hour', '09:00:00');
+        $this->migrator->add('general.business_end_hour', '17:00:00');
     }
 }

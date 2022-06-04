@@ -17,7 +17,7 @@ class StateSelect extends LivewireSelect
     {
         return State::query()
             ->when($this->isForSample, function ($query) {
-                $query->where('is_ready_for_sample_collection', true);
+                $query->isReadyForSampleCollection();
             })
             ->when($this->isForTestCenter, function ($query) {
                 $query->has('testCenters');

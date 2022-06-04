@@ -108,7 +108,6 @@ class StateSeeder extends Seeder
 
         DB::table('states')->insert([
             'name' => 'Lagos',
-            'is_ready_for_sample_collection' => true,
         ]);
 
         DB::table('states')->insert([
@@ -161,7 +160,6 @@ class StateSeeder extends Seeder
 
         DB::table('states')->insert([
             'name' => 'FCT',
-            'is_ready_for_sample_collection' => true,
         ]);
     }
 }

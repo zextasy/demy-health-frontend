@@ -14,19 +14,20 @@
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::HOME->value)
         <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.state-select
-                name="selectedState"
-                :value="$selectedState"
+                name="selectedStateForHomeBooking"
+                :value="$selectedStateForHomeBooking"
                 placeholder="Choose a State"
                 :is-for-sample="true"
             />
-            @error('selectedState') <span class="alert-danger">{{ $message }}</span> @enderror
+            @error('selectedStateForHomeBooking') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.local-government-area-select
                 name="selectedLocalGovernmentArea"
                 :value="$selectedLocalGovernmentArea"
                 placeholder="Choose a Local Government Area"
-                :depends-on="['selectedState']"
+                :depends-on="['selectedStateForHomeBooking']"
+                :is-for-sample="true"
             />
             @error('selectedLocalGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
@@ -45,10 +46,20 @@
     @endif
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::CENTER->value)
         <div class="col-12 form-group mb-3" data-for="select">
+            <livewire:forms.select.livewire-select.state-select
+                name="selectedStateForTestCenterBooking"
+                :value="$selectedStateForTestCenterBooking"
+                placeholder="Choose a State"
+                :is-for-test-center="true"
+            />
+            @error('selectedStateForTestCenterBooking') <span class="alert-danger">{{ $message }}</span> @enderror
+        </div>
+        <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.test-center-select
                 name="selectedTestCenter"
                 :value="$selectedTestCenter"
                 placeholder="Choose a Center"
+                :depends-on="['selectedStateForTestCenterBooking']"
             />
             @error('selectedTestCenter') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>

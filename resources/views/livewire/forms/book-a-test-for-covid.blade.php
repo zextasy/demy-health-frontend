@@ -12,7 +12,7 @@
         @error('locationType') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::HOME->value)
-        <div class="col-12 form-group mb-3" data-for="textarea">
+        <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.state-select
                 name="selectedStateForHomeBooking"
                 :value="$selectedStateForHomeBooking"
@@ -45,7 +45,7 @@
         </div>
     @endif
     @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::CENTER->value)
-        <div class="col-12 form-group mb-3" data-for="textarea">
+        <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.state-select
                 name="selectedStateForTestCenterBooking"
                 :value="$selectedStateForTestCenterBooking"
@@ -54,7 +54,7 @@
             />
             @error('selectedStateForTestCenterBooking') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
-        <div class="col-12 form-group mb-3" data-for="textarea">
+        <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.test-center-select
                 name="selectedTestCenter"
                 :value="$selectedTestCenter"
@@ -64,7 +64,7 @@
             @error('selectedTestCenter') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
-    <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
+    <div class="col-md col-sm-12 form-group mb-3" data-for="select">
         <select wire:model="selectedTestCategory" class="form-control"  required>
             <option value="" selected>Choose Category</option>
 
@@ -76,7 +76,7 @@
         @error('selectedTestCategory') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     @if (!is_null($selectedTestCategory))
-        <div class="col-md col-sm-12 form-group mb-3" data-for="textarea">
+        <div class="col-md col-sm-12 form-group mb-3" data-for="select">
             <select wire:model="selectedTestType" class="form-control"  required>
                 <option value="" selected>Choose Test</option>
 
