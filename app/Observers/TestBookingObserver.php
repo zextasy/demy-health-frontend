@@ -10,11 +10,6 @@ class TestBookingObserver
 {
     public function creating (TestBooking $model)
     {
-        if (empty($model->reference)){
-            $nextId = (new ModelHelper)->getNextId('test_bookings');
-            $padding = str_pad($nextId, 9, "0", STR_PAD_LEFT);
-            $model->reference = app(GeneralSettings::class)->test_booking_prefix.$padding;
-        }
 
     }
 

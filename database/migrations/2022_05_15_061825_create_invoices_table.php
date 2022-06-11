@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('reference')->unique();
-            $table->morphs('invoiceable');
+            $table->nullableMorphs('invoiceable');
             $table->timestamps();
         });
     }

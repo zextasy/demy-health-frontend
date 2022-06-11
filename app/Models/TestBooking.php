@@ -3,15 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Support\Carbon;
+use App\Settings\GeneralSettings;
+use App\Contracts\AddressableContract;
+use App\Contracts\OrderableItemContract;
+use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\MorphsAddresses;
 use App\Enums\TestBooking\LocationTypeEnum;
+use App\Traits\Relationships\MorphsOrderItems;
 use App\Filament\Resources\TestBookingResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TestBooking extends BaseModel
+class TestBooking extends BaseModel implements OrderableItemContract, AddressableContract
 {
-    use HasFactory, MorphsAddresses;
+    use HasFactory, MorphsAddresses, MorphsOrderItems, GeneratesReference;
 
     //region CONFIG
     protected $dates = ['created_at', 'updated_at','due_date'];
@@ -20,6 +25,14 @@ class TestBooking extends BaseModel
     protected $casts = [
         'location_type' => LocationTypeEnum::class,
     ];
+
+    public function referenceConfig(): array
+    {
+        return [
+            'reference_key' => 'reference',
+            'reference_prefix' => app(GeneralSettings::class)->test_booking_prefix,
+        ];
+    }
     //endregion
 
     //region ATTRIBUTES

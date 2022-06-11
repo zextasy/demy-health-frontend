@@ -3,11 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\TestBookedEvent;
-use App\EventsCartCheckedOutEvent;
+use App\Events\CartCheckedOutEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class GenerateOrderFromCustomerCartListener implements ShouldQueue
+class GenerateOrderNotificationListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
@@ -22,7 +22,7 @@ class GenerateOrderFromCustomerCartListener implements ShouldQueue
 
     public function handle(CartCheckedOutEvent $event)
     {
-        //TODO generate order
+        //TODO notify user
     }
 
     /**
@@ -33,7 +33,7 @@ class GenerateOrderFromCustomerCartListener implements ShouldQueue
      *
      * @return void
      */
-    public function failed(TestBookedEvent $event, $exception)
+    public function failed(CartCheckedOutEvent $event, $exception)
     {
         //
     }

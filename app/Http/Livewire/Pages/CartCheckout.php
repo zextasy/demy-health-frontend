@@ -5,8 +5,10 @@ namespace App\Http\Livewire\Pages;
 use Livewire\Component;
 use Illuminate\Support\Collection;
 use App\Helpers\FlashMessageHelper;
+use App\Jobs\CreateOrderFromCartJob;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use App\Actions\Orders\GenerateOrderFromCartAction;
 
 class CartCheckout extends Component
 {
@@ -30,6 +32,9 @@ class CartCheckout extends Component
 
     public function checkoutCart()
     {
+        $items = Cart::getContent();
+        CreateOrderFromCartJob::dispatch($items);
+        Cart::clear();
         $this->flash('success', FlashMessageHelper::ORDER_BOOKING_SUCCESSFUL, [], '/');
     }
 

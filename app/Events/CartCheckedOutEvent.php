@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use DarryldecodeCartCart;
+use App\Models\Order;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -12,15 +12,15 @@ class CartCheckedOutEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public Cart $cart;
+    public Order $order;
 
     /**
      * Create a new event instance.
      * @return void
      */
-    public function __construct(Cart $cart)
+    public function __construct(Order $order)
     {
-        $this->cart = $cart;
+        $this->order = $order;
     }
 
     /**
