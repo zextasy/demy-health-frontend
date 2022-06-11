@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\TestCenter;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as Controller;
 
 class CartController extends Controller
@@ -12,9 +13,10 @@ class CartController extends Controller
         return view('frontend.cart-show');
     }
 
-    public function checkOut()
+    public function checkOut(Request $request)
     {
-        return view('frontend.cart-checkout');
+        $data['customerEmail'] = $request->customer_email;
+        return view('frontend.cart-checkout',$data);
     }
 
     public function clear()

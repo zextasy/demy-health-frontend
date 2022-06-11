@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('reference')->unique();
+            $table->string('customer_email')->index();
             $table->nullableMorphs('orderable');
             $table->timestamps();
         });

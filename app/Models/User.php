@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Laravel\Sanctum\HasApiTokens;
+use App\Contracts\OrderableContract;
 use Spatie\Permission\Traits\HasRoles;
 use App\Contracts\AddressableContract;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\Relationships\MorphsOrders;
 use Filament\Models\Contracts\FilamentUser;
 use Spatie\Permission\Traits\HasPermissions;
 use App\Traits\Relationships\MorphsAddresses;
@@ -16,9 +18,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail, AddressableContract
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail, AddressableContract, OrderableContract
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, MorphsAddresses, SoftDeletes;
+    use  SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, MorphsAddresses, MorphsOrders;
 
     //region CONFIG
     protected $fillable = [

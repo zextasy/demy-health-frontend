@@ -22,7 +22,7 @@
     </div>
     <aside>
         <div class="summary">
-            <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
+            <div class="summary-total-items"><span class="total-items"></span>Items in your Cart</div>
             <div class="summary-subtotal">
                 <div class="subtotal-title">Subtotal</div>
                 <div class="subtotal-value final-value" id="basket-subtotal">{{number_format($cartSubTotal)}}</div>
@@ -32,24 +32,23 @@
                 </div>
             </div>
             <div class="summary-delivery">
-                {{--            <select name="delivery-collection" class="summary-delivery-selection">--}}
-                {{--                <option value="0" selected="selected">Select Collection or Delivery</option>--}}
-                {{--                <option value="collection">Collection</option>--}}
-                {{--                <option value="first-class">Royal Mail 1st Class</option>--}}
-                {{--                <option value="second-class">Royal Mail 2nd Class</option>--}}
-                {{--                <option value="signed-for">Royal Mail Special Delivery</option>--}}
-                {{--            </select>--}}
+                <label for="payment_method">Choose Payment Method</label>
+                <select wire:model="paymentMethod" name="payment_method" class="summary-delivery-selection">
+                    <option value="0" selected="selected">Select Payment Option</option>
+                    <option value="collection">Book and Pay later</option>
+                </select>
+            </div>
+            <div class="summary-delivery">
+                <label for="payment_method">Customer email</label>
+                <input wire:model="customerEmail" id="customer-email" type="text" name="customer_email" required>
+                @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
             </div>
             <div class="summary-total">
                 <div class="total-title">Total</div>
                 <div class="total-value final-value" id="basket-total">{{number_format($cartTotal)}}</div>
             </div>
             <div class="summary-checkout">
-                {{--            <form wire:submit.prevent="proceedToCheckout">--}}
-                {{--                <input type="submit" class="checkout-cta"  wire:click="proceedToCheckout" value="Checkout">--}}
-                {{--            </form>--}}
                 <button class="checkout-cta"  wire:click="proceedToCheckout">Checkout</button>
-                {{--            onclick="return confirm('Is your order complete?') || event.stopImmediatePropagation()"--}}
             </div>
         </div>
     </aside>

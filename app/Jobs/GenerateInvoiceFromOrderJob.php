@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Darryldecode\Cart\CartCollection;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -11,22 +12,20 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Actions\Orders\GenerateOrderFromCartAction;
 
-class CreateOrderFromCartJob implements ShouldQueue
+class GenerateInvoiceFromOrderJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private CartCollection $items;
-    private string $customerEmail;
+    private Order $order;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(CartCollection $items, string $customerEmail)
+    public function __construct(Order $order)
     {
-        $this->items = $items;
-        $this->customerEmail = $customerEmail;
+        $this->order = $order;
     }
 
     /**
@@ -36,6 +35,6 @@ class CreateOrderFromCartJob implements ShouldQueue
      */
     public function handle()
     {
-        (new GenerateOrderFromCartAction())->run($this->items, $this->customerEmail);
+
     }
 }
