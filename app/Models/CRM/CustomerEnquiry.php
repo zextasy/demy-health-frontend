@@ -4,7 +4,7 @@ namespace App\Models\CRM;
 
 use App\Models\BaseModel;
 use App\Traits\Relationships\MorphsAddresses;
-use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
+use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Filament\Resources\CRM\CustomerEnquiryResource;
 

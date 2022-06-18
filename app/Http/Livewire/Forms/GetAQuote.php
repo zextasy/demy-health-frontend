@@ -4,11 +4,10 @@ namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
 use App\Helpers\FlashMessageHelper;
-use App\Events\GetAQuoteFormSubmittedEvent;
 use App\Events\ContactUsFormSubmittedEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Actions\Addresses\CreateAddressAction;
-use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
+use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Actions\CRM\CustomerEnquiries\CreateCustomerEnquiryAction;
 
 class GetAQuote extends Component

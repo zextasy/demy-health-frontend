@@ -8,7 +8,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use App\Models\CRM\CustomerEnquiry;
-use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
+use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Filament\Resources\CRM\CustomerEnquiryResource\Pages;
 use App\Filament\Resources\CRM\CustomerEnquiryResource\RelationManagers;
 
@@ -45,9 +45,15 @@ class CustomerEnquiryResource extends Resource
                 ])->columns(1),
                 Forms\Components\Fieldset::make('General Info')->schema([
                     Forms\Components\Select::make('type')
-                        ->options(EnquiryTypeEnum::optionsAsSelectArray()),
-                    Forms\Components\TextInput::make('status'),
+                        ->options(EnquiryTypeEnum::optionsAsSelectArray())
+                        ->disabled(),
+                    Forms\Components\TextInput::make('status')->disabled(),
                 ])->columns(2),
+                Forms\Components\Fieldset::make('Resolution Details')->schema([
+                    Forms\Components\Textarea::make('resolution_notes')
+                        ->required()
+                        ->maxLength(255),
+                ])->columns(1),
             ]);
     }
 

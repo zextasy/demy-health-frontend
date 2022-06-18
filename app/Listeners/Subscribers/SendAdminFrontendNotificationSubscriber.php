@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\InternalOrderNotification;
 use App\Notifications\InternalTestBookingNotification;
 use App\Notifications\InternalCustomerEnquiryNotification;
 
@@ -40,7 +41,8 @@ class SendAdminFrontendNotificationSubscriber implements ShouldQueue
 
     public function sendCustomerOrderNotificationEmail( $event)
     {
-
+        $usersToNotify = User::query()->permission('process test booking')->get();
+        Notification::send($usersToNotify, new InternalOrderNotification($event->order));
     }
 
     public function subscribe($events)

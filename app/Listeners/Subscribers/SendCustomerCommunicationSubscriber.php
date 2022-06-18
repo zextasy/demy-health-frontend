@@ -5,6 +5,7 @@ namespace App\Listeners\Subscribers;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\CustomerOrderNotification;
 use App\Notifications\CustomerTestBookingNotification;
 use App\Notifications\CustomerCommunicationReceiptConfirmation;
 
@@ -46,7 +47,8 @@ class SendCustomerCommunicationSubscriber implements ShouldQueue
 
     public function sendCustomerOrderNotificationEmail( $event)
     {
-
+        Notification::route('mail', $event->order->customer_email)
+            ->notify(new CustomerOrderNotification($event->order));
     }
 
     public function subscribe($events)

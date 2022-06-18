@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Helpers\FlashMessageHelper;
 use App\Events\GetInTouchFormSubmittedEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
+use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Actions\CRM\CustomerEnquiries\CreateCustomerEnquiryAction;
 
 class GetInTouch extends Component

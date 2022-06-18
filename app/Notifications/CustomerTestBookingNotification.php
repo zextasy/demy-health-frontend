@@ -5,7 +5,7 @@ namespace App\Notifications;
 use App\Models\TestBooking;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Enums\TestBooking\LocationTypeEnum;
+use App\Enums\TestBookings\LocationTypeEnum;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -68,6 +68,7 @@ class CustomerTestBookingNotification extends Notification
             ->line($this->messageLine3)
             ->line($this->messageLine4)
             ->line($this->messageLine5)
+            ->line('If you have registered on our site with this email, you can log in and view the details.')
             ->line('Thank you for Choosing DemyHealth!');
     }
 
