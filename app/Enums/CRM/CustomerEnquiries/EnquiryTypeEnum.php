@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\CRM\CustomerEnquiry;
+namespace App\Enums\CRM\CustomerEnquiries;
 
 use ArchTech\Enums\Names;
 use ArchTech\Enums\Values;
@@ -15,4 +15,5 @@ enum EnquiryTypeEnum: int
 //TODO delete this  and use standard enquiry workflow
     case GENERAL = 1;
     case QUOTE = 2;
+    case OTHER = 100;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\TestBooking;
+namespace App\Enums\Finance\Payments;
 
 use ArchTech\Enums\Names;
 use ArchTech\Enums\Values;
@@ -8,11 +8,15 @@ use ArchTech\Enums\Options;
 use ArchTech\Enums\InvokableCases;
 use App\Traits\Enums\HasSelectArrayOptions;
 
-enum LocationTypeEnum: int
+enum PaymentMethodEnum: int
 {
     use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
 
 
-    case CENTER = 1;
-    case HOME = 2;
+    case CARD = 1;
+    case BANK_TRANSFER = 2;
+    case CHEQUE = 3;
+    case CREDIT = 10;
+    case OTHER = 100;
+
 }
