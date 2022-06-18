@@ -8,7 +8,7 @@ use App\Models\TestBooking;
 use Illuminate\Support\Carbon;
 use App\Events\TestBookedEvent;
 use Illuminate\Support\Facades\DB;
-use App\Enums\TestBooking\LocationTypeEnum;
+use App\Enums\TestBookings\LocationTypeEnum;
 
 class CreateTestBookingAction {
 

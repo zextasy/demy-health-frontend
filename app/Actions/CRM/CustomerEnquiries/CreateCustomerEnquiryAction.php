@@ -3,7 +3,7 @@
 namespace App\Actions\CRM\CustomerEnquiries;
 
 use App\Models\CRM\CustomerEnquiry;
-use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
+use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 
 class CreateCustomerEnquiryAction
 {

@@ -5,11 +5,11 @@ namespace App\Traits\Relationships;
 use App\Models\Finance\Payment;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait MorphsPayments
+trait MorphsReceivedPayments
 {
 
-    public function payments(): MorphMany
+    public function paymentsReceived(): MorphMany
     {
-        return $this->MorphMany(Payment::class, 'payable');
+        return $this->morphMany(Payment::class, 'payable');
     }
 }
