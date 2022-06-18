@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\SocialMediaLink\SiteEnum;
+use App\Enums\SocialMediaLinks\SiteEnum;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

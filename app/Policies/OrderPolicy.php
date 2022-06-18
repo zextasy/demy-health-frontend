@@ -18,7 +18,7 @@ class OrderPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class OrderPolicy
      */
     public function view(User $user, Order $order)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class OrderPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class OrderPolicy
      */
     public function update(User $user, Order $order)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class OrderPolicy
      */
     public function delete(User $user, Order $order)
     {
-        //
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class OrderPolicy
      */
     public function restore(User $user, Order $order)
     {
-        //
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,6 @@ class OrderPolicy
      */
     public function forceDelete(User $user, Order $order)
     {
-        //
+        return $user->isFilamentAdmin();
     }
 }

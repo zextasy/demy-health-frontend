@@ -8,7 +8,7 @@ use App\Models\TestBooking;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
-use App\Enums\TestBooking\LocationTypeEnum;
+use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
 use App\Filament\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
@@ -43,9 +43,9 @@ class TestBookingResource extends Resource
                         ->maxLength(255),
                     Forms\Components\BelongsToSelect::make('testType')
                         ->relationship('testType', 'description')
-                        ->required(),
+                        ->disabled(),
                     Forms\Components\Select::make('status')
-                        ->required(),
+                        ->disabled(),
                 ])->columns(1),
                 Forms\Components\Fieldset::make('Customer Details')->schema([
                     Forms\Components\TextInput::make('customer_email')
@@ -114,7 +114,7 @@ class TestBookingResource extends Resource
             'index' => Pages\ListTestBookings::route('/'),
             //            'create' => Pages\CreateTestBooking::route('/create'),
             'view' => Pages\ViewTestBooking::route('/{record}'),
-            //            'edit' => Pages\EditTestBooking::route('/{record}/edit'),
+                        'edit' => Pages\EditTestBooking::route('/{record}/edit'),
         ];
     }
 

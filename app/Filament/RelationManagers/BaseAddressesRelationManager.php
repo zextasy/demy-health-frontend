@@ -15,6 +15,16 @@ class BaseAddressesRelationManager extends MorphToManyRelationManager
 
     protected static ?string $recordTitleAttribute = 'line_1';
 
+    protected function canCreate(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canAttach(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

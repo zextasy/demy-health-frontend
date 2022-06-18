@@ -10,11 +10,15 @@ class OrderItem extends BaseModel
     use HasFactory;
 
     //region CONFIG
-
+    protected $appends = ['total_amount'];
+    protected $casts = ['price' => 'float'];
     //endregion
 
     //region ATTRIBUTES
-
+    public function getTotalAmountAttribute(): float
+    {
+        return $this->price * $this->quantity;
+    }
     //endregion
 
     //region HELPERS

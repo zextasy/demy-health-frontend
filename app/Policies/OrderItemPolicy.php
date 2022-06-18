@@ -18,7 +18,7 @@ class OrderItemPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class OrderItemPolicy
      */
     public function view(User $user, OrderItem $orderItem)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class OrderItemPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class OrderItemPolicy
      */
     public function update(User $user, OrderItem $orderItem)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class OrderItemPolicy
      */
     public function delete(User $user, OrderItem $orderItem)
     {
-        //
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class OrderItemPolicy
      */
     public function restore(User $user, OrderItem $orderItem)
     {
-        //
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,6 @@ class OrderItemPolicy
      */
     public function forceDelete(User $user, OrderItem $orderItem)
     {
-        //
+        return $user->isFilamentAdmin();
     }
 }

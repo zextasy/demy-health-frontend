@@ -25,10 +25,10 @@ class Product extends BaseModel implements HasMedia, OrderableItemContract
     }
     protected $dates = ['created_at', 'updated_at'];
     protected $guarded = ['id'];
-
     protected $casts = [
         'extra_information' => 'array',
         'should_call_in_for_details' => 'boolean',
+        'price' => 'float',
     ];
     //endregion
 

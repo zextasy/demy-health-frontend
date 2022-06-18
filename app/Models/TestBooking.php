@@ -8,7 +8,7 @@ use App\Contracts\AddressableContract;
 use App\Contracts\OrderableItemContract;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\MorphsAddresses;
-use App\Enums\TestBooking\LocationTypeEnum;
+use App\Enums\TestBookings\LocationTypeEnum;
 use App\Traits\Relationships\MorphsOrderItems;
 use App\Filament\Resources\TestBookingResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
