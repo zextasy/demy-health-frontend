@@ -6,6 +6,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\CustomerOrderNotification;
+use App\Notifications\CustomerTestResultNotification;
 use App\Notifications\CustomerTestBookingNotification;
 use App\Notifications\CustomerCommunicationReceiptConfirmation;
 
@@ -16,6 +17,7 @@ class SendCustomerCommunicationSubscriber implements ShouldQueue
     const SEND_ENQUIRY_EMAIL_CONFIRMATION_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationSubscriber@sendCustomerCommunicationConfirmationEmail';
     const SEND_TEST_BOOKING_EMAIL_CONFIRMATION_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationSubscriber@sendCustomerTestBookingConfirmationEmail';
     const SEND_ORDER_EMAIL_CONFIRMATION_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationSubscriber@sendCustomerOrderNotificationEmail';
+    const SEND_TEST_RESULT_EMAIL_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationSubscriber@sendCustomerTestResultNotificationEmail';
 
     /**
      * Create the event listener.
@@ -51,31 +53,24 @@ class SendCustomerCommunicationSubscriber implements ShouldQueue
             ->notify(new CustomerOrderNotification($event->order));
     }
 
+    public function sendCustomerTestResultNotificationEmail($event)
+    {
+        Notification::route('mail', $event->testResult->customer_email)
+            ->notify(new CustomerTestResultNotification($event->testResult));
+    }
+
     public function subscribe($events)
     {
-        $events->listen(
-            'App\Events\ContactUsFormSubmittedEvent',
-            self::SEND_ENQUIRY_EMAIL_CONFIRMATION_FUNCTION
-        );
+        $events->listen('App\Events\ContactUsFormSubmittedEvent', self::SEND_ENQUIRY_EMAIL_CONFIRMATION_FUNCTION);
 
-        $events->listen(
-            'App\Events\GetAQuoteFormSubmittedEvent',
-            self::SEND_ENQUIRY_EMAIL_CONFIRMATION_FUNCTION
-        );
+        $events->listen('App\Events\GetAQuoteFormSubmittedEvent', self::SEND_ENQUIRY_EMAIL_CONFIRMATION_FUNCTION);
 
-        $events->listen(
-            'App\Events\GetInTouchFormSubmittedEvent',
-            self::SEND_ENQUIRY_EMAIL_CONFIRMATION_FUNCTION
-        );
+        $events->listen('App\Events\GetInTouchFormSubmittedEvent', self::SEND_ENQUIRY_EMAIL_CONFIRMATION_FUNCTION);
 
-        $events->listen(
-            'App\Events\TestBookedEvent',
-            self::SEND_TEST_BOOKING_EMAIL_CONFIRMATION_FUNCTION
-        );
+        $events->listen('App\Events\TestBookedEvent', self::SEND_TEST_BOOKING_EMAIL_CONFIRMATION_FUNCTION);
 
-        $events->listen(
-            'App\Events\CartCheckedOutEvent',
-            self::SEND_ORDER_EMAIL_CONFIRMATION_FUNCTION
-        );
+        $events->listen('App\Events\CartCheckedOutEvent', self::SEND_ORDER_EMAIL_CONFIRMATION_FUNCTION);
+
+        $events->listen('App\Events\NewTestResultAddedEvent',self::SEND_TEST_RESULT_EMAIL_FUNCTION);
     }
 }

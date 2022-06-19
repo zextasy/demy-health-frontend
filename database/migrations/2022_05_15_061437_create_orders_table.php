@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamp('received_at')->nullable();
             $table->timestamp('rejected_at')->nullable();
             $table->timestamp('cancelled_at')->nullable();
-            $table->foreignId('cancelled_by')->constrained('users');
+            $table->foreignId('cancelled_by')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

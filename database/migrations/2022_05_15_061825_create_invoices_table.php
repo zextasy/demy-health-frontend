@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->timestamp('credit_approved_at')->nullable();
             $table->foreignId('credit_approved_by')->constrained('users');
             $table->timestamp('cancelled_at')->nullable();
-            $table->foreignId('cancelled_by')->constrained('users');
+            $table->foreignId('cancelled_by')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -39,8 +39,8 @@ class TestBookingResource extends Resource
             ->schema([
                 Forms\Components\Fieldset::make('General Info')->schema([
                     Forms\Components\TextInput::make('reference')
-                        ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->helperText('Leave this blank and the system will generate one for you'),
                     Forms\Components\BelongsToSelect::make('testType')
                         ->relationship('testType', 'description')
                         ->disabled(),
@@ -54,7 +54,8 @@ class TestBookingResource extends Resource
                         ->maxLength(255),
                     Forms\Components\BelongsToSelect::make('user')
                         ->relationship('user', 'name')
-                        ->placeholder(''),
+                        ->placeholder('')
+                        ->disabled()->dehydrated(false),
                 ]),
                 Forms\Components\Fieldset::make('Schedule')->schema([
                     Forms\Components\DateTimePicker::make('due_date')
@@ -105,6 +106,7 @@ class TestBookingResource extends Resource
     {
         return [
             RelationManagers\AddressesRelationManager::class,
+            RelationManagers\TestResultsRelationManager::class,
         ];
     }
 
@@ -114,7 +116,7 @@ class TestBookingResource extends Resource
             'index' => Pages\ListTestBookings::route('/'),
             //            'create' => Pages\CreateTestBooking::route('/create'),
             'view' => Pages\ViewTestBooking::route('/{record}'),
-                        'edit' => Pages\EditTestBooking::route('/{record}/edit'),
+//            'edit' => Pages\EditTestBooking::route('/{record}/edit'), //TODO enable editing when the issue with the user relationship is set
         ];
     }
 

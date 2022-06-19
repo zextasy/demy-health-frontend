@@ -11,12 +11,14 @@ use App\Traits\Relationships\MorphsAddresses;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Traits\Relationships\MorphsOrderItems;
 use App\Filament\Resources\TestBookingResource;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TestBooking extends BaseModel implements OrderableItemContract, AddressableContract
 {
-    use HasFactory, MorphsAddresses, MorphsOrderItems, GeneratesReference;
+    use HasFactory, MorphsAddresses, MorphsOrderItems, GeneratesReference, ReferencesUsersViaEmail;
 
     //region CONFIG
     protected $dates = ['created_at', 'updated_at','due_date'];
@@ -99,11 +101,6 @@ class TestBooking extends BaseModel implements OrderableItemContract, Addressabl
         return $this->belongsTo(TestType::class);
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class,'customer_email','email');
-    }
-
     public function testCenter(): BelongsTo
     {
         return $this->belongsTo(TestCenter::class);
@@ -113,6 +110,11 @@ class TestBooking extends BaseModel implements OrderableItemContract, Addressabl
     //    {
     //        return $this->hasMany();
     //    }
+
+    public function testResults(): HasOne
+    {
+        return $this->hasOne(TestResult::class);
+    }
 
     public function paymentRecordedBy(): BelongsTo
     {

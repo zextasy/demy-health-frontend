@@ -1,22 +1,22 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Policies;
 
+use App\Models\TestResult;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use {{ namespacedModel }};
-use {{ namespacedUserModel }};
 
-class {{ class }}
+class TestResultPolicy
 {
     use HandlesAuthorization;
 
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \{{ namespacedUserModel }}  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny({{ user }} $user)
+    public function viewAny(User $user)
     {
         return true;
     }
@@ -24,11 +24,11 @@ class {{ class }}
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \{{ namespacedUserModel }}  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\TestResult  $testResult
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function view(User $user, TestResult $testResult)
     {
         return true;
     }
@@ -36,10 +36,10 @@ class {{ class }}
     /**
      * Determine whether the user can create models.
      *
-     * @param  \{{ namespacedUserModel }}  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create({{ user }} $user)
+    public function create(User $user)
     {
         return true;
     }
@@ -47,11 +47,11 @@ class {{ class }}
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \{{ namespacedUserModel }}  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\TestResult  $testResult
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function update(User $user, TestResult $testResult)
     {
         return true;
     }
@@ -59,11 +59,11 @@ class {{ class }}
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \{{ namespacedUserModel }}  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\TestResult  $testResult
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function delete(User $user, TestResult $testResult)
     {
         return true;
     }
@@ -71,11 +71,11 @@ class {{ class }}
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \{{ namespacedUserModel }}  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\TestResult  $testResult
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function restore(User $user, TestResult $testResult)
     {
         return true;
     }
@@ -83,11 +83,11 @@ class {{ class }}
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \{{ namespacedUserModel }}  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\TestResult  $testResult
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function forceDelete(User $user, TestResult $testResult)
     {
         return true;
     }

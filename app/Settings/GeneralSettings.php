@@ -9,6 +9,7 @@ class GeneralSettings extends Settings
     public string $site_name;
     public string $default_prefix;
     public string $test_booking_prefix;
+    public string $test_result_prefix;
     public string $specimen_sample_prefix;
     public string $product_sku_prefix;
     public string $order_prefix;
