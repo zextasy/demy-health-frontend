@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Enums\CRM\CustomerEnquiry\EnquiryTypeEnum;
+use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 
 class CreateCustomerEnquiriesTable extends Migration
 {
@@ -26,6 +26,7 @@ class CreateCustomerEnquiriesTable extends Migration
             $table->foreignId('latest_action_by')->nullable()->constrained('users', 'id');
             $table->timestamp('resolved_at')->nullable();
             $table->foreignId('resolved_by')->nullable()->constrained('users', 'id');
+            $table->string('resolution_notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

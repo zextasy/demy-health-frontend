@@ -4,13 +4,11 @@ namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
 use App\Models\TestType;
-use App\Models\TestBooking;
-use App\Helpers\ModelHelper;
 use App\Helpers\FlashMessageHelper;
 use Illuminate\Contracts\View\View;
 use App\Events\TestAddedToCartEvent;
 use Illuminate\Contracts\View\Factory;
-use App\Enums\TestBooking\LocationTypeEnum;
+use App\Enums\TestBookings\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Http\Requests\StoreTestBookingRequest;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -63,10 +61,10 @@ class BookATest extends Component
 
     public function submit()
     {
-        try{
+        try {
             $this->validate();
 
-            $selectedState = match (LocationTypeEnum::from($this->locationType)){
+            $selectedState = match (LocationTypeEnum::from($this->locationType)) {
                 LocationTypeEnum::CENTER => $this->selectedStateForTestCenterBooking,
                 LocationTypeEnum::HOME => $this->selectedStateForHomeBooking,
             };
@@ -74,7 +72,7 @@ class BookATest extends Component
             $testType = TestType::find($this->selectedTestType);
 
             Cart::add(array(
-                'id' => 'Test Booking - '. $testType->test_id,
+                'id' => 'Test Booking - ' . $testType->test_id,
                 'name' => $testType->description,
                 'price' => $testType->price,
                 'quantity' => 1,
@@ -95,7 +93,8 @@ class BookATest extends Component
             TestAddedToCartEvent::dispatch();
 
             $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');
-        } catch(\Exception $e){
+        }
+        catch (\Exception $e) {
             $this->alert('error', FlashMessageHelper::GENERAL_ERROR);
         }
 

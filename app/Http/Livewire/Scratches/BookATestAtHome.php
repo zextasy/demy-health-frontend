@@ -12,7 +12,7 @@ use App\Models\TestBooking;
 use App\Models\TestCategory;
 use App\Models\LocalGovernmentArea;
 use App\Helpers\FlashMessageHelper;
-use App\Enums\TestBooking\LocationTypeEnum;
+use App\Enums\TestBookings\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BookATestAtHome extends Component

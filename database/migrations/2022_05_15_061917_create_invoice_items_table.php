@@ -22,6 +22,7 @@ return new class extends Migration
             $table->json('attributes')->nullable();
             $table->morphs('invoiceable_item');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

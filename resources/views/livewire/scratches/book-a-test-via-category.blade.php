@@ -1,9 +1,9 @@
 <form wire:submit.prevent="submit" class="mbr-form form-with-styler" data-form-title="Form Name">
     @csrf
     <div class="col-12 form-group mb-3" data-for="email">
-        <input type="radio" id="html" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::HOME->value}}">
+        <input type="radio" id="html" wire:model="locationType" value="{{\App\Enums\TestBookings\LocationTypeEnum::HOME->value}}">
         <label for="html">Home sample collection</label><br>
-        <input type="radio" id="css" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::CENTER->value}}">
+        <input type="radio" id="css" wire:model="locationType" value="{{\App\Enums\TestBookings\LocationTypeEnum::CENTER->value}}">
         <label for="css">Take the Test at a center</label><br>
         @error('locationType') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
@@ -11,7 +11,7 @@
         <input type="text" wire:model="customerEmail" class="form-control" placeholder="Please enter your email">
         @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
-    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::HOME->value)
+    @if ($locationType == \App\Enums\TestBookings\LocationTypeEnum::HOME->value)
         <div class="col-12 form-group mb-3" data-for="textarea">
             <select wire:model="selectedState" class="form-control">
                 <option value="" selected>Choose State</option>
@@ -44,7 +44,7 @@
             @error('address') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
-    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::CENTER->value)
+    @if ($locationType == \App\Enums\TestBookings\LocationTypeEnum::CENTER->value)
         <div class="col-12 form-group mb-3" data-for="select">
             <select wire:model="testCenter" class="form-control">
                 <option value="" selected>Choose Center</option>

@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->json('attributes')->nullable();
             $table->morphs('orderable_item');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

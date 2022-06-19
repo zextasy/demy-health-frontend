@@ -5,13 +5,13 @@
         @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-12 form-group mb-3" data-for="radio">
-        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::HOME->value}}">
+        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBookings\LocationTypeEnum::HOME->value}}">
         <label for="html">Home sample collection</label><br>
-        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBooking\LocationTypeEnum::CENTER->value}}">
+        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBookings\LocationTypeEnum::CENTER->value}}">
         <label for="css">Take the Test at a center</label><br>
         @error('locationType') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
-    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::HOME->value)
+    @if ($locationType == \App\Enums\TestBookings\LocationTypeEnum::HOME->value)
         <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.state-select
                 name="selectedStateForHomeBooking"
@@ -44,7 +44,7 @@
             @error('addressLine2') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
-    @if ($locationType == \App\Enums\TestBooking\LocationTypeEnum::CENTER->value)
+    @if ($locationType == \App\Enums\TestBookings\LocationTypeEnum::CENTER->value)
         <div class="col-12 form-group mb-3" data-for="select">
             <livewire:forms.select.livewire-select.state-select
                 name="selectedStateForTestCenterBooking"

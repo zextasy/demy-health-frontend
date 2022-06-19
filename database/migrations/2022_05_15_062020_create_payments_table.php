@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\Finance\Payment\PaymentTypeEnum;
+use App\Enums\Finance\Payments\PaymentMethodEnum;
 
 return new class extends Migration
 {
@@ -18,9 +18,11 @@ return new class extends Migration
             $table->id();
             $table->string('reference')->unique();
             $table->unsignedDecimal('amount',12);
-            $table->unsignedSmallInteger('type')->default(PaymentTypeEnum::OTHER->value);
+            $table->unsignedSmallInteger('type')->default(PaymentMethodEnum::OTHER->value);
             $table->morphs('payable');
+            $table->nullableMorphs('payer');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
