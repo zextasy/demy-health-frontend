@@ -44,7 +44,9 @@
                 <div class="total-value final-value" id="basket-total">{{number_format($cartTotal)}}</div>
             </div>
             <div class="summary-checkout">
-                <button class="checkout-cta"  wire:click="checkoutCart">Checkout</button>
+                @if($canCheckOut)
+                    <button class="checkout-cta"  wire:click="checkoutCart">Checkout</button>
+                @endif
                 <br>
                 <button class="checkout-cta btn-danger"  wire:click="proceedToCheckout">Cancel</button>
             </div>

@@ -10,7 +10,7 @@ use App\Events\OrderCreatedEvent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use App\Contracts\OrderableContract;
-use App\Enums\TestBooking\LocationTypeEnum;
+use App\Enums\TestBookings\LocationTypeEnum;
 use App\Actions\Addresses\CreateAddressAction;
 use App\Actions\OrderItems\CreateOrderItemAction;
 use App\Actions\Addresses\AttachAddressableAction;

@@ -27,8 +27,8 @@ class InternalOrderNotification extends Notification
     public function __construct(Order $order)
     {
         $this->order = $order;
-        $this->message = "An order was booked by a customer, reference: {$order->reference} email: {$order->customer_email} on {$order->created_at}";
-        $this->subject = 'An order has been booked';
+        $this->message = "An order was made by a customer, reference: {$order->reference} email: {$order->customer_email} on {$order->created_at->toDayDateTimeString()}";
+        $this->subject = 'An order has been made';
         $this->orderUrl = $order->filament_url;
     }
 

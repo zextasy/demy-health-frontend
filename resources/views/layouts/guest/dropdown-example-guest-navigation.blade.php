@@ -27,7 +27,7 @@
                         <x-slot name="children">
                             <a href="{{route('services.all-services')}}">All Services</a>
                             <span class="separator"></span>
-                            <a href="{{route('services.lab-tests')}}">Lab Tests</a>
+                            <a href="{{route('services.lab-orders')}}">Lab Tests</a>
                             <span class="separator"></span>
                             <a href="{{route('services.revolutionary-panel-testing')}}">Revolutionary Panel Testing</a>
                             <span class="separator"></span>
@@ -101,7 +101,7 @@
                 <x-slot name="children">
                     <a href="{{route('services.all-services')}}">All Services</a>
                     <span class="separator"></span>
-                    <a href="{{route('services.lab-tests')}}">Lab Tests</a>
+                    <a href="{{route('services.lab-orders')}}">Lab Tests</a>
                     <span class="separator"></span>
                     <a href="{{route('services.revolutionary-panel-testing')}}">Revolutionary Panel Testing</a>
                     <span class="separator"></span>

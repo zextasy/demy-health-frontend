@@ -8,6 +8,7 @@ use App\Helpers\FlashMessageHelper;
 use Illuminate\Contracts\View\View;
 use App\Events\TestAddedToCartEvent;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Session;
 use App\Enums\TestBookings\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Http\Requests\StoreTestBookingRequest;
@@ -90,6 +91,7 @@ class BookATest extends Component
                     'selectedLocalGovernmentArea' => $this->selectedLocalGovernmentArea,
                 ),
             ));
+            Session::put('customerEmail', $this->customerEmail);
             TestAddedToCartEvent::dispatch();
 
             $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');

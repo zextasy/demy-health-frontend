@@ -43,6 +43,7 @@ class StoreTestBookingRequest extends FormRequest
     {
         return [
             'locationType.required' => 'Please choose a location type',
+            'customerEmail.email' => 'Please enter a valid email',
             'selectedTestCenter.required_if' => 'Please choose a center',
             'selectedState.required_if' => 'Please choose a state',
             'selectedLocalGovernmentArea.required_if' => 'Please choose a local government area',

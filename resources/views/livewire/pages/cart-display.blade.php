@@ -32,15 +32,15 @@
                 </div>
             </div>
             <div class="summary-delivery">
-                <label for="payment_method">Choose Payment Method</label>
-                <select wire:model="paymentMethod" name="payment_method" class="summary-delivery-selection">
+                <label for="payment-method">Choose Payment Method</label>
+                <select wire:model="paymentMethod" id="payment-method" class="summary-delivery-selection">
                     <option value="0" selected="selected">Select Payment Option</option>
-                    <option value="collection">Book and Pay later</option>
+                    <option value="{{\App\Enums\Finance\Payments\PaymentMethodEnum::OTHER->value}}">Book and Pay later</option>
                 </select>
             </div>
             <div class="summary-delivery">
-                <label for="payment_method">Customer email</label>
-                <input wire:model="customerEmail" id="customer-email" type="text" name="customer_email" required>
+                <label for="customer-email">Customer email</label>
+                <input wire:model="customerEmail" id="customer-email" type="text" required>
                 @error('customerEmail') <span class="alert-danger">{{ $message }}</span> @enderror
             </div>
             <div class="summary-total">

@@ -13,9 +13,6 @@ class CustomerOrderNotification extends Notification
 
     private Order $order;
     private string $subject;
-    private string $messageLine1;
-    private string $messageLine2;
-    private string $messageLine3;
 
     /**
      * Create a new notification instance.
@@ -25,9 +22,6 @@ class CustomerOrderNotification extends Notification
     {
         $this->order = $order;
         $this->subject = 'Your order has been received';
-        $this->messageLine1 = "You have successfully placed order na order with us  on {$order->created_at}. ";
-        $this->messageLine2 = "Your booking reference is {$order->reference}. Please keep this number safe. It will be used to retrieve your booking information";
-        $this->messageLine3 = "Your summary is below";
     }
 
     /**
@@ -53,11 +47,7 @@ class CustomerOrderNotification extends Notification
     {
         return (new MailMessage)
             ->subject($this->subject)
-            ->line($this->messageLine1)
-            ->line($this->messageLine2)
-            ->line($this->messageLine3)
-            ->line('If you have registered on our site with this email, you can log in and view the details')
-            ->line('Thank you for Choosing DemyHealth!');
+            ->view('emails.orders.placed', ['order' => $this->order]);
     }
 
     /**

@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Pages;
 use Livewire\Component;
 use Illuminate\Support\Collection;
 use App\Helpers\FlashMessageHelper;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CheckoutCartRequest;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use App\Enums\Finance\Payments\PaymentMethodEnum;
 
 class CartDisplay extends Component
 {
@@ -16,8 +18,8 @@ class CartDisplay extends Component
     public Collection $cartItems;
     public float $cartTotal;
     public $cartSubTotal;
-    public string $paymentMethod = ""; //TODO use PAYMENTOPTIONSENUM
-    public string $customerEmail = "";
+    public int $paymentMethod;
+    public ?string $customerEmail = null;
 
     protected $listeners = [
         'cartItemDeleted' => 'removeItem',
@@ -33,6 +35,8 @@ class CartDisplay extends Component
     {
         $this->updateCartTotals();
         $this->cartItems = Cart::getContent();
+        $this->customerEmail = $this->getCustomerEmail();
+        $this->paymentMethod = PaymentMethodEnum::OTHER->value;
     }
 
     public function updateCartTotals()
@@ -57,5 +61,14 @@ class CartDisplay extends Component
     {
         $this->validate();
         $this->flash('success', FlashMessageHelper::BLANK, [], route('frontend.cart.checkout',['customer_email' => $this->customerEmail]));
+    }
+
+    private function getCustomerEmail(): string
+    {
+        if (auth()->user()){
+        return auth()->user()->email;
+        }
+
+        return Session::get('customerEmail') ?? "";
     }
 }
