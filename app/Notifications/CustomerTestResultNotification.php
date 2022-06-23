@@ -45,7 +45,6 @@ class CustomerTestResultNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        ray($this->testResult,$this->testResult->media, $this->testResult->media());
         return (new MailMessage)
             ->subject($this->subject)
             ->attach($this->testResult->media()->latest()->first()->getPath())

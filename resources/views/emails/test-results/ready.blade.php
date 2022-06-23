@@ -2,6 +2,7 @@
 <x-email-layout>
     <x-email.h1>Hello!</x-email.h1>
     <x-email.p>Your test results for booking ref: {{$result->testBooking->reference}} has been generated  on {{$result->created_at->toDayDateTimeString()}}.</x-email.p>
+    <x-email.p>Please see the attached file for more details</x-email.p>
     <x-email.p>Your result reference is {{$result->reference}}. Please keep this number safe. It will be used to retrieve your result information</x-email.p>
 {{--    <x-email.p>Your summary is below</x-email.p>--}}
 {{--    <br>--}}

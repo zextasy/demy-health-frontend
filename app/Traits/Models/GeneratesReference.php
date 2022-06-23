@@ -14,7 +14,7 @@ trait GeneratesReference
             $prefix = $config['reference_prefix'];
             $key = $config['reference_key'];
             if (empty($model->reference)) {
-                $nextId = (new ModelHelper)->getNextId($model->getTable());
+                $nextId = (new ModelHelper)->getNextId($model);
                 $padding = str_pad($nextId, 9, "0", STR_PAD_LEFT);
                 $model->$key = $model->reference ?? $prefix . $padding;
             }
