@@ -48,7 +48,6 @@ class ProductResource extends Resource
                 Forms\Components\Fieldset::make('Pricing')->schema([
                     Forms\Components\Toggle::make('should_call_in_for_details')
                         ->required(),
-                    Forms\Components\TextInput::make('price'),
                 ]),
                 Forms\Components\Fieldset::make('Extra Info')->schema([
                     Forms\Components\KeyValue::make('extra_information'),
@@ -78,6 +77,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\PricesRelationManager::class,
             RelationManagers\CategoriesRelationManager::class,
         ];
     }

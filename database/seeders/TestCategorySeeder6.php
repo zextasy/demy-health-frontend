@@ -27,10 +27,10 @@ class TestCategorySeeder6 extends Seeder
         $test->description = 'NEISSERIA GONORRHEA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 15000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeSW);
+        $test->setPrice(15000);
         $test->specimenTypes()->save($specimenTypeUrine);
 
         $test = new TestType;
@@ -38,20 +38,20 @@ class TestCategorySeeder6 extends Seeder
         $test->description = 'TRICHOMONAS VAGINALIS DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 10000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeSW);
+        $test->setPrice(10000);
 
         $test = new TestType;
         $test->test_id = 'GTL 063';
         $test->description = 'CHLAMYDIA TRACHOMATIS DNA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 19000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeSW);
+        $test->setPrice(19000);
         $test->specimenTypes()->save($specimenTypeUrine);
 
         $test = new TestType;
@@ -59,20 +59,20 @@ class TestCategorySeeder6 extends Seeder
         $test->description = 'HERPES SIMPLEX VIRUS 1& 2 DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 14000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(14000);
 
         $test = new TestType;
         $test->test_id = 'GTL 065';
         $test->description = 'HERPES SIMPLEX VIRUS 1 & 2 QUANTITATION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 18000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(18000);
 
         $testCategory = TestCategory::create(['name' => 'SEXUALLY TRANSMITTED INFECTIONS (STI) BY PCR METHOD (MULTIPLEX ASSAYS)']);
 
@@ -81,10 +81,10 @@ class TestCategorySeeder6 extends Seeder
         $test->description = 'N.GONOR./С.TRACHOMATIS/T.VAGINALIS/M.GENITALIUM';
         $test->minimum_tat = 1;
         $test->maximum_tat = 2;
-        $test->price = 20000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeSW);
+        $test->setPrice(20000);
         $test->specimenTypes()->save($specimenTypeUrine);
 
         $testCategory = TestCategory::create(['name' => 'INFECTIONS BY PCR METHOD']);
@@ -94,69 +94,69 @@ class TestCategorySeeder6 extends Seeder
         $test->description = 'MYCOBACTERIUM DNA DETECTION';
         $test->minimum_tat = 5;
         $test->maximum_tat = 7;
-        $test->price = 15000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(15000);
 
         $test = new TestType;
         $test->test_id = 'GTL 068';
         $test->description = 'SALMONELLA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 15000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(15000);
 
         $test = new TestType;
         $test->test_id = 'GTL 069';
         $test->description = 'CMV DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 15000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(15000);
 
         $test = new TestType;
         $test->test_id = 'GTL 070';
         $test->description = 'CYTOMEGALOVIRUS QUANTIFICATION PCR';
         $test->minimum_tat = 4;
         $test->maximum_tat = 5;
-        $test->price = 30000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(30000);
 
         $test = new TestType;
         $test->test_id = 'GTL 071';
         $test->description = 'EPSTEIN-BARR VIRUS (EBV) DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 15000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(15000);
 
         $test = new TestType;
         $test->test_id = 'GTL 072';
         $test->description = 'RUBELLA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 15000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(15000);
 
         $test = new TestType;
         $test->test_id = 'GTL 073';
         $test->description = 'TOXOPLASMA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
-        $test->price = 15000;
         $test->test_category_id = $testCategory->id;
         $test->save();
         $test->specimenTypes()->save($specimenTypeP);
+        $test->setPrice(15000);
     }
 }

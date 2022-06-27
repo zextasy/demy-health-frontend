@@ -38,9 +38,6 @@ class TestTypeResource extends Resource
                 Fieldset::make('Pricing')->schema([
                     Forms\Components\Toggle::make('should_call_in_for_details')
                         ->required(),
-                    Forms\Components\TextInput::make('price')
-                        ->numeric()
-                        ->required(),
                 ]),
                 Fieldset::make('Turn around time')
                     ->schema([
@@ -92,6 +89,7 @@ class TestTypeResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\PricesRelationManager::class,
             RelationManagers\TestBookingsRelationManager::class,
             RelationManagers\SpecimenTypesRelationManager::class,
         ];

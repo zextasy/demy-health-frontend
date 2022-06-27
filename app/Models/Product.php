@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Helpers\HerokuHelper;
+use App\Traits\Models\HasPrices;
 use Spatie\MediaLibrary\HasMedia;
 use App\Settings\GeneralSettings;
 use App\Contracts\OrderableItemContract;
 use App\Traits\Models\GeneratesReference;
+use App\Traits\Relationships\MorphsPrices;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Traits\Relationships\MorphsOrderItems;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends BaseModel implements HasMedia, OrderableItemContract
 {
-    use HasFactory, InteractsWithMedia, MorphsOrderItems, GeneratesReference;
+    use HasFactory, InteractsWithMedia, MorphsOrderItems, GeneratesReference, MorphsPrices;
     //region CONFIG
     public function referenceConfig(): array
     {
@@ -28,19 +30,11 @@ class Product extends BaseModel implements HasMedia, OrderableItemContract
     protected $casts = [
         'extra_information' => 'array',
         'should_call_in_for_details' => 'boolean',
-        'price' => 'float',
     ];
+//    protected $with = ['prices','currentPrice'];
     //endregion
 
     //region ATTRIBUTES
-    public function getformattedPriceAttribute($value)
-    {
-        if ($this->should_call_in_for_details){
-            return "Call In";
-        }
-
-        return number_format($this->price);
-    }
 
     public function getLatestPictureUrlAttribute() : string
     {

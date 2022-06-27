@@ -40,9 +40,9 @@ class TestCategorySeeder9 extends Seeder
         $test->description = $description;
         $test->minimum_tat = $minTAT;
         $test->maximum_tat = $maxTAT;
-        $test->price = $price;
         $test->test_category_id = $testCategory->id;
         $test->save();
+        $test->setPrice($price);
 
         return $test;
     }

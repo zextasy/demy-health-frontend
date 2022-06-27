@@ -57,9 +57,9 @@ class TestCategorySeeder7 extends Seeder
         $test->minimum_tat = $minTAT;
         $test->maximum_tat = $maxTAT;
         $test->should_call_in_for_details = $callIn;
-        $test->price = $price;
         $test->test_category_id = $testCategory->id;
         $test->save();
+        $test->setPrice($price);
 
         foreach ($specimenTypes as $specimenType){
             $test->specimenTypes()->save($specimenType);
