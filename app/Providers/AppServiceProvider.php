@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\TestResult;
 use App\Models\Finance\Invoice;
+use App\Observers\UserObserver;
 use App\Observers\OrderObserver;
 use App\Observers\ProductObserver;
 use App\Observers\InvoiceObserver;
@@ -39,5 +41,6 @@ class AppServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
         Order::observe(OrderObserver::class);
         Invoice::observe(InvoiceObserver::class);
+        User::observe(UserObserver::class);
     }
 }

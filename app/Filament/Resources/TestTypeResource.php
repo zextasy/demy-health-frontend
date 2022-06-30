@@ -29,7 +29,8 @@ class TestTypeResource extends Resource
                 Fieldset::make('General Info')->schema([
                     Forms\Components\TextInput::make('test_id')
                         ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->helperText('Internal unique reference for this test type'),
                     Forms\Components\BelongsToSelect::make('test_category_id')
                         ->relationship('category', 'name')
                         ->searchable()
@@ -37,6 +38,7 @@ class TestTypeResource extends Resource
                 ]),
                 Fieldset::make('Pricing')->schema([
                     Forms\Components\Toggle::make('should_call_in_for_details')
+                        ->helperText('If this is selected, customers will not see the price of this item and will be asked to call in instead')
                         ->required(),
                 ]),
                 Fieldset::make('Turn around time')
@@ -52,7 +54,9 @@ class TestTypeResource extends Resource
                         Forms\Components\TextInput::make('tat_hours')
                             ->label('Hours')
                             ->helperText('Please set minimum and maximum days to 0 to display this')
-                            ->numeric(),
+                            ->numeric()
+                            ->required()
+                            ->default(0),
                     ])->columns(3),
                 Fieldset::make('Description')->schema([
                     Forms\Components\Textarea::make('description')
@@ -90,8 +94,8 @@ class TestTypeResource extends Resource
     {
         return [
             RelationManagers\PricesRelationManager::class,
-            RelationManagers\TestBookingsRelationManager::class,
             RelationManagers\SpecimenTypesRelationManager::class,
+            RelationManagers\TestBookingsRelationManager::class,
         ];
     }
 
