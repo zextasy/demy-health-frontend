@@ -59,5 +59,37 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
         $customer->assignRole('customer');
+
+        $admin = User::firstOrCreate([
+            'name' => 'Admin',
+            'email' => 'emeka@demyhealth.com',
+            'password' => bcrypt(self::DefaultPassword),
+            'email_verified_at' => now(),
+        ]);
+        $admin->assignRole('admin');
+
+        $manager = User::firstOrCreate([
+            'name' => 'Manager',
+            'email' => 'c.orji@demyhealth.com',
+            'password' => bcrypt(self::DefaultPassword),
+            'email_verified_at' => now(),
+        ]);
+        $manager->assignRole('manager');
+
+        $manager = User::firstOrCreate([
+            'name' => 'Manager',
+            'email' => 'g.chukwuma@demyhealth.com',
+            'password' => bcrypt(self::DefaultPassword),
+            'email_verified_at' => now(),
+        ]);
+        $manager->assignRole('manager');
+
+        $manager = User::firstOrCreate([
+            'name' => 'Manager',
+            'email' => 'lag@demyhealth.com',
+            'password' => bcrypt(self::DefaultPassword),
+            'email_verified_at' => now(),
+        ]);
+        $manager->assignRole('editor');
     }
 }
