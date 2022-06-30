@@ -49,7 +49,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Add
     //region HELPERS
     public function canAccessFilament(): bool
     {
-        return $this->hasPermissionTo('frontend');
+        return $this->hasAnyPermission(['frontend','backend']);
     }
 
     public function isFilamentAdmin()
