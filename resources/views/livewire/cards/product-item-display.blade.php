@@ -11,7 +11,6 @@
                     <div class="row">
                         <div class="col-md">
                             <h6 class="card-title mbr-fonts-style display-5"><strong>{{$title}}</strong></h6>
-                            <p class="mbr-text mbr-fonts-style display-7">{{$description}}</p>
                         </div>
                         <div class="col-md-auto">
                             <p class="price mbr-fonts-style display-2">{{$displayPrice}}</p>
