@@ -4,6 +4,7 @@ namespace App\Models\Finance;
 
 use App\Models\BaseModel;
 use App\Traits\Models\HasAmounts;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Price extends BaseModel
@@ -34,7 +35,10 @@ class Price extends BaseModel
     //endregion
 
     //region RELATIONSHIPS
-
+    public function priceable(): MorphTo
+    {
+        return $this->morphTo('priceable');
+    }
     //endregion
 
 }

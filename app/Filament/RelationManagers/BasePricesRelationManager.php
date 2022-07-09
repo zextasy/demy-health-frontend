@@ -27,11 +27,7 @@ class BasePricesRelationManager extends MorphManyRelationManager
                     ->required(),
                 Fieldset::make('Pricing')->schema([
                     Forms\Components\DatePicker::make('start_date')
-                        ->withoutTime()
-                        ->required(),
-                    Forms\Components\DatePicker::make('end_date')
-                        ->withoutTime()
-                        ->nullable(),
+                        ->withoutTime(),
                 ]),
             ]);
     }
