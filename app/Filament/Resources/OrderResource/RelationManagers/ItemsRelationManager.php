@@ -4,6 +4,7 @@ namespace App\Filament\Resources\OrderResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
@@ -15,6 +16,16 @@ class ItemsRelationManager extends HasManyRelationManager
     protected static ?string $recordTitleAttribute = 'name';
 
     protected function canCreate(): bool
+    {
+        return false;
+    }
+
+    protected function canEdit(Model $record): bool
+    {
+        return false;
+    }
+
+    protected function canDelete(Model $record): bool
     {
         return false;
     }

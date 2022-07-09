@@ -17,6 +17,16 @@ class BasePricesRelationManager extends MorphManyRelationManager
 
     protected static ?string $title = 'Price History';
 
+    protected function canCreate(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canAttach(): bool
+    {
+        return false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form

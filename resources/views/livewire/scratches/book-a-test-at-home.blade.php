@@ -74,7 +74,7 @@
                 <option value="" selected>Choose Test</option>
 
                 @foreach($testTypes as $testType)
-                    <option value="{{ $testType->id }}">{{ $testType->description }}</option>
+                    <option value="{{ $testType->id }}">{{ $testType->name }}</option>
                 @endforeach
 
             </select>

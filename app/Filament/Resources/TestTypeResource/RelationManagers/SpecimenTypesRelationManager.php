@@ -14,6 +14,16 @@ class SpecimenTypesRelationManager extends BelongsToManyRelationManager
 
     protected static ?string $recordTitleAttribute = 'description';
 
+    protected function canCreate(): bool
+    {
+        return false;
+    }
+
+    protected function canAttach(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

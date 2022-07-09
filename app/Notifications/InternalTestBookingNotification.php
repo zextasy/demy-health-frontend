@@ -28,7 +28,7 @@ class InternalTestBookingNotification extends Notification
     {
         $this->testBooking = $testBooking;
         $testType = $testBooking->testType;
-        $this->message = "{$testType->description} was booked by a customer, reference: {$testBooking->reference} email: {$testBooking->customer_email} on {$testBooking->created_at->toDayDateTimeString()}";
+        $this->message = "{$testType->name} was booked by a customer, reference: {$testBooking->reference} email: {$testBooking->customer_email} on {$testBooking->created_at->toDayDateTimeString()}";
         $this->subject = 'A test has been booked';
         $this->bookingUrl = $testBooking->filament_url;
     }

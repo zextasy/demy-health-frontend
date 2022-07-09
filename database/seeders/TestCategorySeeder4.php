@@ -25,7 +25,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 038';
-        $test->description = 'BRCA PANEL. REAL TIME PCR DETECTION AND ALLELIC DISCRIMINATION OF 8 MUTATIONS OF BRCA 1&2 GENES';
+        $test->name = 'BRCA PANEL. REAL TIME PCR DETECTION AND ALLELIC DISCRIMINATION OF 8 MUTATIONS OF BRCA 1&2 GENES';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -36,7 +36,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 039';
-        $test->description = 'EGFR';
+        $test->name = 'EGFR';
         $test->minimum_tat = 15;
         $test->maximum_tat = 15;
         $test->test_category_id = $testCategory->id;
@@ -46,7 +46,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 040';
-        $test->description = 'BRAF V600E MUTATION';
+        $test->name = 'BRAF V600E MUTATION';
         $test->minimum_tat = 15;
         $test->maximum_tat = 15;
         $test->test_category_id = $testCategory->id;
@@ -56,7 +56,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 041';
-        $test->description = 'K-RAS MUTATION';
+        $test->name = 'K-RAS MUTATION';
         $test->minimum_tat = 15;
         $test->maximum_tat = 15;
         $test->test_category_id = $testCategory->id;
@@ -66,7 +66,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 042';
-        $test->description = 'NRAS';
+        $test->name = 'NRAS';
         $test->minimum_tat = 15;
         $test->maximum_tat = 15;
         $test->test_category_id = $testCategory->id;
@@ -76,7 +76,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 043';
-        $test->description = 'FCGR';
+        $test->name = 'FCGR';
         $test->minimum_tat = 15;
         $test->maximum_tat = 15;
         $test->test_category_id = $testCategory->id;
@@ -86,7 +86,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 044';
-        $test->description = 'PGX-5FU';
+        $test->name = 'PGX-5FU';
         $test->minimum_tat = 15;
         $test->maximum_tat = 15;
         $test->test_category_id = $testCategory->id;
@@ -96,7 +96,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 045';
-        $test->description = 'PGX-TMPT';
+        $test->name = 'PGX-TMPT';
         $test->minimum_tat = 15;
         $test->maximum_tat = 15;
         $test->test_category_id = $testCategory->id;
@@ -108,7 +108,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 046';
-        $test->description = 'CARDIOVASCULAR DISEASE RISK ASSESMENT (DETECTION OF 8 GENETIC VARIANTS)';
+        $test->name = 'CARDIOVASCULAR DISEASE RISK ASSESMENT (DETECTION OF 8 GENETIC VARIANTS)';
         $test->minimum_tat = 7;
         $test->maximum_tat = 7;
         $test->test_category_id = $testCategory->id;
@@ -118,7 +118,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 047';
-        $test->description = 'G-6PD GENE MUTATION DETECTION BY PCR';
+        $test->name = 'G-6PD GENE MUTATION DETECTION BY PCR';
         $test->minimum_tat = 14;
         $test->maximum_tat = 14;
         $test->test_category_id = $testCategory->id;
@@ -128,7 +128,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 048';
-        $test->description = 'HLA B27 QUALITATIVE PCR';
+        $test->name = 'HLA B27 QUALITATIVE PCR';
         $test->minimum_tat = 14;
         $test->maximum_tat = 14;
         $test->test_category_id = $testCategory->id;
@@ -139,7 +139,7 @@ class TestCategorySeeder4 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 049';
-        $test->description = 'Y CHROMOSOME MICRODELETION [BLOOD]';
+        $test->name = 'Y CHROMOSOME MICRODELETION [BLOOD]';
         $test->minimum_tat = 14;
         $test->maximum_tat = 14;
         $test->test_category_id = $testCategory->id;

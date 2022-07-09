@@ -18,7 +18,7 @@ class TestTypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $recordTitleAttribute = 'description';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationGroup = 'Tests';
 
@@ -31,6 +31,10 @@ class TestTypeResource extends Resource
                         ->required()
                         ->maxLength(255)
                         ->helperText('Internal unique reference for this test type'),
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255)
+                        ->helperText('Internal unique name for this test type'),
                     Forms\Components\BelongsToSelect::make('test_category_id')
                         ->relationship('category', 'name')
                         ->searchable()
@@ -60,7 +64,6 @@ class TestTypeResource extends Resource
                     ])->columns(3),
                 Fieldset::make('Description')->schema([
                     Forms\Components\Textarea::make('description')
-                        ->required()
                         ->maxLength(65535),
                 ])->columns(1),
 
@@ -72,7 +75,7 @@ class TestTypeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('test_id')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('description')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('formatted_price')->label('Price')->sortable(),
                 Tables\Columns\TextColumn::make('category.name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('tat')->sortable(),

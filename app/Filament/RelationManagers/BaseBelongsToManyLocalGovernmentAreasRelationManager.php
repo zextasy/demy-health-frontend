@@ -16,6 +16,16 @@ class BaseBelongsToManyLocalGovernmentAreasRelationManager extends BelongsToMany
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected function canCreate(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canAttach(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

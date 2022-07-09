@@ -24,7 +24,7 @@ class TestCategorySeeder9 extends Seeder
 
         $test = new TestType;
         $test->test_id = '';
-        $test->description = '';
+        $test->name = '';
         $test->minimum_tat = 0;
         $test->maximum_tat = 0;
         $test->price = 0.0;
@@ -37,7 +37,7 @@ class TestCategorySeeder9 extends Seeder
     {
         $test = new TestType;
         $test->test_id = $testId;
-        $test->description = $description;
+        $test->name = $description;
         $test->minimum_tat = $minTAT;
         $test->maximum_tat = $maxTAT;
         $test->test_category_id = $testCategory->id;

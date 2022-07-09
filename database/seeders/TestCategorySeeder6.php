@@ -24,7 +24,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 061';
-        $test->description = 'NEISSERIA GONORRHEA DETECTION';
+        $test->name = 'NEISSERIA GONORRHEA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -35,7 +35,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 062';
-        $test->description = 'TRICHOMONAS VAGINALIS DETECTION';
+        $test->name = 'TRICHOMONAS VAGINALIS DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -45,7 +45,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 063';
-        $test->description = 'CHLAMYDIA TRACHOMATIS DNA DETECTION';
+        $test->name = 'CHLAMYDIA TRACHOMATIS DNA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -56,7 +56,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 064';
-        $test->description = 'HERPES SIMPLEX VIRUS 1& 2 DETECTION';
+        $test->name = 'HERPES SIMPLEX VIRUS 1& 2 DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -66,7 +66,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 065';
-        $test->description = 'HERPES SIMPLEX VIRUS 1 & 2 QUANTITATION';
+        $test->name = 'HERPES SIMPLEX VIRUS 1 & 2 QUANTITATION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -78,7 +78,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 066';
-        $test->description = 'N.GONOR./С.TRACHOMATIS/T.VAGINALIS/M.GENITALIUM';
+        $test->name = 'N.GONOR./С.TRACHOMATIS/T.VAGINALIS/M.GENITALIUM';
         $test->minimum_tat = 1;
         $test->maximum_tat = 2;
         $test->test_category_id = $testCategory->id;
@@ -91,7 +91,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 067';
-        $test->description = 'MYCOBACTERIUM DNA DETECTION';
+        $test->name = 'MYCOBACTERIUM DNA DETECTION';
         $test->minimum_tat = 5;
         $test->maximum_tat = 7;
         $test->test_category_id = $testCategory->id;
@@ -101,7 +101,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 068';
-        $test->description = 'SALMONELLA DETECTION';
+        $test->name = 'SALMONELLA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -111,7 +111,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 069';
-        $test->description = 'CMV DETECTION';
+        $test->name = 'CMV DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -121,7 +121,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 070';
-        $test->description = 'CYTOMEGALOVIRUS QUANTIFICATION PCR';
+        $test->name = 'CYTOMEGALOVIRUS QUANTIFICATION PCR';
         $test->minimum_tat = 4;
         $test->maximum_tat = 5;
         $test->test_category_id = $testCategory->id;
@@ -131,7 +131,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 071';
-        $test->description = 'EPSTEIN-BARR VIRUS (EBV) DETECTION';
+        $test->name = 'EPSTEIN-BARR VIRUS (EBV) DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -141,7 +141,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 072';
-        $test->description = 'RUBELLA DETECTION';
+        $test->name = 'RUBELLA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -151,7 +151,7 @@ class TestCategorySeeder6 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 073';
-        $test->description = 'TOXOPLASMA DETECTION';
+        $test->name = 'TOXOPLASMA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;

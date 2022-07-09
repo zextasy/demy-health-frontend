@@ -16,12 +16,13 @@ class CreateTestTypesTable extends Migration
         Schema::create('test_types', function (Blueprint $table) {
             $table->id();
             $table->string('test_id')->unique();
+            $table->string('name')->unique();
             $table->foreignId('test_category_id')->constrained();
             $table->boolean('should_call_in_for_details')->default(false);
             $table->integer('minimum_tat');
             $table->integer('maximum_tat');
             $table->integer('tat_hours')->default(0);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -15,6 +15,16 @@ class BaseMorphManyTestBookingsRelationManager extends MorphToManyRelationManage
 
     protected static ?string $recordTitleAttribute = 'reference';
 
+    protected function canCreate(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canAttach(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

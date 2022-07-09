@@ -42,7 +42,7 @@ class TestBookingResource extends Resource
                         ->maxLength(255)
                         ->helperText('Leave this blank and the system will generate one for you'),
                     Forms\Components\BelongsToSelect::make('testType')
-                        ->relationship('testType', 'description')
+                        ->relationship('testType', 'name')
                         ->disabled(),
                     Forms\Components\Select::make('status')
                         ->disabled(),

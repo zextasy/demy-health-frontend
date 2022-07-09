@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\SpecimenTypeResource\RelationManagers;
 
-use App\Filament\RelationManagers\BaseTestTypesRelationManager;
 
-class TestTypesRelationManager extends BaseTestTypesRelationManager
+use App\Filament\RelationManagers\BaseBelongsToManyTestTypesRelationManager;
+
+class TestTypesRelationManager extends BaseBelongsToManyTestTypesRelationManager
 {
 
 }

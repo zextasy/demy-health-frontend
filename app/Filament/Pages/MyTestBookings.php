@@ -31,7 +31,7 @@ class MyTestBookings extends Page implements HasTable
             BadgeColumn::make('status')
                 ->label('Booking status')->sortable(),
             TextColumn::make('reference')->sortable(),
-            TextColumn::make('testType.description')->wrap(),
+            TextColumn::make('testType.name')->wrap(),
             TextColumn::make('due_date')
                 ->label('Booked for')
                 ->date()

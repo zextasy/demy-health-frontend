@@ -74,7 +74,7 @@ class BookATest extends Component
 
             Cart::add(array(
                 'id' => 'Test Booking - ' . $testType->test_id,
-                'name' => $testType->description,
+                'name' => $testType->name,
                 'price' => $testType->price,
                 'quantity' => 1,
                 'attributes' => array(

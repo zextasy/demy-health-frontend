@@ -53,7 +53,7 @@ class TestCategorySeeder7 extends Seeder
     {
         $test = new TestType;
         $test->test_id = $testId;
-        $test->description = $description;
+        $test->name = $description;
         $test->minimum_tat = $minTAT;
         $test->maximum_tat = $maxTAT;
         $test->should_call_in_for_details = $callIn;

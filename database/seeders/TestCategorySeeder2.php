@@ -23,7 +23,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 014';
-        $test->description = 'HIV RNA QUANTITATIVE DETECTION(VIRAL LOAD)';
+        $test->name = 'HIV RNA QUANTITATIVE DETECTION(VIRAL LOAD)';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -33,7 +33,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 015';
-        $test->description = 'HIV RNA DETECTION';
+        $test->name = 'HIV RNA DETECTION';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -43,7 +43,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 016';
-        $test->description = 'HYPERSENSITIVITY REACTION TO ANTIRETROVIRAL DRUG';
+        $test->name = 'HYPERSENSITIVITY REACTION TO ANTIRETROVIRAL DRUG';
         $test->minimum_tat = 14;
         $test->maximum_tat = 14;
         $test->test_category_id = $testCategory->id;
@@ -53,7 +53,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 017';
-        $test->description = 'PNEUMOCYSTIS JIROVECII (CARINII) DETECTION';
+        $test->name = 'PNEUMOCYSTIS JIROVECII (CARINII) DETECTION';
         $test->minimum_tat = 14;
         $test->maximum_tat = 14;
         $test->test_category_id = $testCategory->id;
@@ -63,7 +63,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 018';
-        $test->description = 'CRYPTOCOCCUS NEOFORMANS DETECTION';
+        $test->name = 'CRYPTOCOCCUS NEOFORMANS DETECTION';
         $test->minimum_tat = 14;
         $test->maximum_tat = 14;
         $test->test_category_id = $testCategory->id;
@@ -73,7 +73,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 019';
-        $test->description = 'HIV DNA DETECTION';
+        $test->name = 'HIV DNA DETECTION';
         $test->minimum_tat = 5;
         $test->maximum_tat = 9;
         $test->test_category_id = $testCategory->id;
@@ -83,7 +83,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 020';
-        $test->description = 'HIV DRUG RESISTANT (HIV GENOTYPE/ DRUG RESISTANCE) ASSAY';
+        $test->name = 'HIV DRUG RESISTANT (HIV GENOTYPE/ DRUG RESISTANCE) ASSAY';
         $test->minimum_tat = 5;
         $test->maximum_tat = 9;
         $test->test_category_id = $testCategory->id;
@@ -93,7 +93,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL O21';
-        $test->description = 'CRYPTOCOCCUS NEOFORMANS DETECTION';
+        $test->name = 'CRYPTOCOCCUS NEOFORMANS DETECTION';
         $test->minimum_tat = 14;
         $test->maximum_tat = 14;
         $test->test_category_id = $testCategory->id;
@@ -105,7 +105,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 022';
-        $test->description = 'HBV/HDV REAL-TIME PCR TEST FOR SIMULTANEOUS DETECTION OF HBV AND HDV';
+        $test->name = 'HBV/HDV REAL-TIME PCR TEST FOR SIMULTANEOUS DETECTION OF HBV AND HDV';
         $test->minimum_tat = 2;
         $test->maximum_tat = 3;
         $test->test_category_id = $testCategory->id;
@@ -115,7 +115,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 023';
-        $test->description = 'HBV/HCV/HIV1/HIV2 REAL-TIME PCR DETECTION';
+        $test->name = 'HBV/HCV/HIV1/HIV2 REAL-TIME PCR DETECTION';
         $test->minimum_tat = 10;
         $test->maximum_tat = 10;
         $test->test_category_id = $testCategory->id;
@@ -125,7 +125,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL 024';
-        $test->description = 'HBV/HCV/HIV REAL TIME DETECTION';
+        $test->name = 'HBV/HCV/HIV REAL TIME DETECTION';
         $test->minimum_tat = 10;
         $test->maximum_tat = 10;
         $test->test_category_id = $testCategory->id;
@@ -137,7 +137,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL CV01';
-        $test->description = 'COVID – 19 DETECTION (NON TRAVELLERS)';
+        $test->name = 'COVID – 19 DETECTION (NON TRAVELLERS)';
         $test->minimum_tat = 1;
         $test->maximum_tat = 1;
         $test->test_category_id = $testCategory->id;
@@ -147,7 +147,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL CV02';
-        $test->description = 'COVID-19 DETECTION (TRAVELLERS)';
+        $test->name = 'COVID-19 DETECTION (TRAVELLERS)';
         $test->minimum_tat = 1;
         $test->maximum_tat = 1;
         $test->test_category_id = $testCategory->id;
