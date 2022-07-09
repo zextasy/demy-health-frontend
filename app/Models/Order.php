@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
 use App\Filament\Resources\OrderResource;
+use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends BaseModel
 {
-    use HasFactory, GeneratesReference;
+    use HasFactory, GeneratesReference, ReferencesUsersViaEmail;
 
     //region CONFIG
     public function referenceConfig(): array
