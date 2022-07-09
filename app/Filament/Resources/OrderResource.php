@@ -21,6 +21,16 @@ class OrderResource extends Resource
 
     protected static ?string $navigationGroup = 'Products';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('backend');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->hasPermissionTo('backend'), 403);
+    }
+
     public static function form(Form $form): Form
     {
         return $form

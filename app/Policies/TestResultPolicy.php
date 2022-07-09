@@ -18,7 +18,7 @@ class TestResultPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('frontend');
     }
 
     /**
@@ -30,7 +30,7 @@ class TestResultPolicy
      */
     public function view(User $user, TestResult $testResult)
     {
-        return true;
+        return $user->hasPermissionTo('backend') || $testResult->customer_email == $user->email;
     }
 
     /**
@@ -41,7 +41,7 @@ class TestResultPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -53,7 +53,7 @@ class TestResultPolicy
      */
     public function update(User $user, TestResult $testResult)
     {
-        return true;
+        return $user->hasPermissionTo('backend');
     }
 
     /**
@@ -65,7 +65,7 @@ class TestResultPolicy
      */
     public function delete(User $user, TestResult $testResult)
     {
-        return true;
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class TestResultPolicy
      */
     public function restore(User $user, TestResult $testResult)
     {
-        return true;
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,6 @@ class TestResultPolicy
      */
     public function forceDelete(User $user, TestResult $testResult)
     {
-        return true;
+        return $user->isFilamentAdmin();
     }
 }

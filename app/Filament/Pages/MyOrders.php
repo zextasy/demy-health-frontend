@@ -2,38 +2,40 @@
 
 namespace App\Filament\Pages;
 
+use App\Models\Order;
 use Filament\Pages\Page;
-use App\Models\TestResult;
+use App\Models\TestBooking;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\LinkAction;
 use Filament\Tables\Columns\BadgeColumn;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Concerns\InteractsWithTable;
+use Illuminate\Database\Eloquent\Builder;
 
-class MyTestResults extends Page  implements HasTable
+class MyOrders extends Page implements HasTable
 {
+
     use InteractsWithTable;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static ?string $navigationGroup = 'Personal';
 
-    protected static string $view = 'filament.pages.my-test-results';
+    protected static string $view = 'filament.pages.my-orders';
 
     public function getTableQuery(): Builder
     {
-        return TestResult::query()->where('customer_email', auth()->user()->email);
+        return Order::query()->where('customer_email', auth()->user()->email);
     }
 
     protected function getTableColumns(): array
     {
         return [
             BadgeColumn::make('status')
-                ->label('Result status')->sortable(),
+                ->label('Booking status')->sortable(),
             TextColumn::make('reference')->sortable(),
             TextColumn::make('created_at')
-                ->label('Date')
+                ->label('Ordered on')
                 ->date()
                 ->sortable(),
         ];
@@ -43,8 +45,8 @@ class MyTestResults extends Page  implements HasTable
     {
         return [
             LinkAction::make('View')
-                ->url(fn(TestResult $record): string => $record->filament_url)
-                ->hidden(fn(TestResult $record): bool => $record->user()->doesntExist()),
+                ->url(fn(Order $record): string => $record->filament_url)
+                ->hidden(fn(Order $record): bool => $record->user()->doesntExist()),
         ];
     }
 

@@ -25,12 +25,12 @@ class TestBookingResource extends Resource
 
     protected static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->hasPermissionTo('admin');
+        return auth()->user()->hasPermissionTo('backend');
     }
 
     public function mount(): void
     {
-        abort_unless(auth()->user()->hasPermissionTo('admin'), 403);
+        abort_unless(auth()->user()->hasPermissionTo('backend'), 403);
     }
 
     public static function form(Form $form): Form
