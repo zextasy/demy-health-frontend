@@ -10,6 +10,7 @@ class CreateGeneralSettings extends SettingsMigration
         $this->migrator->add('general.default_prefix', 'DM-');
         $this->migrator->add('general.test_booking_prefix', 'DM-TB-');
         $this->migrator->add('general.test_result_prefix', 'DM-RES-');
+        $this->migrator->add('general.test_type_prefix', 'DM-GTL-TST-');
         $this->migrator->add('general.specimen_sample_prefix', 'DM-SS-');
         $this->migrator->add('general.product_sku_prefix', 'DM-PROD-');
         $this->migrator->add('general.order_prefix', 'DM-ORD-');

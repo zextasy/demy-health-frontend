@@ -28,9 +28,8 @@ class TestTypeResource extends Resource
             ->schema([
                 Fieldset::make('General Info')->schema([
                     Forms\Components\TextInput::make('test_id')
-                        ->required()
                         ->maxLength(255)
-                        ->helperText('Internal unique reference for this test type'),
+                        ->helperText('Internal unique reference for this test type. Leave blank and the system will generate one for you'),
                     Forms\Components\TextInput::make('name')
                         ->required()
                         ->maxLength(255)

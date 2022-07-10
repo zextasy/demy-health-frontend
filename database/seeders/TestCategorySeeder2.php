@@ -93,7 +93,7 @@ class TestCategorySeeder2 extends Seeder
 
         $test = new TestType;
         $test->test_id = 'GTL O21';
-        $test->name = 'CRYPTOCOCCUS NEOFORMANS DETECTION';
+        $test->name = 'CRYPTOCOCCUS NEOFORMANS DETECTION 2';
         $test->minimum_tat = 14;
         $test->maximum_tat = 14;
         $test->test_category_id = $testCategory->id;

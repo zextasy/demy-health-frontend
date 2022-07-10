@@ -27,13 +27,11 @@ trait MorphsPrices
 
     public function setPrice(float $amount, Carbon $startDate = null, Carbon $endDate = null): Price
     {
-        $price = $this->prices()->create([
+        return $this->prices()->create([
             'amount' => $amount,
             'start_date' => $startDate ?? now(),
             'end_date' => $endDate ?? null,
         ]);
-
-        return $price;
     }
 
     public function getPriceAttribute():float|null
@@ -44,7 +42,7 @@ trait MorphsPrices
 
     public function getformattedPriceAttribute()
     {
-        if ($this->should_call_in_for_details) {
+        if ($this->should_call_in_for_details || empty($this->price)) {
             return "Call In";
         }
 

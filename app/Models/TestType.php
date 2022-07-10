@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Settings\GeneralSettings;
 use App\Traits\Models\HasFilamentUrl;
+use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\MorphsPrices;
 use App\Filament\Resources\TestTypeResource;
 use App\Traits\Relationships\HasTestBookings;
@@ -12,13 +14,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TestType extends BaseModel
 {
-    use HasFactory, HasTestBookings, MorphsPrices, HasFilamentUrl;
+    use HasFactory, HasTestBookings, MorphsPrices, HasFilamentUrl, GeneratesReference;
 
     protected $dates = ['created_at', 'updated_at'];
     protected $guarded = ['id'];
     protected $casts = [
         'should_call_in_for_details' => 'boolean',
     ];
+
+    public function referenceConfig(): array
+    {
+        return [
+            'reference_key' => 'test_id',
+            'reference_prefix' => app(GeneralSettings::class)->test_type_prefix,
+        ];
+    }
 
     public function getFilamentResourceClass(): string
     {
@@ -31,15 +41,11 @@ class TestType extends BaseModel
             return "Call In";
         }
 
-        if ($this->minimum_tat == $this->maximum_tat) {
-            return "{$this->maximum_tat} days";
-        }
-
         if ($this->minimum_tat == 0 && $this->maximum_tat == 0) {
             return "{$this->tat_hours} hours";
         }
 
-        return "{$this->minimum_tat} - {$this->maximum_tat} days";
+        return $this->minimum_tat == $this->maximum_tat ?  "{$this->maximum_tat} days" : "{$this->minimum_tat} - {$this->maximum_tat} days";
     }
 
     public function getFilamentUrlAttribute(): string
@@ -56,5 +62,4 @@ class TestType extends BaseModel
     {
         return $this->belongsToMany(SpecimenType::class, 'specimen_types_test_types');
     }
-
 }
