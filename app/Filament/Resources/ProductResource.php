@@ -43,7 +43,7 @@ class ProductResource extends Resource
                     Forms\Components\TextInput::make('country')
                         ->maxLength(255),
                     Forms\Components\BelongsToManyMultiSelect::make('categories')
-                        ->relationship('categories', 'name')
+                        ->relationship('productCategories', 'name')
                 ]),
                 Forms\Components\Fieldset::make('Pricing')->schema([
                     Forms\Components\Toggle::make('should_call_in_for_details')

@@ -41,7 +41,7 @@ class TestCenterPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -53,7 +53,7 @@ class TestCenterPolicy
      */
     public function update(User $user, TestCenter $testCenter)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -65,7 +65,7 @@ class TestCenterPolicy
      */
     public function delete(User $user, TestCenter $testCenter)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class TestCenterPolicy
      */
     public function restore(User $user, TestCenter $testCenter)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,6 @@ class TestCenterPolicy
      */
     public function forceDelete(User $user, TestCenter $testCenter)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 }

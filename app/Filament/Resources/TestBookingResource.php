@@ -21,7 +21,7 @@ class TestBookingResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'reference';
 
-    protected static ?string $navigationGroup = 'Tests';
+    protected static ?string $navigationGroup = 'CRM';
 
     protected static function shouldRegisterNavigation(): bool
     {

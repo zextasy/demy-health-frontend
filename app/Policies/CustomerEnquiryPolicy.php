@@ -32,16 +32,16 @@ class CustomerEnquiryPolicy
 
     public function delete(User $user, CustomerEnquiry $customerEnquiry)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     public function restore(User $user, CustomerEnquiry $customerEnquiry)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     public function forceDelete(User $user, CustomerEnquiry $customerEnquiry)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 }

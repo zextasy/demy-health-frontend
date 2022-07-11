@@ -5,6 +5,7 @@ namespace App\Filament\RelationManagers;
 use Filament\Forms;
 use App\Models\State;
 use Filament\Resources\Form;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\MorphToManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
@@ -21,6 +22,21 @@ class BaseAddressesRelationManager extends MorphToManyRelationManager
     }
 
     protected function canAttach(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canDetach(Model $record): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canEdit(Model $record): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canDelete(Model $record): bool
     {
         return auth()->user()->isFilamentAdmin();
     }

@@ -53,7 +53,7 @@ class SpecimenTypePolicy
      */
     public function update(User $user, SpecimenType $specimenType)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -65,7 +65,7 @@ class SpecimenTypePolicy
      */
     public function delete(User $user, SpecimenType $specimenType)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class SpecimenTypePolicy
      */
     public function restore(User $user, SpecimenType $specimenType)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,6 @@ class SpecimenTypePolicy
      */
     public function forceDelete(User $user, SpecimenType $specimenType)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 }

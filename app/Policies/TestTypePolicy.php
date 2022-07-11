@@ -53,7 +53,7 @@ class TestTypePolicy
      */
     public function update(User $user, TestType $testType)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -65,7 +65,7 @@ class TestTypePolicy
      */
     public function delete(User $user, TestType $testType)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class TestTypePolicy
      */
     public function restore(User $user, TestType $testType)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,6 @@ class TestTypePolicy
      */
     public function forceDelete(User $user, TestType $testType)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 }

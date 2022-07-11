@@ -5,6 +5,7 @@ namespace App\Filament\RelationManagers;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Forms\Components\Fieldset;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
 use Filament\Resources\Table;
@@ -17,6 +18,16 @@ class BaseHasManyTestTypesRelationManager extends HasManyRelationManager
     protected static ?string $recordTitleAttribute = 'test_id';
 
     protected function canCreate(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canEdit(Model $record): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
+    protected function canDelete(Model $record): bool
     {
         return auth()->user()->isFilamentAdmin();
     }

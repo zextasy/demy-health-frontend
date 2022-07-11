@@ -57,7 +57,7 @@ class Product extends BaseModel implements HasMedia, OrderableItemContract
     //endregion
 
     //region RELATIONSHIPS
-    public function categories(): BelongsToMany
+    public function productCategories(): BelongsToMany
     {
         return $this->belongsToMany(ProductCategory::class, 'products_product_categories');
     }

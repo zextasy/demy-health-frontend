@@ -65,7 +65,7 @@ class AddressPolicy
      */
     public function delete(User $user, Address $address)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class AddressPolicy
      */
     public function restore(User $user, Address $address)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,7 @@ class AddressPolicy
      */
     public function forceDelete(User $user, Address $address)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
+
     }
 }

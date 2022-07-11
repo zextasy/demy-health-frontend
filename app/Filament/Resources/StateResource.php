@@ -22,6 +22,11 @@ class StateResource extends Resource
 
     protected static ?string $navigationGroup = 'Locations';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -21,6 +21,10 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
 
     protected static function getNavigationGroup(): ?string
     {

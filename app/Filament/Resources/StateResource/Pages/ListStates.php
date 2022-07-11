@@ -14,4 +14,10 @@ class ListStates extends ListRecords
     {
         return parent::getTableQuery()->with('localGovernmentAreasWithHomeSampleCollection');
     }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->isFilamentAdmin(), 403);
+        parent::mount();
+    }
 }

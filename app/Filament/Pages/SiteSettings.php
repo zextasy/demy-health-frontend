@@ -16,12 +16,12 @@ class SiteSettings extends SettingsPage
 
     protected static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->hasPermissionTo('admin');
+        return auth()->user()->isFilamentAdmin();
     }
 
     public function mount(): void
     {
-        abort_unless(auth()->user()->hasPermissionTo('admin'), 403);
+        abort_unless(auth()->user()->isFilamentAdmin(), 403);
         parent::mount();
     }
 

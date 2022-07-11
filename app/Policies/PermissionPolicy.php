@@ -18,7 +18,7 @@ class PermissionPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -30,7 +30,7 @@ class PermissionPolicy
      */
     public function view(User $user, Permission $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -41,7 +41,7 @@ class PermissionPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -53,7 +53,7 @@ class PermissionPolicy
      */
     public function update(User $user, Permission $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -65,7 +65,7 @@ class PermissionPolicy
      */
     public function delete(User $user, Permission $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class PermissionPolicy
      */
     public function restore(User $user, Permission $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,6 @@ class PermissionPolicy
      */
     public function forceDelete(User $user, Permission $model)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 }

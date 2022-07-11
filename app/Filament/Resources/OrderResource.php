@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\Orders\DeliveryStatusEnum;
+
 use App\Filament\Resources\OrderResource\Pages;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\OrderResource\RelationManagers;
@@ -19,7 +19,7 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = 'CRM';
 
     protected static function shouldRegisterNavigation(): bool
     {

@@ -10,7 +10,7 @@ use Filament\Tables;
 
 class CategoriesRelationManager extends BelongsToManyRelationManager
 {
-    protected static string $relationship = 'categories';
+    protected static string $relationship = 'productCategories';
 
     protected static ?string $recordTitleAttribute = 'name';
 

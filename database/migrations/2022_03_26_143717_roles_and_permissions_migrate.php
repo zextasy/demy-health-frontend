@@ -49,7 +49,12 @@ class RolesAndPermissionsMigrate extends Migration
 
     private $roles       = [
         'admin',
+        'senior manager',
         'manager',
+        'junior manager',
+        'senior technical',
+        'technical',
+        'junior technical',
         'editor',
         'customer',
     ];

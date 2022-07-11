@@ -53,7 +53,7 @@ class OrderPolicy
      */
     public function update(User $user, Order $order)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**

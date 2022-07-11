@@ -8,7 +8,7 @@ class BusinessGroupObserver
 {
     public function creating (BusinessGroup $model)
     {
-        if (empty($mdel->business_group_id)){
+        if (empty($model->parent_id)){
             if (!empty (BusinessGroup::root())){
                 throw new \Exception('Root Business Group already exists');
             }
@@ -16,7 +16,7 @@ class BusinessGroupObserver
             return;
         }
 
-        $model->order = BusinessGroup::findOrFail($model->business_group_id)->order + 1;
+        $model->order = BusinessGroup::findOrFail($model->parent_id)->order + 1;
     }
 
     public function created(BusinessGroup $model)

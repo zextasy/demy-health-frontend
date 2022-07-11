@@ -65,7 +65,7 @@ class ProductCategoryPolicy
      */
     public function delete(User $user, ProductCategory $productCategory)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ class ProductCategoryPolicy
      */
     public function restore(User $user, ProductCategory $productCategory)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 
     /**
@@ -89,6 +89,6 @@ class ProductCategoryPolicy
      */
     public function forceDelete(User $user, ProductCategory $productCategory)
     {
-        return $user->hasPermissionTo('backend');
+        return $user->isFilamentAdmin();
     }
 }

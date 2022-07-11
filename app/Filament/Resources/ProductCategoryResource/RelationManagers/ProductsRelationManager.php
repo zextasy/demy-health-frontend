@@ -23,7 +23,6 @@ class ProductsRelationManager extends BelongsToManyRelationManager
                     ->maxLength(255),
                 Forms\Components\TextInput::make('model')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('price'),
             ]);
     }
 
@@ -33,7 +32,7 @@ class ProductsRelationManager extends BelongsToManyRelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable(),
                 Tables\Columns\TextColumn::make('model')->sortable(),
-                Tables\Columns\TextColumn::make('price')->sortable(),
+                Tables\Columns\TextColumn::make('formatted_price')->label('price')->sortable(),
             ])
             ->filters([
                 //
