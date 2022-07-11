@@ -15,6 +15,7 @@ class CreateCustomerEnquiriesTable extends Migration
     {
         Schema::create('customer_enquiries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('customer_email');
             $table->string('customer_name');
             $table->string('customer_phone')->nullable();

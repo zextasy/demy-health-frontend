@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('reference')->unique();
             $table->string('customer_email')->index();
             $table->unsignedSmallInteger('payment_method')->default(PaymentMethodEnum::OTHER->value);

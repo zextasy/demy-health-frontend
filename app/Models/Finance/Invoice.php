@@ -5,11 +5,12 @@ namespace App\Models\Finance;
 use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
+use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Invoice extends BaseModel
 {
-    use HasFactory, GeneratesReference;
+    use HasFactory, GeneratesReference, BelongsToBusinessGroup;
 
     //region CONFIG
     public function referenceConfig(): array

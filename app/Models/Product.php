@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Helpers\HerokuHelper;
-use App\Traits\Models\HasPrices;
 use Spatie\MediaLibrary\HasMedia;
 use App\Settings\GeneralSettings;
 use App\Contracts\OrderableItemContract;
@@ -11,12 +10,13 @@ use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\MorphsPrices;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Traits\Relationships\MorphsOrderItems;
+use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends BaseModel implements HasMedia, OrderableItemContract
 {
-    use HasFactory, InteractsWithMedia, MorphsOrderItems, GeneratesReference, MorphsPrices;
+    use HasFactory, InteractsWithMedia, MorphsOrderItems, GeneratesReference, MorphsPrices, BelongsToBusinessGroup;
     //region CONFIG
     public function referenceConfig(): array
     {

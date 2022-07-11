@@ -15,12 +15,13 @@ use App\Traits\Relationships\HasTestBookings;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail, AddressableContract, OrderableContract
 {
-    use  SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, MorphsAddresses, MorphsOrders;
+    use  SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, MorphsAddresses, MorphsOrders, BelongsToBusinessGroup;
 
     //region CONFIG
     protected $fillable = [

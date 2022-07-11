@@ -15,6 +15,7 @@ class CreateTeamMembersTable extends Migration
     {
         Schema::create('team_members', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('other_names')->nullable();

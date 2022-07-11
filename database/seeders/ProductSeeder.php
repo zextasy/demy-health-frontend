@@ -434,7 +434,6 @@ class ProductSeeder extends Seeder
         foreach ($this->products as $product){
             $price = ['price' => 0];
             $filteredProduct = array_diff_key($product, $price);
-            ray($product, $filteredProduct);
             $productModel = Product::updateOrCreate(['name' => $product['name']], $filteredProduct);
             $mediaUrl = public_path("demyhealth/images/products/default-product-image.png");
             $ProductUrl = public_path("demyhealth/images/products/{$product['name']}.jpg");

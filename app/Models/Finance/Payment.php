@@ -3,11 +3,12 @@
 namespace App\Models\Finance;
 
 use App\Models\BaseModel;
+use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Payment extends BaseModel
 {
-    use HasFactory;
+    use HasFactory, BelongsToBusinessGroup;
 
         //region CONFIG
 

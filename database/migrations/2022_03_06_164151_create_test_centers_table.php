@@ -15,6 +15,7 @@ class CreateTestCentersTable extends Migration
     {
         Schema::create('test_centers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('name');
             $table->boolean('offers_home_collection')->default(false);
             $table->timestamps();

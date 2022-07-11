@@ -7,13 +7,14 @@ use Spatie\MediaLibrary\HasMedia;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TestResult extends BaseModel implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, GeneratesReference, ReferencesUsersViaEmail;
+    use HasFactory, InteractsWithMedia, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup;
 
 //region CONFIG
     public function referenceConfig(): array

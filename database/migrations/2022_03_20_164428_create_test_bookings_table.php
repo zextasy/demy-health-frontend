@@ -15,6 +15,7 @@ class CreateTestBookingsTable extends Migration
     {
         Schema::create('test_bookings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('reference')->unique();
             $table->foreignId('test_type_id')->constrained();
             $table->string('customer_email')->index();

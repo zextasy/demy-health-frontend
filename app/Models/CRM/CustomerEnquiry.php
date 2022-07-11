@@ -5,12 +5,13 @@ namespace App\Models\CRM;
 use App\Models\BaseModel;
 use App\Traits\Relationships\MorphsAddresses;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
+use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Filament\Resources\CRM\CustomerEnquiryResource;
 
 class CustomerEnquiry extends BaseModel
 {
-    use HasFactory, MorphsAddresses;
+    use HasFactory, MorphsAddresses, BelongsToBusinessGroup;
 
     protected $guarded = ['id'];
 
