@@ -1,8 +1,8 @@
 <div
     x-data="{
-        notifications: {{ json_encode(session()->pull('notifications', [])) }},
+        notifications: {{ \Illuminate\Support\Js::from(session()->pull('filament.notifications', [])) }},
         add: function (event) {
-            this.notifications.push(event.detail)
+            this.notifications = this.notifications.concat(event.detail)
         },
         remove: function (notification) {
             this.notifications = this.notifications.filter(i => i.id !== notification.id)
