@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('contact_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('type');//ContactDetailTypeEnum
+            $table->unsignedTinyInteger('type');//ContactDetailTypeEnum
             $table->text('description');
             $table->text('details');
             $table->morphs('contactable');

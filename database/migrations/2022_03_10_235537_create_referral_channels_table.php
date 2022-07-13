@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('test_results', function (Blueprint $table) {
+        Schema::create('referral_channels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_group_id')->references('id')->on('business_groups');
-            $table->string('reference')->unique();
-            $table->foreignId('test_booking_id')->nullable()->constrained('test_bookings');
-            $table->foreignId('patient_id')->nullable()->constrained('patients');
-            $table->string('customer_email');
+            $table->string('name')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_results');
+        Schema::dropIfExists('referral_channels');
     }
 };

@@ -20,7 +20,7 @@ class CreateCustomerEnquiriesTable extends Migration
             $table->string('customer_name');
             $table->string('customer_phone')->nullable();
             $table->text('customer_message');
-            $table->unsignedSmallInteger('type')->default(EnquiryTypeEnum::GENERAL->value);
+            $table->unsignedTinyInteger('type')->default(EnquiryTypeEnum::GENERAL->value);
             $table->timestamp('latest_response_sent_at')->nullable();
             $table->foreignId('latest_response_sent_by')->nullable()->constrained('users', 'id');
             $table->timestamp('latest_customer_response_received_at')->nullable();

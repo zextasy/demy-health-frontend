@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('reference')->unique();
             $table->string('customer_email')->index();
-            $table->unsignedSmallInteger('payment_method')->default(PaymentMethodEnum::OTHER->value);
+            $table->unsignedTinyInteger('payment_method')->default(PaymentMethodEnum::OTHER->value);
             $table->nullableMorphs('orderable');
             $table->timestamp('processed_at')->nullable();
             $table->timestamp('delivered_at')->nullable();

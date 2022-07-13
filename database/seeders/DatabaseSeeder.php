@@ -19,8 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(BusinessGroupSeeder::class);
         $this->seedUsers();
         $this->call(UserSeeder::class);
+        $this->call(CountrySeeder::class);
         $this->call(StateSeeder::class);
         $this->call(LocalGovernmentAreaSeeder::class);
+        $this->call(ReferralChannelSeeder::class);
         $this->call(TestCenterSeeder::class);
         $this->call(ProductCategorySeeder::class);
         $this->call(ProductSeeder::class);

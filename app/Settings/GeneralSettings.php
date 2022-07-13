@@ -15,6 +15,7 @@ class GeneralSettings extends Settings
     public string $product_sku_prefix;
     public string $order_prefix;
     public string $invoice_prefix;
+    public string $patient_prefix;
 
     public $business_start_hour;
     public $business_end_hour;
