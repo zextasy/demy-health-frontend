@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('reference')->unique();
             $table->foreignId('test_booking_id')->nullable()->constrained('test_bookings');
-            $table->foreignId('patient_id')->nullable()->constrained('patients');
+            $table->foreignId('patient_id')->constrained('patients');
             $table->string('customer_email');
             $table->timestamps();
             $table->softDeletes();

@@ -76,7 +76,7 @@ class RegisterPatient extends Page implements HasForms
                                 ->maxLength(255)
                                 ->helperText('Reference number for the patient. Leave this blank and the system will generate one for you'),
                             Select::make('booking_reference')
-                                ->options(TestBooking::doesntHave('testResults')->get()->toSelectArray())
+                                ->options(TestBooking::doesntHave('testResult')->get()->toSelectArray())
                                 ->searchable()
                                 ->hidden(fn (Closure $get) => $get('acquisition') != PatientAcquisitionTypeEnum::TEST_BOOKING->value)
                                 ->helperText('Reference number for the booking. This is required for patients with a booking.'),

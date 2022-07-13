@@ -45,6 +45,11 @@ class TestResult extends BaseModel implements HasMedia
     {
         return $this->belongsTo(TestBooking::class);
     }
+
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(Patient::class);
+    }
 //endregion
 
 }

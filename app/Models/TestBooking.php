@@ -107,9 +107,14 @@ class TestBooking extends BaseModel implements OrderableItemContract, Addressabl
         return $this->belongsTo(TestCenter::class);
     }
 
-    public function testResults(): HasOne
+    public function testResult(): HasOne
     {
         return $this->hasOne(TestResult::class);
+    }
+
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(Patient::class);
     }
 
     public function paymentRecordedBy(): BelongsTo

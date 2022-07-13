@@ -6,7 +6,9 @@ use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\MorphsAddresses;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Patient extends BaseModel
@@ -37,6 +39,19 @@ class Patient extends BaseModel
 //endregion
 
 //region RELATIONSHIPS
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'email', 'email');
+    }
 
+    public function testResults() : HasMany
+    {
+        return $this->hasMany(TestResult::class);
+    }
+
+    public function testBookings() : HasMany
+    {
+        return $this->hasMany(TestResult::class);
+    }
 //endregion
 }

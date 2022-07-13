@@ -23,6 +23,7 @@ class CreateTestBookingsTable extends Migration
             $table->foreignId('test_center_id')->nullable()->constrained();
             $table->timestamp('due_date');
             $table->unsignedTinyInteger('duration_minutes')->default(10);
+            $table->foreignId('patient_id')->nullable()->constrained('patients');
             $table->timestamp('payment_received_at')->nullable();
             $table->foreignId('payment_recorded_by')->nullable()->constrained('users','id');
             $table->timestamp('sample_collection_approved_at')->nullable();
