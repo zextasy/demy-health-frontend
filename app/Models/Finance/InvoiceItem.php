@@ -11,7 +11,8 @@ class InvoiceItem extends BaseModel
     use HasFactory;
 
     //region CONFIG
-
+    protected $guarded = ['id'];
+    protected $dates = ['created_at', 'updated_at'];
     //endregion
 
     //region ATTRIBUTES

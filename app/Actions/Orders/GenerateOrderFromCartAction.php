@@ -13,6 +13,7 @@ class GenerateOrderFromCartAction
 
     public function run(CartCollection $cartItems, string $customerEmail): Order
     {
+        //TODO move model extraction here and pass to CreateOrderAction
         $this->order = new Order;
         $user = auth()->user();
 

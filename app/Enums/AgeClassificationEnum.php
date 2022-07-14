@@ -14,11 +14,29 @@ enum AgeClassificationEnum: int
 
 
     case INFANT = 1;
-    case CHILD = 2;
-    case TEEN = 3;
-    case ADULT = 4;
-    case SENIOR = 5;
+    case TODDLER = 3;
+    case CHILD = 12;
+    case TEEN = 20;
+    case ADULT = 61;
+    case SENIOR = 150;
 
-    case DECEASED = 100;
-    case OTHER = 200;
+    case DECEASED = 200;
+    case OTHER = 201;
+
+    public static function getClassificationFromAge( int $age ): AgeClassificationEnum
+    {
+        if ( $age < AgeClassificationEnum::INFANT->value ) {
+            return AgeClassificationEnum::INFANT;
+        } elseif ( $age < AgeClassificationEnum::TODDLER->value ) {
+            return AgeClassificationEnum::TODDLER;
+        } elseif ( $age < AgeClassificationEnum::CHILD->value ) {
+            return AgeClassificationEnum::CHILD;
+        } elseif ( $age < AgeClassificationEnum::TEEN->value ) {
+            return AgeClassificationEnum::TEEN;
+        } elseif ( $age < AgeClassificationEnum::ADULT->value ) {
+            return AgeClassificationEnum::ADULT;
+        } else {
+            return AgeClassificationEnum::SENIOR;
+        }
+    }
 }

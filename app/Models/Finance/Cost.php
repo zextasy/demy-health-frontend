@@ -13,7 +13,7 @@ class Cost extends BaseModel
     //region CONFIG
     protected $guarded = ['id'];
     protected $casts = ['amount' => 'float'];
-    protected $dates = ['start_date', 'end_date'];
+    protected $dates = ['created_at', 'updated_at', 'start_date', 'end_date'];
     //endregion
 
     //region ATTRIBUTES

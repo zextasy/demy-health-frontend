@@ -20,7 +20,8 @@ class CreateCustomerEnquiryAction
         ]);
     }
 
-    public function forType(EnquiryTypeEnum $typeEnum) : CreateCustomerEnquiryAction {
+    public function forType(EnquiryTypeEnum $typeEnum) : self
+    {
         $this->type = $typeEnum;
         return $this;
     }

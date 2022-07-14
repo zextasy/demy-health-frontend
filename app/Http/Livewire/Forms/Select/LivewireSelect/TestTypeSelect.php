@@ -17,10 +17,10 @@ class TestTypeSelect extends LivewireSelect
                 $query->where('test_category_id', $this->getDependingValue('test_category_id'));
             })
             ->when($searchTerm, function ($query, $searchTerm) {
-                $query->where(DB::raw('LOWER(description)'), 'like', '%'. strtolower($searchTerm) .'%');
+                $query->where(DB::raw('LOWER(name)'), 'like', '%'. strtolower($searchTerm) .'%');
             })
             ->get()
-            ->toLivewireSelectCollection('description');
+            ->toLivewireSelectCollection('name');
     }
 
     public function selectedOption($value)

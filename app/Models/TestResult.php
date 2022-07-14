@@ -26,6 +26,7 @@ class TestResult extends BaseModel implements HasMedia
     }
 
     protected $guarded = ['id'];
+    protected $dates = ['created_at', 'updated_at'];
 //endregion
 
 //region ATTRIBUTES

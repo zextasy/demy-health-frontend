@@ -31,7 +31,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('height')->nullable();
             $table->unsignedTinyInteger('weight')->nullable();
 
-            $table->foreignId('referral_channel')->nullable()->constrained('referral_channels');//GenderEnum
+            $table->foreignId('referral_channel_id')->nullable()->constrained('referral_channels');
             $table->string('referral_code')->nullable()->unique();
             $table->timestamps();
             $table->softDeletes();

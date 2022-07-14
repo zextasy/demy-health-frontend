@@ -10,6 +10,8 @@ class OrderItem extends BaseModel
     use HasFactory;
 
     //region CONFIG
+    protected $guarded = ['id'];
+    protected $dates = ['created_at', 'updated_at'];
     protected $appends = ['total_amount'];
     protected $casts = ['price' => 'float'];
     //endregion

@@ -57,8 +57,8 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('reference')->sortable(),
-                Tables\Columns\TextColumn::make('customer_email')->sortable(),
+                Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
                 Tables\Columns\BadgeColumn::make('payment_type')->sortable()
                     ->enum(PaymentMethodEnum::optionsAsSelectArray()),
                 Tables\Columns\BadgeColumn::make('status')->sortable(),

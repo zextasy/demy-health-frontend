@@ -43,7 +43,7 @@ class PatientResource extends Resource
                 ])->columns(3),
                 Fieldset::make('Age')->schema([
                     DatePicker::make('date_of_birth'),
-                    TextInput::make('age_in_years')->numeric(),
+//                    TextInput::make('age')->label('Age (Years)')->numeric(),
                     Select::make('age_classification')->options(AgeClassificationEnum::optionsAsSelectArray()),
                 ])->columns(3),
                 Fieldset::make('Data')->schema([
@@ -81,13 +81,13 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('referral_channel'),
-                Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('first_name'),
-                Tables\Columns\TextColumn::make('middle_name'),
-                Tables\Columns\TextColumn::make('last_name'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('phone_number'),
+                Tables\Columns\TextColumn::make('referral_channel')->sortable(),
+                Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('first_name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('middle_name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('last_name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('phone_number')->searchable()->sortable(),
             ])
             ->filters([
                 //
@@ -106,6 +106,7 @@ class PatientResource extends Resource
         return [
             'index' => Pages\ListPatients::route('/'),
             'create' => Pages\CreatePatient::route('/create'),
+            'view' => Pages\ViewPatient::route('/{record}'),
             'edit' => Pages\EditPatient::route('/{record}/edit'),
         ];
     }

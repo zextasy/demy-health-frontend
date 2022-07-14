@@ -36,7 +36,10 @@ class TestCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-
+                Tables\Columns\TextColumn::make('test_types_count')
+                    ->counts('testTypes')
+                    ->label('Tests')
+                    ->sortable(),
             ])
             ->filters([
                 //

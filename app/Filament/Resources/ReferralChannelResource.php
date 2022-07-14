@@ -38,7 +38,7 @@ class ReferralChannelResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
             ])
             ->filters([
                 //
@@ -57,6 +57,7 @@ class ReferralChannelResource extends Resource
         return [
             'index' => Pages\ListReferralChannels::route('/'),
             'create' => Pages\CreateReferralChannel::route('/create'),
+            'view' => Pages\ViewReferralChannel::route('/{record}'),
             'edit' => Pages\EditReferralChannel::route('/{record}/edit'),
         ];
     }

@@ -37,7 +37,7 @@ class CreateTestBookingAction {
         return $this->testBooking;
     }
 
-    public function atTestCenter(TestCenter|int|null $testCenter): CreateTestBookingAction
+    public function atTestCenter(TestCenter|int|null $testCenter): self
     {
         if (isset($testCenter)){
             $this->testCenterId = $testCenter instanceof TestCenter ? $testCenter->id : $testCenter;
@@ -46,7 +46,7 @@ class CreateTestBookingAction {
         return $this;
     }
 
-    public function forUser(User|int|null $user): CreateTestBookingAction
+    public function forUser(User|int|null $user): self
     {
         if (isset($user)){
             $this->userId = $user instanceof User ? $user->id : $user;

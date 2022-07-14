@@ -4,6 +4,7 @@ namespace App\Traits\Models;
 
 use App\Helpers\ModelHelper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 trait GeneratesReference
 {
@@ -22,4 +23,12 @@ trait GeneratesReference
     }
 
     abstract public function referenceConfig(): array;
+
+    public function scopeWithIdOrReference(Builder $query, null|string|int $id): Builder
+    {
+        $config = $this->referenceConfig();
+        $key = $config['reference_key'];
+        return $query->where($key, '=', $id)
+            ->orWhere('id', '=', $id);
+    }
 }

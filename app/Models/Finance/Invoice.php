@@ -20,6 +20,8 @@ class Invoice extends BaseModel
             'reference_prefix' => app(GeneralSettings::class)->invoice_prefix,
         ];
     }
+    protected $guarded = ['id'];
+    protected $dates = ['created_at', 'updated_at'];
     //endregion
 
     //region ATTRIBUTES

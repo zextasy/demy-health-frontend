@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Patient;
 use App\Models\TestResult;
 use App\Models\Finance\Price;
 use App\Models\BusinessGroup;
@@ -14,6 +15,7 @@ use App\Observers\OrderObserver;
 use App\Observers\PriceObserver;
 use App\Observers\ProductObserver;
 use App\Observers\InvoiceObserver;
+use App\Observers\PatientObserver;
 use App\Observers\TestResultObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
@@ -42,11 +44,12 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading(! app()->isProduction());
         //register model Observers TODO move elsewhere? google
         BusinessGroup::observe(BusinessGroupObserver::class);
-        TestResult::observe(TestResultObserver::class);
-        Product::observe(ProductObserver::class);
-        Order::observe(OrderObserver::class);
         Invoice::observe(InvoiceObserver::class);
+        Order::observe(OrderObserver::class);
+        Patient::observe(PatientObserver::class);
         Price::observe(PriceObserver::class);
+        Product::observe(ProductObserver::class);
         User::observe(UserObserver::class);
+        TestResult::observe(TestResultObserver::class);
     }
 }

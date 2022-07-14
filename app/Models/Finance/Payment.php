@@ -10,24 +10,25 @@ class Payment extends BaseModel
 {
     use HasFactory, BelongsToBusinessGroup;
 
-        //region CONFIG
+    //region CONFIG
+    protected $guarded = ['id'];
+    protected $dates = ['created_at', 'updated_at'];
+    //endregion
 
-        //endregion
+    //region ATTRIBUTES
 
-        //region ATTRIBUTES
+    //endregion
 
-        //endregion
+    //region HELPERS
 
-        //region HELPERS
+    //endregion
 
-        //endregion
+    //region SCOPES
 
-        //region SCOPES
+    //endregion
 
-        //endregion
+    //region RELATIONSHIPS
 
-        //region RELATIONSHIPS
-
-        //endregion
+    //endregion
 
 }
