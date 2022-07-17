@@ -2,6 +2,7 @@
 
 namespace App\Actions\TestBookings;
 use App\Models\User;
+use App\Models\Patient;
 use App\Models\TestType;
 use App\Models\TestCenter;
 use App\Models\TestBooking;
@@ -13,7 +14,7 @@ use App\Enums\TestBookings\LocationTypeEnum;
 class CreateTestBookingAction {
 
 
-    private ?int $userId = null;
+    private ?int $patientId = null;
     private ?int $testCenterId = null;
     private TestBooking $testBooking;
 
@@ -22,7 +23,7 @@ class CreateTestBookingAction {
         $testTypeId = $testType instanceof TestType ? $testType->id : $testType;
         $this->testBooking  = TestBooking::make([
             'test_type_id' => $testTypeId,
-            'user_id' => $this->userId,
+            'patient_id' => $this->patientId,
             'customer_email' => $customerEmail,
             'location_type' => $locationTypeEnum,
             'test_center_id' => $this->testCenterId,
@@ -46,10 +47,10 @@ class CreateTestBookingAction {
         return $this;
     }
 
-    public function forUser(User|int|null $user): self
+    public function forPatient(Patient|int|null $patient): self
     {
-        if (isset($user)){
-            $this->userId = $user instanceof User ? $user->id : $user;
+        if (isset($patient)){
+            $this->patientId = $patient instanceof Patient ? $patient->id : $patient;
         }
 
         return $this;

@@ -52,10 +52,14 @@ class TestBookingResource extends Resource
                         ->email()
                         ->required()
                         ->maxLength(255),
+                    Forms\Components\BelongsToSelect::make('patient')
+                        ->label('Patient')
+                        ->relationship('patient', 'first_name')
+                        ->disabled(),
                     Forms\Components\BelongsToSelect::make('user')
                         ->relationship('user', 'name')
-                        ->placeholder('')
-                        ->disabled()->dehydrated(false),
+                        ->label('User')
+                        ->disabled(),
                 ]),
                 Forms\Components\Fieldset::make('Schedule')->schema([
                     Forms\Components\DateTimePicker::make('due_date')
@@ -83,6 +87,7 @@ class TestBookingResource extends Resource
                 Tables\Columns\TextColumn::make('testType.description')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('due_date')
                     ->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('patient.full_name')->label('Patient')->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->sortable(),
                 Tables\Columns\BadgeColumn::make('status')
                     ->sortable(),

@@ -28,7 +28,10 @@ class StoreTestBookingRequest extends FormRequest
     {
         return [
             "locationType" => "required",
-            "customerEmail" => "required|email",
+            "customerFirstName" => "required",
+            "customerLastName" => "required",
+            "customerEmail" => "required_without:customerPhoneNumber|nullable|email",
+            "customerPhoneNumber" => "required_without:customerEmail|nullable|min:6|max:15",
             "selectedStateForTestCenterBooking" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER,
             "selectedTestCenter" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER,
             "selectedStateForHomeBooking" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
@@ -43,7 +46,7 @@ class StoreTestBookingRequest extends FormRequest
     {
         return [
             'locationType.required' => 'Please choose a location type',
-            'customerEmail.email' => 'Please enter a valid email',
+            'customerEmail.email' => 'Please enter a valid email address',
             'selectedTestCenter.required_if' => 'Please choose a center',
             'selectedState.required_if' => 'Please choose a state',
             'selectedLocalGovernmentArea.required_if' => 'Please choose a local government area',

@@ -17,9 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('reference')->unique();
-            $table->foreignId('test_booking_id')->nullable()->constrained('test_bookings');
-            $table->foreignId('patient_id')->constrained('patients');
-            $table->string('customer_email');
+            $table->foreignId('test_booking_id')->constrained('test_bookings');
+            $table->string('customer_email')->nullable()->index();
+            $table->string('customer_phone_number')->nullable()->index();
+            $table->timestamp('approved_at')->nullable();
+            $table->foreignId('approved_by')->nullable()->constrained('users');
+            $table->timestamp('rejected_at')->nullable();
+            $table->foreignId('rejected_by')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

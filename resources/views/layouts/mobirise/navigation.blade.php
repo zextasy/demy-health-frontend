@@ -39,6 +39,9 @@
                         <a class="text-black dropdown-item text-primary display-4" href="{{route('frontend.take-a-test')}}" data-bs-auto-close="outside" aria-expanded="false">
                             Take a test
                         </a>
+                        <a class="text-black dropdown-item display-4" href="{{route('frontend.upcoming-test-bookings')}}" data-bs-auto-close="outside" aria-expanded="false">
+                            Test  Bookings
+                        </a>
                         <a class="text-black dropdown-item display-4" href="{{route('frontend.test-results')}}" data-bs-auto-close="outside" aria-expanded="false">
                             Test Results
                         </a>
@@ -125,6 +128,7 @@
                             @if(auth()->user()->hasPermissionTo('backend'))
                                 <a class="text-black dropdown-item text-primary display-4" href="{{url('admin')}}">Admin Section</a>
                             @endif
+                            <a class="text-black dropdown-item text-primary display-4" href="{{url('admin')}}">My Account</a>
                             <a class="text-black dropdown-item text-primary display-4" href="{{url('admin/my-test-results')}}">My Results</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -141,6 +145,9 @@
                             @if (Route::has('register'))
                                 <a class="text-black dropdown-item text-primary display-4" href="{{ route('register') }}">Register<br></a>
                             @endif
+                            <a class="text-black dropdown-item display-4" href="{{route('frontend.my-orders')}}" data-bs-auto-close="outside" aria-expanded="false">
+                                My Orders
+                            </a>
                         @endauth
                     </div>
 

@@ -20,6 +20,7 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use App\Enums\PatientAcquisitionTypeEnum;
+use App\Filament\Resources\PatientResource;
 use Filament\Forms\Components\MarkdownEditor;
 use App\Actions\Patients\CreatePatientAction;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -62,38 +63,17 @@ class RegisterPatient extends Page implements HasForms
                 Wizard\Step::make('Intro')
                     ->schema([
                         Fieldset::make('Entry')->schema([
-                            Select::make('acquisition')
-                                ->options(PatientAcquisitionTypeEnum::optionsAsSelectArray())
-                                ->helperText('How did the patient come to the clinic?')
-                                ->reactive()
-                                ->required(),
+                            TextInput::make('reference')
+                                ->maxLength(255)
+                                ->helperText('Reference number for the patient. Leave this blank and the system will generate one for you'),
                             Select::make('detailLevel')
                                 ->options(PatientDataDetailEnum::optionsAsSelectArray())
                                 ->reactive()
                                 ->helperText('How much data is required?')
                                 ->required(),
                         ])->columns(2),
-                        Fieldset::make('References')->schema([
-                            TextInput::make('reference')
-                                ->maxLength(255)
-                                ->helperText('Reference number for the patient. Leave this blank and the system will generate one for you'),
-                            Select::make('bookingReference')
-                                ->options(TestBooking::doesntHave('testResult')->doesntHave('user')->doesntHave('patient')->get()->toSelectArray('reference'))
-                                ->searchable()
-                                ->hidden(fn (Closure $get) => $get('acquisition') != PatientAcquisitionTypeEnum::TEST_BOOKING->value)
-                                ->rules([
-                                    function () {
-                                        return function (string $attribute, $value, Closure $fail) {
-                                            if ($this->acquisition == PatientAcquisitionTypeEnum::TEST_BOOKING->value && empty($value)) {
-                                                $fail("The {$attribute} is required.");
-                                            }
-                                        };
-                                    },
-                                ])
-                                ->helperText('Reference number for the booking. This is required for patients with a booking.'),
-                        ])->columns(2),
                     ]),
-                Wizard\Step::make('Data')
+                Wizard\Step::make('Patient Data')
                     ->schema([
                         Fieldset::make('Name')->schema([
                             TextInput::make('firstName')
@@ -197,20 +177,18 @@ class RegisterPatient extends Page implements HasForms
             $parsedWeight = isset($this->weight) ? intval($this->weight) : null;
             $parsedCountryId = isset($this->countryId) ? intval($this->countryId) : null;
             $parsedReferralChannelId =isset($this->referralChannelId) ? intval($this->referralChannelId) : null;
-            (new CreatePatientAction())
+            $patient = (new CreatePatientAction())
                 ->withReference($this->reference)
                 ->withMiddleName($this->middleName)
                 ->withHeight($parsedHeight)
                 ->withWeight($parsedWeight)
-                ->withGender($genderEnum)
                 ->withAgeDetails($ageClassificationEnum, $parsedDateOfBirth, $parsedAgeInYears)
                 ->withContactDetails($this->email, $this->phoneNumber)
                 ->withCountryDetails($parsedCountryId, $this->passportNumber)
                 ->withReferralDetails($parsedReferralChannelId, $this->referralCode)
-                ->withTestBooking($this->bookingReference)
-                ->run($this->firstName, $this->lastName);
+                ->run($this->firstName, $this->lastName, $genderEnum);
             $this->notify('success', 'Registered patient successfully');
-            $this->redirect('/admin');
+            $this->redirect(PatientResource::getUrl('view', ['record' => $patient->id]));
         }
         catch (\Exception $e) {
             $this->notify('danger', 'Something went wrong'. $e->getMessage());

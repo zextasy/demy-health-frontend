@@ -88,6 +88,7 @@ class PatientResource extends Resource
                 Tables\Columns\TextColumn::make('last_name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('phone_number')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('test_bookings_count')->label('Bookings')->counts('testBookings')->sortable(),
             ])
             ->filters([
                 //

@@ -12,6 +12,7 @@ use App\Enums\TestBookings\LocationTypeEnum;
 use App\Traits\Relationships\MorphsOrderItems;
 use App\Filament\Resources\TestBookingResource;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
@@ -107,9 +108,9 @@ class TestBooking extends BaseModel implements OrderableItemContract, Addressabl
         return $this->belongsTo(TestCenter::class);
     }
 
-    public function testResult(): HasOne
+    public function testResults(): HasMany
     {
-        return $this->hasOne(TestResult::class);
+        return $this->hasMany(TestResult::class);
     }
 
     public function patient(): BelongsTo

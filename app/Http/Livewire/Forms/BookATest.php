@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use App\Enums\TestBookings\LocationTypeEnum;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Http\Requests\StoreTestBookingRequest;
+use Illuminate\Validation\ValidationException;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Contracts\Foundation\Application;
 
@@ -24,13 +25,20 @@ class BookATest extends Component
     public $selectedStateForHomeBooking;
     public $selectedLocalGovernmentArea;
     public $selectedTestType;
+    public $customerFirstName = null;
+    public $customerLastName = null;
     public $customerEmail = null;
+    public $customerPhoneNumber = null;
     public $locationType = null;
     public $addressLine1 = null;
     public $addressLine2 = null;
     public $city = null;
     public $dueDate;
     public $startTime;
+    public $customerGender = null;
+    public $customerDateOfBirth = null;
+    public $customerCountryId = null;
+    public $customerPassportNumber = null;
 
     protected $listeners = [
         'selectedTestCenterUpdated' => 'setSelectedTestCenter',
@@ -79,7 +87,14 @@ class BookATest extends Component
                 'quantity' => 1,
                 'attributes' => array(
                     'type' => 'TestBooking',
+                    'customerFirstName' => $this->customerFirstName,
+                    'customerLastName' => $this->customerLastName,
                     'customerEmail' => $this->customerEmail,
+                    'customerPhoneNumber' => $this->customerPhoneNumber,
+                    'customerGender' => $this->customerGender,
+                    'customerDateOfBirth' => $this->customerDateOfBirth,
+                    'customerCountryId' => $this->customerCountryId,
+                    'customerPassportNumber' => $this->customerPassportNumber,
                     'locationType' => $this->locationType,
                     'dueDate' => $this->dueDate,
                     'selectedTestCenter' => $this->selectedTestCenter,
@@ -96,8 +111,11 @@ class BookATest extends Component
 
             $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');
         }
+        catch (ValidationException $e) {
+            $this->alert('error', $e->getMessage());
+        }
         catch (\Exception $e) {
-            $this->alert('error', FlashMessageHelper::GENERAL_ERROR);
+            $this->alert('error', "Something went wrong");
         }
 
     }

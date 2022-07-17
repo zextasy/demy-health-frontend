@@ -4,6 +4,7 @@ namespace App\Actions\Orders;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Patient;
 use App\Models\TestBooking;
 use Illuminate\Support\Carbon;
 use App\Events\OrderCreatedEvent;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use App\Contracts\OrderableContract;
 use App\Enums\TestBookings\LocationTypeEnum;
+use App\Actions\Patients\CreatePatientAction;
 use App\Actions\Addresses\CreateAddressAction;
 use App\Actions\OrderItems\CreateOrderItemAction;
 use App\Actions\Addresses\AttachAddressableAction;
@@ -57,12 +59,23 @@ class CreateOrderAction
 
     private function getTestBookingFromCartItem(mixed $cartItem): TestBooking
     {
-        $TestBookingUser = User::query()->where('email', $cartItem->attributes->customerEmail)->first();
+        $TestBookingPatient = Patient::query()
+            ->where('email', $cartItem->attributes->customerEmail)
+            ->orWhere('phone_number',$cartItem->attributes->customerPhoneNumber)
+            ->first();
+        if (empty($TestBookingPatient)) {
+            $customerDateOfBirth = isset($customerDateOfBirth) ? Carbon::parse($cartItem->attributes->customerDateOfBirth) :null;
+            $TestBookingPatient = (new CreatePatientAction)
+                ->withContactDetails($cartItem->attributes->customerEmail, $cartItem->attributes->customerPhoneNumber)
+                ->withAgeDetails(null,$customerDateOfBirth,null)
+                ->withCountryDetails($cartItem->attributes->customerCountryId,$cartItem->attributes->customerPassportNumber)
+                ->run($cartItem->attributes->customerFirstName, $cartItem->attributes->customerLastName, $cartItem->attributes->customerGender);
+        }
         $locationTypeEnum = LocationTypeEnum::from($cartItem->attributes->locationType);
         $dueDate = Carbon::parse($cartItem->attributes->dueDate);
         $orderableItem = (new CreateTestBookingAction)
             ->atTestCenter($cartItem->attributes->selectedTestCenter)
-            ->forUser($TestBookingUser)
+            ->forPatient($TestBookingPatient)
             ->run(
                 $cartItem->attributes->selectedTestType,
                 $cartItem->attributes->customerEmail, $locationTypeEnum, $dueDate

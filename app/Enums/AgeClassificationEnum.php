@@ -22,6 +22,7 @@ enum AgeClassificationEnum: int
 
     case DECEASED = 200;
     case OTHER = 201;
+    case UNKNOWN = 202;
 
     public static function getClassificationFromAge( int $age ): AgeClassificationEnum
     {

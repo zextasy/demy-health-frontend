@@ -29,14 +29,19 @@ class Address extends BaseModel
     //endregion
 
     //region RELATIONSHIPS
+    public function localGovernmentArea () : BelongsTo
+    {
+        return $this->belongsTo(LocalGovernmentArea::class);
+    }
+
     public function state () : BelongsTo
     {
         return $this->belongsTo(State::class);
     }
 
-    public function localGovernmentArea () : BelongsTo
+    public function country () : BelongsTo
     {
-        return $this->belongsTo(LocalGovernmentArea::class);
+        return $this->state()->country();
     }
 
     public function users () : MorphToMany

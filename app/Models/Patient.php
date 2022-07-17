@@ -8,12 +8,14 @@ use Illuminate\Support\Carbon;
 use App\Settings\GeneralSettings;
 use App\Enums\AgeClassificationEnum;
 use App\Traits\Models\GeneratesReference;
+use Illuminate\Database\Eloquent\Builder;
 use App\Traits\Relationships\MorphsAddresses;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Patient extends BaseModel
 {
@@ -41,7 +43,14 @@ class Patient extends BaseModel
     protected function age(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->calculateAge(),
+            get: fn () => $this->calculateAge(),
+        );
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->last_name . ' ' . $this->first_name,
         );
     }
 
@@ -69,7 +78,13 @@ class Patient extends BaseModel
     //endregion
 
     //region SCOPES
-
+    public function scopeWithCustomerDetails(Builder $query, $identifier ): Builder
+    {
+        return $query->where(function ($query) use ($identifier) {
+            $query->where('email', $identifier)
+                ->orWhere('phone', $identifier);
+        });
+    }
     //endregion
 
     //region RELATIONSHIPS
@@ -78,14 +93,14 @@ class Patient extends BaseModel
         return $this->belongsTo(User::class, 'email', 'email');
     }
 
-    public function testResults(): HasMany
-    {
-        return $this->hasMany(TestResult::class);
-    }
-
     public function testBookings(): HasMany
     {
-        return $this->hasMany(TestResult::class);
+        return $this->hasMany(TestBooking::class);
+    }
+
+    public function testResults(): HasManyThrough
+    {
+        return $this->hasManyThrough(TestResult::class, TestBooking::class);
     }
     //endregion
 }

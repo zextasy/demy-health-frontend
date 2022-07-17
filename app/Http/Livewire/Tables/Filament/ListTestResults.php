@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Forms;
+namespace App\Http\Livewire\Tables\Filament;
 
 use Livewire\Component;
+use App\Models\TestResult;
 use App\Models\TestBooking;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\LinkAction;
@@ -12,22 +14,22 @@ use Illuminate\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Filament\Tables\Concerns\InteractsWithTable;
 
-class GetTestResults extends Component implements HasTable
+class ListTestResults extends Component implements HasTable
 {
     use LivewireAlert, InteractsWithTable;
 
-    public $customerEmail = null;
+    public $customerIdentifier = null;
     public $testBookingReference;
     public $testBookingId;
 
     protected $rules = [
         'customerEmail' => 'required|email',
-        'testBookingReference' => 'required|exists:test_bookings,reference', //test_bookings,reference
+        'testBookingReference' => 'exists:test_bookings,reference', //test_bookings,reference
     ];
 
     protected function getTableQuery(): Builder
     {
-        return TestBooking::query()->where('id', $this->testBookingId);
+        return TestResult::query()->with(['testBooking']);//->where('patient_id', $this->patientId)
     }
 
     protected function getTableColumns(): array
@@ -36,7 +38,7 @@ class GetTestResults extends Component implements HasTable
             BadgeColumn::make('status')
                 ->label('Booking status'),
             TextColumn::make('reference'),
-            TextColumn::make('testType.description')->wrap(),
+            TextColumn::make('testBooking.testType.name')->wrap(),
             TextColumn::make('due_date')
                 ->label('Booked for')
                 ->date(),
@@ -49,9 +51,8 @@ class GetTestResults extends Component implements HasTable
     protected function getTableActions(): array
     {
         return [
-            LinkAction::make('View')
-                ->url(fn(TestBooking $record): string => $record->filament_url)
-                ->hidden(fn(TestBooking $record): bool => $record->user()->doesntExist()),
+            Action::make('view')
+                ->url(fn (TestResult $record): string => route('frontend.test-results.show', $record->id)),
         ];
     }
 
@@ -67,7 +68,7 @@ class GetTestResults extends Component implements HasTable
 
     public function render()
     {
-        return view('livewire.forms.get-test-results');
+        return view('livewire.tables.filament.list-test-results');
     }
 
     public function getTestResults()
@@ -75,7 +76,7 @@ class GetTestResults extends Component implements HasTable
         $this->validate();
         $testBooking = TestBooking::query()->where('reference', $this->testBookingReference)->first();
 
-        if ($testBooking->customer_email != $this->customerEmail) {
+        if ($testBooking->customer_email != $this->customerIdentifier) {
             $this->testBookingReference = null;
             $this->alert('error', 'The email does not match booking reference');
 

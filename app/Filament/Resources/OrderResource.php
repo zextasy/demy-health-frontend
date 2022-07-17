@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\OrderResource\RelationManagers;
@@ -35,20 +37,20 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('reference')
+                TextInput::make('reference')
                     ->helperText('Leave this blank and the system will generate a reference')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('customer_email')
+                TextInput::make('customer_email')
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('total_amount')
+                TextInput::make('total_amount')
                     ->disabled()
                     ->numeric(),
-                Forms\Components\Select::make('payment_type')
+                Select::make('payment_type')
                     ->options(PaymentMethodEnum::optionsAsSelectArray())
                     ->disabled(),
-                Forms\Components\TextInput::make('status')
+                TextInput::make('status')
                     ->disabled(),
             ]);
     }

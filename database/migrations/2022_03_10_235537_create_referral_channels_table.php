@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('referral_channels', function (Blueprint $table) {
             $table->id();
+            $table->string('referral_code')->unique();
             $table->string('name')->unique();
             $table->timestamps();
             $table->softDeletes();

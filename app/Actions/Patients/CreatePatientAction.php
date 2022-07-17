@@ -28,12 +28,11 @@ class CreatePatientAction {
     private ?int $height = null;
     private ?int $weight = null;
     private ?Carbon $dateOfBirth = null;
-    private ?GenderEnum $genderEnum = null;
     private ?AgeClassificationEnum $ageClassificationEnum = null;
     private ?TestBooking $testBooking = null;
     private Patient $patient;
 
-    public function run(string $firstName, string $lastName) : Patient
+    public function run(string $firstName, string $lastName,?GenderEnum $genderEnum = null) : Patient
     {
         $this->patient  = Patient::make([
             'reference' => $this->reference,
@@ -42,11 +41,11 @@ class CreatePatientAction {
             'middle_name' => $this->middleName,
             'email' => $this->email,
             'phone_number' => $this->phoneNumber,
-            'gender' => $this->genderEnum,
+            'gender' => $genderEnum ?? GenderEnum::OTHER,
             'passport_number' =>  $this->passportNumber,
             'country_id' =>  $this->countryId,
             'date_of_birth' =>  $this->dateOfBirth,
-            'age_classification' => $this->ageClassificationEnum,
+            'age_classification' => $this->ageClassificationEnum ?? AgeClassificationEnum::UNKNOWN,
             'height' => $this->height,
             'weight' => $this->weight,
             'referral_channel_id' => $this->referralChannelId,
@@ -90,12 +89,6 @@ class CreatePatientAction {
         return $this;
     }
 
-    public function withGender(?GenderEnum $genderEnum): self
-    {
-        $this->genderEnum = $genderEnum;
-        return $this;
-    }
-
     public function withAgeDetails(?AgeClassificationEnum $ageClassificationEnum, ?Carbon $dateOfBirth, ?int $ageInYears): self
     {
         $this->ageClassificationEnum = $ageClassificationEnum;
@@ -125,14 +118,6 @@ class CreatePatientAction {
             $this->referralChannelId = $referralChannel instanceof ReferralChannel ? $referralChannel->id : $referralChannel;
         }
         $this->referralCode = $referralCode;
-        return $this;
-    }
-
-    public function withTestBooking(null|string|int|TestBooking $testBooking): self
-    {
-        if (isset($testBooking)){
-            $this->testBooking = $testBooking instanceof TestBooking ? $testBooking : TestBooking::withIdOrReference($testBooking)->firstOrFail();
-        }
         return $this;
     }
 

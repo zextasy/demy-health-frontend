@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
 use App\Filament\Resources\OrderResource;
+use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +26,9 @@ class Order extends BaseModel
     protected $appends = ['total_amount'];
     protected $guarded = ['id'];
     protected $dates = ['created_at', 'updated_at'];
+    protected $casts=[
+        'payment_method' => PaymentMethodEnum::class,
+    ];
     //endregion
 
     //region ATTRIBUTES

@@ -18,12 +18,13 @@ class CreateTestBookingsTable extends Migration
             $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('reference')->unique();
             $table->foreignId('test_type_id')->constrained();
-            $table->string('customer_email')->index();
             $table->unsignedTinyInteger('location_type');//LocationTypeEnum
             $table->foreignId('test_center_id')->nullable()->constrained();
             $table->timestamp('due_date');
             $table->unsignedTinyInteger('duration_minutes')->default(10);
-            $table->foreignId('patient_id')->nullable()->constrained('patients');
+            $table->foreignId('patient_id')->constrained('patients');
+            $table->string('customer_email')->nullable()->index();
+            $table->string('customer_phone_number')->nullable()->index();
             $table->timestamp('payment_received_at')->nullable();
             $table->foreignId('payment_recorded_by')->nullable()->constrained('users','id');
             $table->timestamp('sample_collection_approved_at')->nullable();

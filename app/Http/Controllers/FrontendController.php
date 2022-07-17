@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\TestType;
 use App\Models\TestCenter;
+use App\Models\TestResult;
+use App\Models\TestBooking;
 use Illuminate\Http\Request;
 use App\Models\TestCategory;
 
@@ -28,8 +31,6 @@ class FrontendController extends Controller
     {
         return view('frontend.services.all-services');
     }
-
-
 
 
     public function pcrDiagResearch()
@@ -57,22 +58,17 @@ class FrontendController extends Controller
         return view('frontend.set-up-your-lab');
     }
 
-    public function TakeATest()
+    public function takeATest()
     {
-//        $data['testCenters'] = TestCenter::all();
-//        $data['testCategories'] = TestCategory::all();
-//        $data['testTypes'] = TestType::all();
+        //        $data['testCenters'] = TestCenter::all();
+        //        $data['testCategories'] = TestCategory::all();
+        //        $data['testTypes'] = TestType::all();
         return view('frontend.take-a-test'); //, $data
-    }
-
-    public function TestResults()
-    {
-        return view('frontend.test-results');
     }
 
     public function placeholder()
     {
-        return view('frontend.');
+        return view('frontend.placeholder');
     }
 
     public function aboutUs()
@@ -95,8 +91,45 @@ class FrontendController extends Controller
         return view('frontend.contact-us');
     }
 
+    public function testResults()
+    {
+        return view('frontend.my-test-results');
+    }
+
+    public function upcomingTestBookings()
+    {
+        return view('frontend.upcoming-test-bookings');
+    }
+
+    public function myOrders()
+    {
+        return view('frontend.my-orders');
+    }
+
+    public function viewTestBooking(int $id)
+    {
+        $testBooking = TestBooking::findOrFail($id);
+        $data['testBooking'] = $testBooking;
+        return view('frontend.test-booking-detail', $data);
+    }
+
+    public function viewTestResult(int $id)
+    {
+        $testResult = TestResult::findOrFail($id);
+        $data['testResult'] = $testResult;
+        return view('frontend.test-result-detail', $data);
+    }
+
+    public function ViewOrder(int $id)
+    {
+        $order = Order::findOrFail($id);
+        $data['order'] = $order;
+        return view('frontend.order-detail', $data);
+    }
+
+
     public function frontend()
     {
-        return view('frontend.');
+        return view('frontend.base');
     }
 }
