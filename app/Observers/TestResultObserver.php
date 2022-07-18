@@ -12,6 +12,9 @@ class TestResultObserver
         if (is_null($model->customer_email)) {
             $model->customer_email = $model->testBooking->customer_email;
         }
+        if (is_null($model->customer_phone_number)) {
+            $model->customer_phone_number = $model->testBooking->customer_phone_number;
+        }
     }
 
     public function created(TestResult $model)
