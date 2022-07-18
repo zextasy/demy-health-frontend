@@ -15,12 +15,15 @@ use App\Http\Requests\StoreTestBookingRequest;
 use Illuminate\Validation\ValidationException;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Contracts\Foundation\Application;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 
 class BookATest extends Component
 {
-    use LivewireAlert;
+    use LivewireAlert, ManipulatesCustomerSession;
 
     public $selectedTestCenter;
+    public $selectedCustomerCountry;
+    public $selectedCustomerGender;
     public $selectedStateForTestCenterBooking;
     public $selectedStateForHomeBooking;
     public $selectedLocalGovernmentArea;
@@ -60,7 +63,7 @@ class BookATest extends Component
 
     public function mount()
     {
-        $this->customerEmail = optional(auth()->user())->email;
+        $this->customerEmail = $this->getSessionCustomerEmail();
     }
 
     public function render(): Factory|View|Application
@@ -106,7 +109,7 @@ class BookATest extends Component
                     'selectedLocalGovernmentArea' => $this->selectedLocalGovernmentArea,
                 ),
             ));
-            Session::put('customerEmail', $this->customerEmail);
+            $this->setSessionCustomerEmail($this->customerEmail);
             TestAddedToCartEvent::dispatch();
 
             $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');

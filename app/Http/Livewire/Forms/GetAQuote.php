@@ -7,12 +7,13 @@ use App\Helpers\FlashMessageHelper;
 use App\Events\ContactUsFormSubmittedEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Actions\Addresses\CreateAddressAction;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Actions\CRM\CustomerEnquiries\CreateCustomerEnquiryAction;
 
 class GetAQuote extends Component
 {
-    use LivewireAlert;
+    use LivewireAlert, ManipulatesCustomerSession;
 
     public $customerName = null;
     public $customerEmail = null;
@@ -36,7 +37,7 @@ class GetAQuote extends Component
 
     public function mount()
     {
-        $this->customerEmail = optional(auth()->user())->email;
+        $this->customerEmail = $this->getSessionCustomerEmail();
     }
 
     public function render()
@@ -50,6 +51,7 @@ class GetAQuote extends Component
         $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea);
         $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::QUOTE)->run($this->customerEmail, $this->customerName, $this->message);
         $newAddress->customerEnquiries()->save($customerEnquiry);
+        $this->setSessionCustomerEmail($this->customerEmail);
         ContactUsFormSubmittedEvent::dispatch($customerEnquiry->id);
         $this->flash('success', FlashMessageHelper::QUOTE_ENQUIRY_REQUEST_SUCCESSFUL, [], '/');
     }

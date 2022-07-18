@@ -25,13 +25,19 @@ Route::name('frontend.')->group(function () {
         ->name('set-up-your-lab');
     Route::get('take-a-test.html', [FrontendController::class, 'takeATest'])
         ->name('take-a-test');
-    Route::get('test-results.html', [FrontendController::class, 'testResults'])
+    Route::get('test-results.html', [FrontendController::class, 'myTestResults'])
         ->name('test-results');
-    Route::get('upcoming-test-bookings.html', [FrontendController::class, 'upcomingTestBookings'])
+    Route::get('upcoming-test-bookings.html', [FrontendController::class, 'myUpcomingTestBookings'])
         ->name('upcoming-test-bookings');
     Route::get('my-orders.html', [FrontendController::class, 'myOrders'])
         ->name('my-orders');
     //
+    Route::get('/test-bookings/personal/{customerIdentifier}', [FrontendController::class, 'listUpcomingTestBookings'])
+        ->name('my-test-bookings.list');
+    Route::get('/test-results/personal/{customerIdentifier}', [FrontendController::class, 'listTestResults'])
+        ->name('my-test-results.list');
+    Route::get('/orders/personal/{customerIdentifier}', [FrontendController::class, 'listOrders'])
+        ->name('my-orders.list');
     Route::get('/test-bookings/{id}', [FrontendController::class, 'viewTestBooking'])
         ->name('test-bookings.show');
     Route::get('/test-results/{id}', [FrontendController::class, 'viewTestResult'])

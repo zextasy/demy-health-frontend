@@ -23,7 +23,7 @@ class BookATestForCovid extends BookATest
     {
         $this->testCategories = TestCategory::query()->where('name', 'like', '%COVID%')->get();
         $this->testTypes = collect();
-        $this->customerEmail = optional(auth()->user())->email;
+        $this->customerEmail = $this->getSessionCustomerEmail();
     }
 
     public function render(): Factory|View|Application

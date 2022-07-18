@@ -145,9 +145,10 @@
                             @if (Route::has('register'))
                                 <a class="text-black dropdown-item text-primary display-4" href="{{ route('register') }}">Register<br></a>
                             @endif
-                            <a class="text-black dropdown-item display-4" href="{{route('frontend.my-orders')}}" data-bs-auto-close="outside" aria-expanded="false">
-                                My Orders
-                            </a>
+{{--                            <a class="text-black dropdown-item display-4" href="{{route('frontend.my-orders')}}" data-bs-auto-close="outside" aria-expanded="false">--}}
+{{--                                My Orders--}}
+{{--                            </a>--}}
+
                         @endauth
                     </div>
 

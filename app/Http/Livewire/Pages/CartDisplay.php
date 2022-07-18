@@ -10,10 +10,11 @@ use App\Http\Requests\CheckoutCartRequest;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 
 class CartDisplay extends Component
 {
-    use LivewireAlert;
+    use LivewireAlert, ManipulatesCustomerSession;
 
     public Collection $cartItems;
     public float $cartTotal;
@@ -26,6 +27,7 @@ class CartDisplay extends Component
         'cartItemQuantityUpdated' => 'updateCartTotals'
     ];
 
+
     protected function rules(): array
     {
         return (new CheckoutCartRequest())->rules();
@@ -35,7 +37,7 @@ class CartDisplay extends Component
     {
         $this->updateCartTotals();
         $this->cartItems = Cart::getContent();
-        $this->customerEmail = $this->getCustomerEmail();
+        $this->customerEmail = $this->getSessionCustomerEmail();
         $this->paymentMethod = PaymentMethodEnum::OTHER->value;
     }
 
@@ -52,23 +54,22 @@ class CartDisplay extends Component
 
     public function removeItem(int $itemId)
     {
-        Cart::remove($itemId);
         $currentUrl = request()->header('Referer');
+        Cart::remove($itemId);
+
         $this->flash('success', 'Removed!', [], $currentUrl);
     }
 
     public function proceedToCheckout()
     {
-        $this->validate();
-        $this->flash('success', FlashMessageHelper::BLANK, [], route('frontend.cart.checkout',['customer_email' => $this->customerEmail]));
-    }
-
-    private function getCustomerEmail(): string
-    {
-        if (auth()->user()){
-        return auth()->user()->email;
+        $currentUrl = request()->header('Referer');
+        try {
+            $this->validate();
+        } catch (\Throwable $th) {
+            $this->flash('error', $th->getMessage(), [], $currentUrl);
+            return;
         }
 
-        return Session::get('customerEmail') ?? "";
+        $this->flash('success', FlashMessageHelper::BLANK, [], route('frontend.cart.checkout',['customer_email' => $this->customerEmail]));
     }
 }

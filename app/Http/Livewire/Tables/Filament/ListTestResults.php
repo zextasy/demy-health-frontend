@@ -13,19 +13,14 @@ use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Filament\Tables\Concerns\InteractsWithTable;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 
 class ListTestResults extends Component implements HasTable
 {
-    use LivewireAlert, InteractsWithTable;
+    use LivewireAlert, InteractsWithTable, ManipulatesCustomerSession;
 
-    public $customerIdentifier = null;
-    public $testBookingReference;
-    public $testBookingId;
 
-    protected $rules = [
-        'customerEmail' => 'required|email',
-        'testBookingReference' => 'exists:test_bookings,reference', //test_bookings,reference
-    ];
+    public TestBooking $testBooking;
 
     protected function getTableQuery(): Builder
     {
@@ -56,36 +51,9 @@ class ListTestResults extends Component implements HasTable
         ];
     }
 
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-    public function mount()
-    {
-        //        $this->table->shouldRender(false);
-    }
-
     public function render()
     {
         return view('livewire.tables.filament.list-test-results');
     }
 
-    public function getTestResults()
-    {
-        $this->validate();
-        $testBooking = TestBooking::query()->where('reference', $this->testBookingReference)->first();
-
-        if ($testBooking->customer_email != $this->customerIdentifier) {
-            $this->testBookingReference = null;
-            $this->alert('error', 'The email does not match booking reference');
-
-            return;
-        }
-
-        if ($testBooking instanceof TestBooking) {
-            $this->testBookingId = $testBooking->id;
-        }
-
-    }
 }

@@ -78,12 +78,10 @@ class Patient extends BaseModel
     //endregion
 
     //region SCOPES
-    public function scopeWithCustomerDetails(Builder $query, $identifier ): Builder
+    public function scopeWithCustomerDetails(Builder $query, string $identifier ): Builder
     {
-        return $query->where(function ($query) use ($identifier) {
-            $query->where('email', $identifier)
-                ->orWhere('phone', $identifier);
-        });
+        return $query->where('email', $identifier)
+            ->orWhere('phone_number', $identifier);
     }
     //endregion
 

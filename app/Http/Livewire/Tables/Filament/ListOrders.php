@@ -23,16 +23,16 @@ class ListOrders extends Component implements HasTable
 
     public $customerIdentifier = null;
     public $orderReference;
-    public $patientId;
+    public $clientId;
 
     protected $rules = [
-        'customerEmail' => 'required|string',
-        'orderReference' => 'exists:orders,reference', //test_bookings,reference
+        'customerIdentifier' => 'required|string',
+        'orderReference' => 'nullable|exists:orders,reference',
     ];
 
     protected function getTableQuery(): Builder
     {
-        return Order::query()->with(['user']);//->where('patient_id', $this->patientId)
+        return Order::query()->with(['user'])->where('customer_email', $this->customerIdentifier)->latest();//
     }
 
     protected function getTableColumns(): array
@@ -72,19 +72,5 @@ class ListOrders extends Component implements HasTable
     {
         $this->validate();
         $this->setSessionCustomerIdentifier($this->customerIdentifier);
-//        $this->table->shouldRender(true);
-//        $testBookings = TestBooking::query()->where('reference', $this->testBookingReference)->first();
-//
-//        if ($testBookings->customer_email != $this->customerIdentifier) {
-//            $this->testBookingReference = null;
-//            $this->alert('error', 'The email does not match booking reference');
-//
-//            return;
-//        }
-//
-//        if ($testBookings instanceof TestBooking) {
-//            $this->patientId = $testBookings->id;
-//        }
-
     }
 }

@@ -20,18 +20,17 @@ class ListUpcomingTestBookings extends Component implements HasTable
 {
     use LivewireAlert, InteractsWithTable, ManipulatesCustomerSession;
 
-    public $customerIdentifier = null;
-    public $testBookingReference;
-    public $patientId;
 
-    protected $rules = [
-        'customerEmail' => 'required|string',
-        'testBookingReference' => 'exists:test_bookings,reference', //test_bookings,reference
-    ];
+    public Patient $patient;
+
+    public function mount(Patient $patient)
+    {
+        $this->patient = $patient;
+    }
 
     protected function getTableQuery(): Builder
     {
-        return TestBooking::query()->with(['user','patient'])->where('due_date', '>=', now());//->where('patient_id', $this->patientId)
+        return TestBooking::query()->with(['user','patient'])->where('due_date', '>=', now())->where('patient_id', $this->patient->id)->latest();//
     }
 
     protected function getTableColumns(): array
@@ -44,9 +43,6 @@ class ListUpcomingTestBookings extends Component implements HasTable
             TextColumn::make('due_date')
                 ->label('Booked for')
                 ->date(),
-            //            TextColumn::make('latestSpecimenSample.created_at')
-            //                ->label('Sample collected on')
-            //                ->date(),
         ];
     }
 
@@ -58,40 +54,9 @@ class ListUpcomingTestBookings extends Component implements HasTable
         ];
     }
 
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-    public function mount()
-    {
-        $this->customerIdentifier = $this->getSessionCustomerIdentifier();
-//                $this->table->shouldRender(false);
-    }
 
     public function render()
     {
         return view('livewire.tables.filament.list-upcoming-test-bookings');
-    }
-
-    public function getTestResults()
-    {
-        $this->validate();
-        $this->setSessionCustomerIdentifier($this->customerIdentifier);
-        $patient = Patient::query()->where('email', $this->customerIdentifier)->first();
-//        $this->table->shouldRender(true);
-//        $testBookings = TestBooking::query()->where('reference', $this->testBookingReference)->first();
-//
-//        if ($testBookings->customer_email != $this->customerIdentifier) {
-//            $this->testBookingReference = null;
-//            $this->alert('error', 'The email does not match booking reference');
-//
-//            return;
-//        }
-//
-//        if ($testBookings instanceof TestBooking) {
-//            $this->patientId = $testBookings->id;
-//        }
-
     }
 }

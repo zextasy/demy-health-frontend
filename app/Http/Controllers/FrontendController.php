@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Patient;
 use App\Models\TestType;
 use App\Models\TestCenter;
 use App\Models\TestResult;
@@ -91,19 +92,38 @@ class FrontendController extends Controller
         return view('frontend.contact-us');
     }
 
-    public function testResults()
+    public function myTestResults()
     {
         return view('frontend.my-test-results');
     }
 
-    public function upcomingTestBookings()
+    public function myUpcomingTestBookings()
     {
-        return view('frontend.upcoming-test-bookings');
+        return view('frontend.my-upcoming-test-bookings');
     }
 
     public function myOrders()
     {
         return view('frontend.my-orders');
+    }
+
+    public function listTestResults(string $customerIdentifier)
+    {
+        $patient = Patient::withCustomerDetails($customerIdentifier)->firstOrFail();
+        $data['patient'] = $patient;
+        return redirect()->back();//TODO not implemented till discussion with doc about security
+    }
+
+    public function listUpcomingTestBookings(string $customerIdentifier)
+    {
+        $patient = Patient::withCustomerDetails($customerIdentifier)->firstOrFail();
+        $data['patient'] = $patient;
+        return view('frontend.list-upcoming-test-bookings', $data);
+    }
+
+    public function listOrders()
+    {
+        return view('frontend.list-orders');
     }
 
     public function viewTestBooking(int $id)

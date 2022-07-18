@@ -14,9 +14,7 @@
 
             </div>
             <div class="row justify-content-center mt-4">
-                <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                    @livewire('forms.get-my-test-results')
-                </div>
+                @livewire('tables.filament.list-test-results', ['patient' => $patient])
             </div>
         </div>
     </section>
@@ -27,5 +25,3 @@
     </section>
 
 </x-mobirise-layout>
-
-

@@ -3,29 +3,26 @@
 namespace App\Http\Livewire\Forms\Select\LivewireSelect;
 
 
-use App\Models\TestType;
+use App\Models\Country;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Asantibanez\LivewireSelect\LivewireSelect;
 
-class TestTypeSelect extends LivewireSelect
+class CountrySelect extends LivewireSelect
 {
     public function options($searchTerm = null) : Collection
     {
-        return TestType::query()
-            ->when($this->hasDependency('test_category_id'), function ($query) {
-                $query->where('test_category_id', $this->getDependingValue('test_category_id'));
-            })
+        return Country::query()
             ->when($searchTerm, function ($query, $searchTerm) {
                 $query->where(DB::raw('LOWER(name)'), 'like', '%'. strtolower($searchTerm) .'%');
             })
             ->get()
-            ->toLivewireSelectCollection('name');
+            ->toLivewireSelectCollection();
     }
 
     public function selectedOption($value)
     {
-        $model = TestType::find($value);
+        $model = Country::find($value);
 
         return optional($model)->toLivewireSelectDescription();
     }

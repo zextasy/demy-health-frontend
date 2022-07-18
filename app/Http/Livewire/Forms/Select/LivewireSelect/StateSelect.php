@@ -31,4 +31,11 @@ class StateSelect extends LivewireSelect
             ->get()
             ->toLivewireSelectCollection();
     }
+
+    public function selectedOption($value)
+    {
+        $model = State::find($value);
+
+        return optional($model)->toLivewireSelectDescription();
+    }
 }

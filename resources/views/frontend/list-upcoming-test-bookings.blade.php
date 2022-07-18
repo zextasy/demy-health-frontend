@@ -1,6 +1,6 @@
 <x-mobirise-layout>
     <section data-bs-version="5.1" class="info3 cid-sUiuU4aNwh" id="info3-b">
-        @include('components.mobirise.title', ['title' => 'Test Results', 'subTitle' => 'Submit your details and get your results'])
+        @include('components.mobirise.title', ['title' => 'Test Bookings', 'subTitle' => 'Submit your details and get your booking details'])
 
     </section>
 
@@ -9,14 +9,12 @@
         <div class="container">
             <div class="mbr-section-head">
                 <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                    <strong>Results</strong>
+                    <strong>Bookings</strong>
                 </h3>
 
             </div>
             <div class="row justify-content-center mt-4">
-                <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                    @livewire('forms.get-my-test-results')
-                </div>
+                @livewire('tables.filament.list-upcoming-test-bookings', ['patient' => $patient])
             </div>
         </div>
     </section>

@@ -26,6 +26,7 @@ class CheckoutCartRequest extends FormRequest
     {
         return [
             "customerEmail" => "required|email",
+            "paymentMethod" => "required",
         ];
     }
 

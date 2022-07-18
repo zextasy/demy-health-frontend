@@ -6,12 +6,13 @@ use Livewire\Component;
 use App\Helpers\FlashMessageHelper;
 use App\Events\GetInTouchFormSubmittedEvent;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Actions\CRM\CustomerEnquiries\CreateCustomerEnquiryAction;
 
 class GetInTouch extends Component
 {
-    use LivewireAlert;
+    use LivewireAlert, ManipulatesCustomerSession;
 
     public $customerName = null;
     public $customerEmail = null;
@@ -20,6 +21,11 @@ class GetInTouch extends Component
     protected $rules = [
         'customerEmail' => 'required|email',
     ];
+
+    public function mount()
+    {
+        $this->customerEmail = $this->getSessionCustomerEmail();
+    }
 
     public function render()
     {
@@ -30,6 +36,7 @@ class GetInTouch extends Component
     {
         $this->validate();
         $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::GENERAL)->run($this->customerEmail, $this->customerName, $this->message);
+        $this->setSessionCustomerEmail($this->customerEmail);
         GetInTouchFormSubmittedEvent::dispatch($customerEnquiry->id);
         $this->flash('success', FlashMessageHelper::GENERAL_ENQUIRY_REQUEST_SUCCESSFUL, [], '/');
     }

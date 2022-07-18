@@ -110,12 +110,22 @@
         </div>
     @endif
     <div class="dragArea row">
-        <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-            <input type="text" wire:model.lazy="customerGender" class="form-control" placeholder="Please select your gender">
+        <div class="col-md col-sm-12 form-group mb-3" data-for="select">
+            <select name="selectedCustomerGender" wire:model.lazy="customerGender" class="form-control">
+                <option value="" selected>Please select your gender</option>
+                @foreach(\App\Enums\GenderEnum::cases() as $enumOption)
+                    <option value="{{ $enumOption->value }}">{{ $enumOption->name }}</option>
+                @endforeach
+            </select>
             @error('customerGender') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
-        <div class="col-md col-sm-12 form-group mb-3 " data-for="phone">
-            <input type="text" wire:model.lazy="customerCountryId" class="form-control" placeholder="Please select your nationality">
+        <div class="col-md col-sm-12 form-group mb-3 " data-for="select">
+            <livewire:forms.select.livewire-select.country-select
+                name="selectedCustomerCountry"
+                :value="$customerCountryId"
+                placeholder="Please select your nationality"
+                :searchable="true"
+            />
             @error('customerCountryId') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-md col-sm-12 form-group mb-3" data-for="text">
