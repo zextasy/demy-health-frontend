@@ -1,4 +1,3 @@
-
 @props([
     'title' => null,
 ])
@@ -44,8 +43,10 @@
         @endif
 
         @foreach (\Filament\Facades\Filament::getStyles() as $name => $path)
-            @if (Str::of($path)->startsWith(['http://', 'https://']))
+            @if (\Illuminate\Support\Str::of($path)->startsWith(['http://', 'https://']))
                 <link rel="stylesheet" href="{{ $path }}" />
+            @elseif (\Illuminate\Support\Str::of($path)->startsWith('<'))
+                {!! $path !!}
             @else
                 <link rel="stylesheet" href="{{ route('filament.asset', [
                     'file' => "{$name}.css",
@@ -53,7 +54,7 @@
             @endif
         @endforeach
 
-        <link rel="stylesheet" href="{{ \Filament\Facades\Filament::getThemeUrl() }}" />
+        {{ \Filament\Facades\Filament::getThemeLink() }}
 
         {{ \Filament\Facades\Filament::renderHook('styles.end') }}
 
@@ -78,6 +79,8 @@
 
         {{ $slot }}
 
+        {{ \Filament\Facades\Filament::renderHook('scripts.start') }}
+
         @livewireScripts
 
         <script>
@@ -85,10 +88,12 @@
         </script>
 
         @foreach (\Filament\Facades\Filament::getBeforeCoreScripts() as $name => $path)
-            @if (Str::of($path)->startsWith(['http://', 'https://']))
-                <script src="{{ $path }}"></script>
+            @if (\Illuminate\Support\Str::of($path)->startsWith(['http://', 'https://']))
+                <script defer src="{{ $path }}"></script>
+            @elseif (\Illuminate\Support\Str::of($path)->startsWith('<'))
+                {!! $path !!}
             @else
-                <script src="{{ route('filament.asset', [
+                <script defer src="{{ route('filament.asset', [
                     'file' => "{$name}.js",
                 ]) }}"></script>
             @endif
@@ -96,26 +101,26 @@
 
         @stack('beforeCoreScripts')
 
-        {{ \Filament\Facades\Filament::renderHook('scripts.start') }}
-
-        <script src="{{ route('filament.asset', [
+        <script defer src="{{ route('filament.asset', [
             'id' => Filament\get_asset_id('app.js'),
             'file' => 'app.js',
         ]) }}"></script>
 
         @foreach (\Filament\Facades\Filament::getScripts() as $name => $path)
-            @if (Str::of($path)->startsWith(['http://', 'https://']))
-                <script src="{{ $path }}"></script>
+            @if (\Illuminate\Support\Str::of($path)->startsWith(['http://', 'https://']))
+                <script defer src="{{ $path }}"></script>
+            @elseif (\Illuminate\Support\Str::of($path)->startsWith('<'))
+                {!! $path !!}
             @else
-                <script src="{{ route('filament.asset', [
+                <script defer src="{{ route('filament.asset', [
                     'file' => "{$name}.js",
                 ]) }}"></script>
             @endif
         @endforeach
 
-        {{ \Filament\Facades\Filament::renderHook('scripts.end') }}
-
         @stack('scripts')
+
+        {{ \Filament\Facades\Filament::renderHook('scripts.end') }}
 
         {{ \Filament\Facades\Filament::renderHook('body.end') }}
     </body>
