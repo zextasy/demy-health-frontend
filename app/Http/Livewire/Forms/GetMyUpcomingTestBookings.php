@@ -39,6 +39,11 @@ class GetMyUpcomingTestBookings extends Component
     {
         $this->validate();
         $this->setSessionCustomerIdentifier($this->customerIdentifier);
+        $patient = Patient::withCustomerDetails($this->customerIdentifier)->first();
+        if (empty($patient)) {
+            $this->alert('error', 'No valid patient data found');
+            return;
+        }
         $this->redirect(route('frontend.my-test-bookings.list', $this->customerIdentifier));
 
     }

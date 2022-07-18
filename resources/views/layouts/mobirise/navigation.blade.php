@@ -127,9 +127,10 @@
                         @auth
                             @if(auth()->user()->hasPermissionTo('backend'))
                                 <a class="text-black dropdown-item text-primary display-4" href="{{url('admin')}}">Admin Section</a>
+                            @else
+                                <a class="text-black dropdown-item text-primary display-4" href="{{url('admin')}}">My Account</a>
+                                <a class="text-black dropdown-item text-primary display-4" href="{{url('admin/my-test-results')}}">My Results</a>
                             @endif
-                            <a class="text-black dropdown-item text-primary display-4" href="{{url('admin')}}">My Account</a>
-                            <a class="text-black dropdown-item text-primary display-4" href="{{url('admin/my-test-results')}}">My Results</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
