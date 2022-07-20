@@ -23,6 +23,8 @@ class OrderResource extends Resource
 
     protected static ?string $navigationGroup = 'CRM';
 
+    protected static ?int $navigationSort = 5;
+
     protected static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
@@ -47,7 +49,7 @@ class OrderResource extends Resource
                 TextInput::make('total_amount')
                     ->disabled()
                     ->numeric(),
-                Select::make('payment_type')
+                Select::make('payment_method')
                     ->options(PaymentMethodEnum::optionsAsSelectArray())
                     ->disabled(),
                 TextInput::make('status')
@@ -61,7 +63,7 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
-                Tables\Columns\BadgeColumn::make('payment_type')->sortable()
+                Tables\Columns\BadgeColumn::make('payment_method')->sortable()
                     ->enum(PaymentMethodEnum::optionsAsSelectArray()),
                 Tables\Columns\BadgeColumn::make('status')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()

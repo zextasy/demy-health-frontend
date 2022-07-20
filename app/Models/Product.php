@@ -30,6 +30,7 @@ class Product extends BaseModel implements HasMedia, OrderableItemContract
     protected $casts = [
         'extra_information' => 'array',
         'should_call_in_for_details' => 'boolean',
+        'price' => 'float'
     ];
 //    protected $with = ['prices','currentPrice'];
     //endregion

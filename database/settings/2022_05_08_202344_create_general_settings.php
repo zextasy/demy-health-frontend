@@ -7,6 +7,9 @@ class CreateGeneralSettings extends SettingsMigration
     public function up(): void
     {
         $this->migrator->add('general.site_name', 'DemyHealth');
+        $this->migrator->add('general.logo_url', '/images/logo.png');
+        $this->migrator->add('general.default_locale', 'en-US');
+        $this->migrator->add('general.default_currency', 'ngn');
         $this->migrator->add('general.default_prefix', 'DM-');
         $this->migrator->add('general.test_booking_prefix', 'DM-TB-');
         $this->migrator->add('general.test_result_prefix', 'DM-RES-');

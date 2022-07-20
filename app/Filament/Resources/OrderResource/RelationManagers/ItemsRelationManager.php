@@ -4,6 +4,7 @@ namespace App\Filament\Resources\OrderResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
+use App\Settings\GeneralSettings;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
@@ -54,13 +55,9 @@ class ItemsRelationManager extends HasManyRelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('quantity'),
-                Tables\Columns\TextColumn::make('total_amount'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('price')->money('ngn'),
+                Tables\Columns\TextColumn::make('total_amount')->money('ngn'),
             ])
             ->filters([
                 //

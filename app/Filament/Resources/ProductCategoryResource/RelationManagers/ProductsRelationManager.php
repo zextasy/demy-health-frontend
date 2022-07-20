@@ -32,7 +32,7 @@ class ProductsRelationManager extends BelongsToManyRelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable(),
                 Tables\Columns\TextColumn::make('model')->sortable(),
-                Tables\Columns\TextColumn::make('formatted_price')->label('price')->sortable(),
+                Tables\Columns\TextColumn::make('price')->money('ngn')->sortable(),
             ])
             ->filters([
                 //

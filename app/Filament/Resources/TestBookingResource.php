@@ -23,6 +23,8 @@ class TestBookingResource extends Resource
 
     protected static ?string $navigationGroup = 'CRM';
 
+    protected static ?int $navigationSort = 5;
+
     protected static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');

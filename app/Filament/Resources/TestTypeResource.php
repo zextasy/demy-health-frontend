@@ -75,7 +75,7 @@ class TestTypeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('test_id')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('formatted_price')->label('Price')->sortable(),
+                Tables\Columns\TextColumn::make('price')->money('ngn')->sortable(),
                 Tables\Columns\TextColumn::make('category.name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('tat')->sortable(),
                 Tables\Columns\TextColumn::make('test_bookings_count')

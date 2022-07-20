@@ -46,7 +46,7 @@ class BasePricesRelationManager extends MorphManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('formatted_amount')->label('Price')->sortable(),
+                Tables\Columns\TextColumn::make('amount')->money('ngn')->label('Price')->sortable(),
                 Tables\Columns\TextColumn::make('start_date')->label('From')->date()->sortable(),
                 Tables\Columns\TextColumn::make('end_date')->label('To')->date()->sortable(),
             ])

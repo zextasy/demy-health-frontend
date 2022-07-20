@@ -71,7 +71,7 @@ class BaseBelongsToManyTestTypesRelationManager extends BelongsToManyRelationMan
             ->columns([
                 Tables\Columns\TextColumn::make('test_id')->sortable(),
                 Tables\Columns\TextColumn::make('description')->sortable(),
-                Tables\Columns\TextColumn::make('formatted_price')->label('price')->sortable(),
+                Tables\Columns\TextColumn::make('price')->money('ngn')->sortable(),
             ])
             ->filters([
                 //

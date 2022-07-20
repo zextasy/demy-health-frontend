@@ -20,6 +20,7 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use App\Enums\PatientAcquisitionTypeEnum;
+use Filament\Forms\Components\Wizard\Step;
 use App\Filament\Resources\PatientResource;
 use Filament\Forms\Components\MarkdownEditor;
 use App\Actions\Patients\CreatePatientAction;
@@ -30,11 +31,13 @@ class RegisterPatient extends Page implements HasForms
 
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-user-add';
 
     protected static string $view = 'filament.pages.register-patient';
 
     protected static ?string $navigationGroup = 'CRM';
+
+    protected static ?int $navigationSort = 1;
 
     public $acquisition;
     public $detailLevel;
@@ -60,7 +63,7 @@ class RegisterPatient extends Page implements HasForms
     {
         return [
             Wizard::make([
-                Wizard\Step::make('Intro')
+                Step::make('Intro')
                     ->schema([
                         Fieldset::make('Entry')->schema([
                             TextInput::make('reference')
@@ -73,7 +76,7 @@ class RegisterPatient extends Page implements HasForms
                                 ->required(),
                         ])->columns(2),
                     ]),
-                Wizard\Step::make('Patient Data')
+                Step::make('Patient Data')
                     ->schema([
                         Fieldset::make('Name')->schema([
                             TextInput::make('firstName')
@@ -150,7 +153,7 @@ class RegisterPatient extends Page implements HasForms
                         ])->hidden(fn (Closure $get) => $get('detailLevel') == PatientDataDetailEnum::NONE->value)
                             ->columns(2),
                     ]),
-                Wizard\Step::make('Referral')->schema([
+                Step::make('Referral')->schema([
                     Fieldset::make('Referral')->schema([
                         TextInput::make('referralCode')
                             ->maxLength(255),

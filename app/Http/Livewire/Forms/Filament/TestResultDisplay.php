@@ -29,7 +29,6 @@ class TestResultDisplay extends Component implements HasForms
 
     protected function getFormSchema(): array
     {
-        ray($this->testResult);
         return [
             Fieldset::make('General Info')->schema([
                 TextInput::make('reference')

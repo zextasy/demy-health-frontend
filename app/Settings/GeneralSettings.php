@@ -7,6 +7,9 @@ use Spatie\LaravelSettings\Settings;
 class GeneralSettings extends Settings
 {
     public string $site_name;
+    public string $logo_url;
+    public string $default_locale;
+    public string $default_currency;
     public string $default_prefix;
     public string $test_booking_prefix;
     public string $test_result_prefix;
@@ -18,8 +21,8 @@ class GeneralSettings extends Settings
     public string $patient_prefix;
     public string $referral_code_prefix;
 
-    public $business_start_hour;
-    public $business_end_hour;
+    public string $business_start_hour;
+    public string $business_end_hour;
 
     public static function group(): string
     {

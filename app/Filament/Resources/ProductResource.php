@@ -64,7 +64,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('model')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('country')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('formatted_price')->label('price')->sortable(),
+                Tables\Columns\TextColumn::make('price')->money('ngn')->sortable(),
                 Tables\Columns\TextColumn::make('extra_information')->searchable(),
 
             ])

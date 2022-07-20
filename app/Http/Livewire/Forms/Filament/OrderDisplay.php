@@ -29,7 +29,6 @@ class OrderDisplay extends Component implements HasForms
 
     protected function getFormSchema(): array
     {
-        ray($this->order);
         return [
             Fieldset::make('Details')->schema([
                 TextInput::make('reference')

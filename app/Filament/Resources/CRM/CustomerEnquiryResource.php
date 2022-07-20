@@ -22,6 +22,8 @@ class CustomerEnquiryResource extends Resource
 
     protected static ?string $navigationGroup = 'CRM';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
