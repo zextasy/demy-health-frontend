@@ -32,8 +32,13 @@ class CreatePatientAction {
     private ?TestBooking $testBooking = null;
     private Patient $patient;
 
-    public function run(string $firstName, string $lastName,?GenderEnum $genderEnum = null) : Patient
+    public function run(string $firstName, string $lastName, int|GenderEnum $genderEnum = null) : Patient
     {
+        if (isset($genderEnum)){
+            ray($genderEnum);
+            $genderEnum = is_int($genderEnum) ? GenderEnum::from($genderEnum) : $genderEnum;
+            ray($genderEnum);
+        }
         $this->patient  = Patient::make([
             'reference' => $this->reference,
             'first_name' => $firstName,

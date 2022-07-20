@@ -69,13 +69,11 @@ class GenerateOrderFromCartAction
         $TestBookingPatient = Patient::withCustomerDetails($patientDetails)->first();
         if (empty($TestBookingPatient)) {
             $customerDateOfBirth = isset($customerDateOfBirth) ? Carbon::parse($cartItem->attributes->customerDateOfBirth) : null;
-            $customerGenderEnum = isset($cartItem->attributes->customerGender) ? GenderEnum::from(intval($cartItem->attributes->customerGender)) : null;
-            ray($cartItem->attributes->customerGender,intval($cartItem->attributes->customerGender), $customerGenderEnum);
             $TestBookingPatient = (new CreatePatientAction)
                 ->withContactDetails($cartItem->attributes->customerEmail, $cartItem->attributes->customerPhoneNumber)
                 ->withAgeDetails(null,$customerDateOfBirth,null)
                 ->withCountryDetails($cartItem->attributes->customerCountryId,$cartItem->attributes->customerPassportNumber)
-                ->run($cartItem->attributes->customerFirstName, $cartItem->attributes->customerLastName, $customerGenderEnum);
+                ->run($cartItem->attributes->customerFirstName, $cartItem->attributes->customerLastName, $cartItem->attributes->customerGender);
         }
         $locationTypeEnum = LocationTypeEnum::from($cartItem->attributes->locationType);
         $dueDate = Carbon::parse($cartItem->attributes->dueDate);
