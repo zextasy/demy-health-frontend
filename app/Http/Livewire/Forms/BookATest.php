@@ -49,6 +49,8 @@ class BookATest extends Component
         'selectedStateForTestCenterBookingUpdated' => 'setSelectedStateForTestCenterBooking',
         'selectedLocalGovernmentAreaUpdated' => 'setSelectedLocalGovernmentArea',
         'selectedTestTypeUpdated' => 'setSelectedTestType',
+        'postBookingCart' => 'goToCart',
+        'postBookingHome' => 'goHome',
     ];
 
     protected function rules(): array
@@ -112,7 +114,19 @@ class BookATest extends Component
             $this->setSessionCustomerEmail($this->customerEmail);
             TestAddedToCartEvent::dispatch();
 
-            $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');
+            $this->alert('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [
+                'position' => 'center',
+                'showConfirmButton' => true,
+                'confirmButtonText' => 'View Cart',
+//                'showDenyButton' => true,
+//                'denyButtonText' => 'Cancel',
+                'showCancelButton' => true,
+                'cancelButtonText' => 'Home',
+                'onConfirmed' => 'postBookingCart',
+                'onDismissed' => 'postBookingHome',
+                'allowOutsideClick' => false,
+                'timer' => null
+            ]);
         }
         catch (ValidationException $e) {
             $this->alert('error', $e->getMessage());
@@ -148,5 +162,14 @@ class BookATest extends Component
         $this->selectedTestType = $object['value'];
     }
 
+    public function goToCart()
+    {
+        $this->redirect(route('frontend.cart.display'));
+    }
+
+    public function goHome()
+    {
+        $this->redirect(route('home'));
+    }
 
 }
