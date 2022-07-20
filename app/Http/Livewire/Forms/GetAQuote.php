@@ -48,7 +48,7 @@ class GetAQuote extends Component
     public function submit()
     {
         $this->validate();
-        $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedState, $this->selectedLocalGovernmentArea);
+        $newAddress = (new CreateAddressAction)->run($this->addressLine1, $this->addressLine2, $this->city, $this->selectedLocalGovernmentArea, $this->selectedState);
         $customerEnquiry = (new CreateCustomerEnquiryAction)->forType(EnquiryTypeEnum::QUOTE)->run($this->customerEmail, $this->customerName, $this->message);
         $newAddress->customerEnquiries()->save($customerEnquiry);
         $this->setSessionCustomerEmail($this->customerEmail);

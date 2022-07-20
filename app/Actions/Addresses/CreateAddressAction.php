@@ -8,7 +8,7 @@ class CreateAddressAction
 {
 
 
-    public function run($addressLine1, $addressLine2, $city, $stateId, $localGovernmentAreaId): Address
+    public function run($addressLine1, $addressLine2, $city, $localGovernmentAreaId, $stateId): Address
     {
         return Address::create([
             'line_1' => $addressLine1,

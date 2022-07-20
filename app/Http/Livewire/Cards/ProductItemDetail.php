@@ -47,7 +47,7 @@ class ProductItemDetail extends Component
             'price' => $this->productPrice,
             'quantity' => 1,
             'attributes' => array(
-                'type' => 'Product'
+                'type' => Product::class
             ),
             'associatedModel' => $this->product
         ));

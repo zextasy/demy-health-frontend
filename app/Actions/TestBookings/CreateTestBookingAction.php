@@ -17,15 +17,18 @@ class CreateTestBookingAction {
     private ?int $patientId = null;
     private ?int $testCenterId = null;
     private TestBooking $testBooking;
+    private ?string $customerEmail;
+    private ?string $customerPhoneNumber;
 
-    public function run(TestType|int $testType, string $customerEmail, LocationTypeEnum $locationTypeEnum, Carbon $dueDate) : TestBooking
+    public function run(TestType|int $testType, LocationTypeEnum $locationTypeEnum, Carbon $dueDate) : TestBooking
     {
         $testTypeId = $testType instanceof TestType ? $testType->id : $testType;
         $this->testBooking  = TestBooking::make([
             'test_type_id' => $testTypeId,
-            'patient_id' => $this->patientId,
-            'customer_email' => $customerEmail,
             'location_type' => $locationTypeEnum,
+            'patient_id' => $this->patientId,
+            'customer_email' => $this->customerEmail,
+            'customer_phone_number' => $this->customerPhoneNumber,
             'test_center_id' => $this->testCenterId,
             'due_date' =>  $dueDate,
         ]);
@@ -53,6 +56,13 @@ class CreateTestBookingAction {
             $this->patientId = $patient instanceof Patient ? $patient->id : $patient;
         }
 
+        return $this;
+    }
+
+    public function withCustomerCommunicationDetails( ?string $customerEmail, ?string $customerPhoneNumber): self
+    {
+        $this->customerEmail = $customerEmail;
+        $this->customerPhoneNumber = $customerPhoneNumber;
         return $this;
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
 use App\Models\TestType;
+use App\Models\TestBooking;
 use App\Helpers\FlashMessageHelper;
 use Illuminate\Contracts\View\View;
 use App\Events\TestAddedToCartEvent;
@@ -85,13 +86,14 @@ class BookATest extends Component
 
             $testType = TestType::find($this->selectedTestType);
 
+
             Cart::add(array(
                 'id' => 'Test Booking - ' . $testType->test_id,
                 'name' => $testType->name,
                 'price' => $testType->price,
                 'quantity' => 1,
                 'attributes' => array(
-                    'type' => 'TestBooking',
+                    'type' => TestBooking::class,
                     'customerFirstName' => $this->customerFirstName,
                     'customerLastName' => $this->customerLastName,
                     'customerEmail' => $this->customerEmail,
