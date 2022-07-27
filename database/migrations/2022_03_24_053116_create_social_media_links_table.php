@@ -16,7 +16,7 @@ class CreateSocialMediaLinksTable extends Migration
         Schema::create('social_media_links', function (Blueprint $table) {
             $table->id();
             $table->string('url');
-            $table->unsignedTinyInteger('site');//SiteEnum
+            $table->unsignedTinyInteger('site'); //SiteEnum
             $table->morphs('linkable');
             $table->timestamps();
             $table->softDeletes();

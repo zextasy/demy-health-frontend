@@ -2,24 +2,21 @@
 
 namespace App\Http\Livewire\Tables\Filament;
 
-use Livewire\Component;
 use App\Models\Patient;
 use App\Models\TestBooking;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Actions\LinkAction;
-use Illuminate\Support\Facades\Session;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Filament\Tables\Concerns\InteractsWithTable;
-use App\Traits\Livewire\ManipulatesCustomerSession;
+use Livewire\Component;
 
 class ListUpcomingTestBookings extends Component implements HasTable
 {
     use LivewireAlert, InteractsWithTable, ManipulatesCustomerSession;
-
 
     public Patient $patient;
 
@@ -30,7 +27,7 @@ class ListUpcomingTestBookings extends Component implements HasTable
 
     protected function getTableQuery(): Builder
     {
-        return TestBooking::query()->with(['user','patient'])->where('due_date', '>=', now())->where('patient_id', $this->patient->id)->latest();//
+        return TestBooking::query()->with(['user', 'patient'])->where('due_date', '>=', now())->where('patient_id', $this->patient->id)->latest(); //
     }
 
     protected function getTableColumns(): array
@@ -53,7 +50,6 @@ class ListUpcomingTestBookings extends Component implements HasTable
                 ->url(fn (TestBooking $record): string => route('frontend.test-bookings.show', $record->id)),
         ];
     }
-
 
     public function render()
     {

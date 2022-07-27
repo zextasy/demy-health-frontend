@@ -6,5 +6,4 @@ use App\Filament\RelationManagers\BaseHasManyTestTypesRelationManager;
 
 class TestTypesRelationManager extends BaseHasManyTestTypesRelationManager
 {
-
 }

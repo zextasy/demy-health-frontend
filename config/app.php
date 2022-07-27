@@ -236,7 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //extras - zee
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
 
     ],
 

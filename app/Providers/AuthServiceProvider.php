@@ -2,14 +2,13 @@
 
 namespace App\Providers;
 
+use App\Policies\GeneralSettingsPolicy;
+use App\Policies\PermissionPolicy;
 use App\Policies\RolePolicy;
 use App\Settings\GeneralSettings;
-use Spatie\Permission\Models\Role;
-use App\Policies\PermissionPolicy;
-use App\Policies\GeneralSettingsPolicy;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AuthServiceProvider extends ServiceProvider
 {

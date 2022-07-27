@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use PDO;
+use App\Http\Controllers\Controller as Controller;
 use App\Models\TestCenter;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller as Controller;
+use PDO;
 
 class BackendController extends Controller
 {
@@ -28,7 +28,7 @@ class BackendController extends Controller
     public function clear(TestCenter $testCenter)
     {
         Cart::clear();
+
         return redirect()->back();
     }
-
 }

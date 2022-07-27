@@ -7,7 +7,6 @@ use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
-use App\Filament\RelationManagers\BaseBelongsToManyLocalGovernmentAreasRelationManager;
 
 class LocalGovernmentAreasRelationManager extends HasManyRelationManager
 {

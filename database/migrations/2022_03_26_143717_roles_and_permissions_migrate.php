@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesAndPermissionsMigrate extends Migration
 {
@@ -42,12 +40,12 @@ class RolesAndPermissionsMigrate extends Migration
 
     private $permissions = [
         'admin',
-         'backend',
+        'backend',
         'frontend',
         'process test booking',
     ];
 
-    private $roles       = [
+    private $roles = [
         'admin',
         'senior manager',
         'manager',
@@ -59,17 +57,15 @@ class RolesAndPermissionsMigrate extends Migration
         'customer',
     ];
 
-    private function rolePermissions($role){
-
+    private function rolePermissions($role)
+    {
         $role_permissions = [
-            'admin' => ['admin', 'backend', 'frontend','process test booking',],
-             'manager' => ['backend','process test booking',],
+            'admin' => ['admin', 'backend', 'frontend', 'process test booking'],
+            'manager' => ['backend', 'process test booking'],
             'editor' => ['backend'],
-             'customer' => ['frontend'],
+            'customer' => ['frontend'],
         ];
 
-        return (isset($role_permissions[$role]))? $role_permissions[$role] : [];
+        return (isset($role_permissions[$role])) ? $role_permissions[$role] : [];
     }
-
 }
-?>

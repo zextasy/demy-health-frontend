@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Filament\Facades\Filament;
 use App\Filament\Pages\Profile;
+use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
 use Illuminate\Support\ServiceProvider;
 
@@ -36,12 +36,12 @@ class CustomFilamentServiceProvider extends ServiceProvider
             ]);
         });
         Filament::registerPages([
-            Profile::class
+            Profile::class,
         ]);
         Filament::registerUserMenuItems([
             UserMenuItem::make()
                 ->label('My Details')
-                ->url("/admin/profile")
+                ->url('/admin/profile')
                 ->icon('heroicon-o-user'),
             // ...
         ]);

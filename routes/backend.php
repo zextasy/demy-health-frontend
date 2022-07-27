@@ -1,21 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BackendController;
-use App\Http\Controllers\Backend\UserController;
-use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\AddressController;
-use App\Http\Controllers\Backend\ProductController;
-use App\Http\Controllers\Backend\TestTypeController;
-use App\Http\Controllers\Backend\TeamMemberController;
-use App\Http\Controllers\Backend\TestCenterController;
-use App\Http\Controllers\Backend\TestBookingController;
-use App\Http\Controllers\Backend\SpecimenTypeController;
-use App\Http\Controllers\Backend\TestCategoryController;
-use App\Http\Controllers\Backend\ProductCategoryController;
-use App\Http\Controllers\Backend\SocialMediaLinkController;
 use App\Http\Controllers\Backend\LocalGovernmentAreaController;
+use App\Http\Controllers\Backend\ProductCategoryController;
+use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SocialMediaLinkController;
+use App\Http\Controllers\Backend\SpecimenTypeController;
+use App\Http\Controllers\Backend\StateController;
+use App\Http\Controllers\Backend\TeamMemberController;
+use App\Http\Controllers\Backend\TestBookingController;
+use App\Http\Controllers\Backend\TestCategoryController;
+use App\Http\Controllers\Backend\TestCenterController;
+use App\Http\Controllers\Backend\TestTypeController;
+use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\BackendController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +26,7 @@ use App\Http\Controllers\Backend\LocalGovernmentAreaController;
 |
 */
 
-Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->group(function () {
+Route::middleware(['backend', 'auth'])->prefix('backend')->name('backend.')->group(function () {
     Route::get('/info', [BackendController::class, 'info'])
         ->name('info');
 
@@ -40,7 +39,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'address.edit',
             'update' => 'address.update',
             'destroy' => 'address.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('local-government-area', LocalGovernmentAreaController::class, [
@@ -52,7 +51,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'local-government-area.edit',
             'update' => 'local-government-area.update',
             'destroy' => 'local-government-area.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('product-category', ProductCategoryController::class, [
@@ -64,7 +63,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'product-category.edit',
             'update' => 'product-category.update',
             'destroy' => 'product-category.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('product', ProductController::class, [
@@ -76,7 +75,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'product.edit',
             'update' => 'product.update',
             'destroy' => 'product.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('social-media-link', SocialMediaLinkController::class, [
@@ -88,7 +87,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'social-media-link.edit',
             'update' => 'social-media-link.update',
             'destroy' => 'social-media-link.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('specimen-type', SpecimenTypeController::class, [
@@ -100,7 +99,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'specimen-type.edit',
             'update' => 'specimen-type.update',
             'destroy' => 'specimen-type.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('state', StateController::class, [
@@ -112,7 +111,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'state.edit',
             'update' => 'state.update',
             'destroy' => 'state.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('team-member', TeamMemberController::class, [
@@ -124,7 +123,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'team-member.edit',
             'update' => 'team-member.update',
             'destroy' => 'team-member.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('test-booking', TestBookingController::class, [
@@ -136,7 +135,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'test-booking.edit',
             'update' => 'test-booking.update',
             'destroy' => 'test-booking.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('test-category', TestCategoryController::class, [
@@ -148,7 +147,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'test-category.edit',
             'update' => 'test-category.update',
             'destroy' => 'test-category.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('test-center', TestCenterController::class, [
@@ -160,7 +159,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'test-center.edit',
             'update' => 'test-center.update',
             'destroy' => 'test-center.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('test-type', TestTypeController::class, [
@@ -172,7 +171,7 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'test-type.edit',
             'update' => 'test-type.update',
             'destroy' => 'test-type.destroy',
-        ]
+        ],
     ]);
 
     Route::resource('user', UserController::class, [
@@ -184,6 +183,6 @@ Route::middleware(['backend','auth'])->prefix('backend')->name('backend.')->grou
             'edit' => 'user.edit',
             'update' => 'user.update',
             'destroy' => 'user.destroy',
-        ]
+        ],
     ]);
 });

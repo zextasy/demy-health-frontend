@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait MorphsOrders
 {
-
     public function orders(): MorphMany
     {
         return $this->MorphMany(Order::class, 'orderable');

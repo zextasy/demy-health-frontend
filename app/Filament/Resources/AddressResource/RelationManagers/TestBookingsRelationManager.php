@@ -6,5 +6,4 @@ use App\Filament\RelationManagers\BaseMorphManyTestBookingsRelationManager;
 
 class TestBookingsRelationManager extends BaseMorphManyTestBookingsRelationManager
 {
-
 }

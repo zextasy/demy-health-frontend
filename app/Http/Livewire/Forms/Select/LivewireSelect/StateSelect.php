@@ -2,15 +2,15 @@
 
 namespace App\Http\Livewire\Forms\Select\LivewireSelect;
 
-
 use App\Models\State;
+use Asantibanez\LivewireSelect\LivewireSelect;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Asantibanez\LivewireSelect\LivewireSelect;
 
 class StateSelect extends LivewireSelect
 {
     public bool $isForSample = false;
+
     public bool $isForTestCenter = false;
 
     public function options($searchTerm = null): Collection
@@ -26,7 +26,7 @@ class StateSelect extends LivewireSelect
                 $query->where('test_category_id', $this->getDependingValue('test_category_id'));
             })
             ->when($searchTerm, function ($query, $searchTerm) {
-                $query->where(DB::raw('LOWER(name)'), 'like', '%'. strtolower($searchTerm) .'%');
+                $query->where(DB::raw('LOWER(name)'), 'like', '%'.strtolower($searchTerm).'%');
             })
             ->get()
             ->toLivewireSelectCollection();

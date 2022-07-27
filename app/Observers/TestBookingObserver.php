@@ -3,12 +3,10 @@
 namespace App\Observers;
 
 use App\Models\TestBooking;
-use App\Helpers\ModelHelper;
-use App\Settings\GeneralSettings;
 
 class TestBookingObserver
 {
-    public function creating (TestBooking $model)
+    public function creating(TestBooking $model)
     {
         if (empty($model->customer_email)) {
             $model->customer_email = $model->patient->email;

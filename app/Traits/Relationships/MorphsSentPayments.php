@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait MorphsSentPayments
 {
-
     public function paymentsMade(): MorphMany
     {
         return $this->morphMany(Payment::class, 'payer');

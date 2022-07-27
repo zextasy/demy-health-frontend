@@ -4,13 +4,10 @@ namespace App\Jobs;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Darryldecode\Cart\CartCollection;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Actions\Orders\GenerateOrderFromCartAction;
 
 class GenerateInvoiceFromOrderJob implements ShouldQueue
 {
@@ -35,6 +32,5 @@ class GenerateInvoiceFromOrderJob implements ShouldQueue
      */
     public function handle()
     {
-
     }
 }

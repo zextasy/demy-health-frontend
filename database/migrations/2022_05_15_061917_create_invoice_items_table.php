@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('invoice_id')->constrained();
             $table->string('name');
-            $table->unsignedDecimal('price',12);
+            $table->unsignedDecimal('price', 12);
             $table->unsignedInteger('quantity')->default(1);
             $table->json('attributes')->nullable();
             $table->morphs('invoiceable_item');

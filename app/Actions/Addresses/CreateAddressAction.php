@@ -6,8 +6,6 @@ use App\Models\Address;
 
 class CreateAddressAction
 {
-
-
     public function run($addressLine1, $addressLine2, $city, $localGovernmentAreaId, $stateId): Address
     {
         return Address::create([

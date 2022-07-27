@@ -13,5 +13,4 @@ trait HasSelectArrayOptions
             ? array_column($cases, 'name', 'value')
             : array_column($cases, 'value');
     }
-
 }

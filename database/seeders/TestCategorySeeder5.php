@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\TestType;
 use App\Models\SpecimenType;
 use App\Models\TestCategory;
+use App\Models\TestType;
 use Illuminate\Database\Seeder;
 
 class TestCategorySeeder5 extends Seeder

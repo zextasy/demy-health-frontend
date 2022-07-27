@@ -6,5 +6,4 @@ use App\Filament\RelationManagers\BasePricesRelationManager;
 
 class PricesRelationManager extends BasePricesRelationManager
 {
-
 }

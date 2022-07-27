@@ -2,15 +2,15 @@
 
 namespace App\Filament\Resources\CRM;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
-use Filament\Resources\Resource;
-use App\Models\CRM\CustomerEnquiry;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Filament\Resources\CRM\CustomerEnquiryResource\Pages;
 use App\Filament\Resources\CRM\CustomerEnquiryResource\RelationManagers;
+use App\Models\CRM\CustomerEnquiry;
+use Filament\Forms;
+use Filament\Resources\Form;
+use Filament\Resources\Resource;
+use Filament\Resources\Table;
+use Filament\Tables;
 
 class CustomerEnquiryResource extends Resource
 {

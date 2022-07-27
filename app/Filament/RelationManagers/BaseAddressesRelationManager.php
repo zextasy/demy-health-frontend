@@ -2,13 +2,13 @@
 
 namespace App\Filament\RelationManagers;
 
-use Filament\Forms;
 use App\Models\State;
+use Filament\Forms;
 use Filament\Resources\Form;
-use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\MorphToManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Model;
 
 class BaseAddressesRelationManager extends MorphToManyRelationManager
 {
@@ -56,15 +56,16 @@ class BaseAddressesRelationManager extends MorphToManyRelationManager
                     ->label('State')
                     ->options(State::all()->toSelectArray())
                     ->reactive()
-                    ->afterStateUpdated(fn( callable $set) => $set('local_government_area_id', null))
+                    ->afterStateUpdated(fn (callable $set) => $set('local_government_area_id', null))
                     ->required(),
                 Forms\Components\Select::make('local_government_area_id')
                     ->label('Local Government Area')
                     ->options(function (callable $get) {
                         $state = State::find($get('state_id'));
-                        if (! $state){
+                        if (! $state) {
                             return [];
                         }
+
                         return $state->localGovernmentAreas->toSelectArray();
                     })
                     ->required(),
@@ -84,6 +85,6 @@ class BaseAddressesRelationManager extends MorphToManyRelationManager
             ->filters([
                 //
             ])
-            ->defaultSort('line_1','desc');
+            ->defaultSort('line_1', 'desc');
     }
 }

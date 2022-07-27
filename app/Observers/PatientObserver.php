@@ -3,14 +3,12 @@
 namespace App\Observers;
 
 use App\Models\Patient;
-use App\Helpers\ModelHelper;
-use App\Settings\GeneralSettings;
 
 class PatientObserver
 {
-    public function creating (Patient $model)
+    public function creating(Patient $model)
     {
-        if (empty($model->age_classification) && isset($model->date_of_birth)){
+        if (empty($model->age_classification) && isset($model->date_of_birth)) {
             $model->age_classification = $model->resolveAgeClassification($model->date_of_birth);
         }
     }

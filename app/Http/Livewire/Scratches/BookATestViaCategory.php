@@ -2,48 +2,63 @@
 
 namespace App\Http\Livewire\Scratches;
 
-use App\Models\User;
-use App\Models\State;
-use Livewire\Component;
+use App\Enums\TestBookings\LocationTypeEnum;
+use App\Helpers\FlashMessageHelper;
 use App\Models\Address;
-use App\Models\TestType;
-use App\Models\TestCenter;
+use App\Models\LocalGovernmentArea;
+use App\Models\State;
 use App\Models\TestBooking;
 use App\Models\TestCategory;
-use App\Models\LocalGovernmentArea;
-use App\Helpers\FlashMessageHelper;
-use App\Enums\TestBookings\LocationTypeEnum;
+use App\Models\TestCenter;
+use App\Models\TestType;
+use App\Models\User;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class BookATestViaCategory extends Component
 {
     use LivewireAlert;
 
     private bool $success = false;
+
     public $testCenters;
+
     public $states;
+
     public $localGovernmentAreas;
+
     public $testCategories;
+
     public $testTypes;
 
     public $selectedTestCategory = null;
+
     public $selectedState = null;
+
     public $testCenter = null;
+
     public $testType = null;
+
     public $localGovernmentArea = null;
+
     public $customerEmail = null;
+
     public $locationType = null;
+
     public $address = null;
+
     public $city = null;
+
     public $dueDate;
+
     public $startTime;
 
     protected $rules = [
         'locationType' => 'required',
         'customerEmail' => 'required|email',
-        'testCenter' => "required_if:locationType,1",//LocationTypeEnum::Center
-        'selectedState' => 'required_if:locationType,2',//LocationTypeEnum::Home
-        'address' => 'required_if:location_type,2',//LocationTypeEnum::Home
+        'testCenter' => 'required_if:locationType,1', //LocationTypeEnum::Center
+        'selectedState' => 'required_if:locationType,2', //LocationTypeEnum::Home
+        'address' => 'required_if:location_type,2', //LocationTypeEnum::Home
         'selectedTestCategory' => 'required',
         'testType' => 'required',
         'dueDate' => 'required',
@@ -72,9 +87,8 @@ class BookATestViaCategory extends Component
 
     public function submit()
     {
-
         $this->validate();
-        $possibleUser = User::query()->where('email',$this->customerEmail)->first();
+        $possibleUser = User::query()->where('email', $this->customerEmail)->first();
         $locationTypeEnum = LocationTypeEnum::from($this->locationType);
         $testBooking = TestBooking::create([
             'test_type_id' => $this->testType,
@@ -87,7 +101,7 @@ class BookATestViaCategory extends Component
         ]);
         $this->success = isset($testBooking);
 
-        if ($locationTypeEnum == LocationTypeEnum::HOME){
+        if ($locationTypeEnum == LocationTypeEnum::HOME) {
             $newAddress = Address::create([
                 'line_1' => $this->address,
                 'city' => $this->city,
@@ -100,24 +114,23 @@ class BookATestViaCategory extends Component
             $this->success = isset($newAddress);
         }
 
-        if ($this->success){
+        if ($this->success) {
             $this->flash('success', FlashMessageHelper::TEST_BOOKING_SUCCESSFUL, [], '/');
-
-        } else{
-            $this->alert('error',FlashMessageHelper::GENERAL_ERROR);
+        } else {
+            $this->alert('error', FlashMessageHelper::GENERAL_ERROR);
         }
     }
 
     public function updatedSelectedTestCategory($testCategoryId)
     {
-        if (!is_null($testCategoryId)) {
+        if (! is_null($testCategoryId)) {
             $this->testTypes = TestType::where('test_category_id', $testCategoryId)->get();
         }
     }
 
     public function updatedSelectedState($stateId)
     {
-        if (!is_null($stateId)) {
+        if (! is_null($stateId)) {
             $this->localGovernmentAreas = LocalGovernmentArea::where('state_id', $stateId)->get();
         }
     }

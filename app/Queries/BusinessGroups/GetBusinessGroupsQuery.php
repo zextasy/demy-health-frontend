@@ -2,11 +2,10 @@
 
 namespace App\Queries\BusinessGroups;
 
-
+use App\Enums\BusinessGroups\BusinessGroupHierarchyDirectionEnum;
 use App\Models\BusinessGroup;
 use App\Support\BaseCollection;
 use Illuminate\Support\Facades\Cache;
-use App\Enums\BusinessGroups\BusinessGroupHierarchyDirectionEnum;
 
 class GetBusinessGroupsQuery
 {
@@ -17,9 +16,8 @@ class GetBusinessGroupsQuery
     protected bool $includeCurrentBusinessGroup = false;
 
     /**
-     * @param BusinessGroup|int $businessGroup
-     * @param BusinessGroupHierarchyDirectionEnum $hierarchyDirection
-     *
+     * @param  BusinessGroup|int  $businessGroup
+     * @param  BusinessGroupHierarchyDirectionEnum  $hierarchyDirection
      * @return GetBusinessGroupsQuery
      */
     public function forBusinessGroup($businessGroup, BusinessGroupHierarchyDirectionEnum $hierarchyDirection): self
@@ -59,23 +57,23 @@ class GetBusinessGroupsQuery
     private function getBusinessGroupTreeIds(int $businessGroupId): array
     {
         return Cache::tags(BusinessGroup::getCacheTagName())
-            ->remember("business-unit-tree-for-{$businessGroupId}", now()->addDay(), function () use ( $businessGroupId ) {
-            $businessGroup = BusinessGroup::find($businessGroupId);
-            $all_ids = $this->includeCurrentBusinessGroup ? [$businessGroupId] : [];
+            ->remember("business-unit-tree-for-{$businessGroupId}", now()->addDay(), function () use ($businessGroupId) {
+                $businessGroup = BusinessGroup::find($businessGroupId);
+                $all_ids = $this->includeCurrentBusinessGroup ? [$businessGroupId] : [];
 
-            if ($this->hierarchyDirection == BusinessGroupHierarchyDirectionEnum::DOWN && $businessGroup->allChildren->count() > 0) {
-                foreach ($businessGroup->allChildren as $child) {
-                    $all_ids[] = $child->id;
-                    $all_ids = array_merge($all_ids, is_array($this->getBusinessGroupTreeIds($child->id)) ? $this->getBusinessGroupTreeIds($child->id) : []);
+                if ($this->hierarchyDirection == BusinessGroupHierarchyDirectionEnum::DOWN && $businessGroup->allChildren->count() > 0) {
+                    foreach ($businessGroup->allChildren as $child) {
+                        $all_ids[] = $child->id;
+                        $all_ids = array_merge($all_ids, is_array($this->getBusinessGroupTreeIds($child->id)) ? $this->getBusinessGroupTreeIds($child->id) : []);
+                    }
                 }
-            }
 
-            if ($this->hierarchyDirection == BusinessGroupHierarchyDirectionEnum::UP && ! empty($businessGroup->parent)) {
-                $all_ids[] = $businessGroup->parent->id;
-                $all_ids = array_merge($all_ids, is_array($this->getBusinessGroupTreeIds($businessGroup->parent->id)) ? $this->getBusinessGroupTreeIds($businessGroup->parent->id) : []);
-            }
+                if ($this->hierarchyDirection == BusinessGroupHierarchyDirectionEnum::UP && ! empty($businessGroup->parent)) {
+                    $all_ids[] = $businessGroup->parent->id;
+                    $all_ids = array_merge($all_ids, is_array($this->getBusinessGroupTreeIds($businessGroup->parent->id)) ? $this->getBusinessGroupTreeIds($businessGroup->parent->id) : []);
+                }
 
-            return array_unique($all_ids);
-        });
+                return array_unique($all_ids);
+            });
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends BaseModel
 {
@@ -11,8 +11,11 @@ class OrderItem extends BaseModel
 
     //region CONFIG
     protected $guarded = ['id'];
+
     protected $dates = ['created_at', 'updated_at'];
+
     protected $appends = ['total_amount'];
+
     protected $casts = ['price' => 'float'];
     //endregion
 
@@ -42,5 +45,4 @@ class OrderItem extends BaseModel
         return $this->morphTo('orderable_item');
     }
     //endregion
-
 }

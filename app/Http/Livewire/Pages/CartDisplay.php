@@ -2,31 +2,33 @@
 
 namespace App\Http\Livewire\Pages;
 
-use Livewire\Component;
-use Illuminate\Support\Collection;
-use App\Helpers\FlashMessageHelper;
-use Illuminate\Support\Facades\Session;
-use App\Http\Requests\CheckoutCartRequest;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Helpers\FlashMessageHelper;
+use App\Http\Requests\CheckoutCartRequest;
 use App\Traits\Livewire\ManipulatesCustomerSession;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Illuminate\Support\Collection;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class CartDisplay extends Component
 {
     use LivewireAlert, ManipulatesCustomerSession;
 
     public Collection $cartItems;
+
     public float $cartTotal;
+
     public $cartSubTotal;
+
     public int $paymentMethod;
+
     public ?string $customerEmail = null;
 
     protected $listeners = [
         'cartItemDeleted' => 'removeItem',
-        'cartItemQuantityUpdated' => 'updateCartTotals'
+        'cartItemQuantityUpdated' => 'updateCartTotals',
     ];
-
 
     protected function rules(): array
     {
@@ -67,9 +69,10 @@ class CartDisplay extends Component
             $this->validate();
         } catch (\Throwable $th) {
             $this->flash('error', $th->getMessage(), [], $currentUrl);
+
             return;
         }
 
-        $this->flash('success', FlashMessageHelper::BLANK, [], route('frontend.cart.checkout',['customer_email' => $this->customerEmail]));
+        $this->flash('success', FlashMessageHelper::BLANK, [], route('frontend.cart.checkout', ['customer_email' => $this->customerEmail]));
     }
 }

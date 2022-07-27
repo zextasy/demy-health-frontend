@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Support;
+
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Collection;
 
 class BaseCollection extends Collection
 {
-
     public function toSelectArray(string $text = 'name', string $value = 'id')
     {
         return $this->mapWithKeys(function ($item) use ($text, $value) {

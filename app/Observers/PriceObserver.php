@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-
 use App\Models\Finance\Price;
 
 class PriceObserver

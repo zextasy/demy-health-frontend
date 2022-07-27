@@ -3,10 +3,10 @@
 namespace App\Filament\Pages;
 
 use App\Settings\GeneralSettings;
-use Filament\Pages\SettingsPage;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
+use Filament\Pages\SettingsPage;
 
 class SiteSettings extends SettingsPage
 {
@@ -49,9 +49,9 @@ class SiteSettings extends SettingsPage
                 TimePicker::make('business_start_hour')->label('Business Start'),
                 TimePicker::make('business_end_hour')->label('Business End'),
             ])->columns(2),
-//            Fieldset::make('Time')->schema([
-//
-//            ])->columns(1),
+            //            Fieldset::make('Time')->schema([
+            //
+            //            ])->columns(1),
         ];
     }
 }

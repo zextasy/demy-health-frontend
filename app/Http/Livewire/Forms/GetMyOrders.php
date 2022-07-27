@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Forms;
 
-use Livewire\Component;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Traits\Livewire\ManipulatesCustomerSession;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class GetMyOrders extends Component
 {

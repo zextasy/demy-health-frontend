@@ -2,12 +2,10 @@
 
 namespace App\Http\Livewire\Forms\Select\LivewireSelect;
 
-
-use App\Models\State;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use App\Models\LocalGovernmentArea;
 use Asantibanez\LivewireSelect\LivewireSelect;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class LocalGovernmentAreaSelect extends LivewireSelect
 {
@@ -23,7 +21,7 @@ class LocalGovernmentAreaSelect extends LivewireSelect
                 $query->where('state_id', $this->getDependingValue('selectedStateForHomeBooking'));
             })
             ->when($searchTerm, function ($query, $searchTerm) {
-                $query->where(DB::raw('LOWER(name)'), 'like', '%'. strtolower($searchTerm) .'%');
+                $query->where(DB::raw('LOWER(name)'), 'like', '%'.strtolower($searchTerm).'%');
             })
             ->get()
             ->toLivewireSelectCollection();

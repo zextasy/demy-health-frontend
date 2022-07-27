@@ -2,25 +2,29 @@
 
 namespace App\Listeners\Subscribers;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\CustomerOrderNotification;
-use App\Notifications\CustomerTestResultNotification;
-use App\Notifications\CustomerTestBookingNotification;
 use App\Notifications\CustomerCommunicationReceiptConfirmation;
+use App\Notifications\CustomerOrderNotification;
+use App\Notifications\CustomerTestBookingNotification;
+use App\Notifications\CustomerTestResultNotification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Notification;
 
 class SendCustomerCommunicationSubscriber implements ShouldQueue
 {
     use InteractsWithQueue;
 
     const SEND_ENQUIRY_EMAIL_CONFIRMATION_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationSubscriber@sendCustomerCommunicationConfirmationEmail';
+
     const SEND_TEST_BOOKING_EMAIL_CONFIRMATION_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationSubscriber@sendCustomerTestBookingConfirmationEmail';
+
     const SEND_ORDER_EMAIL_CONFIRMATION_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationSubscriber@sendCustomerOrderNotificationEmail';
+
     const SEND_TEST_RESULT_EMAIL_FUNCTION = 'App\Listeners\Subscribers\SendCustomerCommunicationSubscriber@sendCustomerTestResultNotificationEmail';
 
     /**
      * Create the event listener.
+     *
      * @return void
      */
     public function __construct()
@@ -31,8 +35,7 @@ class SendCustomerCommunicationSubscriber implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param object $event
-     *
+     * @param  object  $event
      * @return void
      */
     public function sendCustomerCommunicationConfirmationEmail($event)
@@ -47,7 +50,7 @@ class SendCustomerCommunicationSubscriber implements ShouldQueue
             ->notify(new CustomerTestBookingNotification($event->testBooking));
     }
 
-    public function sendCustomerOrderNotificationEmail( $event)
+    public function sendCustomerOrderNotificationEmail($event)
     {
         Notification::route('mail', $event->order->customer_email)
             ->notify(new CustomerOrderNotification($event->order));
@@ -71,6 +74,6 @@ class SendCustomerCommunicationSubscriber implements ShouldQueue
 
         $events->listen('App\Events\CartCheckedOutEvent', self::SEND_ORDER_EMAIL_CONFIRMATION_FUNCTION);
 
-        $events->listen('App\Events\NewTestResultAddedEvent',self::SEND_TEST_RESULT_EMAIL_FUNCTION);
+        $events->listen('App\Events\NewTestResultAddedEvent', self::SEND_TEST_RESULT_EMAIL_FUNCTION);
     }
 }

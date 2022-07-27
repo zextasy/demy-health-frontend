@@ -2,19 +2,27 @@
 
 namespace App\Http\Livewire\Pages\Rows;
 
-use Livewire\Component;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Livewire\Component;
 
 class CartItemRow extends Component
 {
     public string $cartItemId;
+
     public int $initialQuantity;
+
     public mixed $updatedQuantity;
+
     public float $subTotal;
+
     public string $itemName;
+
     public ?string $pictureUrl;
+
     public ?string $model;
+
     public ?string $description;
+
     public ?string $itemPrice;
 
     public function mount(string $cartItemId)
@@ -46,17 +54,16 @@ class CartItemRow extends Component
         $integerQuantity = intval($this->updatedQuantity);
 
         if ($integerQuantity > 0) {
-            Cart::update($this->cartItemId, array(
-                'quantity' => array(
+            Cart::update($this->cartItemId, [
+                'quantity' => [
                     'relative' => false,
                     'value' => $integerQuantity,
-                ),
-            ));
+                ],
+            ]);
             $this->initialQuantity = $integerQuantity;
             $this->updateCartItemSubTotal();
             $this->emit('cartItemQuantityUpdated');
         }
-
     }
 
     public function updateCartItemSubTotal()

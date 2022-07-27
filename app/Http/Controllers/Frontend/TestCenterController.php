@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller as Controller;
-use App\Http\Requests\StoreTestCenterRequest;
-use App\Http\Requests\UpdateTestCenterRequest;
 use App\Models\TestCenter;
+use Illuminate\Http\Response;
 
 class TestCenterController extends Controller
 {
@@ -19,5 +17,4 @@ class TestCenterController extends Controller
     {
         //
     }
-
 }

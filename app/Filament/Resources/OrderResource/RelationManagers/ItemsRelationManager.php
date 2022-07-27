@@ -4,11 +4,10 @@ namespace App\Filament\Resources\OrderResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
-use App\Settings\GeneralSettings;
-use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Model;
 
 class ItemsRelationManager extends HasManyRelationManager
 {

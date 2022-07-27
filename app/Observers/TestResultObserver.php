@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\TestResult;
 use App\Events\NewTestResultAddedEvent;
+use App\Models\TestResult;
 
 class TestResultObserver
 {

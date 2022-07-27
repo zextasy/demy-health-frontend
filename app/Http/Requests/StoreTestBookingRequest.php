@@ -6,8 +6,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTestBookingRequest extends FormRequest
 {
-    const VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME = "required_if:locationType,2";
-    const VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER = "required_if:locationType,1";
+    const VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME = 'required_if:locationType,2';
+
+    const VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER = 'required_if:locationType,1';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -27,18 +28,18 @@ class StoreTestBookingRequest extends FormRequest
     public function rules()
     {
         return [
-            "locationType" => "required",
-            "customerFirstName" => "required",
-            "customerLastName" => "required",
-            "customerEmail" => "required_without:customerPhoneNumber|nullable|email",
-            "customerPhoneNumber" => "required_without:customerEmail|nullable|min:6|max:15",
-            "selectedStateForTestCenterBooking" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER,
-            "selectedTestCenter" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER,
-            "selectedStateForHomeBooking" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
-            "selectedLocalGovernmentArea" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
-            "addressLine1" => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,//LocationTypeEnum::Home
-            "selectedTestType" => "required",
-            "dueDate" => "required|after_or_equal:now",
+            'locationType' => 'required',
+            'customerFirstName' => 'required',
+            'customerLastName' => 'required',
+            'customerEmail' => 'required_without:customerPhoneNumber|nullable|email',
+            'customerPhoneNumber' => 'required_without:customerEmail|nullable|min:6|max:15',
+            'selectedStateForTestCenterBooking' => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER,
+            'selectedTestCenter' => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_CENTER,
+            'selectedStateForHomeBooking' => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
+            'selectedLocalGovernmentArea' => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME,
+            'addressLine1' => self::VALIDATION_RULE_REQUIRED_IF_LOCATION_TYPE_HOME, //LocationTypeEnum::Home
+            'selectedTestType' => 'required',
+            'dueDate' => 'required|after_or_equal:now',
         ];
     }
 

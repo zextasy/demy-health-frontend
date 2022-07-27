@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LocalGovernmentArea extends BaseModel
 {
     use HasFactory;
+
     //region CONFIG
-    protected $dates =['created_at','updated_at'];
+    protected $dates = ['created_at', 'updated_at'];
+
     protected $guarded = ['id'];
     //endregion
 

@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\TestTypeResource\Pages;
 
-use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\TestTypeResource;
+use Filament\Resources\Pages\ViewRecord;
 
 class ViewTestType extends ViewRecord
 {

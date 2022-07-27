@@ -3,8 +3,8 @@
 namespace App\Models\Finance;
 
 use App\Models\BaseModel;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InvoiceItem extends BaseModel
 {
@@ -12,6 +12,7 @@ class InvoiceItem extends BaseModel
 
     //region CONFIG
     protected $guarded = ['id'];
+
     protected $dates = ['created_at', 'updated_at'];
     //endregion
 
@@ -39,5 +40,4 @@ class InvoiceItem extends BaseModel
         return $this->morphTo('invoiceable_item');
     }
     //endregion
-
 }

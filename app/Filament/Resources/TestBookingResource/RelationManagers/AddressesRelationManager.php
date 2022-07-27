@@ -6,5 +6,4 @@ use App\Filament\RelationManagers\BaseAddressesRelationManager;
 
 class AddressesRelationManager extends BaseAddressesRelationManager
 {
-
 }

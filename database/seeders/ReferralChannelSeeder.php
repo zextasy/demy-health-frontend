@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\ReferralChannel;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ReferralChannelSeeder extends Seeder

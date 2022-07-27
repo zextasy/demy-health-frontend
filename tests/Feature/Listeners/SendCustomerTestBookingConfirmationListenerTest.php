@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Listeners;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class SendCustomerTestBookingConfirmationListenerTest extends TestCase

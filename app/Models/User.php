@@ -2,22 +2,22 @@
 
 namespace App\Models;
 
-use Laravel\Sanctum\HasApiTokens;
-use App\Contracts\OrderableContract;
-use Spatie\Permission\Traits\HasRoles;
 use App\Contracts\AddressableContract;
-use Illuminate\Notifications\Notifiable;
+use App\Contracts\OrderableContract;
+use App\Traits\Relationships\BelongsToBusinessGroup;
+use App\Traits\Relationships\HasTestBookings;
+use App\Traits\Relationships\MorphsAddresses;
 use App\Traits\Relationships\MorphsOrders;
 use Filament\Models\Contracts\FilamentUser;
-use Spatie\Permission\Traits\HasPermissions;
-use App\Traits\Relationships\MorphsAddresses;
-use App\Traits\Relationships\HasTestBookings;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail, AddressableContract, OrderableContract
 {
@@ -50,7 +50,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Add
     //region HELPERS
     public function canAccessFilament(): bool
     {
-        return $this->hasAnyPermission(['frontend','backend']);
+        return $this->hasAnyPermission(['frontend', 'backend']);
     }
 
     public function isFilamentAdmin()
@@ -75,6 +75,4 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Add
     }
 
     //endregion
-
-
 }

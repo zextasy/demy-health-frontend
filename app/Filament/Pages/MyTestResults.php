@@ -2,16 +2,16 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Pages\Page;
 use App\Models\TestResult;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Pages\Page;
 use Filament\Tables\Actions\LinkAction;
 use Filament\Tables\Columns\BadgeColumn;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Builder;
 
-class MyTestResults extends Page  implements HasTable
+class MyTestResults extends Page implements HasTable
 {
     use InteractsWithTable;
 
@@ -43,9 +43,8 @@ class MyTestResults extends Page  implements HasTable
     {
         return [
             LinkAction::make('View')
-                ->url(fn(TestResult $record): string => $record->filament_url)
-                ->hidden(fn(TestResult $record): bool => $record->user()->doesntExist()),
+                ->url(fn (TestResult $record): string => $record->filament_url)
+                ->hidden(fn (TestResult $record): bool => $record->user()->doesntExist()),
         ];
     }
-
 }

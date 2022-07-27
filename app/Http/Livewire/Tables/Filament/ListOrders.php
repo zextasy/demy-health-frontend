@@ -3,26 +3,24 @@
 namespace App\Http\Livewire\Tables\Filament;
 
 use App\Models\Order;
-use Livewire\Component;
-use App\Models\Patient;
-use App\Models\TestBooking;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Actions\LinkAction;
-use Illuminate\Support\Facades\Session;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Filament\Tables\Concerns\InteractsWithTable;
-use App\Traits\Livewire\ManipulatesCustomerSession;
+use Livewire\Component;
 
 class ListOrders extends Component implements HasTable
 {
     use LivewireAlert, InteractsWithTable, ManipulatesCustomerSession;
 
     public $customerIdentifier = null;
+
     public $orderReference;
+
     public $clientId;
 
     protected $rules = [
@@ -32,7 +30,7 @@ class ListOrders extends Component implements HasTable
 
     protected function getTableQuery(): Builder
     {
-        return Order::query()->with(['user'])->where('customer_email', $this->customerIdentifier)->latest();//
+        return Order::query()->with(['user'])->where('customer_email', $this->customerIdentifier)->latest(); //
     }
 
     protected function getTableColumns(): array

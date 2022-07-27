@@ -2,14 +2,12 @@
 
 namespace App\Filament\Resources;
 
-
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use App\Filament\Resources\OrderResource\Pages;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -74,7 +72,7 @@ class OrderResource extends Resource
             ->filters([
                 //
             ])
-            ->defaultSort('created_at','desc');
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
@@ -88,7 +86,7 @@ class OrderResource extends Resource
     {
         return [
             'index' => Pages\ListOrders::route('/'),
-//            'create' => Pages\CreateOrder::route('/create'),
+            //            'create' => Pages\CreateOrder::route('/create'),
             'view' => Pages\ViewOrder::route('/{record}'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];

@@ -2,18 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Country;
-use App\Enums\GenderEnum;
-use App\Models\ReferralChannel;
 use App\Enums\AgeClassificationEnum;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
+use App\Enums\GenderEnum;
 use App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource\RelationManagers;
+use App\Models\Country;
 use App\Models\Patient;
-use Filament\Forms;
+use App\Models\ReferralChannel;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -43,7 +42,7 @@ class PatientResource extends Resource
                 ])->columns(3),
                 Fieldset::make('Age')->schema([
                     DatePicker::make('date_of_birth'),
-//                    TextInput::make('age')->label('Age (Years)')->numeric(),
+                    //                    TextInput::make('age')->label('Age (Years)')->numeric(),
                     Select::make('age_classification')->options(AgeClassificationEnum::optionsAsSelectArray()),
                 ])->columns(3),
                 Fieldset::make('Data')->schema([
@@ -55,7 +54,7 @@ class PatientResource extends Resource
                     Select::make('country_id')
                         ->options(Country::all()->toSelectArray())
                         ->searchable()
-                        ->label("Nationality"),
+                        ->label('Nationality'),
                     TextInput::make('passport_number')
                         ->maxLength(255),
                 ])->columns(2),

@@ -33,7 +33,7 @@ class BaseModel extends Model
         return new BaseCollection($models);
     }
 
-    public function toLivewireSelectDescription($description = 'name',$value = 'id'): array
+    public function toLivewireSelectDescription($description = 'name', $value = 'id'): array
     {
         return [
             'value' => $this->getAttribute($value),

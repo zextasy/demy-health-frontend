@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Filament\Resources\OrderResource;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
-use App\Filament\Resources\OrderResource;
-use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,11 +22,16 @@ class Order extends BaseModel
             'reference_prefix' => app(GeneralSettings::class)->order_prefix,
         ];
     }
+
     protected $with = ['items'];
+
     protected $appends = ['total_amount'];
+
     protected $guarded = ['id'];
+
     protected $dates = ['created_at', 'updated_at'];
-    protected $casts=[
+
+    protected $casts = [
         'payment_method' => PaymentMethodEnum::class,
     ];
     //endregion
@@ -62,6 +67,4 @@ class Order extends BaseModel
         return $this->morphTo('orderable');
     }
     //endregion
-
-
 }

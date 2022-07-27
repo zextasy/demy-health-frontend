@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\BusinessGroup;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -19,12 +18,12 @@ class UserSeeder extends Seeder
         $rootBusinessGroup = BusinessGroup::root();
         $abujaBusinessGroup = BusinessGroup::create([
             'name' => 'Abuja',
-            'description' =>'Abuja',
+            'description' => 'Abuja',
             'parent_id' => $rootBusinessGroup->id,
         ]);
         $lagosBusinessGroup = BusinessGroup::create([
             'name' => 'Lagos',
-            'description' =>'Lagos',
+            'description' => 'Lagos',
             'parent_id' => $rootBusinessGroup->id,
         ]);
         $admin = User::firstOrCreate([
@@ -65,7 +64,7 @@ class UserSeeder extends Seeder
 
         $manager = User::firstOrCreate([
             'name' => ' OSAZUWA GILBERT IMAFIDON',
-            'email' => 'o.imafidon@demyhealth.com',//no recognised email address
+            'email' => 'o.imafidon@demyhealth.com', //no recognised email address
             'password' => bcrypt(DatabaseSeeder::DEFAULT_PASSWORD),
             'email_verified_at' => now(),
             'business_group_id' => $abujaBusinessGroup->id,
@@ -74,7 +73,7 @@ class UserSeeder extends Seeder
 
         $manager = User::firstOrCreate([
             'name' => 'AYEKE JENNIFER',
-            'email' => 'j.ayeke@demyhealth.com',//no recognised email address
+            'email' => 'j.ayeke@demyhealth.com', //no recognised email address
             'password' => bcrypt(DatabaseSeeder::DEFAULT_PASSWORD),
             'email_verified_at' => now(),
             'business_group_id' => $abujaBusinessGroup->id,
@@ -83,7 +82,7 @@ class UserSeeder extends Seeder
 
         $manager = User::firstOrCreate([
             'name' => 'CHISOM OZOH',
-            'email' => 'c.ozoh@demyhealth.com',//no recognised email address
+            'email' => 'c.ozoh@demyhealth.com', //no recognised email address
             'password' => bcrypt(DatabaseSeeder::DEFAULT_PASSWORD),
             'email_verified_at' => now(),
             'business_group_id' => $abujaBusinessGroup->id,
@@ -92,7 +91,7 @@ class UserSeeder extends Seeder
 
         $manager = User::firstOrCreate([
             'name' => 'JEROME JULIUS NDZEMBUIN',
-            'email' => 'j.ndzembuin@demyhealth.com',//no recognised email address
+            'email' => 'j.ndzembuin@demyhealth.com', //no recognised email address
             'password' => bcrypt(DatabaseSeeder::DEFAULT_PASSWORD),
             'email_verified_at' => now(),
             'business_group_id' => $abujaBusinessGroup->id,
@@ -101,7 +100,7 @@ class UserSeeder extends Seeder
 
         $manager = User::firstOrCreate([
             'name' => 'NDUBUISI EMMANUEL EZEBUIHE',
-            'email' => 'n.ezebuihe@demyhealth.com',//no recognised email address
+            'email' => 'n.ezebuihe@demyhealth.com', //no recognised email address
             'password' => bcrypt(DatabaseSeeder::DEFAULT_PASSWORD),
             'email_verified_at' => now(),
             'business_group_id' => $abujaBusinessGroup->id,

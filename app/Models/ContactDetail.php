@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ContactDetail extends BaseModel
@@ -11,6 +10,7 @@ class ContactDetail extends BaseModel
 
     //region CONFIG
     protected $guarded = ['id'];
+
     protected $dates = ['created_at', 'updated_at'];
     //endregion
 
@@ -29,5 +29,4 @@ class ContactDetail extends BaseModel
     //region RELATIONSHIPS
 
     //endregion
-
 }

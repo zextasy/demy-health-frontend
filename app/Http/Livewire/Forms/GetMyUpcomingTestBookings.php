@@ -2,15 +2,17 @@
 
 namespace App\Http\Livewire\Forms;
 
-use Livewire\Component;
 use App\Models\Patient;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Traits\Livewire\ManipulatesCustomerSession;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class GetMyUpcomingTestBookings extends Component
 {
     use LivewireAlert, ManipulatesCustomerSession;
+
     public $customerIdentifier = null;
+
     public $testBookingReference = null;
 
     protected $rules = [
@@ -33,8 +35,6 @@ class GetMyUpcomingTestBookings extends Component
         return view('livewire.forms.get-my-upcoming-test-bookings');
     }
 
-
-
     public function getTestBookings()
     {
         $this->validate();
@@ -42,9 +42,9 @@ class GetMyUpcomingTestBookings extends Component
         $patient = Patient::withCustomerDetails($this->customerIdentifier)->first();
         if (empty($patient)) {
             $this->alert('error', 'No valid patient data found');
+
             return;
         }
         $this->redirect(route('frontend.my-test-bookings.list', $this->customerIdentifier));
-
     }
 }

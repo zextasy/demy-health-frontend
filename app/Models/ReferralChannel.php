@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,8 +10,9 @@ class ReferralChannel extends BaseModel
 {
     use HasFactory, GeneratesReference;
 
-//region CONFIG
+    //region CONFIG
     protected $guarded = ['id'];
+
     protected $dates = ['created_at', 'updated_at'];
 
     public function referenceConfig(): array
@@ -22,7 +22,7 @@ class ReferralChannel extends BaseModel
             'reference_prefix' => app(GeneralSettings::class)->referral_code_prefix,
         ];
     }
-//endregion
+    //endregion
 
 //region ATTRIBUTES
 

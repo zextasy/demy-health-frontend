@@ -2,23 +2,24 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Pages\Page;
 use App\Models\TestBooking;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Pages\Page;
 use Filament\Tables\Actions\LinkAction;
 use Filament\Tables\Columns\BadgeColumn;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Builder;
 
 class MyTestBookings extends Page implements HasTable
 {
     use InteractsWithTable;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationGroup = 'Personal';
-    protected static string $view = 'filament.pages.my-test-bookings';
 
+    protected static ?string $navigationGroup = 'Personal';
+
+    protected static string $view = 'filament.pages.my-test-bookings';
 
     public function getTableQuery(): Builder
     {
@@ -46,8 +47,8 @@ class MyTestBookings extends Page implements HasTable
     {
         return [
             LinkAction::make('View')
-                ->url(fn(TestBooking $record): string => $record->filament_url)
-                ->hidden(fn(TestBooking $record): bool => $record->user()->doesntExist()),
+                ->url(fn (TestBooking $record): string => $record->filament_url)
+                ->hidden(fn (TestBooking $record): bool => $record->user()->doesntExist()),
         ];
     }
 }

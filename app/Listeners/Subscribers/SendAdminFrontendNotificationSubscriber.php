@@ -3,23 +3,26 @@
 namespace App\Listeners\Subscribers;
 
 use App\Models\User;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Notification;
+use App\Notifications\InternalCustomerEnquiryNotification;
 use App\Notifications\InternalOrderNotification;
 use App\Notifications\InternalTestBookingNotification;
-use App\Notifications\InternalCustomerEnquiryNotification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Notification;
 
 class SendAdminFrontendNotificationSubscriber implements ShouldQueue
 {
     use InteractsWithQueue;
 
     const SEND_ENQUIRY_EMAIL_FUNCTION = 'App\Listeners\Subscribers\SendAdminFrontendNotificationSubscriber@sendNotificationForContactEnquiry';
+
     const SEND_TEST_BOOKING_EMAIL_FUNCTION = 'App\Listeners\Subscribers\SendAdminFrontendNotificationSubscriber@sendNotificationForTestBooking';
+
     const SEND_ORDER_EMAIL_FUNCTION = 'App\Listeners\Subscribers\SendAdminFrontendNotificationSubscriber@sendCustomerOrderNotificationEmail';
 
     /**
      * Create the event listener.
+     *
      * @return void
      */
     public function __construct()
@@ -33,13 +36,13 @@ class SendAdminFrontendNotificationSubscriber implements ShouldQueue
         Notification::send($usersToNotify, new InternalCustomerEnquiryNotification($event->customerEnquiry));
     }
 
-    public function sendNotificationForTestBooking( $event)
+    public function sendNotificationForTestBooking($event)
     {
         $usersToNotify = User::query()->permission('process test booking')->get();
         Notification::send($usersToNotify, new InternalTestBookingNotification($event->testBooking));
     }
 
-    public function sendCustomerOrderNotificationEmail( $event)
+    public function sendCustomerOrderNotificationEmail($event)
     {
         $usersToNotify = User::query()->permission('process test booking')->get();
         Notification::send($usersToNotify, new InternalOrderNotification($event->order));

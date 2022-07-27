@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
-use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\OrderResource;
+use Filament\Resources\Pages\ViewRecord;
 
 class ViewOrder extends ViewRecord
 {

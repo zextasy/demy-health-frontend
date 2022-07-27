@@ -3,10 +3,10 @@
 namespace App\Events;
 
 use App\Models\TestBooking;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Queue\SerializesModels;
 
 class TestAddedToCartEvent
 {
@@ -21,7 +21,6 @@ class TestAddedToCartEvent
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -33,5 +32,4 @@ class TestAddedToCartEvent
     {
         return new PrivateChannel('channel-name');
     }
-
 }

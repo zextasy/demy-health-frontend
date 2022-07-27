@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\TestType;
 use App\Models\SpecimenType;
 use App\Models\TestCategory;
+use App\Models\TestType;
 use Illuminate\Database\Seeder;
 
 class TestCategorySeeder9 extends Seeder
@@ -22,15 +22,6 @@ class TestCategorySeeder9 extends Seeder
 
         $testCategory = TestCategory::create(['name' => '']);
 
-        $test = new TestType;
-        $test->test_id = '';
-        $test->name = '';
-        $test->minimum_tat = 0;
-        $test->maximum_tat = 0;
-        $test->price = 0.0;
-        $test->test_category_id = $testCategory->id;
-        $test->save();
-        $test->specimenTypes()->save($specimenTypeSW);
     }
 
     private function getTest($testCategory, string $testId, string $description, int $minTAT, int $maxTAT, float $price): TestType

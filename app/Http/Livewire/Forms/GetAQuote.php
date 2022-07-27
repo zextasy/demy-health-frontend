@@ -2,26 +2,33 @@
 
 namespace App\Http\Livewire\Forms;
 
-use Livewire\Component;
-use App\Helpers\FlashMessageHelper;
-use App\Events\ContactUsFormSubmittedEvent;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Actions\Addresses\CreateAddressAction;
-use App\Traits\Livewire\ManipulatesCustomerSession;
-use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Actions\CRM\CustomerEnquiries\CreateCustomerEnquiryAction;
+use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
+use App\Events\ContactUsFormSubmittedEvent;
+use App\Helpers\FlashMessageHelper;
+use App\Traits\Livewire\ManipulatesCustomerSession;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class GetAQuote extends Component
 {
     use LivewireAlert, ManipulatesCustomerSession;
 
     public $customerName = null;
+
     public $customerEmail = null;
+
     public $selectedState;
+
     public $selectedLocalGovernmentArea;
-    public $city = "-";
-    public $addressLine1 = "-";
-    public $addressLine2 = "-";
+
+    public $city = '-';
+
+    public $addressLine1 = '-';
+
+    public $addressLine2 = '-';
+
     public $message = null;
 
     protected $rules = [

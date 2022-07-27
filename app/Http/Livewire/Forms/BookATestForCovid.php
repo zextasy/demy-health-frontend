@@ -2,22 +2,23 @@
 
 namespace App\Http\Livewire\Forms;
 
-use App\Models\TestType;
 use App\Models\TestCategory;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Models\TestType;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BookATestForCovid extends BookATest
 {
     use LivewireAlert;
 
     public ?int $selectedTestCategory = null;
-    public array|Collection $testCategories;
-    public Collection $testTypes;
 
+    public array|Collection $testCategories;
+
+    public Collection $testTypes;
 
     public function mount()
     {
@@ -33,9 +34,8 @@ class BookATestForCovid extends BookATest
 
     public function updatedSelectedTestCategory($testCategoryId)
     {
-        if (!is_null($testCategoryId)) {
+        if (! is_null($testCategoryId)) {
             $this->testTypes = TestType::where('test_category_id', $testCategoryId)->get();
         }
     }
-
 }

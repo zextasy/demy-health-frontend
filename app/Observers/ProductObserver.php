@@ -3,12 +3,10 @@
 namespace App\Observers;
 
 use App\Models\Product;
-use App\Helpers\ModelHelper;
-use App\Settings\GeneralSettings;
 
 class ProductObserver
 {
-    public function creating (Product $model)
+    public function creating(Product $model)
     {
     }
 

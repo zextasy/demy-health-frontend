@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->text('description');
-            $table->foreignId("parent_id")->nullable()->references("id")->on("business_groups");
+            $table->foreignId('parent_id')->nullable()->references('id')->on('business_groups');
             $table->integer('order');
             $table->softDeletes();
             $table->timestamps();

@@ -3,10 +3,10 @@
 namespace App\Events;
 
 use App\Models\CRM\CustomerEnquiry;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Queue\SerializesModels;
 
 class ContactUsFormSubmittedEvent
 {
@@ -16,6 +16,7 @@ class ContactUsFormSubmittedEvent
 
     /**
      * Create a new event instance.
+     *
      * @return void
      */
     public function __construct(int $customerEnquiryId)
@@ -26,6 +27,7 @@ class ContactUsFormSubmittedEvent
 
     /**
      * Get the channels the event should broadcast on.
+     *
      * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()

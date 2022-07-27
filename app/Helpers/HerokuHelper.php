@@ -7,7 +7,7 @@ use PDO;
 
 class HerokuHelper
 {
-    public static function isRunningHeroku() :bool
+    public static function isRunningHeroku(): bool
     {
         if (DB::connection()->getPDO()->getAttribute(PDO::ATTR_DRIVER_NAME) == 'pgsql') {
             return true;

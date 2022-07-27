@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait HasTestBookings
 {
-
-    public function testBookings():HasMany
+    public function testBookings(): HasMany
     {
         return $this->hasMany(TestBooking::class);
     }

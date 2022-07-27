@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\BusinessGroup;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BusinessGroupSeeder extends Seeder
@@ -18,7 +17,7 @@ class BusinessGroupSeeder extends Seeder
         BusinessGroup::firstOrCreate([
             'name' => 'Root',
             'description' => 'The Root Business Group for this Organisation',
-            'order' => 0
+            'order' => 0,
         ]);
     }
 }

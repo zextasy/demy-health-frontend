@@ -2,14 +2,13 @@
 
 namespace App\Actions\OrderItems;
 
+use App\Contracts\OrderableItemContract;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
-use App\Contracts\OrderableItemContract;
 
 class CreateOrderItemAction
 {
-
     public function run(Order|int $order, OrderableItemContract $orderableItem, float $quantity = 1, string $name = null, float $price = null): OrderItem
     {
         $orderId = $order instanceof Order ? $order->id : $order;

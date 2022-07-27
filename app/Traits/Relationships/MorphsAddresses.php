@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait MorphsAddresses
 {
-
-    public function scopeInState ($query, $stateId)
+    public function scopeInState($query, $stateId)
     {
         $query->whereHas('addresses', function ($query) use ($stateId) {
             $query->where('state_id', '=', $stateId);
         });
     }
 
-    public function scopeInLocalGovernmentArea ($query, $localGovernmentAreaId)
+    public function scopeInLocalGovernmentArea($query, $localGovernmentAreaId)
     {
         $query->whereHas('addresses', function ($query) use ($localGovernmentAreaId) {
             $query->where('local_government_area_id', '=', $localGovernmentAreaId);
@@ -37,13 +36,14 @@ trait MorphsAddresses
         return $this->addresses()->latest()->first();
     }
 
-    public function getResolvedAddressTextAttribute():string
+    public function getResolvedAddressTextAttribute(): string
     {
         $resolvedAddress = $this->latest_address;
-        if (empty($resolvedAddress)){
-            return "Address Not Found!";
+        if (empty($resolvedAddress)) {
+            return 'Address Not Found!';
         }
-        $nullableAddressLine2 = empty($resolvedAddress->line_2) ? '': $resolvedAddress->line_2.', ';
+        $nullableAddressLine2 = empty($resolvedAddress->line_2) ? '' : $resolvedAddress->line_2.', ';
+
         return $resolvedAddress->line_1.', '.$nullableAddressLine2.$resolvedAddress->city.', '.$resolvedAddress->localGovernmentArea->name.', '.$resolvedAddress->state->name;
     }
 }

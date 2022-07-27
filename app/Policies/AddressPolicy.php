@@ -90,6 +90,5 @@ class AddressPolicy
     public function forceDelete(User $user, Address $address)
     {
         return $user->isFilamentAdmin();
-
     }
 }

@@ -2,14 +2,12 @@
 
 namespace App\Filament\Resources\PatientResource\RelationManagers;
 
+use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Forms;
 use Filament\Resources\Form;
-use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TestBookingsRelationManager extends RelationManager
 {

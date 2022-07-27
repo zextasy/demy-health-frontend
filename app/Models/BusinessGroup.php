@@ -2,27 +2,27 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Queries\BusinessGroups\GetBusinessGroupsQuery;
 use App\Enums\BusinessGroups\BusinessGroupHierarchyDirectionEnum;
+use App\Queries\BusinessGroups\GetBusinessGroupsQuery;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BusinessGroup extends BaseModel
 {
     use HasFactory;
 
-//region CONFIG
+    //region CONFIG
     protected $guarded = ['id'];
+
     protected $dates = ['created_at', 'updated_at'];
-//endregion
+    //endregion
 
-//region ATTRIBUTES
+    //region ATTRIBUTES
 
-//endregion
+    //endregion
 
-//region HELPERS
+    //region HELPERS
     public static function root(): ?self
     {
         return self::whereNull('parent_id')->first();
@@ -59,13 +59,13 @@ class BusinessGroup extends BaseModel
 
         return $descendantBusinessGroups->contains($this);
     }
-//endregion
+    //endregion
 
-//region SCOPES
+    //region SCOPES
 
-//endregion
+    //endregion
 
-//region RELATIONSHIPS
+    //region RELATIONSHIPS
     public function parent(): BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id', 'id');
@@ -80,6 +80,5 @@ class BusinessGroup extends BaseModel
     {
         return $this->hasMany(self::class, 'parent_id', 'id')->with('allChildren');
     }
-//endregion
-
+    //endregion
 }

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->nullable()->unique();
             $table->string('phone_number')->nullable()->unique();
-            $table->unsignedTinyInteger('gender');//GenderEnum
+            $table->unsignedTinyInteger('gender'); //GenderEnum
             $table->string('passport_number')->nullable()->unique();
             $table->foreignId('country_id')->nullable()->references('id')->on('countries');
             $table->date('date_of_birth')->nullable();

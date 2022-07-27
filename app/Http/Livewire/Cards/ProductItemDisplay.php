@@ -2,26 +2,32 @@
 
 namespace App\Http\Livewire\Cards;
 
-use Livewire\Component;
-use App\Models\Product;
-use App\Helpers\FlashMessageHelper;
 use App\Events\ProductAddedToCartEvent;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Helpers\FlashMessageHelper;
+use App\Models\Product;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class ProductItemDisplay extends Component
 {
     use LivewireAlert;
 
     public string $imageUrl;
-    public string $title;
-    public ?string $description;
-    public string $displayPrice;
-    public float$productPrice;
-    public int $productId;
-    public string $sku;
-    public Product $product;
 
+    public string $title;
+
+    public ?string $description;
+
+    public string $displayPrice;
+
+    public float$productPrice;
+
+    public int $productId;
+
+    public string $sku;
+
+    public Product $product;
 
     public function mount(Product $product)
     {
@@ -33,7 +39,7 @@ class ProductItemDisplay extends Component
         $this->description = $product->description;
         $this->productPrice = $product->price ?? 0.0;
         $this->displayPrice = isset($product->price) ? 'NGN '.number_format($product->price) : 'Call In';
-        $this->viewButtonUrl = "#";//route('product.show',product->id) TODO implement this
+        $this->viewButtonUrl = '#'; //route('product.show',product->id) TODO implement this
     }
 
     public function render()
@@ -41,25 +47,26 @@ class ProductItemDisplay extends Component
         return view('livewire.cards.product-item-display');
     }
 
-    public function addToCart(){
-        Cart::add(array(
+    public function addToCart()
+    {
+        Cart::add([
             'id' => 'Product - '.$this->sku,
             'name' => $this->title,
             'price' => $this->productPrice,
             'quantity' => 1,
-            'attributes' => array(
-                'type' => Product::class
-            ),
-            'associatedModel' => $this->product
-        ));
+            'attributes' => [
+                'type' => Product::class,
+            ],
+            'associatedModel' => $this->product,
+        ]);
 
         $currentUrl = request()->header('Referer');
         ProductAddedToCartEvent::dispatch();
         $this->flash('success', FlashMessageHelper::PRODUCT_ADD_TO_CART_SUCCESSFUL, [], $currentUrl);
     }
 
-    public function showProduct(){
-
+    public function showProduct()
+    {
         $this->redirectRoute('frontend.business-units.products.show', $this->productId);
     }
 }

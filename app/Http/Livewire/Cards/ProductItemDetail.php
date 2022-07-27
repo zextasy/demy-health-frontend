@@ -2,26 +2,32 @@
 
 namespace App\Http\Livewire\Cards;
 
-use Livewire\Component;
-use App\Models\Product;
-use App\Helpers\FlashMessageHelper;
 use App\Events\ProductAddedToCartEvent;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Helpers\FlashMessageHelper;
+use App\Models\Product;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class ProductItemDetail extends Component
 {
     use LivewireAlert;
 
     public string $imageUrl;
-    public string $title;
-    public ?string $description;
-    public string $displayPrice;
-    public float$productPrice;
-    public int $productId;
-    public string $sku;
-    public Product $product;
 
+    public string $title;
+
+    public ?string $description;
+
+    public string $displayPrice;
+
+    public float$productPrice;
+
+    public int $productId;
+
+    public string $sku;
+
+    public Product $product;
 
     public function mount(Product $product)
     {
@@ -40,17 +46,18 @@ class ProductItemDetail extends Component
         return view('livewire.cards.product-item-detail');
     }
 
-    public function addToCart(){
-        Cart::add(array(
+    public function addToCart()
+    {
+        Cart::add([
             'id' => 'Product - '.$this->sku,
             'name' => $this->title,
             'price' => $this->productPrice,
             'quantity' => 1,
-            'attributes' => array(
-                'type' => Product::class
-            ),
-            'associatedModel' => $this->product
-        ));
+            'attributes' => [
+                'type' => Product::class,
+            ],
+            'associatedModel' => $this->product,
+        ]);
 
         $currentUrl = request()->header('Referer');
         ProductAddedToCartEvent::dispatch();

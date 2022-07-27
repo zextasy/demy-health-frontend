@@ -2,20 +2,20 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
+use App\Actions\Orders\GenerateOrderFromCartAction;
 use Darryldecode\Cart\CartCollection;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Actions\Orders\GenerateOrderFromCartAction;
 
 class CreateOrderFromCartJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private CartCollection $items;
+
     private string $customerEmail;
 
     /**

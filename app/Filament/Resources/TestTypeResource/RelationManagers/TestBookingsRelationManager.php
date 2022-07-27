@@ -6,5 +6,4 @@ use App\Filament\RelationManagers\BaseHasManyTestBookingsRelationManager;
 
 class TestBookingsRelationManager extends BaseHasManyTestBookingsRelationManager
 {
-
 }

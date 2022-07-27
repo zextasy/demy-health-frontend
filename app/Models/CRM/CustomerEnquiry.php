@@ -2,12 +2,12 @@
 
 namespace App\Models\CRM;
 
-use App\Models\BaseModel;
-use App\Traits\Relationships\MorphsAddresses;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
-use App\Traits\Relationships\BelongsToBusinessGroup;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Filament\Resources\CRM\CustomerEnquiryResource;
+use App\Models\BaseModel;
+use App\Traits\Relationships\BelongsToBusinessGroup;
+use App\Traits\Relationships\MorphsAddresses;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CustomerEnquiry extends BaseModel
 {

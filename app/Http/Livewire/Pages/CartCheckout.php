@@ -2,21 +2,25 @@
 
 namespace App\Http\Livewire\Pages;
 
-use Livewire\Component;
-use Illuminate\Support\Collection;
 use App\Helpers\FlashMessageHelper;
 use App\Jobs\CreateOrderFromCartJob;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Illuminate\Support\Collection;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class CartCheckout extends Component
 {
     use LivewireAlert;
 
     public Collection $cartItems;
+
     public float $cartTotal;
+
     public $cartSubTotal;
+
     public string $customerEmail;
+
     public bool $canCheckOut;
 
     public function mount(string $customerEmail)
@@ -28,8 +32,6 @@ class CartCheckout extends Component
         $this->canCheckOut = $this->canCheckout();
     }
 
-
-
     public function render()
     {
         return view('livewire.pages.cart-checkout');
@@ -39,12 +41,13 @@ class CartCheckout extends Component
     {
         $items = Cart::getContent();
 
-        if ($this->cannotCheckout()){
+        if ($this->cannotCheckout()) {
             $this->flash('warning', FlashMessageHelper::BLANK, [], '/');
+
             return;
         }
 
-        CreateOrderFromCartJob::dispatch($items,$this->customerEmail);
+        CreateOrderFromCartJob::dispatch($items, $this->customerEmail);
         Cart::clear();
         $this->flash('success', FlashMessageHelper::ORDER_BOOKING_SUCCESSFUL, [], '/');
     }
@@ -61,6 +64,6 @@ class CartCheckout extends Component
 
     public function canCheckout(): bool
     {
-        return !$this->cannotCheckout();
+        return ! $this->cannotCheckout();
     }
 }

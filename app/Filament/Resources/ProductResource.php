@@ -3,15 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class ProductResource extends Resource
 {
@@ -43,7 +43,7 @@ class ProductResource extends Resource
                     Forms\Components\TextInput::make('country')
                         ->maxLength(255),
                     Forms\Components\BelongsToManyMultiSelect::make('categories')
-                        ->relationship('productCategories', 'name')
+                        ->relationship('productCategories', 'name'),
                 ]),
                 Forms\Components\Fieldset::make('Pricing')->schema([
                     Forms\Components\Toggle::make('should_call_in_for_details')

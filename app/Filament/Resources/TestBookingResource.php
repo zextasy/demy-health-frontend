@@ -2,16 +2,16 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\TestBooking;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
-use Filament\Resources\Resource;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
 use App\Filament\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
+use App\Models\TestBooking;
+use Filament\Forms;
+use Filament\Resources\Form;
+use Filament\Resources\Resource;
+use Filament\Resources\Table;
+use Filament\Tables;
 
 class TestBookingResource extends Resource
 {
@@ -106,7 +106,7 @@ class TestBookingResource extends Resource
             ])
             ->filters([
 
-            ])->defaultSort('created_at','desc');
+            ])->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
@@ -123,7 +123,7 @@ class TestBookingResource extends Resource
             'index' => Pages\ListTestBookings::route('/'),
             //            'create' => Pages\CreateTestBooking::route('/create'),
             'view' => Pages\ViewTestBooking::route('/{record}'),
-//            'edit' => Pages\EditTestBooking::route('/{record}/edit'), //TODO enable editing when the issue with the user relationship is set
+            //            'edit' => Pages\EditTestBooking::route('/{record}/edit'), //TODO enable editing when the issue with the user relationship is set
         ];
     }
 

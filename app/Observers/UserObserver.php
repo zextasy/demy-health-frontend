@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-
 use App\Models\User;
 
 class UserObserver
@@ -13,7 +12,7 @@ class UserObserver
 
     public function created(User $model)
     {
-        if (!$model->hasAnyRole(['admin', 'manager', 'editor'])){
+        if (! $model->hasAnyRole(['admin', 'manager', 'editor'])) {
             $model->assignRole('customer');
         }
     }

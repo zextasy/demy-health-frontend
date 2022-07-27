@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait ReferencesUsersViaEmail
 {
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_email', 'email');

@@ -2,33 +2,27 @@
 
 namespace App\Filament\Pages;
 
-use Closure;
-use App\Models\Country;
-use Filament\Pages\Page;
-use App\Enums\GenderEnum;
-use App\Models\TestBooking;
-use Illuminate\Support\Carbon;
-use App\Models\ReferralChannel;
-use Illuminate\Support\HtmlString;
-use Filament\Forms\Components\Tabs;
-use App\Enums\AgeClassificationEnum;
-use App\Enums\PatientDataDetailEnum;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use App\Enums\PatientAcquisitionTypeEnum;
-use Filament\Forms\Components\Wizard\Step;
-use App\Filament\Resources\PatientResource;
-use Filament\Forms\Components\MarkdownEditor;
 use App\Actions\Patients\CreatePatientAction;
+use App\Enums\AgeClassificationEnum;
+use App\Enums\GenderEnum;
+use App\Enums\PatientDataDetailEnum;
+use App\Filament\Resources\PatientResource;
+use App\Models\Country;
+use App\Models\ReferralChannel;
+use Closure;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Pages\Page;
+use Illuminate\Support\Carbon;
 
 class RegisterPatient extends Page implements HasForms
 {
-
     use InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-add';
@@ -40,23 +34,41 @@ class RegisterPatient extends Page implements HasForms
     protected static ?int $navigationSort = 1;
 
     public $acquisition;
+
     public $detailLevel;
+
     public $reference;
+
     public $bookingReference;
+
     public $firstName;
+
     public $middleName;
+
     public $lastName;
+
     public $dateOfBirth;
+
     public $ageInYears;
+
     public $ageClassification;
+
     public $gender;
+
     public $height;
+
     public $weight;
+
     public $countryId;
+
     public $passportNumber;
+
     public $email;
+
     public $phoneNumber;
+
     public $referralCode;
+
     public $referralChannelId;
 
     protected function getFormSchema(): array
@@ -111,7 +123,7 @@ class RegisterPatient extends Page implements HasForms
                             Select::make('countryId')
                                 ->options(Country::all()->toSelectArray())
                                 ->searchable()
-                                ->label("Nationality")
+                                ->label('Nationality')
                                 ->rules([
                                     function () {
                                         return function (string $attribute, $value, Closure $fail) {
@@ -163,13 +175,12 @@ class RegisterPatient extends Page implements HasForms
                     ])->columns(2),
                 ]),
             ])
-                ->submitAction(view('filament.forms.components.wizard-submit-button'))
+                ->submitAction(view('filament.forms.components.wizard-submit-button')),
         ];
     }
 
     public function submitWizard(): void
     {
-
         try {
             $ageClassificationEnum = isset($this->dateOfBirth, $this->ageInYears) ? null : AgeClassificationEnum::tryFrom($this->ageClassification);
             $genderEnum = GenderEnum::tryFrom($this->gender);
@@ -179,7 +190,7 @@ class RegisterPatient extends Page implements HasForms
             $parsedHeight = isset($this->height) ? intval($this->height) : null;
             $parsedWeight = isset($this->weight) ? intval($this->weight) : null;
             $parsedCountryId = isset($this->countryId) ? intval($this->countryId) : null;
-            $parsedReferralChannelId =isset($this->referralChannelId) ? intval($this->referralChannelId) : null;
+            $parsedReferralChannelId = isset($this->referralChannelId) ? intval($this->referralChannelId) : null;
             $patient = (new CreatePatientAction())
                 ->withReference($this->reference)
                 ->withMiddleName($this->middleName)
@@ -192,10 +203,8 @@ class RegisterPatient extends Page implements HasForms
                 ->run($this->firstName, $this->lastName, $genderEnum);
             $this->notify('success', 'Registered patient successfully');
             $this->redirect(PatientResource::getUrl('view', ['record' => $patient->id]));
+        } catch (\Exception $e) {
+            $this->notify('danger', 'Something went wrong'.$e->getMessage());
         }
-        catch (\Exception $e) {
-            $this->notify('danger', 'Something went wrong'. $e->getMessage());
-        }
-
     }
 }

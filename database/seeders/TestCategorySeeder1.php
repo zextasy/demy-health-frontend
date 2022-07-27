@@ -2,14 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\TestType;
-use App\Models\TestCategory;
 use App\Models\SpecimenType;
+use App\Models\TestCategory;
+use App\Models\TestType;
 use Illuminate\Database\Seeder;
 
 class TestCategorySeeder1 extends Seeder
 {
-
     public function run()
     {
         $specimenTypeP = SpecimenType::where('key', 'P')->first();

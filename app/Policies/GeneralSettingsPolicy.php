@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Settings\GeneralSettings;
 use App\Models\User;
+use App\Settings\GeneralSettings;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class GeneralSettingsPolicy

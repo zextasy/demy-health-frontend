@@ -2,10 +2,9 @@
 
 namespace App\Notifications;
 
+use App\Enums\TestBookings\LocationTypeEnum;
 use App\Models\TestBooking;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Enums\TestBookings\LocationTypeEnum;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -14,11 +13,17 @@ class CustomerTestBookingNotification extends Notification
     use Queueable;
 
     private TestBooking $testBooking;
+
     private string $subject;
+
     private string $messageLine1;
+
     private string $messageLine2;
+
     private string $messageLine3;
+
     private string $messageLine4;
+
     private string $messageLine5;
 
     /**
@@ -39,7 +44,7 @@ class CustomerTestBookingNotification extends Notification
             LocationTypeEnum::CENTER => "Please be at the center : {$testBooking->resolved_address_text}",
             default => '',
         };
-        $this->messageLine5 = $testType->should_call_in_for_details ? "Please call us for further details." : "Your results should be ready in {$testType->tat}.";
+        $this->messageLine5 = $testType->should_call_in_for_details ? 'Please call us for further details.' : "Your results should be ready in {$testType->tat}.";
     }
 
     /**

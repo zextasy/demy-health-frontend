@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Models\TestBooking;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Webbingbrasil\FilamentNotification\Actions\ButtonAction;
@@ -15,8 +14,11 @@ class InternalTestBookingNotification extends Notification
     use Queueable;
 
     private TestBooking $testBooking;
+
     private string $message;
+
     private string $subject;
+
     public string $bookingUrl;
 
     /**
@@ -71,24 +73,25 @@ class InternalTestBookingNotification extends Notification
             'level' => NotificationLevel::INFO,
             'title' => $this->subject,
             'message' => $this->message,
-            'bookingUrl' => $this->bookingUrl
+            'bookingUrl' => $this->bookingUrl,
         ];
     }
 
-    static public function notificationFeedActions()
+    public static function notificationFeedActions()
     {
         return [
             ButtonAction::make('viewBooking')
                 ->label('View Booking')
                 ->action(function ($record) {
                     $record->markAsRead();
+
                     return redirect()->to($record->data['bookingUrl']);
                 })
                 ->outlined()
                 ->color('blue'),
             ButtonAction::make('markRead')
                 ->label('Mark as read')
-                ->hidden(fn($record) => $record->read()) // Use $record to access/update notification, this is DatabaseNotification model
+                ->hidden(fn ($record) => $record->read()) // Use $record to access/update notification, this is DatabaseNotification model
                 ->action(function ($record, $livewire) {
                     $record->markAsRead();
                     $livewire->refresh(); // $livewire can be used to refresh ou reset notification feed

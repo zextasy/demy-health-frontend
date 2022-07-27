@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Str;
-// for heroku
-$DATABASE_URL=parse_url('postgres://hywgxutnyynkgk:f809ba834d715b19efa2f6321abd3c49d1959120f336fafa019789d70808d03d@ec2-52-44-209-165.compute-1.amazonaws.com:5432/d3g5106qbdbuin');
-return [
 
+// for heroku
+$DATABASE_URL = parse_url('postgres://hywgxutnyynkgk:f809ba834d715b19efa2f6321abd3c49d1959120f336fafa019789d70808d03d@ec2-52-44-209-165.compute-1.amazonaws.com:5432/d3g5106qbdbuin');
+
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -67,11 +68,11 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => $DATABASE_URL["host"],
-            'port' => $DATABASE_URL["port"],
-            'database' => ltrim($DATABASE_URL["path"], "/"),
-            'username' => $DATABASE_URL["user"],
-            'password' => $DATABASE_URL["pass"],
+            'host' => $DATABASE_URL['host'],
+            'port' => $DATABASE_URL['port'],
+            'database' => ltrim($DATABASE_URL['path'], '/'),
+            'username' => $DATABASE_URL['user'],
+            'password' => $DATABASE_URL['pass'],
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

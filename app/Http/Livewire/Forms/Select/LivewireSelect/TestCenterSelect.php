@@ -2,19 +2,14 @@
 
 namespace App\Http\Livewire\Forms\Select\LivewireSelect;
 
-
-use App\Models\State;
 use App\Models\TestCenter;
+use Asantibanez\LivewireSelect\LivewireSelect;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Asantibanez\LivewireSelect\LivewireSelect;
 
 class TestCenterSelect extends LivewireSelect
 {
-
     public $testCenterId;
-
-
 
     public function options($searchTerm = null): Collection
     {
@@ -26,7 +21,7 @@ class TestCenterSelect extends LivewireSelect
                 $query->inState($this->getDependingValue('selectedStateForTestCenterBooking'));
             })
             ->when($searchTerm, function ($query, $searchTerm) {
-                $query->where(DB::raw('LOWER(name)'), 'like', '%'. strtolower($searchTerm) .'%');
+                $query->where(DB::raw('LOWER(name)'), 'like', '%'.strtolower($searchTerm).'%');
             })
             ->get()
             ->toLivewireSelectCollection();
@@ -38,5 +33,4 @@ class TestCenterSelect extends LivewireSelect
 
         return optional($model)->toLivewireSelectDescription();
     }
-
 }

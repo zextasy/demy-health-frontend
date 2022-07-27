@@ -12,6 +12,7 @@ class Payment extends BaseModel
 
     //region CONFIG
     protected $guarded = ['id'];
+
     protected $dates = ['created_at', 'updated_at'];
     //endregion
 
@@ -30,5 +31,4 @@ class Payment extends BaseModel
     //region RELATIONSHIPS
 
     //endregion
-
 }

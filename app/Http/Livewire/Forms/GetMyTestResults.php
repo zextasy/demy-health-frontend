@@ -2,16 +2,17 @@
 
 namespace App\Http\Livewire\Forms;
 
-use Livewire\Component;
 use App\Models\TestBooking;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Traits\Livewire\ManipulatesCustomerSession;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class GetMyTestResults extends Component
 {
     use LivewireAlert, ManipulatesCustomerSession;
 
     public $customerIdentifier = null;
+
     public $testBookingReference = null;
 
     protected $rules = [
@@ -43,10 +44,9 @@ class GetMyTestResults extends Component
             return;
         }
 
-        $testResult = $testBooking->testResults()->latest()->firstOrFail();//TODO: change to query approved_at when process id finished
+        $testResult = $testBooking->testResults()->latest()->firstOrFail(); //TODO: change to query approved_at when process id finished
 
         $this->redirect(route('frontend.test-results.show', $testResult->id));
-
     }
 
     public function render()

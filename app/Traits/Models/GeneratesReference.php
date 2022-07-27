@@ -3,8 +3,8 @@
 namespace App\Traits\Models;
 
 use App\Helpers\ModelHelper;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 trait GeneratesReference
 {
@@ -16,8 +16,8 @@ trait GeneratesReference
             $key = $config['reference_key'];
             if (empty($model->reference)) {
                 $nextId = (new ModelHelper)->getNextId($model);
-                $padding = str_pad($nextId, 9, "0", STR_PAD_LEFT);
-                $model->$key = $model->reference ?? $prefix . $padding;
+                $padding = str_pad($nextId, 9, '0', STR_PAD_LEFT);
+                $model->$key = $model->reference ?? $prefix.$padding;
             }
         });
     }
@@ -28,6 +28,7 @@ trait GeneratesReference
     {
         $config = $this->referenceConfig();
         $key = $config['reference_key'];
+
         return $query->where($key, '=', $id)
             ->orWhere('id', '=', $id);
     }

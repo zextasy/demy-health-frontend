@@ -2,11 +2,10 @@
 
 namespace App\Traits\Relationships;
 
-use App\Models\Order;
 use App\Models\Finance\Price;
-use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Carbon;
 
 trait MorphsPrices
 {
@@ -34,16 +33,17 @@ trait MorphsPrices
         ]);
     }
 
-    public function getPriceAttribute():float|null
+    public function getPriceAttribute(): float|null
     {
         $this->loadMissing('currentPrice');
+
         return optional($this->currentPrice)->amount;
     }
 
     public function getformattedPriceAttribute()
     {
         if ($this->should_call_in_for_details || empty($this->price)) {
-            return "Call In";
+            return 'Call In';
         }
 
         return number_format($this->price);

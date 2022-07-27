@@ -2,15 +2,13 @@
 
 namespace App\Traits\Relationships;
 
-use App\Models\Order;
 use App\Models\Finance\Cost;
 use App\Models\Finance\Price;
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Carbon;
 
 trait MorphsCosts
 {
-
     public function costs(): MorphMany
     {
         return $this->MorphMany(Cost::class, 'costable');
@@ -37,7 +35,7 @@ trait MorphsCosts
         return $cost;
     }
 
-    public function getCostAttribute():float|null
+    public function getCostAttribute(): float|null
     {
         return optional($this->currentCost)->amount;
     }

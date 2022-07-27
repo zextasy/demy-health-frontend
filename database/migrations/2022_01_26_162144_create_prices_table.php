@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount',12);
+            $table->decimal('amount', 12);
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->morphs('priceable');

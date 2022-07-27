@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
-use App\Enums\GenderEnum;
-use Illuminate\Support\Carbon;
-use App\Settings\GeneralSettings;
 use App\Enums\AgeClassificationEnum;
+use App\Enums\GenderEnum;
+use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
-use Illuminate\Database\Eloquent\Builder;
-use App\Traits\Relationships\MorphsAddresses;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Traits\Relationships\MorphsAddresses;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Carbon;
 
 class Patient extends BaseModel
 {
@@ -23,7 +22,9 @@ class Patient extends BaseModel
 
     //region CONFIG
     protected $guarded = ['id'];
-    protected $dates = ['created_at', 'updated_at','date_of_birth'];
+
+    protected $dates = ['created_at', 'updated_at', 'date_of_birth'];
+
     protected $casts = [
         'gender' => GenderEnum::class,
         'age_classification' => AgeClassificationEnum::class,
@@ -50,7 +51,7 @@ class Patient extends BaseModel
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->last_name . ' ' . $this->first_name,
+            get: fn () => $this->last_name.' '.$this->first_name,
         );
     }
 
@@ -60,6 +61,7 @@ class Patient extends BaseModel
     public function resolveAgeClassification(int|Carbon $age): AgeClassificationEnum
     {
         $age = $age instanceof Carbon ? $age->age : $age;
+
         return AgeClassificationEnum::getClassificationFromAge($age);
     }
 
@@ -73,12 +75,13 @@ class Patient extends BaseModel
         if (isset($this->age_classification)) {
             return $this->age_classification->key;
         }
+
         return $age;
     }
     //endregion
 
     //region SCOPES
-    public function scopeWithCustomerDetails(Builder $query, string $identifier ): Builder
+    public function scopeWithCustomerDetails(Builder $query, string $identifier): Builder
     {
         return $query->where('email', $identifier)
             ->orWhere('phone_number', $identifier);

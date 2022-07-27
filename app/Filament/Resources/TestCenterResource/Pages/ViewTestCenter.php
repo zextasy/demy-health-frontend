@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\TestCenterResource\Pages;
 
-use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\TestCenterResource;
+use Filament\Resources\Pages\ViewRecord;
 
 class ViewTestCenter extends ViewRecord
 {
     protected static string $resource = TestCenterResource::class;
-
 }

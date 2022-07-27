@@ -2,16 +2,16 @@
 
 namespace App\Filament\Resources;
 
-use STS\FilamentImpersonate\Impersonate;
 use App\Filament\Resources\UserResource\Pages;
-use Filament\Forms\Components\BelongsToManyMultiSelect;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\BelongsToManyMultiSelect;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use STS\FilamentImpersonate\Impersonate;
 
 class UserResource extends Resource
 {
@@ -42,7 +42,7 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                BelongsToManyMultiSelect::make('roles')->relationship('roles', 'name')
+                BelongsToManyMultiSelect::make('roles')->relationship('roles', 'name'),
             ]);
     }
 
@@ -51,7 +51,7 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable(),
-                Tables\Columns\TextColumn::make('email')->sortable()
+                Tables\Columns\TextColumn::make('email')->sortable(),
             ])
             ->filters([
                 //

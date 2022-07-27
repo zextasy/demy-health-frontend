@@ -2,13 +2,11 @@
 
 namespace App\Notifications;
 
-use App\Models\TestBooking;
-use Illuminate\Support\Str;
-use Illuminate\Bus\Queueable;
 use App\Models\CRM\CustomerEnquiry;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 use Webbingbrasil\FilamentNotification\Actions\ButtonAction;
 use Webbingbrasil\FilamentNotification\Notifications\NotificationLevel;
 
@@ -17,10 +15,12 @@ class InternalCustomerEnquiryNotification extends Notification
     use Queueable;
 
     private string $subject;
-    private string $message;
-    private mixed $customerMessage;
-    private mixed $actionUrl;
 
+    private string $message;
+
+    private mixed $customerMessage;
+
+    private mixed $actionUrl;
 
     /**
      * Create a new notification instance.
@@ -76,24 +76,25 @@ class InternalCustomerEnquiryNotification extends Notification
             'level' => NotificationLevel::INFO,
             'title' => $this->subject,
             'message' => $this->message,
-            'actionUrl' => $this->actionUrl
+            'actionUrl' => $this->actionUrl,
         ];
     }
 
-    static public function notificationFeedActions()
+    public static function notificationFeedActions()
     {
         return [
             ButtonAction::make('viewEnquiry')
                 ->label('View Enquiry')
                 ->action(function ($record) {
                     $record->markAsRead();
+
                     return redirect()->to($record->data['actionUrl']);
                 })
                 ->outlined()
                 ->color('blue'),
             ButtonAction::make('markRead')
                 ->label('Mark as read')
-                ->hidden(fn($record) => $record->read()) // Use $record to access/update notification, this is DatabaseNotification model
+                ->hidden(fn ($record) => $record->read()) // Use $record to access/update notification, this is DatabaseNotification model
                 ->action(function ($record, $livewire) {
                     $record->markAsRead();
                     $livewire->refresh(); // $livewire can be used to refresh ou reset notification feed

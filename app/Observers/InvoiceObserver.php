@@ -2,14 +2,11 @@
 
 namespace App\Observers;
 
-
-use App\Helpers\ModelHelper;
 use App\Models\Finance\Invoice;
-use App\Settings\GeneralSettings;
 
 class InvoiceObserver
 {
-    public function creating (Invoice $model)
+    public function creating(Invoice $model)
     {
     }
 

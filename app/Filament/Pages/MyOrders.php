@@ -4,17 +4,15 @@ namespace App\Filament\Pages;
 
 use App\Models\Order;
 use Filament\Pages\Page;
-use App\Models\TestBooking;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\LinkAction;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 
 class MyOrders extends Page implements HasTable
 {
-
     use InteractsWithTable;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
@@ -45,9 +43,8 @@ class MyOrders extends Page implements HasTable
     {
         return [
             LinkAction::make('View')
-                ->url(fn(Order $record): string => $record->filament_url)
-                ->hidden(fn(Order $record): bool => $record->user()->doesntExist()),
+                ->url(fn (Order $record): string => $record->filament_url)
+                ->hidden(fn (Order $record): bool => $record->user()->doesntExist()),
         ];
     }
-
 }

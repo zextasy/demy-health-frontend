@@ -2,27 +2,24 @@
 
 namespace App\Actions\Orders;
 
+use App\Actions\Addresses\AttachAddressableAction;
+use App\Actions\Addresses\CreateAddressAction;
+use App\Actions\Patients\CreatePatientAction;
+use App\Actions\TestBookings\CreateTestBookingAction;
+use App\Enums\TestBookings\LocationTypeEnum;
+use App\Events\CartCheckedOutEvent;
 use App\Models\Order;
 use App\Models\Patient;
 use App\Models\Product;
-use App\Enums\GenderEnum;
 use App\Models\TestBooking;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
-use App\Events\CartCheckedOutEvent;
 use Darryldecode\Cart\CartCollection;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\TestBookings\LocationTypeEnum;
-use App\Actions\Patients\CreatePatientAction;
-use App\Actions\Addresses\CreateAddressAction;
-use App\Actions\OrderItems\CreateOrderItemAction;
-use App\Actions\Addresses\AttachAddressableAction;
-use App\Actions\TestBookings\CreateTestBookingAction;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class GenerateOrderFromCartAction
 {
-
     private Order $order;
 
     public function run(CartCollection $cartItems, string $customerEmail): Order
@@ -48,7 +45,6 @@ class GenerateOrderFromCartAction
             $this->order = (new CreateOrderAction)->run($cartItemModelCollection, $customerEmail, $user);
         });
 
-
         $this->raiseEvents();
 
         return $this->order;
@@ -60,7 +56,6 @@ class GenerateOrderFromCartAction
             TestBooking::class => $this->getTestBookingFromCartItem($cartItem),
             Product::class => $cartItem->associatedModel,
         };
-
     }
 
     private function getTestBookingFromCartItem(mixed $cartItem): TestBooking
@@ -71,8 +66,8 @@ class GenerateOrderFromCartAction
             $customerDateOfBirth = isset($customerDateOfBirth) ? Carbon::parse($cartItem->attributes->customerDateOfBirth) : null;
             $TestBookingPatient = (new CreatePatientAction)
                 ->withContactDetails($cartItem->attributes->customerEmail, $cartItem->attributes->customerPhoneNumber)
-                ->withAgeDetails(null,$customerDateOfBirth,null)
-                ->withCountryDetails($cartItem->attributes->customerCountryId,$cartItem->attributes->customerPassportNumber)
+                ->withAgeDetails(null, $customerDateOfBirth, null)
+                ->withCountryDetails($cartItem->attributes->customerCountryId, $cartItem->attributes->customerPassportNumber)
                 ->run($cartItem->attributes->customerFirstName, $cartItem->attributes->customerLastName, $cartItem->attributes->customerGender);
         }
         $locationTypeEnum = LocationTypeEnum::from($cartItem->attributes->locationType);
@@ -102,5 +97,4 @@ class GenerateOrderFromCartAction
     {
         CartCheckedOutEvent::dispatch($this->order);
     }
-
 }

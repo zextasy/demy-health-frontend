@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\LocalGovernmentAreaResource\Pages;
 
-use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\LocalGovernmentAreaResource;
+use Filament\Resources\Pages\ViewRecord;
 
 class ViewLocalGovernmentArea extends ViewRecord
 {

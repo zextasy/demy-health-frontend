@@ -2,7 +2,6 @@
 
 namespace App\Traits\Relationships;
 
-
 use App\Models\BusinessGroup;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

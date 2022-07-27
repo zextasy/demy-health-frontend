@@ -3,14 +3,11 @@
 namespace App\Observers;
 
 use App\Models\Order;
-use App\Helpers\ModelHelper;
-use App\Settings\GeneralSettings;
 
 class OrderObserver
 {
-    public function creating (Order $model)
+    public function creating(Order $model)
     {
-
     }
 
     public function created(Order $model)

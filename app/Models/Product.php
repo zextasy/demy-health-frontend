@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use App\Helpers\HerokuHelper;
-use Spatie\MediaLibrary\HasMedia;
-use App\Settings\GeneralSettings;
 use App\Contracts\OrderableItemContract;
+use App\Helpers\HerokuHelper;
+use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
-use App\Traits\Relationships\MorphsPrices;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use App\Traits\Relationships\MorphsOrderItems;
 use App\Traits\Relationships\BelongsToBusinessGroup;
+use App\Traits\Relationships\MorphsOrderItems;
+use App\Traits\Relationships\MorphsPrices;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends BaseModel implements HasMedia, OrderableItemContract
 {
     use HasFactory, InteractsWithMedia, MorphsOrderItems, GeneratesReference, MorphsPrices, BelongsToBusinessGroup;
+
     //region CONFIG
     public function referenceConfig(): array
     {
@@ -25,27 +26,31 @@ class Product extends BaseModel implements HasMedia, OrderableItemContract
             'reference_prefix' => app(GeneralSettings::class)->product_sku_prefix,
         ];
     }
+
     protected $dates = ['created_at', 'updated_at'];
+
     protected $guarded = ['id'];
+
     protected $casts = [
         'extra_information' => 'array',
         'should_call_in_for_details' => 'boolean',
-        'price' => 'float'
+        'price' => 'float',
     ];
 //    protected $with = ['prices','currentPrice'];
     //endregion
 
     //region ATTRIBUTES
 
-    public function getLatestPictureUrlAttribute() : string
+    public function getLatestPictureUrlAttribute(): string
     {
-        if (HerokuHelper::isRunningHeroku()){
-            return asset("demyhealth/images/products/default-product-image.png");
+        if (HerokuHelper::isRunningHeroku()) {
+            return asset('demyhealth/images/products/default-product-image.png');
         }
-        if ($this->media->count() > 0){
+        if ($this->media->count() > 0) {
             return $this->media->first()->getUrl();
         }
-        return asset("demyhealth/images/products/default-product-image.png");
+
+        return asset('demyhealth/images/products/default-product-image.png');
     }
     //endregion
 

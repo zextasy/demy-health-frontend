@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Patient;
-use App\Models\TestType;
+use App\Models\TestBooking;
+use App\Models\TestCategory;
 use App\Models\TestCenter;
 use App\Models\TestResult;
-use App\Models\TestBooking;
-use Illuminate\Http\Request;
-use App\Models\TestCategory;
+use App\Models\TestType;
 
 class FrontendController extends Controller
 {
@@ -32,7 +31,6 @@ class FrontendController extends Controller
     {
         return view('frontend.services.all-services');
     }
-
 
     public function pcrDiagResearch()
     {
@@ -111,13 +109,15 @@ class FrontendController extends Controller
     {
         $patient = Patient::withCustomerDetails($customerIdentifier)->firstOrFail();
         $data['patient'] = $patient;
-        return redirect()->back();//TODO not implemented till discussion with doc about security
+
+        return redirect()->back(); //TODO not implemented till discussion with doc about security
     }
 
     public function listUpcomingTestBookings(string $customerIdentifier)
     {
         $patient = Patient::withCustomerDetails($customerIdentifier)->firstOrFail();
         $data['patient'] = $patient;
+
         return view('frontend.list-upcoming-test-bookings', $data);
     }
 
@@ -130,6 +130,7 @@ class FrontendController extends Controller
     {
         $testBooking = TestBooking::findOrFail($id);
         $data['testBooking'] = $testBooking;
+
         return view('frontend.test-booking-detail', $data);
     }
 
@@ -137,6 +138,7 @@ class FrontendController extends Controller
     {
         $testResult = TestResult::findOrFail($id);
         $data['testResult'] = $testResult;
+
         return view('frontend.test-result-detail', $data);
     }
 
@@ -144,9 +146,9 @@ class FrontendController extends Controller
     {
         $order = Order::findOrFail($id);
         $data['order'] = $order;
+
         return view('frontend.order-detail', $data);
     }
-
 
     public function frontend()
     {

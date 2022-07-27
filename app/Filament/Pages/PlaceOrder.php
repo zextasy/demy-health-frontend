@@ -2,17 +2,17 @@
 
 namespace App\Filament\Pages;
 
+use App\Actions\Orders\CreateOrderAction;
+use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Filament\Resources\OrderResource;
 use App\Models\Product;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
 use Filament\Pages\Page;
 use Illuminate\Support\Collection;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
-use App\Actions\Orders\CreateOrderAction;
-use App\Filament\Resources\OrderResource;
-use Filament\Forms\Components\Wizard\Step;
-use App\Enums\Finance\Payments\PaymentMethodEnum;
 
 class PlaceOrder extends Page
 {
@@ -27,7 +27,9 @@ class PlaceOrder extends Page
     protected static ?int $navigationSort = 2;
 
     public $reference;
+
     public $customerEmail;
+
     public $paymentMethod;
 
     protected function getFormSchema(): array
@@ -54,13 +56,13 @@ class PlaceOrder extends Page
                         Repeater::make('products')
                             ->schema([
                                 Select::make('productId')
-                                    ->label("Product")
+                                    ->label('Product')
                                     ->options(Product::all()->toSelectArray())
                                     ->searchable()
                                     ->required(),
                                 TextInput::make('quantity')->integer()->required(),
                             ])
-                            ->columns(3)
+                            ->columns(3),
                     ]),
                 Step::make('Confirmation')
                     ->schema([
@@ -72,7 +74,7 @@ class PlaceOrder extends Page
                             ->helperText('Summary of the order. Please confirm that this is correct before submitting'),
                     ]),
             ])
-                ->submitAction(view('filament.forms.components.wizard-submit-button'))
+                ->submitAction(view('filament.forms.components.wizard-submit-button')),
         ];
     }
 
@@ -96,16 +98,17 @@ class PlaceOrder extends Page
 
             $this->redirect(OrderResource::getUrl('view', ['record' => $order->id]));
         } catch (\Exception $e) {
-            $this->notify('danger', 'Something went wrong'. $e->getMessage());
+            $this->notify('danger', 'Something went wrong'.$e->getMessage());
         }
     }
 
     private function getOrderSummary(): string
     {
-        $summary = "";
+        $summary = '';
         foreach ($this->products as $product) {
-            $summary .= $product->productId . " x " . $product->quantity . "\n";
+            $summary .= $product->productId.' x '.$product->quantity."\n";
         }
+
         return $summary;
     }
 }

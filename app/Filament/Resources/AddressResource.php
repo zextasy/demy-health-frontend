@@ -2,16 +2,15 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\State;
-use App\Models\Address;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
-use Filament\Resources\Resource;
-use App\Models\LocalGovernmentArea;
 use App\Filament\Resources\AddressResource\Pages;
 use App\Filament\Resources\AddressResource\RelationManagers;
+use App\Models\Address;
+use App\Models\State;
+use Filament\Forms;
+use Filament\Resources\Form;
+use Filament\Resources\Resource;
+use Filament\Resources\Table;
+use Filament\Tables;
 
 class AddressResource extends Resource
 {
@@ -39,15 +38,16 @@ class AddressResource extends Resource
                     ->relationship('state', 'name')
                     ->searchable()
                     ->reactive()
-                    ->afterStateUpdated(fn( callable $set) => $set('local_government_area_id', null))
+                    ->afterStateUpdated(fn (callable $set) => $set('local_government_area_id', null))
                     ->required(),
                 Forms\Components\Select::make('local_government_area_id')
                     ->label('local Government Area')
                     ->options(function (callable $get) {
                         $state = State::find($get('state_id'));
-                        if (! $state){
+                        if (! $state) {
                             return [];
                         }
+
                         return $state->localGovernmentAreas->toSelectArray();
                     })
                     ->searchable()

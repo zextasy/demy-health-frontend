@@ -3,13 +3,12 @@
 namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
 use Filament\Forms\Components\Fieldset;
-use Illuminate\Database\Eloquent\Model;
+use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
-use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Model;
 
 class BaseHasManyTestTypesRelationManager extends HasManyRelationManager
 {

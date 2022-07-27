@@ -24,8 +24,9 @@ class SpecimenTypeSeeder extends Seeder
         ['key' => 'TSC', 'description' => 'Not listed, but appears on test list. Please change description'],
         ['key' => 'P(WB)', 'description' => 'Not listed, but appears on test list. Please change description'],
         ['key' => 'T', 'description' => 'Not listed, but appears on test list. Please change description'],
-        ['key' => 'URINE', 'description' => 'Urine']
+        ['key' => 'URINE', 'description' => 'Urine'],
     ];
+
     public function run()
     {
         foreach ($this->specimens as $specimen) {

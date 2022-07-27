@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\LocalGovernmentAreaResource\Pages;
-use App\Filament\Resources\LocalGovernmentAreaResource\RelationManagers;
 use App\Models\LocalGovernmentArea;
 use Filament\Forms;
 use Filament\Resources\Form;

@@ -4,11 +4,9 @@ namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Filament\Resources\RelationManagers\HasManyRelationManager;
+use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
 
 class BaseBelongsToManyLocalGovernmentAreasRelationManager extends BelongsToManyRelationManager
 {

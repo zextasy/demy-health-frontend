@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\TestBookingResource\Pages;
 
-use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\TestBookingResource;
+use Filament\Resources\Pages\ViewRecord;
 
 class ViewTestBooking extends ViewRecord
 {
     protected static string $resource = TestBookingResource::class;
-
 }

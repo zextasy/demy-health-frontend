@@ -2,29 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Carbon;
-use App\Settings\GeneralSettings;
 use App\Contracts\AddressableContract;
 use App\Contracts\OrderableItemContract;
-use App\Traits\Models\GeneratesReference;
-use App\Traits\Relationships\MorphsAddresses;
 use App\Enums\TestBookings\LocationTypeEnum;
-use App\Traits\Relationships\MorphsOrderItems;
 use App\Filament\Resources\TestBookingResource;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Settings\GeneralSettings;
+use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\BelongsToBusinessGroup;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Traits\Relationships\MorphsAddresses;
+use App\Traits\Relationships\MorphsOrderItems;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TestBooking extends BaseModel implements OrderableItemContract, AddressableContract
 {
     use HasFactory, MorphsAddresses, MorphsOrderItems, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup;
 
     //region CONFIG
-    protected $dates = ['created_at', 'updated_at','due_date'];
+    protected $dates = ['created_at', 'updated_at', 'due_date'];
+
     protected $guarded = ['id'];
 
     protected $casts = [

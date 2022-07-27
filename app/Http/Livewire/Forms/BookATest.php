@@ -2,46 +2,65 @@
 
 namespace App\Http\Livewire\Forms;
 
-use Livewire\Component;
-use App\Models\TestType;
-use App\Models\TestBooking;
-use App\Helpers\FlashMessageHelper;
-use Illuminate\Contracts\View\View;
-use App\Events\TestAddedToCartEvent;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Support\Facades\Session;
 use App\Enums\TestBookings\LocationTypeEnum;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Events\TestAddedToCartEvent;
+use App\Helpers\FlashMessageHelper;
 use App\Http\Requests\StoreTestBookingRequest;
-use Illuminate\Validation\ValidationException;
+use App\Models\TestBooking;
+use App\Models\TestType;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Contracts\Foundation\Application;
-use App\Traits\Livewire\ManipulatesCustomerSession;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Validation\ValidationException;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class BookATest extends Component
 {
     use LivewireAlert, ManipulatesCustomerSession;
 
     public $selectedTestCenter;
+
     public $selectedCustomerCountry;
+
     public $selectedCustomerGender;
+
     public $selectedStateForTestCenterBooking;
+
     public $selectedStateForHomeBooking;
+
     public $selectedLocalGovernmentArea;
+
     public $selectedTestType;
+
     public $customerFirstName = null;
+
     public $customerLastName = null;
+
     public $customerEmail = null;
+
     public $customerPhoneNumber = null;
+
     public $locationType = null;
+
     public $addressLine1 = null;
+
     public $addressLine2 = null;
+
     public $city = null;
+
     public $dueDate;
+
     public $startTime;
+
     public $customerGender = null;
+
     public $customerDateOfBirth = null;
+
     public $customerCountryId = null;
+
     public $customerPassportNumber = null;
 
     protected $listeners = [
@@ -86,13 +105,12 @@ class BookATest extends Component
 
             $testType = TestType::find($this->selectedTestType);
 
-
-            Cart::add(array(
-                'id' => 'Test Booking - ' . $testType->test_id,
+            Cart::add([
+                'id' => 'Test Booking - '.$testType->test_id,
                 'name' => $testType->name,
                 'price' => $testType->price,
                 'quantity' => 1,
-                'attributes' => array(
+                'attributes' => [
                     'type' => TestBooking::class,
                     'customerFirstName' => $this->customerFirstName,
                     'customerLastName' => $this->customerLastName,
@@ -111,8 +129,8 @@ class BookATest extends Component
                     'city' => $this->city,
                     'selectedState' => $selectedState,
                     'selectedLocalGovernmentArea' => $this->selectedLocalGovernmentArea,
-                ),
-            ));
+                ],
+            ]);
             $this->setSessionCustomerEmail($this->customerEmail);
             TestAddedToCartEvent::dispatch();
 
@@ -120,23 +138,20 @@ class BookATest extends Component
                 'position' => 'center',
                 'showConfirmButton' => true,
                 'confirmButtonText' => 'View Cart',
-//                'showDenyButton' => true,
-//                'denyButtonText' => 'Cancel',
+                //                'showDenyButton' => true,
+                //                'denyButtonText' => 'Cancel',
                 'showCancelButton' => true,
                 'cancelButtonText' => 'Home',
                 'onConfirmed' => 'postBookingCart',
                 'onDismissed' => 'postBookingHome',
                 'allowOutsideClick' => false,
-                'timer' => null
+                'timer' => null,
             ]);
-        }
-        catch (ValidationException $e) {
+        } catch (ValidationException $e) {
             $this->alert('error', $e->getMessage());
+        } catch (\Exception $e) {
+            $this->alert('error', 'Something went wrong');
         }
-        catch (\Exception $e) {
-            $this->alert('error', "Something went wrong");
-        }
-
     }
 
     public function setSelectedTestCenter($object)
@@ -173,5 +188,4 @@ class BookATest extends Component
     {
         $this->redirect(route('home'));
     }
-
 }

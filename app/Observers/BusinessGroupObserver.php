@@ -6,13 +6,14 @@ use App\Models\BusinessGroup;
 
 class BusinessGroupObserver
 {
-    public function creating (BusinessGroup $model)
+    public function creating(BusinessGroup $model)
     {
-        if (empty($model->parent_id)){
-            if (!empty (BusinessGroup::root())){
+        if (empty($model->parent_id)) {
+            if (! empty(BusinessGroup::root())) {
                 throw new \Exception('Root Business Group already exists');
             }
             $model->order = 0;
+
             return;
         }
 

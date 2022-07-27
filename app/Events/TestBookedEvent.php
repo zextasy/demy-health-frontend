@@ -2,13 +2,9 @@
 
 namespace App\Events;
 
-use App\Models\TestType;
 use App\Models\TestBooking;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -23,7 +19,7 @@ class TestBookedEvent
      *
      * @return void
      */
-    public function __construct( TestBooking $testBooking)
+    public function __construct(TestBooking $testBooking)
     {
         $this->testBooking = $testBooking;
     }
@@ -37,5 +33,4 @@ class TestBookedEvent
     {
         return new PrivateChannel('channel-name');
     }
-
 }
