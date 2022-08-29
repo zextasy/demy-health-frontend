@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // prevent lazy loading
-        Model::preventLazyLoading(! app()->isProduction());
+//        Model::preventLazyLoading(! app()->isProduction());
         //register model Observers TODO move elsewhere? google
         BusinessGroup::observe(BusinessGroupObserver::class);
         Invoice::observe(InvoiceObserver::class);
