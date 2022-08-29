@@ -32,6 +32,10 @@ class GeneralSettings extends Settings
 
     public string $patient_prefix;
 
+    public string $doctor_prefix;
+
+    public string $prescription_prefix;
+
     public string $referral_code_prefix;
 
     public string $business_start_hour;

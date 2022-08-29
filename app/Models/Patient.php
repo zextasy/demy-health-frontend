@@ -10,6 +10,7 @@ use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\MorphsAddresses;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,7 +19,7 @@ use Illuminate\Support\Carbon;
 
 class Patient extends BaseModel
 {
-    use HasFactory, GeneratesReference, MorphsAddresses, BelongsToBusinessGroup;
+    use HasFactory, GeneratesReference, MorphsAddresses, BelongsToBusinessGroup, ReferencesUsersViaEmail;
 
     //region CONFIG
     protected $guarded = ['id'];
@@ -89,10 +90,6 @@ class Patient extends BaseModel
     //endregion
 
     //region RELATIONSHIPS
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'email', 'email');
-    }
 
     public function testBookings(): HasMany
     {

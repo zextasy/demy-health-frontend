@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Contracts\AddressableContract;
 use App\Contracts\OrderableItemContract;
+use App\Traits\Relationships\Assignable;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource;
 use App\Settings\GeneralSettings;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TestBooking extends BaseModel implements OrderableItemContract, AddressableContract
 {
-    use HasFactory, MorphsAddresses, MorphsOrderItems, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup;
+    use HasFactory, MorphsAddresses, MorphsOrderItems, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup, Assignable;
 
     //region CONFIG
     protected $dates = ['created_at', 'updated_at', 'due_date'];

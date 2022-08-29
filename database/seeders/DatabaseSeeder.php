@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
     private function seedUsers()
     {
         $admin = User::firstOrCreate([
-            'name' => 'Admin',
+            'name' => 'System Admin',
             'email' => 'admin@lzl.com',
             'password' => bcrypt(self::DEFAULT_PASSWORD),
             'email_verified_at' => now(),

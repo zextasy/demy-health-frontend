@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Contracts\AddressableContract;
 use App\Contracts\OrderableContract;
+use App\Traits\Relationships\HasTasks;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\HasTestBookings;
 use App\Traits\Relationships\MorphsAddresses;
@@ -21,7 +22,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail, AddressableContract, OrderableContract
 {
-    use  SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, MorphsAddresses, MorphsOrders, BelongsToBusinessGroup;
+    use  SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, MorphsAddresses, MorphsOrders, BelongsToBusinessGroup, HasTasks;
 
     //region CONFIG
     protected $fillable = [
