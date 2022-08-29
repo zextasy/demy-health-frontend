@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('patient_id')->constrained('patients');
             $table->morphs('visitable_location');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('due_at');
             $table->morphs('assignable');
             $table->text('assignable_url');
-            $table->timestamp('assigned_at');
+            $table->timestamp('assigned_at')->useCurrent();
             $table->foreignId('assigned_by')->constrained('users', 'id');
             $table->foreignId('assigned_to')->constrained('users', 'id');
             $table->timestamp('started_at')->nullable();
@@ -38,6 +38,7 @@ return new class extends Migration
             $table->foreignId('failed_by')->nullable()->constrained('users', 'id');
             $table->tinyInteger('completion_rating')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

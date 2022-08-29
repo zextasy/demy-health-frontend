@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->foreignId('doctor_id')->references('id')->on('doctors');
-            $table->fullText('details');
-            $table->json('details');
+            $table->longText('details');
+            $table->json('prescription_details');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

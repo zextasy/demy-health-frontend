@@ -49,12 +49,10 @@
 >
     <button
         x-on:click="$refs.panel.toggle"
-        @class([
-            'block flex-shrink-0 w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center',
-            'dark:bg-gray-900' => config('filament.dark_mode'),
-        ])
-        style="background-image: url('{{ \Filament\Facades\Filament::getUserAvatarUrl($user) }}')"
-    ></button>
+        class="block flex-shrink-0"
+    >
+        <x-filament::user-avatar :user="$user" />
+    </button>
 
     <div
         x-ref="panel"
@@ -89,11 +87,11 @@
 
             <div>
                 @if (config('filament.dark_mode'))
-                    <x-filament::dropdown.item icon="heroicon-s-moon" x-show="theme === 'dark'" x-on:click="mode = 'manual'; theme = 'light'">
+                    <x-filament::dropdown.item icon="heroicon-s-moon" x-show="theme === 'dark'" x-on:click="$refs.panel.close; mode = 'manual'; theme = 'light'">
                         {{ __('filament::layout.buttons.light_mode.label') }}
                     </x-filament::dropdown.item>
 
-                    <x-filament::dropdown.item icon="heroicon-s-sun" x-show="theme === 'light'" x-on:click="mode = 'manual'; theme = 'dark'">
+                    <x-filament::dropdown.item icon="heroicon-s-sun" x-show="theme === 'light'" x-on:click="$refs.panel.close; mode = 'manual'; theme = 'dark'">
                         {{ __('filament::layout.buttons.dark_mode.label') }}
                     </x-filament::dropdown.item>
                 @endif
