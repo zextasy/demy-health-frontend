@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\InvoiceResource\RelationManagers;
+namespace App\Filament\Resources\Finance\InvoiceResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
