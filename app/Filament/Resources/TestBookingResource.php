@@ -112,6 +112,7 @@ class TestBookingResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\TasksRelationManager::class,
             RelationManagers\AddressesRelationManager::class,
             RelationManagers\TestResultsRelationManager::class,
         ];

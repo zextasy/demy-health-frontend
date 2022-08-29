@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
 use App\Models\BusinessGroup;
 use App\Models\Finance\Invoice;
 use App\Models\Finance\Price;
@@ -10,6 +11,7 @@ use App\Models\Patient;
 use App\Models\Product;
 use App\Models\TestResult;
 use App\Models\User;
+use App\Observers\TaskObserver;
 use App\Observers\BusinessGroupObserver;
 use App\Observers\InvoiceObserver;
 use App\Observers\OrderObserver;
@@ -49,7 +51,8 @@ class AppServiceProvider extends ServiceProvider
         Patient::observe(PatientObserver::class);
         Price::observe(PriceObserver::class);
         Product::observe(ProductObserver::class);
-        User::observe(UserObserver::class);
+        Task::observe(TaskObserver::class);
         TestResult::observe(TestResultObserver::class);
+        User::observe(UserObserver::class);
     }
 }

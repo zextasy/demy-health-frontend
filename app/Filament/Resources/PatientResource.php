@@ -24,7 +24,7 @@ class PatientResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'Tests';
+    protected static ?string $navigationGroup = 'Consultation';
 
     public static function form(Form $form): Form
     {

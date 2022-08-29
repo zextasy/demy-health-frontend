@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\AssignableContract;
 use App\Contracts\AddressableContract;
 use App\Contracts\OrderableItemContract;
 use App\Traits\Relationships\Assignable;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class TestBooking extends BaseModel implements OrderableItemContract, AddressableContract
+class TestBooking extends BaseModel implements OrderableItemContract, AddressableContract, AssignableContract
 {
     use HasFactory, MorphsAddresses, MorphsOrderItems, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup, Assignable;
 
@@ -44,6 +45,11 @@ class TestBooking extends BaseModel implements OrderableItemContract, Addressabl
     public function getFilamentUrlAttribute(): string
     {
         return TestBookingResource::getUrl('view', ['record' => $this->id]);
+    }
+
+    public function getAssignableNameAttribute(): string
+    {
+        return $this->name;
     }
 
     protected function name(): Attribute

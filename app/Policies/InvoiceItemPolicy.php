@@ -18,7 +18,7 @@ class InvoiceItemPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class InvoiceItemPolicy
      */
     public function view(User $user, InvoiceItem $invoiceItem)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class InvoiceItemPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class InvoiceItemPolicy
      */
     public function update(User $user, InvoiceItem $invoiceItem)
     {
-        //
+        return true;
     }
 
     /**

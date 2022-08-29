@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\User;
+use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\TaskResource\Pages;
 use App\Filament\Resources\TaskResource\RelationManagers;
 use App\Models\Task;
@@ -23,41 +25,37 @@ class TaskResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('parent_id'),
-                Forms\Components\TextInput::make('business_group_id')
-                    ->required(),
-                Forms\Components\TextInput::make('assigned_by')
-                    ->required(),
-                Forms\Components\TextInput::make('assigned_to')
+                Forms\Components\Select::make('parent_id')->label('Parent')
+                    ->disabled(),
+                Forms\Components\Select::make('business_group_id')->label('Business Group')
+                    ->disabled(),
+                Forms\Components\Select::make('assigned_by')
+                    ->disabled(),
+                Forms\Components\Select::make('assigned_to')->options(User::all()->pluck('name','id'))
                     ->required(),
                 Forms\Components\TextInput::make('started_by'),
-                Forms\Components\TextInput::make('completion_confirmation_requested_by'),
-                Forms\Components\TextInput::make('completion_confirmation_confirmed_by'),
-                Forms\Components\TextInput::make('completion_confirmation_rejected_by'),
-                Forms\Components\TextInput::make('completed_by'),
-                Forms\Components\TextInput::make('failed_by'),
+                Forms\Components\TextInput::make('completion_confirmation_requested_by')->disabled(),
+                Forms\Components\TextInput::make('completion_confirmation_confirmed_by')->disabled(),
+                Forms\Components\TextInput::make('completion_confirmation_rejected_by')->disabled(),
+                Forms\Components\TextInput::make('completed_by')->disabled(),
+                Forms\Components\TextInput::make('failed_by')->disabled(),
                 Forms\Components\Textarea::make('details')
                     ->required()
                     ->maxLength(65535),
                 Forms\Components\DateTimePicker::make('due_at')
                     ->required(),
-                Forms\Components\TextInput::make('assignable_type')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('assignable_id')
-                    ->required(),
                 Forms\Components\Textarea::make('assignable_url')
-                    ->required()
+                    ->disabled()
                     ->maxLength(65535),
                 Forms\Components\DateTimePicker::make('assigned_at')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('started_at'),
-                Forms\Components\DateTimePicker::make('completion_confirmation_requested_at'),
-                Forms\Components\DateTimePicker::make('completion_confirmation_confirmed_at'),
-                Forms\Components\DateTimePicker::make('completion_confirmation_rejected_at'),
-                Forms\Components\DateTimePicker::make('completed_at'),
-                Forms\Components\DateTimePicker::make('failed_at'),
-                Forms\Components\Toggle::make('completion_rating'),
+                    ->disabled(),
+                Forms\Components\DateTimePicker::make('started_at')->disabled(),
+                Forms\Components\DateTimePicker::make('completion_confirmation_requested_at')->disabled(),
+                Forms\Components\DateTimePicker::make('completion_confirmation_confirmed_at')->disabled(),
+                Forms\Components\DateTimePicker::make('completion_confirmation_rejected_at')->disabled(),
+                Forms\Components\DateTimePicker::make('completed_at')->disabled(),
+                Forms\Components\DateTimePicker::make('failed_at')->disabled(),
+                Forms\Components\Toggle::make('completion_rating')->disabled(),
             ]);
     }
 
@@ -65,66 +63,48 @@ class TaskResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('parent_id'),
-                Tables\Columns\TextColumn::make('business_group_id'),
-                Tables\Columns\TextColumn::make('assigned_by'),
-                Tables\Columns\TextColumn::make('assigned_to'),
-                Tables\Columns\TextColumn::make('started_by'),
-                Tables\Columns\TextColumn::make('completion_confirmation_requested_by'),
-                Tables\Columns\TextColumn::make('completion_confirmation_confirmed_by'),
-                Tables\Columns\TextColumn::make('completion_confirmation_rejected_by'),
-                Tables\Columns\TextColumn::make('completed_by'),
-                Tables\Columns\TextColumn::make('failed_by'),
-                Tables\Columns\TextColumn::make('details'),
-                Tables\Columns\TextColumn::make('due_at')
+//                TextColumn::make('business_group.name'),
+                TextColumn::make('assignedBy.name'),
+                TextColumn::make('assignedTo.name'),
+                TextColumn::make('details'),
+                TextColumn::make('assignable_name')
+                    ->label('Target')
+                    ->url(fn (Task $record): string => $record->assignable_url),
+                TextColumn::make('due_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('assignable_type'),
-                Tables\Columns\TextColumn::make('assignable_id'),
-                Tables\Columns\TextColumn::make('assignable_url'),
-                Tables\Columns\TextColumn::make('assigned_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('started_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('completion_confirmation_requested_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('completion_confirmation_confirmed_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('completion_confirmation_rejected_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('completed_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('failed_at')
-                    ->dateTime(),
-                Tables\Columns\BooleanColumn::make('completion_rating'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                TextColumn::make('status'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+//                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+//                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListTasks::route('/'),
             'create' => Pages\CreateTask::route('/create'),
+            'view' => Pages\ViewTask::route('/{record}'),
             'edit' => Pages\EditTask::route('/{record}/edit'),
         ];
-    }    
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 }

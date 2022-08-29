@@ -28,8 +28,8 @@ return new class extends Migration
             $table->foreignId('started_by')->nullable()->constrained('users', 'id');
             $table->timestamp('completion_confirmation_requested_at')->nullable();
             $table->foreignId('completion_confirmation_requested_by')->nullable()->constrained('users', 'id');
-            $table->timestamp('completion_confirmation_confirmed_at')->nullable();
-            $table->foreignId('completion_confirmation_confirmed_by')->nullable()->constrained('users', 'id');
+            $table->timestamp('completion_confirmation_approved_at')->nullable();
+            $table->foreignId('completion_confirmation_approved_by')->nullable()->constrained('users', 'id');
             $table->timestamp('completion_confirmation_rejected_at')->nullable();
             $table->foreignId('completion_confirmation_rejected_by')->nullable()->constrained('users', 'id');
             $table->timestamp('completed_at')->nullable();

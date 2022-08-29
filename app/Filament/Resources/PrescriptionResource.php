@@ -19,12 +19,14 @@ class PrescriptionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Consultation';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('business_group_id')
-                    ->required(),
+                Forms\Components\Select::make('business_group_id')->label('Business Group')
+                    ->disabled(),
                 Forms\Components\TextInput::make('doctor_id')
                     ->required(),
                 Forms\Components\Textarea::make('details')
@@ -38,8 +40,8 @@ class PrescriptionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('business_group_id'),
-                Tables\Columns\TextColumn::make('doctor_id'),
+//                Tables\Columns\TextColumn::make('business_group_id'),
+                Tables\Columns\TextColumn::make('doctor.email')->label('Doctor'),
                 Tables\Columns\TextColumn::make('details'),
                 Tables\Columns\TextColumn::make('prescription_details'),
                 Tables\Columns\TextColumn::make('created_at')
@@ -51,26 +53,33 @@ class PrescriptionResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListPrescriptions::route('/'),
             'create' => Pages\CreatePrescription::route('/create'),
+            'view' => Pages\ViewPrescription::route('/{record}'),
             'edit' => Pages\EditPrescription::route('/{record}/edit'),
         ];
-    }    
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
 }

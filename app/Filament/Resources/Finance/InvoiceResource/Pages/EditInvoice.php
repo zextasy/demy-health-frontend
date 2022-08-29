@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\PrescriptionResource\Pages;
+namespace App\Filament\Resources\Finance\InvoiceResource\Pages;
 
-use App\Filament\Resources\PrescriptionResource;
+use App\Filament\Resources\Finance\InvoiceResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditPrescription extends EditRecord
+class EditInvoice extends EditRecord
 {
-    protected static string $resource = PrescriptionResource::class;
+    protected static string $resource = InvoiceResource::class;
 
     protected function getActions(): array
     {

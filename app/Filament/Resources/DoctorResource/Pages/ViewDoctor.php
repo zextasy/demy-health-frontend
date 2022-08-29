@@ -4,17 +4,16 @@ namespace App\Filament\Resources\DoctorResource\Pages;
 
 use App\Filament\Resources\DoctorResource;
 use Filament\Pages\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditDoctor extends EditRecord
+class ViewDoctor extends ViewRecord
 {
     protected static string $resource = DoctorResource::class;
 
     protected function getActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            Actions\EditAction::make(),
         ];
     }
 }
