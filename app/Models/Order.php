@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use App\Contracts\PayableContract;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\OrderResource;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\BelongsToBusinessGroup;
+use App\Traits\Relationships\MorphsReceivedPayments;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Order extends BaseModel
+class Order extends BaseModel implements PayableContract
 {
-    use HasFactory, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup;
+    use HasFactory, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup, MorphsReceivedPayments;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -45,6 +47,11 @@ class Order extends BaseModel
     public function getTotalAmountAttribute(): float
     {
         return $this->items->sum('total_amount');
+    }
+
+    public function getPayableNameAttribute(): string
+    {
+        return $this->reference;
     }
     //endregion
 

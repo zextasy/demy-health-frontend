@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Finance;
 
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\Finance\PaymentResource\Pages;
 use App\Filament\Resources\Finance\PaymentResource\RelationManagers;
 use App\Models\Finance\Payment;
@@ -25,15 +28,17 @@ class PaymentResource extends Resource
     {
         return $form
             ->schema([
-//                Forms\Components\TextInput::make('business_group_id')
+//                TextInput::make('business_group_id')
 //                    ->required(),
-                Forms\Components\TextInput::make('reference')
+                TextInput::make('reference')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('amount')
+                TextInput::make('amount')
                     ->required(),
-                Forms\Components\Toggle::make('type')
+                Toggle::make('type')
                     ->required(),
+                Select::make('payable_id')
+                    ->relationship('payable', 'reference')->disabled()
             ]);
     }
 
@@ -43,7 +48,7 @@ class PaymentResource extends Resource
             ->columns([
 //                Tables\Columns\TextColumn::make('business_group_id'),
                 Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('amount'),
+                Tables\Columns\TextColumn::make('amount')->money('ngn'),
                 Tables\Columns\BooleanColumn::make('type'),
                 Tables\Columns\TextColumn::make('created_at')->label('Payment Date')
                     ->dateTime(),
@@ -57,10 +62,10 @@ class PaymentResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+//                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+//                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -75,9 +80,9 @@ class PaymentResource extends Resource
     {
         return [
             'index' => Pages\ListPayments::route('/'),
-            'create' => Pages\CreatePayment::route('/create'),
+//            'create' => Pages\CreatePayment::route('/create'),
             'view' => Pages\ViewPayment::route('/{record}'),
-            'edit' => Pages\EditPayment::route('/{record}/edit'),
+//            'edit' => Pages\EditPayment::route('/{record}/edit'),
         ];
     }
 

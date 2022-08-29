@@ -18,6 +18,7 @@ class CreateGeneralSettings extends SettingsMigration
         $this->migrator->add('general.product_sku_prefix', 'DM-PROD-');
         $this->migrator->add('general.order_prefix', 'DM-ORD-');
         $this->migrator->add('general.invoice_prefix', 'DM-INV-');
+        $this->migrator->add('general.payment_prefix', 'DM-PAY-');
         $this->migrator->add('general.patient_prefix', 'DM-PAT-');
         $this->migrator->add('general.doctor_prefix', 'DM-DOC-');
         $this->migrator->add('general.prescription_prefix', 'DM-PRC-');

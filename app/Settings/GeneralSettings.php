@@ -30,6 +30,8 @@ class GeneralSettings extends Settings
 
     public string $invoice_prefix;
 
+    public string $payment_prefix;
+
     public string $patient_prefix;
 
     public string $doctor_prefix;

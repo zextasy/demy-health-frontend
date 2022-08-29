@@ -2,16 +2,16 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\Finance\Payments\PaymentMethodEnum;
-use App\Filament\Resources\OrderResource\Pages;
-use App\Filament\Resources\OrderResource\RelationManagers;
+use Filament\Tables;
 use App\Models\Order;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
+use App\Filament\Resources\OrderResource\Pages;
+use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Filament\Resources\OrderResource\RelationManagers;
 
 class OrderResource extends Resource
 {
@@ -88,7 +88,9 @@ class OrderResource extends Resource
             'index' => Pages\ListOrders::route('/'),
             //            'create' => Pages\CreateOrder::route('/create'),
             'view' => Pages\ViewOrder::route('/{record}'),
-            'edit' => Pages\EditOrder::route('/{record}/edit'),
+//            'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
     }
+
+
 }
