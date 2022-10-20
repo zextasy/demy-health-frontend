@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Settings\GeneralSettings;
+use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Resources\TestTypeResource\Pages;
 use App\Filament\Resources\TestTypeResource\RelationManagers;
 use App\Models\TestType;
@@ -14,6 +16,7 @@ use Filament\Tables;
 
 class TestTypeResource extends Resource
 {
+    use DisplaysCurrencies;
     protected static ?string $model = TestType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
@@ -71,11 +74,12 @@ class TestTypeResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $currency = app(GeneralSettings::class)->default_currency;
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('test_id')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('price')->money('ngn')->sortable(),
+                Tables\Columns\TextColumn::make('price')->money(self::getSystemDefaultCurrency())->sortable(),
                 Tables\Columns\TextColumn::make('category.name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('tat')->sortable(),
                 Tables\Columns\TextColumn::make('test_bookings_count')

@@ -10,6 +10,9 @@ class CreateGeneralSettings extends SettingsMigration
         $this->migrator->add('general.logo_url', '/images/logo.png');
         $this->migrator->add('general.default_locale', 'en-US');
         $this->migrator->add('general.default_currency', 'ngn');
+        $this->migrator->add('general.alternate_currency', 'ngn');
+        $this->migrator->add('general.exchange_rate', 1);
+        $this->migrator->add('general.default_timezone', 'en-US');
         $this->migrator->add('general.default_prefix', 'DM-');
         $this->migrator->add('general.test_booking_prefix', 'DM-TB-');
         $this->migrator->add('general.test_result_prefix', 'DM-RES-');

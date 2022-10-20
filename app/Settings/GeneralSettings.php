@@ -12,7 +12,13 @@ class GeneralSettings extends Settings
 
     public string $default_locale;
 
+    public string $default_timezone;
+
     public string $default_currency;
+
+    public string $alternate_currency;
+
+    public float $exchange_rate;
 
     public string $default_prefix;
 

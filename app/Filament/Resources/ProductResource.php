@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Settings\GeneralSettings;
+use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
@@ -15,6 +17,8 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class ProductResource extends Resource
 {
+    use DisplaysCurrencies;
+
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
@@ -58,13 +62,14 @@ class ProductResource extends Resource
 
     public static function table(Table $table): Table
     {
+
         return $table
             ->columns([
                 SpatieMediaLibraryImageColumn::make('picture')->collection('pictures'),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('model')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('country')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('price')->money('ngn')->sortable(),
+                Tables\Columns\TextColumn::make('price')->money(self::getSystemDefaultCurrency())->sortable(),
                 Tables\Columns\TextColumn::make('extra_information')->searchable(),
 
             ])

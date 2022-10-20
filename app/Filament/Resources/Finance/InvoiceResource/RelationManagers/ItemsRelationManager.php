@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Finance\InvoiceResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
+use App\Traits\Resources\DisplaysCurrencies;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ItemsRelationManager extends RelationManager
 {
+    use DisplaysCurrencies;
+
     protected static string $relationship = 'items';
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -41,7 +44,7 @@ class ItemsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('quantity'),
-                Tables\Columns\TextColumn::make('price')->money('ngn'),
+                Tables\Columns\TextColumn::make('price')->money(self::getSystemDefaultCurrency())->sortable(),
                 Tables\Columns\TextColumn::make('total_amount')->money('ngn'),
             ])
             ->filters([
