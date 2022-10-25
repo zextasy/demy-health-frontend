@@ -23,6 +23,10 @@
 
             </x-cart-item-row>
         @endforeach
+        <div>
+            <h2>Account Details</h2>
+            <p>{{app(\App\Settings\GeneralSettings::class)->account_transfer_details}}</p>
+        </div>
     </div>
     <aside>
         <div class="summary">

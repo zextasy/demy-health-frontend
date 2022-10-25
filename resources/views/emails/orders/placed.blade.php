@@ -1,7 +1,7 @@
 
 <x-email-layout>
     <x-email.h1>Hello!</x-email.h1>
-    <x-email.p>You have successfully placed order na order with us  on {{$order->created_at->toDayDateTimeString()}}.</x-email.p>
+    <x-email.p>You have successfully placed order an order with us  on {{$order->created_at->toDayDateTimeString()}}.</x-email.p>
     <x-email.p>Your booking reference is {{$order->reference}}. Please keep this number safe. It will be used to retrieve your booking information</x-email.p>
     <x-email.p>Your summary is below</x-email.p>
     <br>
@@ -33,6 +33,10 @@
         </tr>
         </tfoot>
     </table>
+    <div>
+        <h2>Account Details</h2>
+        <p>{{app(\App\Settings\GeneralSettings::class)->account_transfer_details}}</p>
+    </div>
     <hr>
     <br>
     <x-email.p>If you have registered on our site with this email, you can log in and view the details</x-email.p>

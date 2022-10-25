@@ -7,6 +7,7 @@ use App\Enums\CurrencyEnum;
 use App\Settings\GeneralSettings;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Pages\SettingsPage;
@@ -49,6 +50,10 @@ class SiteSettings extends SettingsPage
                     ->label('Product SKU Prefix')
                     ->helperText('This text will be prefixed to product SKUs'),
             ])->columns(3),
+            Fieldset::make('Financial')->schema([
+                Textarea::make('account_transfer_details')->label('Account Transfer Details'),
+                TextInput::make('exchange_rate')->label('Exchange Rate')->numeric(),
+            ])->columns(1),
             Fieldset::make('Time')->schema([
                 TimePicker::make('business_start_hour')->label('Business Start'),
                 TimePicker::make('business_end_hour')->label('Business End'),
@@ -66,7 +71,7 @@ class SiteSettings extends SettingsPage
                     ->label('Alternate Currency')
                     ->options(CurrencyEnum::optionsAsSelectArray()),
 //                TextInput::make('alternate_currency')->label('Alternate Currency'),
-                TextInput::make('exchange_rate')->label('Exchange Rate')->numeric(),
+
             ])->columns(1),
             //            Fieldset::make('Time')->schema([
             //

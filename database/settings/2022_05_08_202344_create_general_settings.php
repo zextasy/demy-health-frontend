@@ -28,5 +28,6 @@ class CreateGeneralSettings extends SettingsMigration
         $this->migrator->add('general.referral_code_prefix', 'DM-REF-CD-');
         $this->migrator->add('general.business_start_hour', '09:00:00');
         $this->migrator->add('general.business_end_hour', '17:00:00');
+        $this->migrator->add('general.account_transfer_details', 'Fidelity bank, 000111111');
     }
 }

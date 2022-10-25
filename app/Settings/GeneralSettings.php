@@ -50,6 +50,8 @@ class GeneralSettings extends Settings
 
     public string $business_end_hour;
 
+    public string $account_transfer_details;
+
     public static function group(): string
     {
         return 'general';
