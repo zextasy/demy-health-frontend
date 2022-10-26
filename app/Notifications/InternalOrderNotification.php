@@ -4,10 +4,10 @@ namespace App\Notifications;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
+use Filament\Notifications\Actions\Action;
 use Illuminate\Notifications\Notification;
-use Webbingbrasil\FilamentNotification\Actions\ButtonAction;
-use Webbingbrasil\FilamentNotification\Notifications\NotificationLevel;
+use Illuminate\Notifications\Messages\MailMessage;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class InternalOrderNotification extends Notification
 {
@@ -60,43 +60,26 @@ class InternalOrderNotification extends Notification
             ->line('Please attend to this as soon as possible');
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+    public function toDatabase($notifiable): array
+    {
+        return FilamentNotification::make()
+            ->title($this->subject)
+            ->body($this->message)
+            ->actions([
+                Action::make('View Order')
+                    ->button()
+                    ->url($this->orderUrl),
+            ])
+            ->getDatabaseMessage();
+    }
+
     public function toArray($notifiable)
     {
         return [
-            'level' => NotificationLevel::INFO,
             'title' => $this->subject,
             'message' => $this->message,
             'bookingUrl' => $this->orderUrl,
         ];
     }
 
-    public static function notificationFeedActions()
-    {
-        return [
-            ButtonAction::make('viewOrder')
-                ->label('View Order')
-                ->action(function ($record) {
-                    $record->markAsRead();
-
-                    return redirect()->to($record->data['bookingUrl']);
-                })
-                ->outlined()
-                ->color('blue'),
-            ButtonAction::make('markRead')
-                ->label('Mark as read')
-                ->hidden(fn ($record) => $record->read()) // Use $record to access/update notification, this is DatabaseNotification model
-                ->action(function ($record, $livewire) {
-                    $record->markAsRead();
-                    $livewire->refresh(); // $livewire can be used to refresh ou reset notification feed
-                })
-                ->outlined()
-                ->color('secondary'),
-        ];
-    }
 }

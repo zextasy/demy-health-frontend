@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Filament\Pages\Profile;
 use Filament\Facades\Filament;
+use App\Filament\Pages\Profile;
 use Filament\Navigation\UserMenuItem;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class CustomFilamentServiceProvider extends ServiceProvider
@@ -47,5 +48,9 @@ class CustomFilamentServiceProvider extends ServiceProvider
                 ->icon('heroicon-o-user'),
             // ...
         ]);
+        Filament::registerRenderHook(
+            'global-search.end',
+            fn (): string => Blade::render("<livewire:notifications></livewire:notifications>"),
+        );
     }
 }

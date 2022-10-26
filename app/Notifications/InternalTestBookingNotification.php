@@ -4,10 +4,10 @@ namespace App\Notifications;
 
 use App\Models\TestBooking;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
+use Filament\Notifications\Actions\Action;
 use Illuminate\Notifications\Notification;
-use Webbingbrasil\FilamentNotification\Actions\ButtonAction;
-use Webbingbrasil\FilamentNotification\Notifications\NotificationLevel;
+use Illuminate\Notifications\Messages\MailMessage;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class InternalTestBookingNotification extends Notification
 {
@@ -70,34 +70,22 @@ class InternalTestBookingNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'level' => NotificationLevel::INFO,
             'title' => $this->subject,
             'message' => $this->message,
             'bookingUrl' => $this->bookingUrl,
         ];
     }
 
-    public static function notificationFeedActions()
+    public function toDatabase($notifiable): array
     {
-        return [
-            ButtonAction::make('viewBooking')
-                ->label('View Booking')
-                ->action(function ($record) {
-                    $record->markAsRead();
-
-                    return redirect()->to($record->data['bookingUrl']);
-                })
-                ->outlined()
-                ->color('blue'),
-            ButtonAction::make('markRead')
-                ->label('Mark as read')
-                ->hidden(fn ($record) => $record->read()) // Use $record to access/update notification, this is DatabaseNotification model
-                ->action(function ($record, $livewire) {
-                    $record->markAsRead();
-                    $livewire->refresh(); // $livewire can be used to refresh ou reset notification feed
-                })
-                ->outlined()
-                ->color('secondary'),
-        ];
+        return FilamentNotification::make()
+            ->title($this->subject)
+            ->body($this->message)
+            ->actions([
+                Action::make('View Booking')
+                    ->button()
+                    ->url($this->bookingUrl),
+            ])
+            ->getDatabaseMessage();
     }
 }

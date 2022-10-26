@@ -2,13 +2,13 @@
 
 namespace App\Notifications;
 
-use App\Models\CRM\CustomerEnquiry;
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
-use Webbingbrasil\FilamentNotification\Actions\ButtonAction;
-use Webbingbrasil\FilamentNotification\Notifications\NotificationLevel;
+use Illuminate\Bus\Queueable;
+use App\Models\CRM\CustomerEnquiry;
+use Illuminate\Notifications\Notification;
+use Filament\Notifications\Actions\Action;
+use Illuminate\Notifications\Messages\MailMessage;
+use Filament\Notifications\Notification as FilamentNotification;
 
 class InternalCustomerEnquiryNotification extends Notification
 {
@@ -48,12 +48,7 @@ class InternalCustomerEnquiryNotification extends Notification
         return ['database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
+
     public function toMail($notifiable)
     {
         return (new MailMessage)
@@ -64,43 +59,26 @@ class InternalCustomerEnquiryNotification extends Notification
             ->line('Please attend to this as soon as possible');
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+    public function toDatabase($notifiable): array
+    {
+        return FilamentNotification::make()
+            ->title($this->subject)
+            ->body($this->message)
+            ->actions([
+                Action::make('View Enquiry')
+                    ->button()
+                    ->url($this->actionUrl),
+            ])
+            ->getDatabaseMessage();
+    }
+
     public function toArray($notifiable)
     {
         return [
-            'level' => NotificationLevel::INFO,
             'title' => $this->subject,
             'message' => $this->message,
             'actionUrl' => $this->actionUrl,
         ];
     }
 
-    public static function notificationFeedActions()
-    {
-        return [
-            ButtonAction::make('viewEnquiry')
-                ->label('View Enquiry')
-                ->action(function ($record) {
-                    $record->markAsRead();
-
-                    return redirect()->to($record->data['actionUrl']);
-                })
-                ->outlined()
-                ->color('blue'),
-            ButtonAction::make('markRead')
-                ->label('Mark as read')
-                ->hidden(fn ($record) => $record->read()) // Use $record to access/update notification, this is DatabaseNotification model
-                ->action(function ($record, $livewire) {
-                    $record->markAsRead();
-                    $livewire->refresh(); // $livewire can be used to refresh ou reset notification feed
-                })
-                ->outlined()
-                ->color('secondary'),
-        ];
-    }
 }
