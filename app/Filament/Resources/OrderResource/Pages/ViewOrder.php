@@ -19,9 +19,9 @@ class ViewOrder extends ViewRecord
     protected function getActions(): array
     {
         return [
-            Action::make('capture Payment')
+            Action::make('Capture Payment')
                 ->action(function (array $data): void {
-                    (new CreatePaymentAction)->execute($this->record,$data['amount'],$data['method']);
+                    (new CreatePaymentAction)->execute($this->record, $data['amount'], $data['method']);
                 })
                 ->form([
                     TextInput::make('amount')
