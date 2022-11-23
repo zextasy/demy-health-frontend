@@ -41,6 +41,7 @@
         "stechstudio/filament-impersonate": "^2.4",
         "symfony/http-client": "^6.1",
         "symfony/postmark-mailer": "^6.1",
+        "unicodeveloper/laravel-paystack": "^1.0",
         "webbingbrasil/filament-advancedfilter": "^1.0"
     },
     "require-dev": {

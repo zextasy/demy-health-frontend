@@ -23,10 +23,12 @@
 
             </x-cart-item-row>
         @endforeach
-        <div>
-            <h2>Account Details</h2>
-            <p>{{app(\App\Settings\GeneralSettings::class)->account_transfer_details}}</p>
-        </div>
+        @if($needsAccountDetails)
+            <div>
+                <h2>Account Details</h2>
+                <p>{{app(\App\Settings\GeneralSettings::class)->account_transfer_details}}</p>
+            </div>
+        @endif
     </div>
     <aside>
         <div class="summary">
@@ -40,7 +42,7 @@
                 </div>
             </div>
             <div class="summary-delivery">
-                <p>Payment Method : <strong> </strong> </p>
+                <p>Payment Method : <strong>{{$paymentMethodEnum->name}}</strong> </p>
                 <p>Customer Email : <strong>{{$customerEmail}} </strong> </p>
             </div>
             <div class="summary-total">
@@ -49,7 +51,7 @@
             </div>
             <div class="summary-checkout">
                 @if($canCheckOut)
-                    <button class="checkout-cta"  wire:click="checkoutCart">Purchase</button>
+                    <button class="checkout-cta btn-primary"  wire:click="checkoutCart">Purchase</button>
                 @endif
                 <br>
                 <button class="checkout-cta btn-danger"  wire:click="proceedToCheckout">Cancel</button>

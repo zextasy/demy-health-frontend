@@ -15,6 +15,7 @@ class CartController extends Controller
     public function checkOut(Request $request)
     {
         $data['customerEmail'] = $request->customer_email;
+        $data['paymentMethod'] = $request->payment_method;
 
         return view('frontend.cart-checkout', $data);
     }

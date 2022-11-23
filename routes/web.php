@@ -21,7 +21,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
-require __DIR__.'/frontend.php';
-require __DIR__.'/backend.php';
-require __DIR__.'/backend-admin.php';
+Route::name('paystack.')->prefix('paystack')->group(function () {
+    Route::post('/pay', [App\Http\Controllers\Payment\PayStackController::class, 'redirectToGateway'])->name('pay');
+    Route::get('/payment/callback', [App\Http\Controllers\Payment\PayStackController::class, 'handleGatewayCallback'])
+        ->name('payment-callback');
+});
+
+require_once __DIR__.'/auth.php';
+require_once __DIR__.'/frontend.php';
+require_once __DIR__.'/backend.php';
+require_once __DIR__.'/backend-admin.php';

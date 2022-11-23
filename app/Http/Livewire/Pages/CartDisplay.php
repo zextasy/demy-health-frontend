@@ -40,7 +40,7 @@ class CartDisplay extends Component
         $this->updateCartTotals();
         $this->cartItems = Cart::getContent();
         $this->customerEmail = $this->getSessionCustomerEmail();
-        $this->paymentMethod = PaymentMethodEnum::OTHER->value;
+        $this->paymentMethod = PaymentMethodEnum::PAYSTACK->value;
     }
 
     public function updateCartTotals()
@@ -73,6 +73,6 @@ class CartDisplay extends Component
             return;
         }
 
-        $this->flash('success', FlashMessageHelper::BLANK, [], route('frontend.cart.checkout', ['customer_email' => $this->customerEmail]));
+        $this->flash('success', FlashMessageHelper::BLANK, [], route('frontend.cart.checkout', ['customer_email' => $this->customerEmail,'payment_method' => $this->paymentMethod]));
     }
 }
