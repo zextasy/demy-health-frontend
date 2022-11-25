@@ -9,8 +9,8 @@ class CreateGeneralSettings extends SettingsMigration
         $this->migrator->add('general.site_name', 'DemyHealth');
         $this->migrator->add('general.logo_url', '/images/logo.png');
         $this->migrator->add('general.default_locale', 'en-US');
-        $this->migrator->add('general.default_currency', 'ngn');
-        $this->migrator->add('general.alternate_currency', 'ngn');
+        $this->migrator->add('general.default_currency', 'NGN');
+        $this->migrator->add('general.alternate_currency', 'NGN');
         $this->migrator->add('general.exchange_rate', 1);
         $this->migrator->add('general.default_timezone', 'en-US');
         $this->migrator->add('general.default_prefix', 'DM-');

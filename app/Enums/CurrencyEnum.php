@@ -12,7 +12,7 @@ enum CurrencyEnum: string
 {
     use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
 
-    case US_DOLLAR = 'usd';
+    case US_DOLLAR = 'USD';
 
-    case NIGERIAN_NAIRA = 'ngn';
+    case NIGERIAN_NAIRA = 'NGN';
 }

@@ -97,16 +97,15 @@ class CartCheckout extends Component
     {
         $paystackData['email'] = $this->customerEmail;// {{-- required --}}
             $paystackData['orderID'] = 345;//
-            $paystackData['amount'] = 800;// {{-- required in kobo --}}
+            $paystackData['amount'] = 80000;// {{-- required in kobo --}}
             $paystackData['quantity'] = 3;//
             $paystackData['currency'] = CurrencyEnum::NIGERIAN_NAIRA->value;//
-            $paystackData['metadata'] = ['key_name' => 'value',];// For other necessary things you want to add to your payload. it is optional though
+            $paystackData['metadata'] = ['key_name' => 'value',];
+            // For other necessary things you want to add to your payload. it is optional though
             $paystackData['reference'] = Paystack::genTranxRef();//
         try {
-            $redirectURL = Paystack::getAuthorizationUrl($paystackData);
-            return redirect()->away($redirectURL);
-            $this->flash('warning', FlashMessageHelper::PAYSTACK_ERROR, [], $redirectURL);
-//            return Paystack::getAuthorizationUrl($paystackData)->redirectNow();
+            $paystackAuthorization = Paystack::getAuthorizationUrl($paystackData);
+            redirect()->away($paystackAuthorization->url);
         } catch (\Exception $e) {
             Log::info($e);
             $currentUrl = request()->header('Referer');
