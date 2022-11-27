@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Models\CalculatesTotalAmount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends BaseModel
 {
     use HasFactory;
+    use CalculatesTotalAmount;
 
     //region CONFIG
     protected $guarded = ['id'];
@@ -20,10 +22,7 @@ class OrderItem extends BaseModel
     //endregion
 
     //region ATTRIBUTES
-    public function getTotalAmountAttribute(): float
-    {
-        return $this->price * $this->quantity;
-    }
+
     //endregion
 
     //region HELPERS

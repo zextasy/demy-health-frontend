@@ -19,13 +19,13 @@ return new class extends Migration
             $table->foreignId('business_group_id')->references('id')->on('business_groups');
             $table->string('reference')->unique();
             $table->string('customer_email')->index();
-            $table->unsignedTinyInteger('payment_method')->default(PaymentMethodEnum::OTHER->value);
+            $table->unsignedTinyInteger('payment_method')->nullable();
             $table->nullableMorphs('invoiceable');
             $table->timestamp('sent_at')->nullable();
             $table->timestamp('payment_received_at')->nullable();
             $table->timestamp('payment_refunded_at')->nullable();
             $table->timestamp('credit_approved_at')->nullable();
-            $table->foreignId('credit_approved_by')->constrained('users');
+            $table->foreignId('credit_approved_by')->nullable()->constrained('users');
             $table->timestamp('cancelled_at')->nullable();
             $table->foreignId('cancelled_by')->nullable()->constrained('users');
             $table->timestamps();

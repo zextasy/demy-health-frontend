@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
 use App\Actions\Orders\GenerateOrderFromCartAction;
 use Darryldecode\Cart\CartCollection;
 use Illuminate\Bus\Queueable;
@@ -18,15 +19,18 @@ class CreateOrderFromCartJob implements ShouldQueue
 
     private string $customerEmail;
 
+    private ?User $user = null;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(CartCollection $items, string $customerEmail)
+    public function __construct(CartCollection $items, string $customerEmail, ?User $user = null)
     {
         $this->items = $items;
         $this->customerEmail = $customerEmail;
+        $this->user = $user;
     }
 
     /**
@@ -36,6 +40,6 @@ class CreateOrderFromCartJob implements ShouldQueue
      */
     public function handle()
     {
-        (new GenerateOrderFromCartAction())->run($this->items, $this->customerEmail);
+        (new GenerateOrderFromCartAction())->forUser($this->user)->run($this->items, $this->customerEmail);
     }
 }

@@ -4,13 +4,13 @@ namespace App\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-interface OrderableItemContract
+interface InvoiceableItemContract
 {
-    public function orderItems(): MorphMany;
+    public function invoiceItems(): MorphMany;
 
-    public function getOrderableItemName() : string;
+    public function getInvoiceableItemName() : string;
 
-    public function getOrderableItemPrice() : float;
+    public function getInvoiceableItemPrice() : float;
 
     public function getLaravelMorphModelType(): string;
 

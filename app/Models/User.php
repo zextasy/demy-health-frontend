@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Contracts\AddressableContract;
 use App\Contracts\OrderableContract;
 use App\Traits\Relationships\HasTasks;
+use App\Contracts\InvoiceableContract;
+use App\Traits\Models\LaravelMorphable;
+use App\Traits\Relationships\MorphsInvoices;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\HasTestBookings;
 use App\Traits\Relationships\MorphsAddresses;
@@ -20,9 +23,26 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail, AddressableContract, OrderableContract
+class User extends Authenticatable implements
+    FilamentUser,
+    MustVerifyEmail,
+    AddressableContract,
+    OrderableContract,
+    InvoiceableContract
 {
-    use  SoftDeletes, HasApiTokens, HasFactory, Notifiable, HasRoles, HasPermissions, HasTestBookings, MorphsAddresses, MorphsOrders, BelongsToBusinessGroup, HasTasks;
+    use SoftDeletes;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
+    use HasPermissions;
+    use HasTestBookings;
+    use MorphsAddresses;
+    use MorphsOrders;
+    use MorphsInvoices;
+    use BelongsToBusinessGroup;
+    use HasTasks;
+    use LaravelMorphable;
 
     //region CONFIG
     protected $fillable = [

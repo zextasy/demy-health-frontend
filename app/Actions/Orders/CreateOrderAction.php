@@ -14,15 +14,12 @@ class CreateOrderAction
 {
     private Order $order;
 
-    private ?PaymentMethodEnum $paymentMethod;
-
     public function run(Collection $orderItems, string $customerEmail, OrderableContract $orderable = null): Order
     {
         $this->order = new Order;
         $this->order->customer_email = $customerEmail;
-        $this->order->orderable_id = $orderable?->id;
-        $this->order->orderable_type = isset($orderable) ? get_class($orderable) : null;
-        $this->order->payment_method = $this->paymentMethod ?? PaymentMethodEnum::OTHER;
+        $this->order->orderable_id = $orderable?->getLaravelMorphModelId();
+        $this->order->orderable_type = $orderable?->getLaravelMorphModelType();
         DB::transaction(function () use ($orderItems) {
             $this->order->save();
             foreach ($orderItems as $orderableItemCollection) {
@@ -40,16 +37,6 @@ class CreateOrderAction
         $this->raiseEvents();
 
         return $this->order;
-    }
-
-    public function withPaymentMethod(null|int|PaymentMethodEnum $paymentMethod): self
-    {
-        if (isset($paymentMethod)) {
-            $paymentMethod = is_int($paymentMethod) ? PaymentMethodEnum::from($paymentMethod) : $paymentMethod;
-        }
-        $this->paymentMethod = $paymentMethod;
-
-        return $this;
     }
 
     private function raiseEvents()

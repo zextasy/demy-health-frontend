@@ -2,21 +2,31 @@
 
 namespace App\Models;
 
-use App\Contracts\OrderableItemContract;
 use App\Helpers\HerokuHelper;
 use App\Settings\GeneralSettings;
+use Spatie\MediaLibrary\HasMedia;
+use App\Traits\Models\LaravelMorphable;
+use App\Contracts\OrderableItemContract;
 use App\Traits\Models\GeneratesReference;
-use App\Traits\Relationships\BelongsToBusinessGroup;
-use App\Traits\Relationships\MorphsOrderItems;
+use App\Contracts\InvoiceableItemContract;
 use App\Traits\Relationships\MorphsPrices;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Traits\Relationships\MorphsOrderItems;
+use App\Traits\Relationships\MorphsInvoiceItems;
+use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends BaseModel implements HasMedia, OrderableItemContract
+class Product extends BaseModel implements HasMedia, OrderableItemContract, InvoiceableItemContract
 {
-    use HasFactory, InteractsWithMedia, MorphsOrderItems, GeneratesReference, MorphsPrices, BelongsToBusinessGroup;
+    use HasFactory;
+    use InteractsWithMedia;
+    use MorphsOrderItems;
+    use MorphsInvoiceItems;
+    use GeneratesReference;
+    use MorphsPrices;
+    use BelongsToBusinessGroup;
+    use LaravelMorphable;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -73,4 +83,23 @@ class Product extends BaseModel implements HasMedia, OrderableItemContract
         return $this->media()->where('collection_name', 'pictures');
     }
     //endregion
+    public function getInvoiceableItemName(): string
+    {
+        return $this->name;
+    }
+
+    public function getInvoiceableItemPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function getOrderableItemName(): string
+    {
+        return $this->name;
+    }
+
+    public function getOrderableItemPrice(): float
+    {
+        return $this->price;
+    }
 }

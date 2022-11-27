@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Helpers\FlashMessageHelper;
+use Illuminate\Support\Facades\Log;
 use Unicodeveloper\Paystack\Paystack;
 use Illuminate\Support\Facades\Redirect;
 
@@ -30,10 +31,17 @@ class PayStackController extends Controller
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
-
-        dd($paymentDetails);
+        Log::info($paymentDetails);
+//        dd($paymentDetails);
         // Now you have the payment details,
         // you can store the authorization_code in your db to allow for recurrent subscriptions
         // you can then redirect or do whatever you want
+    }
+
+    public function handleIncomingWebhook()
+    {
+        $paymentDetails = Paystack::getPaymentData();
+        Log::info($paymentDetails);
+                dd($paymentDetails);
     }
 }

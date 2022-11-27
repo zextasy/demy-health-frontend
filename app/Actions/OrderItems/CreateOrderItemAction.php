@@ -14,11 +14,11 @@ class CreateOrderItemAction
         $orderId = $order instanceof Order ? $order->id : $order;
         $orderItem = new OrderItem;
         $orderItem->order_id = $orderId;
-        $orderItem->name = $name ?? $orderableItem->name;
-        $orderItem->price = $price ?? $orderableItem->current_price;
+        $orderItem->name = $name ?? $orderableItem->getOrderableItemName();
+        $orderItem->price = $price ?? $orderableItem->getOrderableItemPrice();
         $orderItem->quantity = $quantity;
-        $orderItem->orderable_item_type = get_class($orderableItem);
-        $orderItem->orderable_item_id = $orderableItem->id;
+        $orderItem->orderable_item_type = $orderableItem->getLaravelMorphModelType();
+        $orderItem->orderable_item_id = $orderableItem->getLaravelMorphModelId();
 
         DB::transaction(function () use ($orderItem) {
             $orderItem->save();

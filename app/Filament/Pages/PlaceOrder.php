@@ -46,10 +46,6 @@ class PlaceOrder extends Page
                             ->maxLength(255)
                             ->required()
                             ->helperText('Customer email address. This is required for the system to know who to send the order to'),
-                        Select::make('paymentMethod')
-                            ->options(PaymentMethodEnum::optionsAsSelectArray())
-                            ->helperText('How does the customer intend to pay?')
-                            ->required(),
                     ]),
                 Step::make('Order Data')
                     ->schema([
@@ -94,7 +90,7 @@ class PlaceOrder extends Page
                 );
                 $productCollection->push($orderableItemCollection);
             }
-            $order = (new CreateOrderAction)->withPaymentMethod($this->paymentMethod)->run($productCollection, $this->customerEmail);
+            $order = (new CreateOrderAction)->run($productCollection, $this->customerEmail);
 
             $this->redirect(OrderResource::getUrl('view', ['record' => $order->id]));
         } catch (\Exception $e) {

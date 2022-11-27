@@ -2,16 +2,18 @@
 
 namespace App\Http\Livewire\Pages;
 
+use Livewire\Component;
 use App\Enums\CurrencyEnum;
+use App\Models\Finance\Invoice;
+use Illuminate\Support\Collection;
 use App\Helpers\FlashMessageHelper;
 use Illuminate\Support\Facades\Log;
-use App\Jobs\CreateOrderFromCartJob;
 use Unicodeveloper\Paystack\Facades\Paystack;
-use Darryldecode\Cart\Facades\CartFacade as Cart;
-use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Actions\Orders\GenerateOrderFromCartAction;
+use App\Actions\Invoices\GenerateInvoiceForOrderAction;
 
 class CartCheckout extends Component
 {
@@ -59,14 +61,17 @@ class CartCheckout extends Component
             return;
         }
 
-        CreateOrderFromCartJob::dispatch($items, $this->customerEmail);
+        $order = (new GenerateOrderFromCartAction())->forUser(auth()->user())->run($items, $this->customerEmail);
+        $invoice = (new GenerateInvoiceForOrderAction)->run($order);
+        Cart::clear();
         if ($this->paymentMethodEnum == PaymentMethodEnum::PAYSTACK) {
             Log::info('redirecting to paystack');
-            $this->redirectToPayStack();
+
+            $this->redirectToPayStack($invoice);
         }
 
         if ($this->paymentMethodEnum->isHandledInternally()) {
-            Cart::clear();
+
             $this->flash('success', FlashMessageHelper::ORDER_BOOKING_SUCCESSFUL, [], '/');
         }
 
@@ -93,16 +98,14 @@ class CartCheckout extends Component
             || $this->paymentMethodEnum == PaymentMethodEnum::OTHER;
     }
 
-    private function redirectToPayStack()
+    private function redirectToPayStack(Invoice $invoice)
     {
         $paystackData['email'] = $this->customerEmail;// {{-- required --}}
-            $paystackData['orderID'] = 345;//
-            $paystackData['amount'] = 80000;// {{-- required in kobo --}}
-            $paystackData['quantity'] = 3;//
-            $paystackData['currency'] = CurrencyEnum::NIGERIAN_NAIRA->value;//
-            $paystackData['metadata'] = ['key_name' => 'value',];
+            $paystackData['reference'] = $invoice->reference;
+            $paystackData['amount'] = $invoice->total_amount * 100;// {{-- required --}}
+            $paystackData['currency'] = CurrencyEnum::NIGERIAN_NAIRA->value;
+            $paystackData['metadata'] = ['invoice_reference' => $invoice->reference,];
             // For other necessary things you want to add to your payload. it is optional though
-            $paystackData['reference'] = Paystack::genTranxRef();//
         try {
             $paystackAuthorization = Paystack::getAuthorizationUrl($paystackData);
             redirect()->away($paystackAuthorization->url);

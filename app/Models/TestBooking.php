@@ -4,12 +4,15 @@ namespace App\Models;
 
 use App\Contracts\AssignableContract;
 use App\Contracts\AddressableContract;
+use App\Traits\Models\LaravelMorphable;
 use App\Contracts\OrderableItemContract;
 use App\Traits\Relationships\Assignable;
+use App\Contracts\InvoiceableItemContract;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
+use App\Traits\Relationships\MorphsInvoiceItems;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\MorphsAddresses;
 use App\Traits\Relationships\MorphsOrderItems;
@@ -19,9 +22,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class TestBooking extends BaseModel implements OrderableItemContract, AddressableContract, AssignableContract
+class TestBooking extends BaseModel implements OrderableItemContract, InvoiceableItemContract, AddressableContract, AssignableContract
 {
-    use HasFactory, MorphsAddresses, MorphsOrderItems, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup, Assignable;
+    use HasFactory;
+    use MorphsAddresses;
+    use MorphsOrderItems;
+    use MorphsInvoiceItems;
+    use LaravelMorphable;
+    use GeneratesReference;
+    use ReferencesUsersViaEmail;
+    use BelongsToBusinessGroup;
+    use Assignable;
 
     //region CONFIG
     protected $dates = ['created_at', 'updated_at', 'due_date'];
@@ -157,4 +168,23 @@ class TestBooking extends BaseModel implements OrderableItemContract, Addressabl
         return $this->belongsTo(User::class, 'sample_rejected_by');
     }
     //endregion
+    public function getInvoiceableItemName(): string
+    {
+        return $this->name;
+    }
+
+    public function getInvoiceableItemPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function getOrderableItemName(): string
+    {
+        return $this->name;
+    }
+
+    public function getOrderableItemPrice(): float
+    {
+        return $this->price;
+    }
 }
