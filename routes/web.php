@@ -24,7 +24,9 @@ Route::get('/dashboard', function () {
 Route::name('paystack.')->prefix('paystack')->group(function () {
     Route::post('/pay', [App\Http\Controllers\Payment\PayStackController::class, 'redirectToGateway'])->name('pay');
     Route::get('/payment/callback', [App\Http\Controllers\Payment\PayStackController::class, 'handleGatewayCallback'])
-        ->name('payment-callback');
+        ->name('handle-gateway-callback');
+    Route::post('/webhook/handle', [App\Http\Controllers\Payment\PayStackController::class, 'handleIncomingWebhook'])
+        ->name('handle-webhook');
 });
 
 require_once __DIR__.'/auth.php';

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Payment;
 
+use Paystack;
+use Illuminate\Http\Request;
 use App\Helpers\FlashMessageHelper;
 use Illuminate\Support\Facades\Log;
-use Unicodeveloper\Paystack\Paystack;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Controllers\Controller as Controller;
@@ -28,8 +29,9 @@ class PayStackController extends Controller
         }
     }
 
-    public function handleGatewayCallback()
+    public function handleGatewayCallback(Request $request)
     {
+        ray($request);
         $paymentDetails = Paystack::getPaymentData();
         Log::info($paymentDetails);
 //        dd($paymentDetails);

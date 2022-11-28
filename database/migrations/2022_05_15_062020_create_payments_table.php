@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('reference')->unique();
             $table->unsignedDecimal('amount', 12);
             $table->unsignedTinyInteger('payment_method')->default(PaymentMethodEnum::OTHER->value);
+            $table->string('external_reference')->unique();
             $table->morphs('payable');
             $table->nullableMorphs('payer');
             $table->timestamps();

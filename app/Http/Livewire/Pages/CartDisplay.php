@@ -40,7 +40,7 @@ class CartDisplay extends Component
         $this->updateCartTotals();
         $this->cartItems = Cart::getContent();
         $this->customerEmail = $this->getSessionCustomerEmail();
-        $this->paymentMethod = PaymentMethodEnum::PAYSTACK->value;
+        $this->paymentMethod = PaymentMethodEnum::OTHER->value;
     }
 
     public function updateCartTotals()

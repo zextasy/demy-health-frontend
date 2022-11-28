@@ -101,10 +101,11 @@ class CartCheckout extends Component
     private function redirectToPayStack(Invoice $invoice)
     {
         $paystackData['email'] = $this->customerEmail;// {{-- required --}}
-            $paystackData['reference'] = $invoice->reference;
+//            $paystackData['reference'] = $invoice->reference;
             $paystackData['amount'] = $invoice->total_amount * 100;// {{-- required --}}
             $paystackData['currency'] = CurrencyEnum::NIGERIAN_NAIRA->value;
             $paystackData['metadata'] = ['invoice_reference' => $invoice->reference,];
+//            $paystackData['callback'] = route('paystack.handle-gateway-callback', $invoice->reference);
             // For other necessary things you want to add to your payload. it is optional though
         try {
             $paystackAuthorization = Paystack::getAuthorizationUrl($paystackData);
