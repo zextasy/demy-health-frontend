@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Finance;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use App\Traits\Resources\DisplaysCurrencies;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\Finance\InvoiceResource\Pages;
 use App\Filament\Resources\Finance\InvoiceResource\RelationManagers;
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class InvoiceResource extends Resource
 {
+    use DisplaysCurrencies;
+
     protected static ?string $model = Invoice::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
@@ -37,7 +40,13 @@ class InvoiceResource extends Resource
                     ->maxLength(255),
                 TextInput::make('total_amount')
                     ->disabled()
-                    ->numeric(),
+                    ->numeric()
+                    ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->numeric()
+                        ->decimalPlaces(2) // Set the number of digits after the decimal point.
+                        ->decimalSeparator('.') // Add a separator for decimal numbers.
+                        ->thousandsSeparator(',') // Add a separator for thousands.
+                    ),
                 Select::make('payment_method')
                     ->options(PaymentMethodEnum::optionsAsSelectArray())
                     ->disabled(),
@@ -52,8 +61,7 @@ class InvoiceResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
-                Tables\Columns\BadgeColumn::make('payment_method')->sortable()
-                    ->enum(PaymentMethodEnum::optionsAsSelectArray()),
+                Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
                 Tables\Columns\BadgeColumn::make('status')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()
                     ->dateTime(),
@@ -75,7 +83,7 @@ class InvoiceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ItemsRelationManager::class,
         ];
     }
 

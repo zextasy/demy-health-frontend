@@ -40,9 +40,11 @@
                     <option value="{{\App\Enums\Finance\Payments\PaymentMethodEnum::BANK_TRANSFER->value}}">
                         Bank Transfer
                     </option>
-{{--                    <option value="{{\App\Enums\Finance\Payments\PaymentMethodEnum::PAYSTACK->value}}">--}}
-{{--                        PAYSTACK--}}
-{{--                    </option>--}}
+                    @if(! app()->isProduction())
+                        <option value="{{\App\Enums\Finance\Payments\PaymentMethodEnum::PAYSTACK->value}}">
+                            PAYSTACK
+                        </option>
+                    @endif
                 </select>
             </div>
             <div class="summary-delivery">

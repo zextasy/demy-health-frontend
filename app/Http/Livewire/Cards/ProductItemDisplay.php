@@ -29,6 +29,11 @@ class ProductItemDisplay extends Component
 
     public Product $product;
 
+    protected $listeners = [
+        'postProductAddedCart' => 'goToCart',
+        'postProductAddedContinue' => 'continueShopping',
+    ];
+
     public function mount(Product $product)
     {
         $this->product = $product;
@@ -60,13 +65,36 @@ class ProductItemDisplay extends Component
             'associatedModel' => $this->product,
         ]);
 
-        $currentUrl = request()->header('Referer');
+
         ProductAddedToCartEvent::dispatch();
-        $this->flash('success', FlashMessageHelper::PRODUCT_ADD_TO_CART_SUCCESSFUL, [], $currentUrl);
+        $this->alert('success', FlashMessageHelper::PRODUCT_ADD_TO_CART_SUCCESSFUL, [
+            'position' => 'center',
+            'showConfirmButton' => true,
+            'confirmButtonText' => 'View Cart',
+            //                'showDenyButton' => true,
+            //                'denyButtonText' => 'Cancel',
+            'showCancelButton' => true,
+            'cancelButtonText' => 'Continue Shopping',
+            'onConfirmed' => 'postProductAddedCart',
+            'onDismissed' => 'postProductAddedContinue',
+            'allowOutsideClick' => false,
+            'timer' => null,
+        ]);
     }
 
     public function showProduct()
     {
         $this->redirectRoute('frontend.business-units.products.show', $this->productId);
+    }
+
+    public function goToCart()
+    {
+        $this->redirect(route('frontend.cart.display'));
+    }
+
+    public function continueShopping()
+    {
+        $currentUrl = request()->header('Referer');
+        $this->redirect($currentUrl);
     }
 }

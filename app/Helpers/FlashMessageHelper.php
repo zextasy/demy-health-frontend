@@ -19,5 +19,5 @@ class FlashMessageHelper
 
     const ORDER_BOOKING_SUCCESSFUL = 'Your order has been booked! You will receive a confirmation email soon.';
 
-    const PAYSTACK_ERROR = 'The paystack token has expired. Please refresh the page and try again.';
+    const PAYSTACK_ERROR = 'Something went wrong trying to communicate with Paystack. Your invoice has been generated. you will receive an email.';
 }

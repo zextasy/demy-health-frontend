@@ -54,7 +54,7 @@
                     <button class="checkout-cta btn-primary"  wire:click="checkoutCart">Purchase</button>
                 @endif
                 <br>
-                <button class="checkout-cta btn-danger"  wire:click="proceedToCheckout">Cancel</button>
+                <button class="checkout-cta btn-danger"  wire:click="cancelCheckout">Cancel</button>
             </div>
         </div>
     </aside>

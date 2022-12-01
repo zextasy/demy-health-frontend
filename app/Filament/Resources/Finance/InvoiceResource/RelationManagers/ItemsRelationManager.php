@@ -45,7 +45,7 @@ class ItemsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('quantity'),
                 Tables\Columns\TextColumn::make('price')->money(self::getSystemDefaultCurrency())->sortable(),
-                Tables\Columns\TextColumn::make('total_amount')->money('ngn'),
+                Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
             ])
             ->filters([
                 //

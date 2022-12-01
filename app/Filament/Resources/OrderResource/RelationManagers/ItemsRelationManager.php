@@ -55,8 +55,8 @@ class ItemsRelationManager extends HasManyRelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('quantity'),
-                Tables\Columns\TextColumn::make('price')->money('ngn'),
-                Tables\Columns\TextColumn::make('total_amount')->money('ngn'),
+                Tables\Columns\TextColumn::make('price')->money('NGN'),
+                Tables\Columns\TextColumn::make('total_amount')->money('NGN'),
             ])
             ->filters([
                 //

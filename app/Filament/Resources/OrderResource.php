@@ -9,12 +9,15 @@ use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\OrderResource\RelationManagers;
 
 class OrderResource extends Resource
 {
+    use DisplaysCurrencies;
+
     protected static ?string $model = Order::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
@@ -46,7 +49,13 @@ class OrderResource extends Resource
                     ->maxLength(255),
                 TextInput::make('total_amount')
                     ->disabled()
-                    ->numeric(),
+                    ->numeric()
+                    ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->numeric()
+                        ->decimalPlaces(2) // Set the number of digits after the decimal point.
+                        ->decimalSeparator('.') // Add a separator for decimal numbers.
+                        ->thousandsSeparator(',') // Add a separator for thousands.
+                    ),
                 Select::make('payment_method')
                     ->options(PaymentMethodEnum::optionsAsSelectArray())
                     ->disabled(),
@@ -61,8 +70,7 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
-                Tables\Columns\BadgeColumn::make('payment_method')->sortable()
-                    ->enum(PaymentMethodEnum::optionsAsSelectArray()),
+                Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
                 Tables\Columns\BadgeColumn::make('status')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()
                     ->dateTime(),

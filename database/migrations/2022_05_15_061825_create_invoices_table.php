@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('reference')->unique();
             $table->string('customer_email')->index();
             $table->unsignedTinyInteger('payment_method')->nullable();
+            $table->nullableMorphs('customer');
             $table->nullableMorphs('invoiceable');
             $table->timestamp('sent_at')->nullable();
             $table->timestamp('payment_received_at')->nullable();

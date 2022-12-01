@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // prevent lazy loading
 //        Model::shouldBeStrict(! app()->isProduction());
-        Model::preventLazyLoading(! app()->isProduction());
+        Model::preventLazyLoading(app()->isLocal());
 
     }
 }

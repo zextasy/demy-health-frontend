@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\Models\EncryptsId;
 use App\Contracts\PayableContract;
+use App\Traits\Models\SumsTotalAmountFromItems;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\OrderResource;
 use App\Settings\GeneralSettings;
@@ -14,7 +16,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends BaseModel implements PayableContract
 {
-    use HasFactory, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup, MorphsReceivedPayments;
+    use HasFactory;
+    use GeneratesReference;
+    use ReferencesUsersViaEmail;
+    use BelongsToBusinessGroup;
+    use MorphsReceivedPayments;
+    use SumsTotalAmountFromItems;
+    use EncryptsId;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -42,11 +50,6 @@ class Order extends BaseModel implements PayableContract
     public function getFilamentUrlAttribute(): string
     {
         return OrderResource::getUrl('view', ['record' => $this->id]);
-    }
-
-    public function getTotalAmountAttribute(): float
-    {
-        return $this->items->sum('total_amount');
     }
 
     public function getPayableNameAttribute(): string
