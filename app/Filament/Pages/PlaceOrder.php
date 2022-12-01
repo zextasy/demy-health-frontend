@@ -13,6 +13,7 @@ use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Pages\Page;
 use Illuminate\Support\Collection;
+use App\Actions\Invoices\GenerateInvoiceForOrderAction;
 
 class PlaceOrder extends Page
 {
@@ -91,6 +92,7 @@ class PlaceOrder extends Page
                 $productCollection->push($orderableItemCollection);
             }
             $order = (new CreateOrderAction)->run($productCollection, $this->customerEmail);
+            (new GenerateInvoiceForOrderAction)->run($order);
 
             $this->redirect(OrderResource::getUrl('view', ['record' => $order->id]));
         } catch (\Exception $e) {

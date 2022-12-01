@@ -61,8 +61,14 @@ class CartCheckout extends Component
             return;
         }
 
-        $order = (new GenerateOrderFromCartAction())->forUser(auth()->user())->run($items, $this->customerEmail);
-        $invoice = (new GenerateInvoiceForOrderAction)->run($order);
+        try {
+            $order = (new GenerateOrderFromCartAction())->forUser(auth()->user())->run($items, $this->customerEmail);
+            $invoice = (new GenerateInvoiceForOrderAction)->run($order);
+        } catch (\Exception $e) {
+            Log::info($e);
+            $this->flash('warning', FlashMessageHelper::CHECKOUT_ERROR, [], '/');
+        }
+
         Cart::clear();
         if ($this->paymentMethodEnum == PaymentMethodEnum::PAYSTACK) {
             Log::info('redirecting to paystack');

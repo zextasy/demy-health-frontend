@@ -5,10 +5,10 @@ namespace App\Traits\Relationships;
 use App\Models\Finance\Invoice;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait MorphsInvoices
+trait MorphsInvoicesAsCustomer
 {
     public function invoices(): MorphMany
     {
-        return $this->MorphMany(Invoice::class, 'invoiceable');
+        return $this->MorphMany(Invoice::class, 'customer');
     }
 }

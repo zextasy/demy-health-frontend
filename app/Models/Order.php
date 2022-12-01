@@ -4,6 +4,9 @@ namespace App\Models;
 
 use App\Traits\Models\EncryptsId;
 use App\Contracts\PayableContract;
+use App\Contracts\InvoiceableContract;
+use App\Traits\Models\LaravelMorphable;
+use App\Traits\Relationships\MorphsInvoice;
 use App\Traits\Models\SumsTotalAmountFromItems;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\OrderResource;
@@ -14,7 +17,7 @@ use App\Traits\Relationships\MorphsReceivedPayments;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Order extends BaseModel implements PayableContract
+class Order extends BaseModel implements PayableContract, InvoiceableContract
 {
     use HasFactory;
     use GeneratesReference;
@@ -23,6 +26,8 @@ class Order extends BaseModel implements PayableContract
     use MorphsReceivedPayments;
     use SumsTotalAmountFromItems;
     use EncryptsId;
+    use MorphsInvoice;
+    use LaravelMorphable;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -72,9 +77,9 @@ class Order extends BaseModel implements PayableContract
         return $this->hasMany(OrderItem::class);
     }
 
-    public function orderable()
+    public function customer()
     {
-        return $this->morphTo('orderable');
+        return $this->morphTo('customer');
     }
     //endregion
 }

@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use App\Contracts\AddressableContract;
-use App\Contracts\OrderableContract;
+use App\Contracts\OrderableCustomerContract;
 use App\Traits\Relationships\HasTasks;
-use App\Contracts\InvoiceableContract;
+use App\Contracts\InvoiceableCustomerContract;
 use App\Traits\Models\LaravelMorphable;
-use App\Traits\Relationships\MorphsInvoices;
+use App\Traits\Relationships\MorphsInvoicesAsCustomer;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\HasTestBookings;
 use App\Traits\Relationships\MorphsAddresses;
-use App\Traits\Relationships\MorphsOrders;
+use App\Traits\Relationships\MorphsOrdersAsCustomer;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,8 +27,8 @@ class User extends Authenticatable implements
     FilamentUser,
     MustVerifyEmail,
     AddressableContract,
-    OrderableContract,
-    InvoiceableContract
+    OrderableCustomerContract,
+    InvoiceableCustomerContract
 {
     use SoftDeletes;
     use HasApiTokens;
@@ -38,8 +38,8 @@ class User extends Authenticatable implements
     use HasPermissions;
     use HasTestBookings;
     use MorphsAddresses;
-    use MorphsOrders;
-    use MorphsInvoices;
+    use MorphsOrdersAsCustomer;
+    use MorphsInvoicesAsCustomer;
     use BelongsToBusinessGroup;
     use HasTasks;
     use LaravelMorphable;

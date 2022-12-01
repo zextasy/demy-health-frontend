@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('customer_email')->index();
             $table->unsignedTinyInteger('payment_method')->nullable();
             $table->nullableMorphs('customer');
-            $table->nullableMorphs('orderable');
             $table->timestamp('processed_at')->nullable();
             $table->timestamp('delivered_at')->nullable();
             $table->timestamp('received_at')->nullable();

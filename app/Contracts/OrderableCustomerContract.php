@@ -2,11 +2,11 @@
 
 namespace App\Contracts;
 
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-interface InvoiceableContract
+interface OrderableCustomerContract
 {
-    public function invoice(): MorphOne;
+    public function orders(): MorphMany;
 
     public function getLaravelMorphModelType(): string;
 

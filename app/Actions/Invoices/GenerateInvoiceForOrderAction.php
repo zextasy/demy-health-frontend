@@ -28,9 +28,11 @@ class GenerateInvoiceForOrderAction
             );
             $orderableItemModelCollection->push($orderableItemCollection);
         }
-        ray($order->items, $orderableItemModelCollection);
+
         $this->invoice = (new CreateInvoiceAction)
-            ->forInvoiceable($order->orderable)->run($orderableItemModelCollection, $order->customer_email);
+            ->forInvoiceable($order)
+            ->forInvoiceableCustomer($order->customer)
+            ->run($orderableItemModelCollection, $order->customer_email);
 
         $this->raiseEvents();
 

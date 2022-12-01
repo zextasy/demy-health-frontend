@@ -20,4 +20,6 @@ class FlashMessageHelper
     const ORDER_BOOKING_SUCCESSFUL = 'Your order has been booked! You will receive a confirmation email soon.';
 
     const PAYSTACK_ERROR = 'Something went wrong trying to communicate with Paystack. Your invoice has been generated. you will receive an email.';
+
+    const CHECKOUT_ERROR = 'Something went wrong trying to Generate your order. Please contact us';
 }
