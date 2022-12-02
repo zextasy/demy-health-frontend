@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\Finance\InvoiceResource\Pages;
 
 use Filament\Pages\Actions\Action;
-use App\Actions\CreatePaymentAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use App\Actions\Payments\CreatePaymentAction;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\Finance\InvoiceResource;
 use Filament\Pages\Actions;

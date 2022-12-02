@@ -21,6 +21,8 @@ use App\Observers\ProductObserver;
 use App\Observers\TestResultObserver;
 use Illuminate\Support\ServiceProvider;
 use App\Observers\BusinessGroupObserver;
+use App\Models\Finance\PaystackTransaction;
+use App\Observers\PaystackTransactionObserver;
 
 class ObserverServiceProvider extends ServiceProvider
 {
@@ -45,6 +47,7 @@ class ObserverServiceProvider extends ServiceProvider
         Invoice::observe(InvoiceObserver::class);
         Order::observe(OrderObserver::class);
         Patient::observe(PatientObserver::class);
+        PaystackTransaction::observe(PaystackTransactionObserver::class);
         Price::observe(PriceObserver::class);
         Product::observe(ProductObserver::class);
         Task::observe(TaskObserver::class);

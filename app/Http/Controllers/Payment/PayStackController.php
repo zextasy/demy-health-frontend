@@ -4,14 +4,10 @@ namespace App\Http\Controllers\Payment;
 
 use Paystack;
 use Illuminate\Http\Request;
-use App\Models\Finance\Payment;
 use App\Helpers\FlashMessageHelper;
-use Illuminate\Support\Facades\Log;
-use App\Actions\CreatePaymentAction;
 use Illuminate\Support\Facades\Redirect;
-
 use App\Http\Controllers\Controller as Controller;
-use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Actions\PaystackTransactions\RecordPaystackTransactionAction;
 
 class PayStackController extends Controller
 {
@@ -35,26 +31,19 @@ class PayStackController extends Controller
     public function handleGatewayCallback(Request $request)
     {
         $paymentDetails = Paystack::getPaymentData();
-//        ray($paymentDetails);
-        if ($paymentDetails['status']) {
-            $paymentDataArray = $paymentDetails['data'];
-            $invoiceReference = $paymentDataArray['metadata']['invoice_reference'] ?? '';
-            //TODO create paystack transaction instead then payment later
-            if (Payment::where('external_reference', '=', $paymentDataArray['reference'])->doesntExist()) {
-                (new CreatePaymentAction)
-                    ->withExternalReference($paymentDataArray['reference'])
-                    ->withInternalReferences($invoiceReference)
-                    ->execute($paymentDataArray['amount']/100, PaymentMethodEnum::PAYSTACK);
-            }
-            return redirect(route('frontend.cart.checkout-successful'));
+        $route = route('frontend.cart.checkout-successful');
+        $status = boolval($paymentDetails['status']);
+        if (!$status) {
+            $route = redirect(route('frontend.cart.checkout-failed'));
         }
-        return redirect(route('frontend.cart.checkout-failed'));
+        $paymentDataArray = $paymentDetails['data'];
+        (new RecordPaystackTransactionAction)->execute($status, $paymentDataArray);
+        return redirect($route);
     }
 
     public function handleIncomingWebhook()
     {
         $paymentDetails = Paystack::getPaymentData();
-        Log::info($paymentDetails);
-                dd($paymentDetails);
+        ray($paymentDetails);
     }
 }
