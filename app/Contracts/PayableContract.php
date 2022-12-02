@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface PayableContract
 {
-    public function paymentsReceived(): MorphMany;
+//    public function payments(): MorphMany;
 }

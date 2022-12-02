@@ -8,10 +8,14 @@ use App\Traits\Models\GeneratesReference;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Relationships\MorphsTransactionsAsDebit;
 
 class Payment extends BaseModel
 {
-    use HasFactory, BelongsToBusinessGroup, GeneratesReference;
+    use HasFactory;
+    use BelongsToBusinessGroup;
+    use GeneratesReference;
+    use MorphsTransactionsAsDebit;
 
     //region CONFIG
     protected $guarded = ['id'];
@@ -21,6 +25,8 @@ class Payment extends BaseModel
         'internal_references' => 'array',
         'metadata' => 'array'
     ];
+
+    protected $with = ['transactions'];
 
     public function referenceConfig(): array
     {

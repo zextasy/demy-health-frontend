@@ -3,14 +3,13 @@
 namespace App\Actions;
 
 use App\Models\Finance\Payment;
-use App\Contracts\PayableContract;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 
 class CreatePaymentAction
 {
 
-    private array $internalReferences;
-    private string $externalReference;
+    private ?array $internalReferences = null;
+    private ?string $externalReference = null;
 
     public function execute(int $amount, int|PaymentMethodEnum $method) : Payment
     {

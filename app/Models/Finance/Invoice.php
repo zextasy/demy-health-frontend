@@ -10,7 +10,7 @@ use App\Traits\Models\GeneratesReference;
 use App\Traits\Models\SumsTotalAmountFromItems;
 use App\Filament\Resources\Finance\InvoiceResource;
 use App\Traits\Relationships\BelongsToBusinessGroup;
-use App\Traits\Relationships\MorphsReceivedPayments;
+use App\Traits\Relationships\MorphsTransactionsAsCredit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Invoice extends BaseModel  implements PayableContract
@@ -18,7 +18,7 @@ class Invoice extends BaseModel  implements PayableContract
     use HasFactory;
     use GeneratesReference;
     use BelongsToBusinessGroup;
-    use MorphsReceivedPayments;
+    use MorphsTransactionsAsCredit;
     use EncryptsId;
     use SumsTotalAmountFromItems;
 
@@ -35,7 +35,7 @@ class Invoice extends BaseModel  implements PayableContract
 
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $with = ['items','paymentsReceived'];
+    protected $with = ['items','transactions'];
 
     protected $appends = ['total_amount','outstanding_amount'];
     //endregion
@@ -58,7 +58,7 @@ class Invoice extends BaseModel  implements PayableContract
 
     public function getTotalPaidAttribute(): float
     {
-        return $this->paymentsReceived->sum('total_amount');
+        return $this->transactions->sum('amount');
     }
     //endregion
 
