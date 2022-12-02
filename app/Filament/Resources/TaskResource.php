@@ -21,6 +21,11 @@ class TaskResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('backend');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

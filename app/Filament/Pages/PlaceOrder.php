@@ -33,6 +33,11 @@ class PlaceOrder extends Page
 
     public $paymentMethod;
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('backend');
+    }
+
     protected function getFormSchema(): array
     {
         return [

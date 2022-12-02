@@ -2,27 +2,32 @@
 
 namespace App\Filament\Resources\Finance;
 
-use Filament\Forms\Components\Select;
+use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use App\Models\Finance\Payment;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\TextInput;
+use App\Traits\Resources\DisplaysCurrencies;
+use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\Finance\PaymentResource\Pages;
 use App\Filament\Resources\Finance\PaymentResource\RelationManagers;
-use App\Models\Finance\Payment;
-use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PaymentResource extends Resource
 {
+    use DisplaysCurrencies;
+
     protected static ?string $model = Payment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     protected static ?string $navigationGroup = 'Finance';
+
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('backend');
+    }
 
     public static function form(Form $form): Form
     {
@@ -37,8 +42,6 @@ class PaymentResource extends Resource
                     ->required(),
                 Toggle::make('type')
                     ->required(),
-                Select::make('payable_id')
-                    ->relationship('payable', 'reference')->disabled()
             ]);
     }
 
@@ -48,8 +51,9 @@ class PaymentResource extends Resource
             ->columns([
 //                Tables\Columns\TextColumn::make('business_group_id'),
                 Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('amount')->money('ngn'),
-                Tables\Columns\BooleanColumn::make('type'),
+                Tables\Columns\TextColumn::make('amount')->money(self::getSystemDefaultCurrency()),
+                Tables\Columns\BadgeColumn::make('payment_method')
+                    ->enum(PaymentMethodEnum::optionsAsSelectArray())->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label('Payment Date')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

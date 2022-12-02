@@ -3,27 +3,24 @@
 namespace App\Models;
 
 use App\Traits\Models\EncryptsId;
-use App\Contracts\PayableContract;
+use App\Settings\GeneralSettings;
 use App\Contracts\InvoiceableContract;
 use App\Traits\Models\LaravelMorphable;
+use App\Filament\Resources\OrderResource;
+use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\MorphsInvoice;
 use App\Traits\Models\SumsTotalAmountFromItems;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
-use App\Filament\Resources\OrderResource;
-use App\Settings\GeneralSettings;
-use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\BelongsToBusinessGroup;
-use App\Traits\Relationships\MorphsReceivedPayments;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Order extends BaseModel implements PayableContract, InvoiceableContract
+class Order extends BaseModel implements InvoiceableContract
 {
     use HasFactory;
     use GeneratesReference;
     use ReferencesUsersViaEmail;
     use BelongsToBusinessGroup;
-    use MorphsReceivedPayments;
     use SumsTotalAmountFromItems;
     use EncryptsId;
     use MorphsInvoice;

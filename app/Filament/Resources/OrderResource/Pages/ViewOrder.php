@@ -19,25 +19,7 @@ class ViewOrder extends ViewRecord
     protected function getActions(): array
     {
         return [
-            Action::make('Capture Payment')
-                ->action(function (array $data): void {
-                    (new CreatePaymentAction)->execute($this->record, $data['amount'], $data['method']);
-                })
-                ->form([
-                    TextInput::make('amount')
-                        ->label('Amount')
-                        ->numeric()
-                        ->required(),
-                    Select::make('method')
-                        ->label('Payment Method')
-                        ->options(PaymentMethodEnum::optionsAsSelectArray())
-                        ->searchable()
-                        ->required(),
-//                    DateTimePicker::make('received_at')
-//                        ->minDate(now())
-//                        ->withoutSeconds()
-//                        ->required(),
-                ]),
+
         ];
     }
 }

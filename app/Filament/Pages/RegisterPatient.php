@@ -71,6 +71,11 @@ class RegisterPatient extends Page implements HasForms
 
     public $referralChannelId;
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('backend');
+    }
+
     protected function getFormSchema(): array
     {
         return [

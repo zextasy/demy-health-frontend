@@ -17,6 +17,10 @@ class Payment extends BaseModel
     protected $guarded = ['id'];
 
     protected $dates = ['created_at', 'updated_at'];
+    protected $casts = [
+        'internal_references' => 'array',
+        'metadata' => 'array'
+    ];
 
     public function referenceConfig(): array
     {

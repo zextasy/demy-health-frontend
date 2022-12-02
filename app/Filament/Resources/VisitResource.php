@@ -21,6 +21,11 @@ class VisitResource extends Resource
 
     protected static ?string $navigationGroup = 'CRM';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('backend');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

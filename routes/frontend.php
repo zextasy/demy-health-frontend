@@ -77,4 +77,8 @@ Route::name('frontend.')->group(function () {
         ->name('cart.checkout');
     Route::get('cart-clear.html', [CartController::class, 'clear'])
         ->name('cart.clear');
+    Route::get('cart-checkout-successful.html', [CartController::class, 'checkoutSuccess'])
+        ->name('cart.checkout-successful');
+    Route::get('cart-checkout-failed.html', [CartController::class, 'checkoutFailed'])
+        ->name('cart.checkout-failed');
 });

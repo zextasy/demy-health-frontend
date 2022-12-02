@@ -21,6 +21,11 @@ class PrescriptionResource extends Resource
 
     protected static ?string $navigationGroup = 'Consultation';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('backend');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

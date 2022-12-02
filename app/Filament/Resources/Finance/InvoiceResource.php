@@ -27,6 +27,11 @@ class InvoiceResource extends Resource
 
     protected static ?string $navigationGroup = 'Finance';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->hasPermissionTo('backend');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,6 +44,15 @@ class InvoiceResource extends Resource
                     ->required()
                     ->maxLength(255),
                 TextInput::make('total_amount')
+                    ->disabled()
+                    ->numeric()
+                    ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->numeric()
+                        ->decimalPlaces(2) // Set the number of digits after the decimal point.
+                        ->decimalSeparator('.') // Add a separator for decimal numbers.
+                        ->thousandsSeparator(',') // Add a separator for thousands.
+                    ),
+                TextInput::make('outstanding_amount')
                     ->disabled()
                     ->numeric()
                     ->mask(fn (TextInput\Mask $mask) => $mask
@@ -61,7 +75,7 @@ class InvoiceResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
+                Tables\Columns\TextColumn::make('outstanding_amount')->money(self::getSystemDefaultCurrency()),
                 Tables\Columns\BadgeColumn::make('status')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()
                     ->dateTime(),
@@ -91,9 +105,9 @@ class InvoiceResource extends Resource
     {
         return [
             'index' => Pages\ListInvoices::route('/'),
-            'create' => Pages\CreateInvoice::route('/create'),
+//            'create' => Pages\CreateInvoice::route('/create'),
             'view' => Pages\ViewInvoice::route('/{record}'),
-            'edit' => Pages\EditInvoice::route('/{record}/edit'),
+//            'edit' => Pages\EditInvoice::route('/{record}/edit'),
         ];
     }
 

@@ -26,4 +26,14 @@ class CartController extends Controller
 
         return redirect()->back();
     }
+
+    public function checkoutSuccess()
+    {
+        return view('frontend.cart-checkout-result', ['success' => true]);
+    }
+
+    public function checkoutFailed()
+    {
+        return view('frontend.cart-checkout-result', ['success' => false]);
+    }
 }

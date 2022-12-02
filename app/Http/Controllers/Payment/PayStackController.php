@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Payment;
 
 use Paystack;
 use Illuminate\Http\Request;
+use App\Models\Finance\Payment;
 use App\Helpers\FlashMessageHelper;
 use Illuminate\Support\Facades\Log;
+use App\Actions\CreatePaymentAction;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Controllers\Controller as Controller;
+use App\Enums\Finance\Payments\PaymentMethodEnum;
 
 class PayStackController extends Controller
 {
@@ -31,13 +34,21 @@ class PayStackController extends Controller
 
     public function handleGatewayCallback(Request $request)
     {
-        ray($request);
         $paymentDetails = Paystack::getPaymentData();
-        Log::info($paymentDetails);
-//        dd($paymentDetails);
-        // Now you have the payment details,
-        // you can store the authorization_code in your db to allow for recurrent subscriptions
-        // you can then redirect or do whatever you want
+//        ray($paymentDetails);
+        if ($paymentDetails['status']) {
+            $paymentDataArray = $paymentDetails['data'];
+            $invoiceReference = $paymentDataArray['metadata']['invoice_reference'] ?? '';
+            //TODO create paystack transaction instead then payment later
+            if (Payment::where('external_reference', '=', $paymentDataArray['reference'])->doesntExist()) {
+                (new CreatePaymentAction)
+                    ->withExternalReference($paymentDataArray['reference'])
+                    ->withInternalReferences($invoiceReference)
+                    ->execute($paymentDataArray['amount']/100, PaymentMethodEnum::PAYSTACK);
+            }
+            return redirect(route('frontend.cart.checkout-successful'));
+        }
+        return redirect(route('frontend.cart.checkout-failed'));
     }
 
     public function handleIncomingWebhook()

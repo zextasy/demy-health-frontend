@@ -35,9 +35,9 @@ class Invoice extends BaseModel  implements PayableContract
 
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $with = ['items'];
+    protected $with = ['items','paymentsReceived'];
 
-    protected $appends = ['total_amount'];
+    protected $appends = ['total_amount','outstanding_amount'];
     //endregion
 
     //region ATTRIBUTES
@@ -49,6 +49,16 @@ class Invoice extends BaseModel  implements PayableContract
     public function getPayableNameAttribute(): string
     {
         return $this->reference;
+    }
+
+    public function getOutstandingAmountAttribute(): float
+    {
+        return $this->total_amount - $this->total_paid;
+    }
+
+    public function getTotalPaidAttribute(): float
+    {
+        return $this->paymentsReceived->sum('total_amount');
     }
     //endregion
 
