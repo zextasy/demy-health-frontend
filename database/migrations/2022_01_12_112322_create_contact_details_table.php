@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('details');
             $table->morphs('contactable');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

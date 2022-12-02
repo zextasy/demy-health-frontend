@@ -22,6 +22,7 @@ return new class extends Migration
             $table->morphs('debitable');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

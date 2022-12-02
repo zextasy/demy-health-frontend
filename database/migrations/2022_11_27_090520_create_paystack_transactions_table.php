@@ -24,6 +24,7 @@ return new class extends Migration
             $table->json('metadata');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
     /**

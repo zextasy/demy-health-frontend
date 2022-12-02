@@ -18,6 +18,7 @@ class CreateSpecimenTypesTestTypesTable extends Migration
             $table->foreignId('specimen_type_id')->constrained();
             $table->foreignId('test_type_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
