@@ -175,6 +175,7 @@ class RegisterPatient extends Page implements HasForms
                         TextInput::make('referralCode')
                             ->maxLength(255),
                         Select::make('referralChannelId')
+                            ->label('Referred By')
                             ->options(ReferralChannel::all()->toSelectArray())
                             ->searchable(),
                     ])->columns(2),
