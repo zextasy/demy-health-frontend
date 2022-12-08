@@ -74,7 +74,12 @@ class User extends Authenticatable implements
         return $this->hasAnyPermission(['frontend', 'backend']);
     }
 
-    public function isFilamentAdmin()
+    public function isFilamentBackendUser(): bool
+    {
+        return $this->hasPermissionTo('backend');
+    }
+
+    public function isFilamentAdmin(): bool
     {
         return $this->hasPermissionTo('admin');
     }

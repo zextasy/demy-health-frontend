@@ -20,7 +20,7 @@ class ReferralChannelResource extends Resource
 
     protected static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->isFilamentAdmin();
+        return auth()->user()->isFilamentBackendUser();
     }
 
     public static function form(Form $form): Form
