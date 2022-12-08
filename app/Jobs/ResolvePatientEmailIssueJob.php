@@ -35,7 +35,7 @@ class ResolvePatientEmailIssueJob implements ShouldQueue
             ->with(['patient', 'orderItems', 'orderItems.order', 'orderItems.order.invoice'])
             ->whereNull('customer_email')->get();
         foreach ($testBookingsWithWrongEmails as $testBooking) {
-            $patientEmail = $testBooking->patient->email ?? 'info@demyhealth.com';
+            $patientEmail = $testBooking->patient->email ?? 'care@demyhealth.com';
             $testBooking->customer_email = $patientEmail;
             $testBooking->save();
             foreach ($testBooking->orderItems as $orderItem) {

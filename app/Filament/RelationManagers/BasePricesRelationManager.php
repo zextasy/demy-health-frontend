@@ -19,7 +19,7 @@ class BasePricesRelationManager extends MorphManyRelationManager
 
     protected function canCreate(): bool
     {
-        return auth()->user()->isFilamentAdmin();
+        return auth()->user()->isFilamentBackendUser();
     }
 
     protected function canAttach(): bool

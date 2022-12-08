@@ -66,17 +66,17 @@ class PatientResource extends Resource
                 Fieldset::make('Contact')->schema([
                     TextInput::make('email')
                         ->email()
-                        ->maxLength(255),
+                        ->disabled(),
                     TextInput::make('phone_number')
                         ->tel()
                         ->maxLength(255),
                 ])->columns(2),
                 Fieldset::make('Referral')->schema([
                     TextInput::make('referral_code')
-                        ->maxLength(255),
+                        ->disabled(),
                     Select::make('referral_channel_id')->label('Referred By')
                         ->options(ReferralChannel::all()->toSelectArray())
-                        ->searchable(),
+                        ->disabled(),
                 ])->columns(2),
             ]);
     }

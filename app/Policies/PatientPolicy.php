@@ -53,7 +53,7 @@ class PatientPolicy
      */
     public function update(User $user, Patient $patient)
     {
-        return $user->isFilamentAdmin();
+        return $user->isFilamentBackendUser();
     }
 
     /**

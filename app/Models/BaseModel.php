@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use App\Support\BaseCollection;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BaseModel extends Model
 {
     use SoftDeletes;
+    use LogsActivity;
     //region CONFIG
 
     //endregion
@@ -39,5 +42,10 @@ class BaseModel extends Model
             'value' => $this->getAttribute($value),
             'description' => $this->getAttribute($description),
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logAll()->dontSubmitEmptyLogs();
     }
 }
