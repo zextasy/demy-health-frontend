@@ -74,7 +74,7 @@ class PatientResource extends Resource
                 Fieldset::make('Referral')->schema([
                     TextInput::make('referral_code')
                         ->maxLength(255),
-                    Select::make('referral_channel')
+                    Select::make('referral_channel_id')->label('Referred By')
                         ->options(ReferralChannel::all()->toSelectArray())
                         ->searchable(),
                 ])->columns(2),
@@ -92,7 +92,8 @@ class PatientResource extends Resource
                 Tables\Columns\TextColumn::make('last_name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('email')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('phone_number')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('test_bookings_count')->label('Bookings')->counts('testBookings')->sortable(),
+                Tables\Columns\TextColumn::make('test_bookings_count')->label('Bookings')
+                    ->counts('testBookings')->sortable(),
             ])
             ->filters([
                 //

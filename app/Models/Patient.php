@@ -100,5 +100,10 @@ class Patient extends BaseModel
     {
         return $this->hasManyThrough(TestResult::class, TestBooking::class);
     }
+
+    public function referredBy(): BelongsTo
+    {
+        return $this->belongsTo(ReferralChannel::class, 'referral_channel_id');
+    }
     //endregion
 }
