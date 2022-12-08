@@ -23,7 +23,7 @@ class GenerateOrderFromTestBookingAction
     public function run(TestBooking $testBooking): Order
     {
 
-        $customerEmail = $testBooking->customer_email;
+        $customerEmail = $testBooking->patient->customer_email;
         $this->order = new Order;
 
         DB::transaction(function () use ($customerEmail, $testBooking) {
