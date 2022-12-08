@@ -58,7 +58,7 @@ class BaseHasManyTestTypesRelationManager extends HasManyRelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('test_id')->sortable(),
-                Tables\Columns\TextColumn::make('description')->sortable(),
+                Tables\Columns\TextColumn::make('name')->sortable(),
                 Tables\Columns\TextColumn::make('price')->money('ngn')->sortable(),
             ])
             ->filters([
