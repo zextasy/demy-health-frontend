@@ -6,14 +6,14 @@ use App\Models\User;
 use Illuminate\Support\Carbon;
 use Filament\Pages\Actions\Action;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Textarea;
 use App\Actions\Tasks\AssignTaskAction;
 use Filament\Resources\Pages\ViewRecord;
+use App\Jobs\GenerateOrderFromBookingJob;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\TestBookingResource;
-use App\Filament\Actions\Tasks\ConfirmTaskStartAction;
-use App\Filament\Actions\Tasks\MarkTaskAsCompleteAction;
 
 class ViewTestBooking extends ViewRecord
 {
@@ -28,7 +28,8 @@ class ViewTestBooking extends ViewRecord
             ]))
                 ->action(function (array $data): void {
                     $dueAt = Carbon::parse($data['due_at']);
-                    (new AssignTaskAction)->assignedBy($data['assignedById'])->execute($this->record,$data['assignedToId'],$data['details'],$dueAt);
+                    (new AssignTaskAction)->assignedBy($data['assignedById'])
+                        ->execute($this->record, $data['assignedToId'], $data['details'],$dueAt);
                 })
                 ->form([
                     Select::make('assignedById')
@@ -48,6 +49,14 @@ class ViewTestBooking extends ViewRecord
                         ->withoutSeconds()
                         ->required(),
                 ]),
+            Action::make('generate order')
+                ->action(function (): void {
+                    GenerateOrderFromBookingJob::dispatch($this->record);
+                })
+                ->form([
+                    Hidden::make('token'),
+                ])
+                ->visible($this->record->orderItems()->doesntExist())
         ];
     }
 }

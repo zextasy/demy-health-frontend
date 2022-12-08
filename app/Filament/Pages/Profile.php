@@ -24,7 +24,7 @@ class Profile extends BaseProfile
                 ->action(function (): void {
                     ResolveTestBookingsWithoutOrdersJob::dispatch();
                     ResolveOrdersWithoutInvoicesJob::dispatch();
-                })->hidden(!auth()->user()->isFilamentAdmin())
+                })->visible(auth()->user()->isFilamentAdmin())
         ];
     }
 

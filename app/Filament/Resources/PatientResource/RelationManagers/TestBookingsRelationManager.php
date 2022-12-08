@@ -48,7 +48,7 @@ class TestBookingsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->sortable(),
-                Tables\Columns\TextColumn::make('testType.description')->sortable(),
+                Tables\Columns\TextColumn::make('testType.name')->sortable(),
                 Tables\Columns\TextColumn::make('due_date')
                     ->date()
                     ->sortable(),
@@ -64,6 +64,7 @@ class TestBookingsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
