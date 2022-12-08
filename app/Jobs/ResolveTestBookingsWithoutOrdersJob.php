@@ -2,28 +2,26 @@
 
 namespace App\Jobs;
 
-use App\Models\Order;
+use App\Models\TestBooking;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Actions\Invoices\GenerateInvoiceForOrderAction;
 
-class GenerateInvoiceFromOrderJob implements ShouldQueue
+class ResolveTestBookingsWithoutOrdersJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    private Order $order;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct()
     {
-        $this->order = $order;
+        //
     }
 
     /**
@@ -33,6 +31,9 @@ class GenerateInvoiceFromOrderJob implements ShouldQueue
      */
     public function handle()
     {
-        (new GenerateInvoiceForOrderAction)->run($this->order);
+        $testBookingsWithoutOrders = TestBooking::doesntHave('orderItems')->get();
+        foreach ($testBookingsWithoutOrders as $testBooking) {
+            GenerateOrderFromBookingJob::dispatch($testBooking);
+        }
     }
 }

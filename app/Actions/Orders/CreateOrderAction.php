@@ -14,10 +14,10 @@ class CreateOrderAction
 {
     private Order $order;
 
-    public function run(Collection $orderItems, string $customerEmail, OrderableCustomerContract $orderableCustomer = null): Order
+    public function run(Collection $orderItems, ?string $customerEmail, OrderableCustomerContract $orderableCustomer = null): Order
     {
         $this->order = new Order;
-        $this->order->customer_email = $customerEmail;
+        $this->order->customer_email = $customerEmail ?? 'info@demyhealth.com';
         $this->order->customer_id = $orderableCustomer?->getLaravelMorphModelId();
         $this->order->customer_type = $orderableCustomer?->getLaravelMorphModelType();
         DB::transaction(function () use ($orderItems) {

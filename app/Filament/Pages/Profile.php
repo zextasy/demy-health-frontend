@@ -2,14 +2,31 @@
 
 namespace App\Filament\Pages;
 
+use Illuminate\Support\Carbon;
+use Filament\Pages\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
+use Filament\Forms\ComponentContainer;
+use App\Actions\Tasks\AssignTaskAction;
 use Filament\Forms\Components\TextInput;
+use App\Jobs\ResolveOrdersWithoutInvoicesJob;
+use App\Jobs\ResolveTestBookingsWithoutOrdersJob;
 use RyanChandler\FilamentProfile\Pages\Profile as BaseProfile;
 
 class Profile extends BaseProfile
 {
     protected static ?string $navigationGroup = null;
+
+    protected function getActions(): array
+    {
+        return [
+            Action::make('update system')
+                ->action(function (): void {
+                    ResolveTestBookingsWithoutOrdersJob::dispatch();
+                    ResolveOrdersWithoutInvoicesJob::dispatch();
+                })->hidden(!auth()->user()->isFilamentAdmin())
+        ];
+    }
 
     protected function getFormSchema(): array
     {
