@@ -18,8 +18,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->job(new ScheduledResolveTestBookingsWithoutOrdersJob())->everyFiveMinutes();
-        $schedule->job(new ScheduledResolveOrdersWithoutInvoicesJob())->everyFiveMinutes();
+        $schedule->job(new ScheduledResolveTestBookingsWithoutOrdersJob())->hourlyAt('01');
+        $schedule->job(new ScheduledResolveOrdersWithoutInvoicesJob())->hourlyAt('02');
     }
 
     /**
