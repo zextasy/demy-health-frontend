@@ -16,6 +16,14 @@ class ViewOrder extends ViewRecord
     protected function getActions(): array
     {
         return [
+            Action::make('apply discount')
+                ->action(function (): void {
+                    GenerateInvoiceFromOrderJob::dispatch($this->record);
+                })
+                ->form([
+                    Hidden::make('token'),
+                ])
+                ->visible($this->record->hasNotBeenInvoiced()),
             Action::make('generate invoice')
                 ->action(function (): void {
                     GenerateInvoiceFromOrderJob::dispatch($this->record);
@@ -23,7 +31,7 @@ class ViewOrder extends ViewRecord
                 ->form([
                     Hidden::make('token'),
                 ])
-                ->visible($this->record->invoice()->doesntExist())
+                ->visible($this->record->hasNotBeenInvoiced())
         ];
     }
 }

@@ -43,6 +43,8 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
         'location_type' => LocationTypeEnum::class,
     ];
 
+    protected $with = ['orderItem','InvoiceItem'];
+
     public function referenceConfig(): array
     {
         return [
@@ -115,6 +117,16 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     public function sampleWasRejected(): bool
     {
         return $this->sample_rejected_at !== null;
+    }
+
+    public function hasBeenInvoiced(): bool
+    {
+        return  $this->invoiceItems()->exists();
+    }
+
+    public function hasNotBeenInvoiced(): bool
+    {
+        return  !$this->hasBeenInvoiced();
     }
     //endregion
 

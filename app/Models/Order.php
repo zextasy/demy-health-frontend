@@ -61,7 +61,15 @@ class Order extends BaseModel implements InvoiceableContract
     //endregion
 
     //region HELPERS
+    public function hasBeenInvoiced(): bool
+    {
+        return  $this->invoice()->exists();
+    }
 
+    public function hasNotBeenInvoiced(): bool
+    {
+        return  !$this->hasBeenInvoiced();
+    }
     //endregion
 
     //region SCOPES

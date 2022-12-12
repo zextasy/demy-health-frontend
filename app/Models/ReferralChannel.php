@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use App\Settings\GeneralSettings;
+use App\Traits\Relationships\Discounter;
 use App\Traits\Models\GeneratesReference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ReferralChannel extends BaseModel
 {
-    use HasFactory, GeneratesReference;
+    use HasFactory;
+    use GeneratesReference;
+    use Discounter;
 
     //region CONFIG
     protected $guarded = ['id'];

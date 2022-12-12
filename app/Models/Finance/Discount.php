@@ -2,10 +2,15 @@
 
 namespace App\Models\Finance;
 
+use App\Models\Order;
+use App\Models\Patient;
 use App\Models\BaseModel;
+use App\Models\ReferralChannel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Discount extends BaseModel
 {
@@ -13,7 +18,7 @@ class Discount extends BaseModel
 
     //region CONFIG
     protected $guarded = ['id'];
-    protected $with = ['discount'];
+    protected $with = ['discount','orders'];
     protected $appends = ['type','discount_value'];
     //endregion
 
@@ -46,7 +51,7 @@ class Discount extends BaseModel
 
     public function hasBeenApplied(): bool
     {
-        return true;
+        return $this->orders()->exists();
     }
 
     public function hasNotBeenApplied(): bool
@@ -63,6 +68,21 @@ class Discount extends BaseModel
     public function discount(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class);
+    }
+
+    public function referralChannels(): MorphToMany
+    {
+        return $this->morphedByMany(ReferralChannel::class, 'discounter');
+    }
+
+    public function patients(): MorphToMany
+    {
+        return $this->morphedByMany(Patient::class, 'discountable');
     }
     //endregion
 

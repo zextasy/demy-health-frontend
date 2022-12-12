@@ -19,6 +19,8 @@ class OrderItem extends BaseModel
     protected $appends = ['total_amount'];
 
     protected $casts = ['price' => 'float'];
+
+    protected $with = ['order'];
     //endregion
 
     //region ATTRIBUTES

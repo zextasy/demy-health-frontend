@@ -6,6 +6,7 @@ use App\Enums\AgeClassificationEnum;
 use App\Enums\GenderEnum;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
+use App\Traits\Relationships\Discountable;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\MorphsAddresses;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,7 +20,12 @@ use Illuminate\Support\Carbon;
 
 class Patient extends BaseModel
 {
-    use HasFactory, GeneratesReference, MorphsAddresses, BelongsToBusinessGroup, ReferencesUsersViaEmail;
+    use HasFactory;
+    use GeneratesReference;
+    use MorphsAddresses;
+    use BelongsToBusinessGroup;
+    use ReferencesUsersViaEmail;
+    use Discountable;
 
     //region CONFIG
     protected $guarded = ['id'];
