@@ -5,6 +5,7 @@ namespace App\Actions\TestResults;
 use App\Models\TestResult;
 use App\Models\TestBooking;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class GenerateTestResultAction
 {
@@ -24,8 +25,26 @@ class GenerateTestResultAction
             $this->testResult->save();
             if (!empty($this->mediaUrls)) {
                 foreach ($this->mediaUrls as $url) {
-                    $mediaUrl = asset($url);//storage_path('/public/'$url)
-                    $this->testResult->addMediaFromUrl($mediaUrl)->preservingOriginal()->toMediaCollection('result');
+                    $mediaUrl = asset($url);//
+                    $mediaStoragePath = base_path('public/storage/'.$url);
+                    if (file_exists($mediaStoragePath)) {
+                        $this->testResult->copyMedia($mediaStoragePath)->preservingOriginal()
+                            ->toMediaCollection('result');
+                        break;
+                    }
+
+                    try {
+                        $response = Http::get($mediaUrl);
+                        if ($response->successful()) {
+                            $this->testResult->addMediaFromUrl($mediaUrl)->preservingOriginal()
+                                ->toMediaCollection('result');
+                            break;
+                        }
+                    } catch (\Exception $e) {
+                        break;
+                    }
+
+
                 }
 
             }

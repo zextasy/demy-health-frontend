@@ -18,16 +18,17 @@ class CreateDiscountAction
     public function run(DiscountTypeEnum $discountTypeEnum, string $code, string $name, ?float $value) : Discount
     {
         return DB::transaction(function () use ($value, $name, $code, $discountTypeEnum) {
-             $childDiscount = $this->createChildDiscount($discountTypeEnum, $value);
-             $discount = new Discount();
-             $discount->code = $code;
-             $discount->name = $name;
-             $discount->discount_id = $childDiscount->getLaravelMorphModelId();
+            $childDiscount = $this->createChildDiscount($discountTypeEnum, $value);
+            $discount = new Discount();
+            $discount->code = $code;
+            $discount->name = $name;
+            $discount->discount_id = $childDiscount->getLaravelMorphModelId();
             $discount->discount_type = $childDiscount->getLaravelMorphModelType();
-             $discount->save();
-             return $discount;
+            $discount->save();
 
-         });
+            return $discount;
+
+        });
     }
 
     /**
