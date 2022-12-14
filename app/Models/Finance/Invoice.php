@@ -9,7 +9,11 @@ use App\Contracts\PayableContract;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Models\SumsTotalAmountFromItems;
 use App\Filament\Resources\Finance\InvoiceResource;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use App\Traits\Relationships\MorphsTransactionsAsCredit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -21,6 +25,7 @@ class Invoice extends BaseModel  implements PayableContract
     use MorphsTransactionsAsCredit;
     use EncryptsId;
     use SumsTotalAmountFromItems;
+    use HasRelationships;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -37,7 +42,7 @@ class Invoice extends BaseModel  implements PayableContract
 
     protected $with = ['items','transactions'];
 
-    protected $appends = ['total_amount','outstanding_amount'];
+    protected $appends = ['sub_total_amount','total_discount_amount','total_amount','outstanding_amount'];
     //endregion
 
     //region ATTRIBUTES
@@ -71,15 +76,23 @@ class Invoice extends BaseModel  implements PayableContract
     //endregion
 
     //region RELATIONSHIPS
-    public function items()
+    public function items(): HasMany
     {
         return $this->hasMany(InvoiceItem::class);
     }
 
-    public function invoiceable()
+    public function invoiceable(): MorphTo
     {
         return $this->morphTo('invoiceable');
     }
 
+    public function discounts(): MorphToMany
+    {
+        return $this->invoiceable->discounts();
+    }
     //endregion
+    private function getTotalDiscountAmount(): float
+    {
+        return $this->invoiceable->getTotalDiscountAmount();
+    }
 }

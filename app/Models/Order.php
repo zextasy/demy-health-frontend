@@ -42,7 +42,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
 
     protected $with = ['items','discounts','customer'];
 
-    protected $appends = ['total_amount'];
+    protected $appends = ['sub_total_amount','total_discount_amount','total_amount'];
 
     protected $guarded = ['id'];
 
@@ -75,6 +75,17 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     {
         return  !$this->hasBeenInvoiced();
     }
+
+    public function getTotalDiscountAmount(): float
+    {
+        $totalDiscountAmount = 0;
+
+        foreach ($this->discounts as $discount) {
+            $totalDiscountAmount += $discount->getDiscountAmount($this->sub_total_amount);
+        }
+
+        return $totalDiscountAmount;
+    }
     //endregion
 
     //region SCOPES
@@ -91,5 +102,9 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     {
         return $this->morphTo('customer');
     }
+    //endregion
+
+    //region PRIVATE
+
     //endregion
 }

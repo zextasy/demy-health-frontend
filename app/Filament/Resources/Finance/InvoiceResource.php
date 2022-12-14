@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Finance;
 
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
@@ -32,6 +33,11 @@ class InvoiceResource extends Resource
         return auth()->user()->hasPermissionTo('backend');
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with('invoiceable');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -43,27 +49,32 @@ class InvoiceResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                TextInput::make('total_amount')
-                    ->disabled()
-                    ->numeric()
-                    ->mask(fn (TextInput\Mask $mask) => $mask
+                Fieldset::make('Financial Info')->schema([
+                    TextInput::make('sub_total_amount')
+                        ->disabled()
                         ->numeric()
-                        ->decimalPlaces(2) // Set the number of digits after the decimal point.
-                        ->decimalSeparator('.') // Add a separator for decimal numbers.
-                        ->thousandsSeparator(',') // Add a separator for thousands.
-                    ),
-                TextInput::make('outstanding_amount')
-                    ->disabled()
-                    ->numeric()
-                    ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->mask(fn (TextInput\Mask $mask) => $mask
+                            ->money(self::getSystemDefaultCurrency())
+                        ),
+                    TextInput::make('total_discount_amount')
+                        ->disabled()
                         ->numeric()
-                        ->decimalPlaces(2) // Set the number of digits after the decimal point.
-                        ->decimalSeparator('.') // Add a separator for decimal numbers.
-                        ->thousandsSeparator(',') // Add a separator for thousands.
-                    ),
-                Select::make('payment_method')
-                    ->options(PaymentMethodEnum::optionsAsSelectArray())
-                    ->disabled(),
+                        ->mask(fn (TextInput\Mask $mask) => $mask
+                            ->money(self::getSystemDefaultCurrency())
+                        ),
+                    TextInput::make('total_amount')
+                        ->disabled()
+                        ->numeric()
+                        ->mask(fn (TextInput\Mask $mask) => $mask
+                            ->money(self::getSystemDefaultCurrency())
+                        ),
+                    TextInput::make('outstanding_amount')
+                        ->disabled()
+                        ->numeric()
+                        ->mask(fn (TextInput\Mask $mask) => $mask
+                            ->money(self::getSystemDefaultCurrency())
+                        ),
+                ])->columns(2),
                 TextInput::make('status')
                     ->disabled(),
             ]);
@@ -98,6 +109,7 @@ class InvoiceResource extends Resource
     {
         return [
             RelationManagers\ItemsRelationManager::class,
+            RelationManagers\DiscountRelationManager::class,
         ];
     }
 

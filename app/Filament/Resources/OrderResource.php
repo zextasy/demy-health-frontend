@@ -8,6 +8,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Resources\OrderResource\Pages;
@@ -47,18 +48,26 @@ class OrderResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                TextInput::make('total_amount')
-                    ->disabled()
-                    ->numeric()
-                    ->mask(fn (TextInput\Mask $mask) => $mask
+                Fieldset::make('Financial Info')->schema([
+                    TextInput::make('sub_total_amount')
+                        ->disabled()
                         ->numeric()
-                        ->decimalPlaces(2) // Set the number of digits after the decimal point.
-                        ->decimalSeparator('.') // Add a separator for decimal numbers.
-                        ->thousandsSeparator(',') // Add a separator for thousands.
-                    ),
-                Select::make('payment_method')
-                    ->options(PaymentMethodEnum::optionsAsSelectArray())
-                    ->disabled(),
+                        ->mask(fn (TextInput\Mask $mask) => $mask
+                            ->money(self::getSystemDefaultCurrency())
+                        ),
+                    TextInput::make('total_discount_amount')
+                        ->disabled()
+                        ->numeric()
+                        ->mask(fn (TextInput\Mask $mask) => $mask
+                            ->money(self::getSystemDefaultCurrency())
+                        ),
+                    TextInput::make('total_amount')
+                        ->disabled()
+                        ->numeric()
+                        ->mask(fn (TextInput\Mask $mask) => $mask
+                            ->money(self::getSystemDefaultCurrency())
+                        ),
+                ])->columns(3),
                 TextInput::make('status')
                     ->disabled(),
             ]);
