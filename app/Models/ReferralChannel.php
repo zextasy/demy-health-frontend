@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Settings\GeneralSettings;
+use Illuminate\Support\Collection;
 use App\Contracts\DiscounterContract;
 use App\Traits\Relationships\Discounter;
 use App\Traits\Models\GeneratesReference;
@@ -33,7 +34,10 @@ class ReferralChannel extends BaseModel implements DiscounterContract
 //endregion
 
 //region HELPERS
-
+    public function getApplicableDiscounts(): Collection
+    {
+        return $this->discounts;
+    }
 //endregion
 
 //region SCOPES
@@ -43,4 +47,5 @@ class ReferralChannel extends BaseModel implements DiscounterContract
 //region RELATIONSHIPS
 
 //endregion
+
 }

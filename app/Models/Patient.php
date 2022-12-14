@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\GenderEnum;
 use Illuminate\Support\Carbon;
 use App\Settings\GeneralSettings;
+use Illuminate\Support\Collection;
 use App\Enums\AgeClassificationEnum;
 use App\Contracts\DiscounterContract;
 use App\Traits\Relationships\Discounter;
@@ -86,6 +87,11 @@ class Patient extends BaseModel implements DiscounterContract
 
         return $age;
     }
+
+    public function getApplicableDiscounts(): Collection
+    {
+        return $this->discounts->merge($this->referredBy->discounts);
+    }
     //endregion
 
     //region SCOPES
@@ -113,4 +119,5 @@ class Patient extends BaseModel implements DiscounterContract
         return $this->belongsTo(ReferralChannel::class, 'referral_channel_id');
     }
     //endregion
+
 }

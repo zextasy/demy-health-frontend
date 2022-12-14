@@ -13,6 +13,7 @@ use App\Events\CartCheckedOutEvent;
 use Darryldecode\Cart\CartCollection;
 use Illuminate\Database\Eloquent\Model;
 use App\Events\OrderGeneratedFromBookingEvent;
+use App\Actions\Discounts\LinkDiscountableAction;
 
 class GenerateOrderFromTestBookingAction
 {
@@ -20,25 +21,28 @@ class GenerateOrderFromTestBookingAction
 
     private ?User $user = null;
 
-    public function run(TestBooking $testBooking): Order
-    {
+    private TestBooking $testBooking;
 
-        $customerEmail = $testBooking->patient->email ??  $testBooking->customer_email;
+    public function run(int|TestBooking $testBooking): Order
+    {
+        $this->testBooking = $testBooking instanceof TestBooking ? $testBooking : TestBooking::findOrFail($testBooking);
+
+        $customerEmail = $this->testBooking->patient->email ??  $this->testBooking->customer_email;
         $this->order = new Order;
 
-        DB::transaction(function () use ($customerEmail, $testBooking) {
+        DB::transaction(function () use ($customerEmail) {
             $orderItemCollection = collect(
                 [
-                    'model' => $testBooking,
-                    'name' => $testBooking->name,
-                    'price' => floatval($testBooking->testType->price),
+                    'model' => $this->testBooking,
+                    'name' => $this->testBooking->name,
+                    'price' => floatval($this->testBooking->testType->price),
                     'quantity' => 1,
                 ]
             );
             $orderItemCollections = collect([$orderItemCollection]);
-            ray($customerEmail, $testBooking->patient->customer_email, $testBooking->customer_email);
 
-            $this->order = (new CreateOrderAction)->run($orderItemCollections, $customerEmail, $this->user);
+            $this->order = (new CreateOrderAction)->withDiscounter($this->testBooking->patient)
+                ->run($orderItemCollections, $customerEmail, $this->user);
         });
 
         $this->raiseEvents();

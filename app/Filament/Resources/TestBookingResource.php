@@ -48,7 +48,9 @@ class TestBookingResource extends Resource
                         ->disabled(),
                     Forms\Components\Select::make('status')
                         ->disabled(),
-                ])->columns(1),
+                    Forms\Components\TextInput::make('duration_minutes')
+                        ->disabled(),
+                ])->columns(2),
                 Forms\Components\Fieldset::make('Customer Details')->schema([
                     Forms\Components\TextInput::make('customer_email')
                         ->email()
