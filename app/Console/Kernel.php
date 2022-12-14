@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\ResolvePatientEmailIssueJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Jobs\Scheduled\ScheduledResolveOrdersWithoutInvoicesJob;
@@ -18,8 +19,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->job(new ScheduledResolveTestBookingsWithoutOrdersJob())->hourlyAt('01');
-        $schedule->job(new ScheduledResolveOrdersWithoutInvoicesJob())->hourlyAt('02');
+        $schedule->job(new ScheduledResolveTestBookingsWithoutOrdersJob())->hourlyAt('02');
+        $schedule->job(new ScheduledResolveOrdersWithoutInvoicesJob())->hourlyAt('04');
+        $schedule->job(new ResolvePatientEmailIssueJob())->everyTenMinutes();
     }
 
     /**
