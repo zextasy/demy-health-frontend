@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\GenderEnum;
 use Illuminate\Support\Carbon;
+use App\Models\Finance\Discount;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Collection;
 use App\Enums\AgeClassificationEnum;
@@ -91,6 +92,11 @@ class Patient extends BaseModel implements DiscounterContract
     public function getApplicableDiscounts(): Collection
     {
         return $this->discounts->merge($this->referredBy->discounts);
+    }
+
+    public function canApplyDiscount(?Discount $discount): bool
+    {
+        return app()->isLocal();
     }
     //endregion
 

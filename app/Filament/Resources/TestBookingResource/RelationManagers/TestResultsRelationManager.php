@@ -3,13 +3,13 @@
 namespace App\Filament\Resources\TestBookingResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\HasManyRelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
-class TestResultsRelationManager extends HasManyRelationManager
+class TestResultsRelationManager extends RelationManager
 {
     protected static string $relationship = 'testResults';
 

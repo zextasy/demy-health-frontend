@@ -128,6 +128,16 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     {
         return  !$this->hasBeenInvoiced();
     }
+
+    public function testResultIsComplete():bool
+    {
+        return !app()->isLocal();
+    }
+
+    public function testResultIsNotComplete():bool
+    {
+        return !$this->testResultIsComplete();
+    }
     //endregion
 
     //region SCOPES

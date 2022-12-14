@@ -42,7 +42,6 @@ class TestResultResource extends Resource
                 ])->columns(1),
                 Forms\Components\Fieldset::make('Result')->schema([
                     SpatieMediaLibraryFileUpload::make('result')
-                        ->image()
                         ->multiple()
                         ->collection('result')
                         ->enableReordering(),

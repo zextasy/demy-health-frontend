@@ -10,10 +10,15 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Textarea;
 use App\Actions\Tasks\AssignTaskAction;
+use Filament\Forms\Components\Fieldset;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Forms\Components\TextInput;
 use App\Jobs\GenerateOrderFromBookingJob;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\TestBookingResource;
+use App\Actions\TestResults\GenerateTestResultAction;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class ViewTestBooking extends ViewRecord
 {
@@ -53,7 +58,33 @@ class ViewTestBooking extends ViewRecord
                 ->action(function (): void {
                     GenerateOrderFromBookingJob::dispatch($this->record);
                 })->requiresConfirmation()
-                ->visible($this->record->orderItems()->doesntExist())
+                ->visible($this->record->orderItems()->doesntExist()),
+            Action::make('upload result')
+                ->action(function (array $data): void {
+                    ray($data);
+                    (new GenerateTestResultAction)->withMediaUrls($data['result_file'])
+                        ->withCustomerEmail($data['customer_email'])->run($this->record);
+                })->form([
+                    Fieldset::make('General Info')->schema([
+                        TextInput::make('reference')
+                            ->maxLength(255)
+                            ->helperText('Leave this blank and the system will generate one for you'),
+                    ])->columns(1),
+                    Fieldset::make('Result')->schema([
+                        FileUpload::make('result_file')
+                            ->acceptedFileTypes(['application/pdf','image/*'])
+                            ->multiple()
+                            ->enableReordering(),
+                    ])->columns(1),
+                    Fieldset::make('Customer Details')->schema([
+                        TextInput::make('customer_email')
+                            ->email()
+                            ->maxLength(255)
+                            ->helperText('Leave this blank and the system will use the customer email from the booking'),
+                    ]),
+                ])
+                ->visible($this->record->testResultIsNotComplete())
+
         ];
     }
 }

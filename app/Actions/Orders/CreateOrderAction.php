@@ -25,7 +25,7 @@ class CreateOrderAction
     {
         ray($customerEmail);
         $this->order = new Order;
-        $this->order->customer_email = $customerEmail ?? 'care@demyhealth.com';
+        $this->order->customer_email = $customerEmail ?? 'care@demyhealth.com'; //TODO move to general settings
         $this->order->customer_id = $orderableCustomer?->getLaravelMorphModelId();
         $this->order->customer_type = $orderableCustomer?->getLaravelMorphModelType();
         DB::transaction(function () use ($orderItems) {

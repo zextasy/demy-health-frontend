@@ -115,8 +115,8 @@ class TestBookingResource extends Resource
     {
         return [
             RelationManagers\TasksRelationManager::class,
-            RelationManagers\AddressesRelationManager::class,
             RelationManagers\TestResultsRelationManager::class,
+            RelationManagers\AddressesRelationManager::class,
         ];
     }
 

@@ -76,7 +76,8 @@ class ViewPatient extends ViewRecord
                         ->options(Discount::all()->toSelectArray())
                         ->searchable()
                         ->required(),
-                ]),
+                ])
+                ->visible($this->record->canApplyDiscount()),
         ];
     }
 }

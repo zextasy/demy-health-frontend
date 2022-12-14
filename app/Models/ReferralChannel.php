@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Finance\Discount;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Collection;
 use App\Contracts\DiscounterContract;
@@ -38,6 +39,11 @@ class ReferralChannel extends BaseModel implements DiscounterContract
     {
         return $this->discounts;
     }
+
+    public function canApplyDiscount(?Discount $discount): bool
+    {
+        return app()->isLocal();
+    }
 //endregion
 
 //region SCOPES
@@ -47,5 +53,4 @@ class ReferralChannel extends BaseModel implements DiscounterContract
 //region RELATIONSHIPS
 
 //endregion
-
 }
