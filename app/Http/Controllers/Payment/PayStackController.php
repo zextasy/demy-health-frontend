@@ -44,6 +44,5 @@ class PayStackController extends Controller
     public function handleIncomingWebhook()
     {
         $paymentDetails = Paystack::getPaymentData();
-        ray($paymentDetails);
     }
 }

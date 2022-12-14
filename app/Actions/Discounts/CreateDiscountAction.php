@@ -24,7 +24,6 @@ class CreateDiscountAction
              $discount->name = $name;
              $discount->discount_id = $childDiscount->getLaravelMorphModelId();
             $discount->discount_type = $childDiscount->getLaravelMorphModelType();
-             ray($childDiscount, $discount);
              $discount->save();
              return $discount;
 

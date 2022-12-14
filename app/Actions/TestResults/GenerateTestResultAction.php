@@ -25,7 +25,6 @@ class GenerateTestResultAction
             if (!empty($this->mediaUrls)) {
                 foreach ($this->mediaUrls as $url) {
                     $mediaUrl = asset($url);//storage_path('/public/'$url)
-                    ray($mediaUrl);
                     $this->testResult->addMediaFromUrl($mediaUrl)->preservingOriginal()->toMediaCollection('result');
                 }
 

@@ -23,7 +23,6 @@ class CreateOrderAction
 
     public function run(Collection $orderItems, ?string $customerEmail, OrderableCustomerContract $orderableCustomer = null): Order
     {
-        ray($customerEmail);
         $this->order = new Order;
         $this->order->customer_email = $customerEmail ?? 'care@demyhealth.com'; //TODO move to general settings
         $this->order->customer_id = $orderableCustomer?->getLaravelMorphModelId();

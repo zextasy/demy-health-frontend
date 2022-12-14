@@ -61,7 +61,6 @@ class ViewTestBooking extends ViewRecord
                 ->visible($this->record->orderItems()->doesntExist()),
             Action::make('upload result')
                 ->action(function (array $data): void {
-                    ray($data);
                     (new GenerateTestResultAction)->withMediaUrls($data['result_file'])
                         ->withCustomerEmail($data['customer_email'])->run($this->record);
                 })->form([
