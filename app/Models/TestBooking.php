@@ -131,7 +131,7 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
 
     public function testResultIsComplete():bool
     {
-        return !app()->isLocal();
+        return false;
     }
 
     public function testResultIsNotComplete():bool
