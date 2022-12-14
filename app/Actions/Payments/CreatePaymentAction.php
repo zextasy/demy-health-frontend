@@ -12,7 +12,7 @@ class CreatePaymentAction
     private ?string $externalReference = null;
     private ?array $metadata = null;
 
-    public function execute(int $amount, int|PaymentMethodEnum $method) : Payment
+    public function run(int $amount, int|PaymentMethodEnum $method) : Payment
     {
         $payment =  new Payment();
         $payment->amount = $amount;

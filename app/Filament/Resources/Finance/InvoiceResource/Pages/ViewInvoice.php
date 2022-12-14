@@ -22,7 +22,7 @@ class ViewInvoice extends ViewRecord
                 ->action(function (array $data): void {
                     (new CreatePaymentAction)
                         ->withInternalReferences($this->record->reference)
-                        ->execute($data['amount'], $data['method']);
+                        ->run($data['amount'], $data['method']);
                 })
                 ->form([
                     TextInput::make('amount')

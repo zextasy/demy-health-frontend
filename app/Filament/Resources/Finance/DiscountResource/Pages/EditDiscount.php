@@ -45,6 +45,6 @@ class EditDiscount extends EditRecord
         $discountCode = $data['code'];
         $name = $data['name'];
         $value = $data['discount_value'];
-        return (new UpdateDiscountAction)->withCode($discountCode)->withName($name)->execute($record, $value);
+        return (new UpdateDiscountAction)->withCode($discountCode)->withName($name)->run($record, $value);
     }
 }

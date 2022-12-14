@@ -2,11 +2,14 @@
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
+use App\Models\Finance\Discount;
 use Filament\Pages\Actions\Action;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\OrderResource;
 use App\Jobs\GenerateInvoiceFromOrderJob;
+use App\Actions\Discounts\LinkDiscountableAction;
 
 class ViewOrder extends ViewRecord
 {
@@ -16,14 +19,19 @@ class ViewOrder extends ViewRecord
     protected function getActions(): array
     {
         return [
-            Action::make('apply discount')
-                ->action(function (): void {
-                    GenerateInvoiceFromOrderJob::dispatch($this->record);
+            Action::make('Apply Discount')
+                ->action(function (array $data): void {
+                    (new LinkDiscountableAction())
+                        ->run($data['discount_id'], $this->record);
                 })
                 ->form([
-                    Hidden::make('token'),
-                ])
-                ->visible($this->record->hasNotBeenInvoiced()),
+                    Select::make('discount_id')
+                        ->label('Discount')
+                        ->options(Discount::all()->toSelectArray())
+                        ->searchable()
+                        ->required(),
+                ]),
+//                ->visible($this->record->hasNotBeenInvoiced()),
             Action::make('generate invoice')
                 ->action(function (): void {
                     GenerateInvoiceFromOrderJob::dispatch($this->record);

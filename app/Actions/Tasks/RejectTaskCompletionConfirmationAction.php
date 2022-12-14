@@ -11,7 +11,7 @@ class RejectTaskCompletionConfirmationAction
 {
 
 
-    public function execute(Task| int $task, bool $markAsFailed = false) : Task
+    public function run(Task| int $task, bool $markAsFailed = false) : Task
     {
         $task = $task instanceof Task ? $task : Task::find($task);
 

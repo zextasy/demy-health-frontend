@@ -104,6 +104,7 @@ class PatientResource extends Resource
     {
         return [
             RelationManagers\TestBookingsRelationManager::class,
+            RelationManagers\DiscountRelationManager::class,
         ];
     }
 

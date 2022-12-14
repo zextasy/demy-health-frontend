@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class CreateTestBookingAction
 {
-    private ?int $patientId = null;
+    private ?Patient $patient = null;
 
     private ?int $testCenterId = null;
 
@@ -29,9 +29,9 @@ class CreateTestBookingAction
         $this->testBooking = TestBooking::make([
             'test_type_id' => $testTypeId,
             'location_type' => $locationTypeEnum,
-            'patient_id' => $this->patientId,
-            'customer_email' => $this->customerEmail,
-            'customer_phone_number' => $this->customerPhoneNumber,
+            'patient_id' => $this->patient->id,
+            'customer_email' => $this->customerEmail ?? $this->patient?->email,
+            'customer_phone_number' => $this->customerPhoneNumber?? $this->patient?->phone_number,
             'test_center_id' => $this->testCenterId,
             'due_date' => $dueDate,
         ]);
@@ -57,7 +57,7 @@ class CreateTestBookingAction
     public function forPatient(Patient|int|null $patient): self
     {
         if (isset($patient)) {
-            $this->patientId = $patient instanceof Patient ? $patient->id : $patient;
+            $this->patient = $patient instanceof Patient ? $patient : Patient::find($patient);
         }
 
         return $this;

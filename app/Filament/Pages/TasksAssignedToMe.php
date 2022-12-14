@@ -46,14 +46,14 @@ class TasksAssignedToMe extends Page implements HasTable
     {
         return [
             Action::make('start')
-                ->action(fn (Task $record) => (new StartTaskAction)->execute($record))
+                ->action(fn (Task $record) => (new StartTaskAction)->run($record))
                 ->requiresConfirmation()
                 ->modalHeading('Start Task')
                 ->modalSubheading('This will indicate that you have started this task')
                 ->modalButton('Yes, start')
                 ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
             Action::make('markAsComplete')
-                ->action(fn (Task $record) => (new RequestTaskCompletionConfirmationAction)->execute($record))
+                ->action(fn (Task $record) => (new RequestTaskCompletionConfirmationAction)->run($record))
                 ->requiresConfirmation()
                 ->modalHeading('Mark Task as Complete')
                 ->modalSubheading('This will indicate that you have completed this task and it will be sent for approval')

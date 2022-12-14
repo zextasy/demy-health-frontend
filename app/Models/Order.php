@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
+use App\Models\Finance\Discount;
 use App\Traits\Models\EncryptsId;
 use App\Settings\GeneralSettings;
 use App\Contracts\InvoiceableContract;
 use App\Traits\Models\LaravelMorphable;
+use App\Contracts\DiscountableContract;
 use App\Filament\Resources\OrderResource;
 use App\Traits\Models\GeneratesReference;
+use App\Traits\Relationships\Discountable;
 use App\Traits\Relationships\MorphsInvoice;
 use App\Traits\Models\SumsTotalAmountFromItems;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Order extends BaseModel implements InvoiceableContract
+class Order extends BaseModel implements InvoiceableContract, DiscountableContract
 {
     use HasFactory;
     use GeneratesReference;
@@ -25,6 +29,7 @@ class Order extends BaseModel implements InvoiceableContract
     use EncryptsId;
     use MorphsInvoice;
     use LaravelMorphable;
+    use Discountable;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -35,7 +40,7 @@ class Order extends BaseModel implements InvoiceableContract
         ];
     }
 
-    protected $with = ['items'];
+    protected $with = ['items','discounts','customer'];
 
     protected $appends = ['total_amount'];
 

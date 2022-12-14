@@ -43,7 +43,7 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
         'location_type' => LocationTypeEnum::class,
     ];
 
-    protected $with = ['orderItem','InvoiceItem'];
+    protected $with = ['orderItems','InvoiceItems'];
 
     public function referenceConfig(): array
     {

@@ -11,7 +11,7 @@ class RequestTaskCompletionConfirmationAction
 {
 
 
-    public function execute(Task| int $task) : Task
+    public function run(Task| int $task) : Task
     {
         $task = $task instanceof Task ? $task : Task::find($task);
 

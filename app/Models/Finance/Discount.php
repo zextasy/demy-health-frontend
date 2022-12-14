@@ -18,7 +18,7 @@ class Discount extends BaseModel
 
     //region CONFIG
     protected $guarded = ['id'];
-    protected $with = ['discount','orders'];
+    protected $with = ['discount'];
     protected $appends = ['type','discount_value'];
     //endregion
 
@@ -46,7 +46,7 @@ class Discount extends BaseModel
 
     public function getDiscountAmount(int|float $total): float
     {
-        return $this->discount->getDiscountAmount();
+        return $this->discount->getDiscountAmount($total);
     }
 
     public function hasBeenApplied(): bool
@@ -72,7 +72,7 @@ class Discount extends BaseModel
 
     public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class);
+        return $this->morphedByMany(Order::class, 'discountable');
     }
 
     public function referralChannels(): MorphToMany
@@ -82,7 +82,7 @@ class Discount extends BaseModel
 
     public function patients(): MorphToMany
     {
-        return $this->morphedByMany(Patient::class, 'discountable');
+        return $this->morphedByMany(Patient::class, 'discounter');
     }
     //endregion
 

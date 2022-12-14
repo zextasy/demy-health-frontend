@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReferralChannelResource\Pages;
+use App\Filament\Resources\ReferralChannelResource\RelationManagers;
 use App\Models\ReferralChannel;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -47,7 +48,7 @@ class ReferralChannelResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\DiscountRelationManager::class,
         ];
     }
 

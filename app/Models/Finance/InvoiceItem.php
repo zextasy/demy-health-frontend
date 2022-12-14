@@ -17,7 +17,7 @@ class InvoiceItem extends BaseModel
 
     protected $dates = ['created_at', 'updated_at'];
     protected $appends = ['total_amount'];
-    protected $with = ['invoice'];
+//    protected $with = ['invoice'];
 
     protected $casts = ['price' => 'float'];
     //endregion

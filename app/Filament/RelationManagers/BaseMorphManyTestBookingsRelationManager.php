@@ -2,14 +2,14 @@
 
 namespace App\Filament\RelationManagers;
 
-use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\MorphToManyRelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use App\Enums\TestBookings\LocationTypeEnum;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class BaseMorphManyTestBookingsRelationManager extends MorphToManyRelationManager
+class BaseMorphManyTestBookingsRelationManager extends RelationManager
 {
     protected static string $relationship = 'testBookings';
 
@@ -17,7 +17,7 @@ class BaseMorphManyTestBookingsRelationManager extends MorphToManyRelationManage
 
     protected function canCreate(): bool
     {
-        return auth()->user()->isFilamentAdmin();
+        return auth()->user()->isFilamentBackendUser();
     }
 
     protected function canAttach(): bool

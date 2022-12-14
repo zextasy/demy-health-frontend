@@ -18,6 +18,6 @@ class CreateDiscount extends CreateRecord
         $discountCode = $data['code'];
         $name = $data['name'];
         $value = $data['discount_value'];
-        return (new CreateDiscountAction)->execute($discountTypeEnum, $discountCode, $name, $value);
+        return (new CreateDiscountAction)->run($discountTypeEnum, $discountCode, $name, $value);
     }
 }

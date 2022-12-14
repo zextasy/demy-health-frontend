@@ -2,30 +2,31 @@
 
 namespace App\Models;
 
-use App\Enums\AgeClassificationEnum;
 use App\Enums\GenderEnum;
-use App\Settings\GeneralSettings;
-use App\Traits\Models\GeneratesReference;
-use App\Traits\Relationships\Discountable;
-use App\Traits\Relationships\BelongsToBusinessGroup;
-use App\Traits\Relationships\MorphsAddresses;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Traits\Relationships\ReferencesUsersViaEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
+use App\Settings\GeneralSettings;
+use App\Enums\AgeClassificationEnum;
+use App\Contracts\DiscounterContract;
+use App\Traits\Relationships\Discounter;
+use App\Traits\Models\GeneratesReference;
+use Illuminate\Database\Eloquent\Builder;
+use App\Traits\Relationships\MorphsAddresses;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\Relationships\BelongsToBusinessGroup;
+use App\Traits\Relationships\ReferencesUsersViaEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class Patient extends BaseModel
+class Patient extends BaseModel implements DiscounterContract
 {
     use HasFactory;
     use GeneratesReference;
     use MorphsAddresses;
     use BelongsToBusinessGroup;
     use ReferencesUsersViaEmail;
-    use Discountable;
+    use Discounter;
 
     //region CONFIG
     protected $guarded = ['id'];

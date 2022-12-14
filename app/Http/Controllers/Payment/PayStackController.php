@@ -37,7 +37,7 @@ class PayStackController extends Controller
             $route = redirect(route('frontend.cart.checkout-failed'));
         }
         $paymentDataArray = $paymentDetails['data'];
-        (new RecordPaystackTransactionAction)->execute($status, $paymentDataArray);
+        (new RecordPaystackTransactionAction)->run($status, $paymentDataArray);
         return redirect($route);
     }
 

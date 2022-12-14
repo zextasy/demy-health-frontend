@@ -20,7 +20,7 @@ class OrderItem extends BaseModel
 
     protected $casts = ['price' => 'float'];
 
-    protected $with = ['order'];
+//    protected $with = ['orderableItem'];
     //endregion
 
     //region ATTRIBUTES

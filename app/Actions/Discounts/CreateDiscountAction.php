@@ -15,7 +15,7 @@ class CreateDiscountAction
 {
 
 
-    public function execute(DiscountTypeEnum $discountTypeEnum, string $code, string $name, ?float $value) : Discount
+    public function run(DiscountTypeEnum $discountTypeEnum, string $code, string $name, ?float $value) : Discount
     {
         return DB::transaction(function () use ($value, $name, $code, $discountTypeEnum) {
              $childDiscount = $this->createChildDiscount($discountTypeEnum, $value);

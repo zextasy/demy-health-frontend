@@ -13,7 +13,7 @@ class AssignTaskAction
 
     private ?int $assignedById = null;
 
-    public function execute(AssignableContract $assignable, User| int $assignedTo, string $details, ?Carbon $dueAt) : Task
+    public function run(AssignableContract $assignable, User| int $assignedTo, string $details, ?Carbon $dueAt) : Task
     {
 
         $assignedToId = $assignedTo instanceof User ? $assignedTo->id : $assignedTo;

@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Settings\GeneralSettings;
+use App\Contracts\DiscounterContract;
 use App\Traits\Relationships\Discounter;
 use App\Traits\Models\GeneratesReference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ReferralChannel extends BaseModel
+class ReferralChannel extends BaseModel implements DiscounterContract
 {
     use HasFactory;
     use GeneratesReference;

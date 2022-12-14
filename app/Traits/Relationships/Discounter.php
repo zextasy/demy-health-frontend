@@ -5,11 +5,12 @@ namespace App\Traits\Relationships;
 use App\Models\Task;
 use App\Models\Finance\Discount;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait Discounter
 {
-    public function discounts(): MorphMany
+    public function discounts(): MorphToMany
     {
-        return $this->MorphMany(Discount::class, 'discounter');
+        return $this->MorphToMany(Discount::class, 'discounter');
     }
 }

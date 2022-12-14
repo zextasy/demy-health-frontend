@@ -17,7 +17,7 @@ class PaystackTransactionObserver
                 ->withExternalReference($model->reference)
                 ->withInternalReferences($model->invoice_reference)
                 ->withMetadata($model->metadata)
-                ->execute($model->amount/100, PaymentMethodEnum::PAYSTACK);
+                ->run($model->amount/100, PaymentMethodEnum::PAYSTACK);
         }
     }
 

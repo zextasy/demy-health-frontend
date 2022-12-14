@@ -18,7 +18,7 @@ class UpdateDiscountAction
     private ?string $name = null;
     private ?string $code = null;
 
-    public function execute(int|Discount $discount, ?float $value) : Discount
+    public function run(int|Discount $discount, ?float $value) : Discount
     {
         $discount = $discount instanceof Discount ? $discount : Discount::findOrFail($discount);
 

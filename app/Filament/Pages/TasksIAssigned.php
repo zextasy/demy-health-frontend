@@ -47,14 +47,14 @@ class TasksIAssigned extends Page implements HasTable
     {
         return [
             Action::make('confirmCompletion')
-                ->action(fn (Task $record) => (new ApproveTaskCompletionConfirmationAction())->execute($record))
+                ->action(fn (Task $record) => (new ApproveTaskCompletionConfirmationAction())->run($record))
                 ->requiresConfirmation()
                 ->modalHeading('Confirm Task is Complete')
                 ->modalSubheading('This will indicate that you have reviewed this task and are satisfied')
                 ->modalButton('Yes, confirm')
                 ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
             Action::make('rejectCompletion')
-                ->action(fn (Task $record, array $data) => (new RejectTaskCompletionConfirmationAction())->execute($record, $data['markAsFailed']))
+                ->action(fn (Task $record, array $data) => (new RejectTaskCompletionConfirmationAction())->run($record, $data['markAsFailed']))
                 ->form([
                     Toggle::make('markAsFailed')
                         ->label('mark as failed')

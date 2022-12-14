@@ -29,7 +29,7 @@ class ViewTestBooking extends ViewRecord
                 ->action(function (array $data): void {
                     $dueAt = Carbon::parse($data['due_at']);
                     (new AssignTaskAction)->assignedBy($data['assignedById'])
-                        ->execute($this->record, $data['assignedToId'], $data['details'], $dueAt);
+                        ->run($this->record, $data['assignedToId'], $data['details'], $dueAt);
                 })
                 ->form([
                     Select::make('assignedById')

@@ -11,7 +11,7 @@ use App\Models\Finance\PaystackTransaction;
 class RecordPaystackTransactionAction
 {
 
-    public function execute(bool $success, array $paymentDataArray) : PaystackTransaction
+    public function run(bool $success, array $paymentDataArray) : PaystackTransaction
     {
         $reference = $paymentDataArray['reference'];
         $paystackTransaction = PaystackTransaction::firstOrNew(['reference' =>  $reference]);

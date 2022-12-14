@@ -11,7 +11,7 @@ class ApproveTaskCompletionConfirmationAction
 {
 
 
-    public function execute(Task| int $task, int $rating = 0) : Task
+    public function run(Task| int $task, int $rating = 0) : Task
     {
         $task = $task instanceof Task ? $task : Task::find($task);
 
