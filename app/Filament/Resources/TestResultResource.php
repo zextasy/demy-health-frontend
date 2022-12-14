@@ -72,7 +72,8 @@ class TestResultResource extends Resource
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

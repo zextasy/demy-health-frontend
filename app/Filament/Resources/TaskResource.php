@@ -36,7 +36,7 @@ class TaskResource extends Resource
                     ->disabled(),
                 Forms\Components\Select::make('assigned_by')
                     ->disabled(),
-                Forms\Components\Select::make('assigned_to')->options(User::all()->pluck('name','id'))
+                Forms\Components\Select::make('assigned_to')->options(User::all()->pluck('name', 'id'))
                     ->required(),
                 Forms\Components\TextInput::make('started_by'),
                 Forms\Components\TextInput::make('completion_confirmation_requested_by')->disabled(),
@@ -79,6 +79,7 @@ class TaskResource extends Resource
                     ->dateTime(),
                 TextColumn::make('status'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

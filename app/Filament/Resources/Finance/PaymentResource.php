@@ -61,6 +61,7 @@ class PaymentResource extends Resource
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

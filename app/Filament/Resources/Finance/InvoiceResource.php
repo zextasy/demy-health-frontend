@@ -93,6 +93,7 @@ class InvoiceResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')->sortable()
                     ->dateTime(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

@@ -52,6 +52,7 @@ class DiscountResource extends Resource
                 Tables\Columns\TextColumn::make('type'),
                 Tables\Columns\TextColumn::make('discount_value'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

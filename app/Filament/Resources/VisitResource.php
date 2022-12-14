@@ -50,6 +50,7 @@ class VisitResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')->label('Date and Time')
                     ->dateTime(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

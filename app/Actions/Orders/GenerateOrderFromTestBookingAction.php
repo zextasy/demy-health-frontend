@@ -23,7 +23,7 @@ class GenerateOrderFromTestBookingAction
     public function run(TestBooking $testBooking): Order
     {
 
-        $customerEmail = $testBooking->patient->customer_email;
+        $customerEmail = $testBooking->patient->email ??  $testBooking->customer_email;
         $this->order = new Order;
 
         DB::transaction(function () use ($customerEmail, $testBooking) {
@@ -36,6 +36,7 @@ class GenerateOrderFromTestBookingAction
                 ]
             );
             $orderItemCollections = collect([$orderItemCollection]);
+            ray($customerEmail, $testBooking->patient->customer_email, $testBooking->customer_email);
 
             $this->order = (new CreateOrderAction)->run($orderItemCollections, $customerEmail, $this->user);
         });

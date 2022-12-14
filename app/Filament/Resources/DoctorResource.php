@@ -64,6 +64,7 @@ class DoctorResource extends Resource
                 Tables\Columns\TextColumn::make('phone_number'),
                 Tables\Columns\TextColumn::make('email'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

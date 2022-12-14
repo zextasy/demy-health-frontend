@@ -52,10 +52,7 @@ class ViewTestBooking extends ViewRecord
             Action::make('generate order')
                 ->action(function (): void {
                     GenerateOrderFromBookingJob::dispatch($this->record);
-                })
-                ->form([
-                    Hidden::make('token'),
-                ])
+                })->requiresConfirmation()
                 ->visible($this->record->orderItems()->doesntExist())
         ];
     }

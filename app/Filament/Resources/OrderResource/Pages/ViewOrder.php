@@ -30,15 +30,12 @@ class ViewOrder extends ViewRecord
                         ->options(Discount::all()->toSelectArray())
                         ->searchable()
                         ->required(),
-                ]),
-//                ->visible($this->record->hasNotBeenInvoiced()),
+                ])
+                ->visible($this->record->hasNotBeenInvoiced()),
             Action::make('generate invoice')
                 ->action(function (): void {
                     GenerateInvoiceFromOrderJob::dispatch($this->record);
-                })
-                ->form([
-                    Hidden::make('token'),
-                ])
+                })->requiresConfirmation()
                 ->visible($this->record->hasNotBeenInvoiced())
         ];
     }

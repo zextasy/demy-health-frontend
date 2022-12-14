@@ -47,6 +47,7 @@ class CountryResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('nationality')->searchable()->sortable(),
             ])
+            ->defaultSort('name')
             ->filters([
                 //
             ]);

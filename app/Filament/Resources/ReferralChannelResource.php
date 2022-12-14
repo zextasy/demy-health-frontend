@@ -42,7 +42,8 @@ class ReferralChannelResource extends Resource
             ])
             ->filters([
                 //
-            ]);
+            ])
+            ->defaultSort('name');
     }
 
     public static function getRelations(): array
