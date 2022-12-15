@@ -44,7 +44,7 @@ class TestResultResource extends Resource
                     SpatieMediaLibraryFileUpload::make('result')
                         ->multiple()
                         ->collection('result')
-                        ->enableReordering(),
+                        ->enableReordering()->enableOpen(),
                 ])->columns(1),
                 Forms\Components\Fieldset::make('Customer Details')->schema([
                     Forms\Components\TextInput::make('customer_email')

@@ -36,7 +36,8 @@ class ProductResource extends Resource
                         ->image()
                         ->multiple()
                         ->collection('pictures')
-                        ->enableReordering(),
+                        ->enableReordering()
+                        ->enableOpen(),
                 ])->columns(1),
                 Forms\Components\Fieldset::make('General Info')->schema([
                     Forms\Components\TextInput::make('name')
