@@ -94,7 +94,7 @@ class Patient extends BaseModel implements DiscounterContract
         return $this->discounts->merge($this->referredBy->discounts);
     }
 
-    public function canApplyDiscount(?Discount $discount): bool
+    public function canApplyDiscount(?Discount $discount = null): bool
     {
         return app()->isLocal();
     }
