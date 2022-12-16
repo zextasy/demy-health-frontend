@@ -23,6 +23,8 @@ class ViewInvoice extends ViewRecord
                     (new CreatePaymentAction)
                         ->withInternalReferences($this->record->reference)
                         ->run($data['amount'], $data['method']);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(InvoiceResource::getUrl('view', ['record' => $this->record->id]));
                 })
                 ->form([
                     TextInput::make('amount')

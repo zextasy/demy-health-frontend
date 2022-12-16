@@ -34,6 +34,8 @@ class ViewPatient extends ViewRecord
                     ->forPatient($this->record)
                     ->atTestCenter($data['test_center_id'])
                     ->run($data['test_type_id'], LocationTypeEnum::CENTER, $dueDate);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(PatientResource::getUrl('view', ['record' => $this->record->id]));
                 if ($data['place_order']) {
                     $order = (new GenerateOrderFromTestBookingAction)->run($testBooking);
                     if (isset($data['discount_id'])) {
@@ -69,6 +71,8 @@ class ViewPatient extends ViewRecord
                 ->action(function (array $data): void {
                     (new LinkDiscounterAction)
                         ->run($data['discount_id'], $this->record);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(PatientResource::getUrl('view', ['record' => $this->record->id]));
                 })
                 ->form([
                     Select::make('discount_id')

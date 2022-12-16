@@ -23,6 +23,8 @@ class ViewOrder extends ViewRecord
                 ->action(function (array $data): void {
                     (new LinkDiscountableAction())
                         ->run($data['discount_id'], $this->record);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(OrderResource::getUrl('view', ['record' => $this->record->id]));
                 })
                 ->form([
                     Select::make('discount_id')
@@ -35,6 +37,8 @@ class ViewOrder extends ViewRecord
             Action::make('generate invoice')
                 ->action(function (): void {
                     GenerateInvoiceFromOrderJob::dispatch($this->record);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(OrderResource::getUrl('view', ['record' => $this->record->id]));
                 })->requiresConfirmation()
                 ->visible($this->record->hasNotBeenInvoiced())
         ];

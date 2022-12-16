@@ -23,6 +23,8 @@ class ViewReferralChannel extends ViewRecord
                 ->action(function (array $data): void {
                     (new LinkDiscounterAction)
                         ->run($data['discount_id'], $this->record);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(ReferralChannelResource::getUrl('view', ['record' => $this->record->id]));
                 })
                 ->form([
                     Select::make('discount_id')
