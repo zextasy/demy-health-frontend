@@ -5,6 +5,7 @@ namespace App\Filament\Resources\TestBookingResource\Pages;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Filament\Pages\Actions\Action;
+use App\Jobs\DeleteTestBookingJob;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\ComponentContainer;
@@ -18,6 +19,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\TestBookingResource;
 use App\Actions\TestResults\GenerateTestResultAction;
+use App\Actions\TestBookings\DeleteTestBookingAction;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class ViewTestBooking extends ViewRecord
@@ -35,6 +37,8 @@ class ViewTestBooking extends ViewRecord
                     $dueAt = Carbon::parse($data['due_at']);
                     (new AssignTaskAction)->assignedBy($data['assignedById'])
                         ->run($this->record, $data['assignedToId'], $data['details'], $dueAt);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(TestBookingResource::getUrl('view', ['record' => $this->record->id]));
                 })
                 ->form([
                     Select::make('assignedById')
@@ -57,12 +61,16 @@ class ViewTestBooking extends ViewRecord
             Action::make('generate order')
                 ->action(function (): void {
                     GenerateOrderFromBookingJob::dispatch($this->record);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(TestBookingResource::getUrl('view', ['record' => $this->record->id]));
                 })->requiresConfirmation()
                 ->visible($this->record->orderItems()->doesntExist()),
             Action::make('upload result')
                 ->action(function (array $data): void {
                     (new GenerateTestResultAction)->withMediaUrls($data['result_file'])
                         ->withCustomerEmail($data['customer_email'])->run($this->record);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(TestBookingResource::getUrl('view', ['record' => $this->record->id]));
                 })->form([
                     Fieldset::make('General Info')->schema([
                         TextInput::make('reference')
@@ -82,8 +90,13 @@ class ViewTestBooking extends ViewRecord
                             ->helperText('Leave this blank and the system will use the customer email from the booking'),
                     ]),
                 ])
-                ->visible($this->record->testResultIsNotComplete())
-
+                ->visible($this->record->testResultIsNotComplete()),
+            Action::make('delete')
+                ->action(function (): void {
+                    DeleteTestBookingJob::dispatch($this->record);
+                    $this->notify('success', 'Booking and associated records will be deleted!');
+                    $this->redirect(TestBookingResource::getUrl());
+                })->color('danger')->requiresConfirmation()
         ];
     }
 }
