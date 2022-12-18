@@ -6,6 +6,7 @@ use App\Models\Finance\Discount;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Collection;
 use App\Contracts\DiscounterContract;
+use App\Traits\Models\LaravelMorphable;
 use App\Traits\Relationships\Discounter;
 use App\Traits\Models\GeneratesReference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +16,7 @@ class ReferralChannel extends BaseModel implements DiscounterContract
     use HasFactory;
     use GeneratesReference;
     use Discounter;
+    use LaravelMorphable;
 
     //region CONFIG
     protected $guarded = ['id'];

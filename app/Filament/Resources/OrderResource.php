@@ -83,8 +83,6 @@ class OrderResource extends Resource
                 Tables\Columns\BadgeColumn::make('status')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')->sortable()
-                    ->dateTime(),
             ])
             ->filters([
                 //

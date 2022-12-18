@@ -14,16 +14,16 @@ class GenerateInvoiceFromOrderJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private Order $order;
+    private int $orderId;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order|int $order)
     {
-        $this->order = $order;
+        $this->orderId = $order instanceof Order ? $order->id : $order;
     }
 
     /**
@@ -33,6 +33,6 @@ class GenerateInvoiceFromOrderJob implements ShouldQueue
      */
     public function handle()
     {
-        (new GenerateInvoiceForOrderAction)->run($this->order);
+        (new GenerateInvoiceForOrderAction)->run($this->orderId);
     }
 }

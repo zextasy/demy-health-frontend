@@ -10,6 +10,10 @@ interface DiscounterContract
 {
     public function discounts(): MorphToMany;
 
+    public function getLaravelMorphModelType(): string;
+
+    public function getLaravelMorphModelId(): int;
+
     public function getApplicableDiscounts(): Collection;
 
     public function canApplyDiscount(?Discount $discount): bool;

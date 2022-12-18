@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Actions\TestBookings\ChangeTestBookingEmailAction;
 
 class ResolvePatientEmailIssueJob implements ShouldQueue
 {
@@ -38,16 +39,7 @@ class ResolvePatientEmailIssueJob implements ShouldQueue
             ->get();
         foreach ($testBookingsWithWrongEmails as $testBooking) {
             $patientEmail = $testBooking->patient->email ?? 'care@demyhealth.com';
-            $testBooking->customer_email = $patientEmail;
-            $testBooking->save();
-            foreach ($testBooking->orderItems as $orderItem) {
-                $order = $orderItem->order;
-                $order->customer_email = $patientEmail;
-                $order->save();
-                $invoice = $order->invoice;
-                $invoice->customer_email = $patientEmail;
-                $invoice->save();
-            }
+            (new ChangeTestBookingEmailAction)->run($testBooking, $patientEmail);
         }
     }
 }

@@ -9,6 +9,7 @@ use App\Settings\GeneralSettings;
 use Illuminate\Support\Collection;
 use App\Enums\AgeClassificationEnum;
 use App\Contracts\DiscounterContract;
+use App\Traits\Models\LaravelMorphable;
 use App\Traits\Relationships\Discounter;
 use App\Traits\Models\GeneratesReference;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,6 +30,7 @@ class Patient extends BaseModel implements DiscounterContract
     use BelongsToBusinessGroup;
     use ReferencesUsersViaEmail;
     use Discounter;
+    use LaravelMorphable;
 
     //region CONFIG
     protected $guarded = ['id'];

@@ -12,8 +12,9 @@ class GenerateInvoiceForOrderAction
     private Invoice $invoice;
 
 
-    public function run(Order $order): Invoice
+    public function run(Order|int $order): Invoice
     {
+        $order = $order instanceof Order ? $order : Order::findOrFail($order);
         $this->invoice = new Invoice;
         $orderableItemModelCollection = new Collection();
         foreach ($order->items as $orderItem) {

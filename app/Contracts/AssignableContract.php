@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 interface AssignableContract
 {
     public function tasks(): MorphMany;
-    public function getFilamentUrlAttribute(): string;
-    public function getAssignableNameAttribute(): string;
+    public function getLaravelMorphModelType(): string;
+    public function getLaravelMorphModelId(): int;
+    public function getFilamentUrl(): string;
+    public function getAssignableName(): string;
 }

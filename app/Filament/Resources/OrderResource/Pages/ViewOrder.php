@@ -10,6 +10,8 @@ use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\OrderResource;
 use App\Jobs\GenerateInvoiceFromOrderJob;
 use App\Actions\Discounts\LinkDiscountableAction;
+use App\Filament\Resources\Finance\InvoiceResource;
+use App\Actions\Invoices\GenerateInvoiceForOrderAction;
 
 class ViewOrder extends ViewRecord
 {
@@ -36,9 +38,9 @@ class ViewOrder extends ViewRecord
                 ->visible($this->record->hasNotBeenInvoiced()),
             Action::make('generate invoice')
                 ->action(function (): void {
-                    GenerateInvoiceFromOrderJob::dispatch($this->record);
+                    $invoice = (new GenerateInvoiceForOrderAction)->run($this->record);
                     $this->notify('success', 'Success!');
-                    $this->redirect(OrderResource::getUrl('view', ['record' => $this->record->id]));
+                    $this->redirect(InvoiceResource::getUrl('view', ['record' => $invoice->id]));
                 })->requiresConfirmation()
                 ->visible($this->record->hasNotBeenInvoiced())
         ];

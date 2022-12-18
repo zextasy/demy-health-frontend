@@ -2,28 +2,30 @@
 
 namespace App\Jobs;
 
-use App\Models\TestBooking;
+use App\Models\Patient;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Actions\Orders\GenerateOrderFromTestBookingAction;
+use App\Actions\Patients\ChangePatientEmailAction;
 
-class GenerateOrderFromBookingJob implements ShouldQueue
+class ChangePatientEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private int $testBookingId;
+    private int $patientId;
+    private string $email;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(int|TestBooking $testBooking)
+    public function __construct(Patient|int $patient, string $email)
     {
-        $this->testBookingId = $testBooking instanceof TestBooking ? $testBooking->id : $testBooking;
+        $this->patientId = $patient instanceof Patient ? $patient->id : $patient;
+        $this->email = $email;
     }
 
     /**
@@ -33,6 +35,6 @@ class GenerateOrderFromBookingJob implements ShouldQueue
      */
     public function handle()
     {
-        (new GenerateOrderFromTestBookingAction)->run($this->testBookingId);
+        (new ChangePatientEmailAction)->run($this->patientId, $this->email);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\AssignableContract;
+use App\Traits\Models\HasFilamentUrl;
 use App\Contracts\AddressableContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Contracts\OrderableItemContract;
@@ -13,6 +14,8 @@ use App\Filament\Resources\TestBookingResource;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\MorphsInvoiceItems;
+use App\Enums\Finance\Invoices\InvoiceStatusEnum;
+use App\Filament\Resources\Finance\InvoiceResource;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\MorphsAddresses;
 use App\Traits\Relationships\MorphsOrderItems;
@@ -21,6 +24,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Enums\Finance\TestBookings\TestBookingStatusEnum;
 
 class TestBooking extends BaseModel implements OrderableItemContract, InvoiceableItemContract, AddressableContract, AssignableContract
 {
@@ -33,6 +37,7 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     use ReferencesUsersViaEmail;
     use BelongsToBusinessGroup;
     use Assignable;
+    use HasFilamentUrl;
 
     //region CONFIG
     protected $dates = ['created_at', 'updated_at', 'due_date'];
@@ -45,6 +50,8 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
 
     protected $with = ['orderItems','InvoiceItems'];
 
+    protected $appends = ['status'];
+
     public function referenceConfig(): array
     {
         return [
@@ -55,15 +62,7 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     //endregion
 
     //region ATTRIBUTES
-    public function getFilamentUrlAttribute(): string
-    {
-        return TestBookingResource::getUrl('view', ['record' => $this->id]);
-    }
 
-    public function getAssignableNameAttribute(): string
-    {
-        return $this->name;
-    }
 
     protected function name(): Attribute
     {
@@ -71,9 +70,29 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
             get: fn ($value) => $this->testType->name,
         );
     }
+
+    protected function status(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->determineStatus(),
+        );
+    }
     //endregion
 
     //region HELPERS
+    public function getFilamentResourceClass(): string
+    {
+        return TestBookingResource::class;
+    }
+    public function getFilamentUrl(): string
+    {
+        return $this->filament_url;
+    }
+
+    public function getAssignableName(): string
+    {
+        return $this->name;
+    }
     public function toFullCalenderEventArray(): array
     {
         return [
@@ -138,6 +157,26 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     {
         return !$this->testResultIsComplete();
     }
+
+    public function getInvoiceableItemName(): string
+    {
+        return $this->name;
+    }
+
+    public function getInvoiceableItemPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function getOrderableItemName(): string
+    {
+        return $this->name;
+    }
+
+    public function getOrderableItemPrice(): float
+    {
+        return $this->price;
+    }
     //endregion
 
     //region SCOPES
@@ -190,23 +229,25 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
         return $this->belongsTo(User::class, 'sample_rejected_by');
     }
     //endregion
-    public function getInvoiceableItemName(): string
-    {
-        return $this->name;
-    }
 
-    public function getInvoiceableItemPrice(): float
+    //region PRIVATE
+    private function determineStatus(): string
     {
-        return $this->price;
-    }
+        $status = TestBookingStatusEnum::BOOKED->value;
 
-    public function getOrderableItemName(): string
-    {
-        return $this->name;
-    }
+        if ($this->orderItems()->exists()) {
+            $status = TestBookingStatusEnum::ORDER_PLACED->value;
+        }
 
-    public function getOrderableItemPrice(): float
-    {
-        return $this->price;
+        if ($this->invoiceItems()->exists()) {
+            $status = TestBookingStatusEnum::INVOICE_GENERATED->value;
+        }
+
+        if ($this->testResults()->exists()) {
+            $status = TestBookingStatusEnum::RESULT_GENERATED->value;
+        }
+
+        return $status;
     }
+    //endregion
 }

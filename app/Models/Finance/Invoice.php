@@ -6,8 +6,12 @@ use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\EncryptsId;
 use App\Contracts\PayableContract;
+use App\Enums\Orders\OrderStatusEnum;
+use App\Traits\Models\HasFilamentUrl;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Models\SumsTotalAmountFromItems;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Enums\Finance\Invoices\InvoiceStatusEnum;
 use App\Filament\Resources\Finance\InvoiceResource;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,6 +30,7 @@ class Invoice extends BaseModel  implements PayableContract
     use EncryptsId;
     use SumsTotalAmountFromItems;
     use HasRelationships;
+    use HasFilamentUrl;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -42,33 +47,49 @@ class Invoice extends BaseModel  implements PayableContract
 
     protected $with = ['items','transactions'];
 
-    protected $appends = ['sub_total_amount','total_discount_amount','total_amount','outstanding_amount'];
+    protected $appends = ['sub_total_amount','total_discount_amount','total_amount','outstanding_amount','status'];
     //endregion
 
     //region ATTRIBUTES
-    public function getFilamentUrlAttribute(): string
+
+    public function payableName(): Attribute
     {
-        return InvoiceResource::getUrl('view', ['record' => $this->id]);
+        return Attribute::make(
+            get: fn ($value) => $this->reference,
+        );
     }
 
-    public function getPayableNameAttribute(): string
+    public function outstandingAmount(): Attribute
     {
-        return $this->reference;
+        return Attribute::make(
+            get: fn ($value) => $this->total_amount - $this->total_paid,
+        );
     }
 
-    public function getOutstandingAmountAttribute(): float
+    public function totalPaid(): Attribute
     {
-        return $this->total_amount - $this->total_paid;
+        return Attribute::make(
+            get: fn ($value) => $this->transactions->sum('amount'),
+        );
     }
 
-    public function getTotalPaidAttribute(): float
+    protected function status(): Attribute
     {
-        return $this->transactions->sum('amount');
+        return Attribute::make(
+            get: fn ($value) => $this->determineStatus(),
+        );
     }
     //endregion
 
     //region HELPERS
-
+    public function getFilamentResourceClass(): string
+    {
+        return InvoiceResource::class;
+    }
+    public function getFilamentUrl(): string
+    {
+        return $this->filament_url;
+    }
     //endregion
 
     //region SCOPES
@@ -91,6 +112,8 @@ class Invoice extends BaseModel  implements PayableContract
         return $this->invoiceable->discounts();
     }
     //endregion
+
+    //region PRIVATE
     private function getTotalDiscountAmount(): float
     {
         if (empty($this->invoiceable)) {
@@ -98,4 +121,18 @@ class Invoice extends BaseModel  implements PayableContract
         }
         return $this->invoiceable->getTotalDiscountAmount();
     }
+
+    private function determineStatus(): string
+    {
+        $status = InvoiceStatusEnum::GENERATED->value;
+
+        if ($this->transactions()->exists()) {
+            $status = InvoiceStatusEnum::PAYMENT_RECEIVED->value;
+        }
+
+        return $status;
+    }
+
+    //endregion
+
 }

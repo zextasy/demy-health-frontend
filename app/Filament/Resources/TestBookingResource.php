@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
@@ -87,13 +89,13 @@ class TestBookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('testType.description')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('due_date')
+                TextColumn::make('reference')->searchable()->sortable(),
+                TextColumn::make('testType.description')->searchable()->sortable(),
+                TextColumn::make('due_date')
                     ->dateTime()->sortable(),
-                Tables\Columns\TextColumn::make('patient.full_name')->label('Patient')->sortable(),
-                Tables\Columns\TextColumn::make('customer_email')->sortable(),
-                Tables\Columns\BadgeColumn::make('status')
+                TextColumn::make('patient.full_name')->label('Patient')->sortable(),
+                TextColumn::make('customer_email')->sortable(),
+                BadgeColumn::make('status')
                     ->sortable(),
                 //            ->colors([
                 //                'gray' => StatusEnum::Booked->value,
@@ -102,7 +104,7 @@ class TestBookingResource extends Resource
                 //                'warning' => 'reviewing',
                 //                'success' => 'complete',
                 //            ])
-                Tables\Columns\BadgeColumn::make('location_type')
+                BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray())
                     ->sortable(),
             ])

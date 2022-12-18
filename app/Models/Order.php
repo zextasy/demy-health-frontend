@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Finance\Discount;
 use App\Traits\Models\EncryptsId;
 use App\Settings\GeneralSettings;
+use App\Enums\Orders\OrderStatusEnum;
+use App\Traits\Models\HasFilamentUrl;
 use App\Contracts\InvoiceableContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Contracts\DiscountableContract;
@@ -14,6 +16,8 @@ use App\Traits\Relationships\Discountable;
 use App\Traits\Relationships\MorphsInvoice;
 use App\Traits\Models\SumsTotalAmountFromItems;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Filament\Resources\Finance\InvoiceResource;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +34,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     use MorphsInvoice;
     use LaravelMorphable;
     use Discountable;
+    use HasFilamentUrl;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -42,7 +47,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
 
     protected $with = ['items','discounts','customer'];
 
-    protected $appends = ['sub_total_amount','total_discount_amount','total_amount'];
+    protected $appends = ['sub_total_amount','total_discount_amount','total_amount','status'];
 
     protected $guarded = ['id'];
 
@@ -54,18 +59,30 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     //endregion
 
     //region ATTRIBUTES
-    public function getFilamentUrlAttribute(): string
-    {
-        return OrderResource::getUrl('view', ['record' => $this->id]);
-    }
 
-    public function getPayableNameAttribute(): string
+    public function payableName(): Attribute
     {
-        return $this->reference;
+        return Attribute::make(
+            get: fn ($value) => $this->reference,
+        );
+    }
+    protected function status(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->determineStatus(),
+        );
     }
     //endregion
 
     //region HELPERS
+    public function getFilamentResourceClass(): string
+    {
+        return InvoiceResource::class;
+    }
+    public function getFilamentUrl(): string
+    {
+        return $this->filament_url;
+    }
     public function hasBeenInvoiced(): bool
     {
         return  $this->invoice()->exists();
@@ -105,6 +122,15 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     //endregion
 
     //region PRIVATE
+    private function determineStatus(): string
+    {
+        $status = OrderStatusEnum::PLACED->value;
 
+        if ($this->invoice()->exists()) {
+            $status = OrderStatusEnum::INVOICE_GENERATED->value;
+        }
+
+        return $status;
+    }
     //endregion
 }

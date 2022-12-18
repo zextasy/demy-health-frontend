@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Carbon;
 use Filament\Pages\Actions\Action;
 use App\Jobs\DeleteTestBookingJob;
+use App\Helpers\FlashMessageHelper;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\ComponentContainer;
@@ -16,10 +17,13 @@ use Filament\Resources\Pages\ViewRecord;
 use Filament\Forms\Components\TextInput;
 use App\Jobs\GenerateOrderFromBookingJob;
 use Filament\Forms\Components\FileUpload;
+use App\Filament\Resources\OrderResource;
 use Filament\Forms\Components\DateTimePicker;
+use App\Filament\Resources\TestResultResource;
 use App\Filament\Resources\TestBookingResource;
 use App\Actions\TestResults\GenerateTestResultAction;
 use App\Actions\TestBookings\DeleteTestBookingAction;
+use App\Actions\Orders\GenerateOrderFromTestBookingAction;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class ViewTestBooking extends ViewRecord
@@ -37,7 +41,7 @@ class ViewTestBooking extends ViewRecord
                     $dueAt = Carbon::parse($data['due_at']);
                     (new AssignTaskAction)->assignedBy($data['assignedById'])
                         ->run($this->record, $data['assignedToId'], $data['details'], $dueAt);
-                    $this->notify('success', 'Success!');
+                    $this->notify('success', FlashMessageHelper::DEFAULT_SUCCESS_MESSAGE);
                     $this->redirect(TestBookingResource::getUrl('view', ['record' => $this->record->id]));
                 })
                 ->form([
@@ -60,17 +64,17 @@ class ViewTestBooking extends ViewRecord
                 ]),
             Action::make('generate order')
                 ->action(function (): void {
-                    GenerateOrderFromBookingJob::dispatch($this->record);
-                    $this->notify('success', 'Success!');
-                    $this->redirect(TestBookingResource::getUrl('view', ['record' => $this->record->id]));
+                    $order = (new GenerateOrderFromTestBookingAction)->run($this->record);
+                    $this->notify('success', FlashMessageHelper::DEFAULT_SUCCESS_MESSAGE);
+                    $this->redirect(OrderResource::getUrl('view', ['record' => $order->id]));
                 })->requiresConfirmation()
                 ->visible($this->record->orderItems()->doesntExist()),
             Action::make('upload result')
                 ->action(function (array $data): void {
-                    (new GenerateTestResultAction)->withMediaUrls($data['result_file'])
+                    $testResult = (new GenerateTestResultAction)->withMediaUrls($data['result_file'])
                         ->withCustomerEmail($data['customer_email'])->run($this->record);
-                    $this->notify('success', 'Success!');
-                    $this->redirect(TestBookingResource::getUrl('view', ['record' => $this->record->id]));
+                    $this->notify('success', FlashMessageHelper::DEFAULT_SUCCESS_MESSAGE);
+                    $this->redirect(TestResultResource::getUrl('view', ['record' => $testResult->id]));
                 })->form([
                     Fieldset::make('General Info')->schema([
                         TextInput::make('reference')

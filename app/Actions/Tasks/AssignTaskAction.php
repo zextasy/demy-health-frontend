@@ -20,9 +20,9 @@ class AssignTaskAction
         $task = new Task;
         $task->details = $details;
         $task->due_at = $dueAt ?? now()->addHours(2);
-        $task->assignable_id = $assignable->id;
-        $task->assignable_type = get_class($assignable);
-        $task->assignable_url = $assignable->filament_url;
+        $task->assignable_id = $assignable->getLaravelMorphModelId();
+        $task->assignable_type = $assignable->getLaravelMorphModelType();
+        $task->assignable_url = $assignable->getFilamentUrl();
         $task->assigned_at = now();
         $task->assigned_by = $this->assignedById ?? auth()?->id() ?? 1;
         $task->assigned_to = $assignedToId;

@@ -22,4 +22,6 @@ class FlashMessageHelper
     const PAYSTACK_ERROR = 'Something went wrong trying to communicate with Paystack. Your invoice has been generated. you will receive an email.';
 
     const CHECKOUT_ERROR = 'Something went wrong trying to Generate your order. Please contact us';
+
+    const DEFAULT_SUCCESS_MESSAGE = 'Success!';
 }
