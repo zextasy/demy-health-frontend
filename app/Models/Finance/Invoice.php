@@ -93,6 +93,9 @@ class Invoice extends BaseModel  implements PayableContract
     //endregion
     private function getTotalDiscountAmount(): float
     {
+        if (empty($this->invoiceable)) {
+            return 0;
+        }
         return $this->invoiceable->getTotalDiscountAmount();
     }
 }

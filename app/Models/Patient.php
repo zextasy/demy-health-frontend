@@ -91,7 +91,11 @@ class Patient extends BaseModel implements DiscounterContract
 
     public function getApplicableDiscounts(): Collection
     {
-        return $this->discounts->merge($this->referredBy->discounts);
+        $discounts = $this->discounts;
+        if (isset($this->referredBy)) {
+            $discounts = $discounts->merge($this->referredBy?->discounts);
+        }
+        return $discounts;
     }
 
     public function canApplyDiscount(?Discount $discount = null): bool
