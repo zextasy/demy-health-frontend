@@ -17,7 +17,10 @@ class ChangeTestBookingEmailAction
             $testBooking->loadMissing(['orderItems.order']);
             $action = new ChangeOrderEmailAction;
             foreach ($testBooking->orderItems as $orderItem) {
-                $action->run($orderItem->order, $email);
+                if (isset($orderItem->order)) {
+                    $action->run($orderItem->order, $email);
+                }
+
             }
         });
 
