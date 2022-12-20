@@ -95,9 +95,10 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     }
     public function toFullCalenderEventArray(): array
     {
+        //TODO fix issue with nullable testType
         return [
             'id' => $this->id,
-            'title' => "{$this->testType->description} for {$this->customer_email}",
+            'title' => "{$this->testType?->description} for {$this->customer_email}",
             'start' => $this->due_date,
             'url' => $this->filament_url,
         ];
