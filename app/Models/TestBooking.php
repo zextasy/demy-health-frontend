@@ -48,7 +48,7 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
         'location_type' => LocationTypeEnum::class,
     ];
 
-    protected $with = ['orderItems','InvoiceItems'];
+    protected $with = ['testType','orderItems','InvoiceItems'];
 
     protected $appends = ['status'];
 
@@ -98,7 +98,7 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
         //TODO fix issue with nullable testType
         return [
             'id' => $this->id,
-            'title' => "{$this->testType?->description} for {$this->customer_email}",
+            'title' => "{$this->testType?->name} for {$this->customer_email}",
             'start' => $this->due_date,
             'url' => $this->filament_url,
         ];
