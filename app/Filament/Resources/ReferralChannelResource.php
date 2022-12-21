@@ -28,8 +28,13 @@ class ReferralChannelResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('referral_code')
+                    ->unique()
+                    ->maxLength(255)
+                    ->helperText('Leave this blank and the system will generate one for you'),
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->unique()
                     ->maxLength(255),
             ]);
     }

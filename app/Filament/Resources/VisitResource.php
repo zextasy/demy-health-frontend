@@ -35,7 +35,7 @@ class VisitResource extends Resource
                 Forms\Components\TextInput::make('patient_id')
                     ->required(),
                 Forms\Components\TextInput::make('reference')
-                    ->required()
+                    ->unique()
                     ->maxLength(255),
             ]);
     }

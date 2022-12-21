@@ -34,6 +34,7 @@ class DoctorResource extends Resource
                     ->disabled(),
                 Forms\Components\TextInput::make('reference')
                     ->required()
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('first_name')
                     ->required()
@@ -45,9 +46,11 @@ class DoctorResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone_number')
                     ->tel()
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
+                    ->unique()
                     ->maxLength(255),
             ]);
     }

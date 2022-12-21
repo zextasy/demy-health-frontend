@@ -37,6 +37,7 @@ class PaymentResource extends Resource
 //                    ->required(),
                 TextInput::make('reference')
                     ->required()
+                    ->unique()
                     ->maxLength(255),
                 TextInput::make('amount')
                     ->required(),

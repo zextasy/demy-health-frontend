@@ -40,6 +40,11 @@ class ProductResource extends Resource
                         ->enableOpen(),
                 ])->columns(1),
                 Forms\Components\Fieldset::make('General Info')->schema([
+                    Forms\Components\TextInput::make('sku')
+                        ->label('SKU')
+                        ->unique()
+                        ->maxLength(255)
+                        ->helperText('Leave this blank and the system will generate one for you'),
                     Forms\Components\TextInput::make('name')
                         ->required()
                         ->maxLength(255),

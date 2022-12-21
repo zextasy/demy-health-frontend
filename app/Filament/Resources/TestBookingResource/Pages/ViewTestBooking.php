@@ -3,28 +3,25 @@
 namespace App\Filament\Resources\TestBookingResource\Pages;
 
 use App\Models\User;
+use App\Models\TestResult;
 use Illuminate\Support\Carbon;
 use Filament\Pages\Actions\Action;
 use App\Jobs\DeleteTestBookingJob;
 use App\Helpers\FlashMessageHelper;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Textarea;
 use App\Actions\Tasks\AssignTaskAction;
 use Filament\Forms\Components\Fieldset;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Forms\Components\TextInput;
-use App\Jobs\GenerateOrderFromBookingJob;
 use Filament\Forms\Components\FileUpload;
 use App\Filament\Resources\OrderResource;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\TestResultResource;
 use App\Filament\Resources\TestBookingResource;
 use App\Actions\TestResults\GenerateTestResultAction;
-use App\Actions\TestBookings\DeleteTestBookingAction;
 use App\Actions\Orders\GenerateOrderFromTestBookingAction;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class ViewTestBooking extends ViewRecord
 {
@@ -79,6 +76,7 @@ class ViewTestBooking extends ViewRecord
                     Fieldset::make('General Info')->schema([
                         TextInput::make('reference')
                             ->maxLength(255)
+                            ->unique(table: TestResult::class)
                             ->helperText('Leave this blank and the system will generate one for you'),
                     ])->columns(1),
                     Fieldset::make('Result')->schema([

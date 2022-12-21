@@ -27,6 +27,7 @@ class ProductCategoryResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\BelongsToSelect::make('product_category_id')
                     ->relationship('parent', 'name')

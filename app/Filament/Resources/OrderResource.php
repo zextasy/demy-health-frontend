@@ -42,6 +42,7 @@ class OrderResource extends Resource
         return $form
             ->schema([
                 TextInput::make('reference')
+                    ->unique()
                     ->helperText('Leave this blank and the system will generate a reference')
                     ->maxLength(255),
                 TextInput::make('customer_email')

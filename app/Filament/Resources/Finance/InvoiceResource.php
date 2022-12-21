@@ -2,21 +2,18 @@
 
 namespace App\Filament\Resources\Finance;
 
-use Filament\Forms\Components\Select;
+use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use App\Models\Finance\Invoice;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Builder;
 use App\Traits\Resources\DisplaysCurrencies;
-use App\Enums\Finance\Payments\PaymentMethodEnum;
+use App\Enums\Finance\Invoices\InvoiceStatusEnum;
 use App\Filament\Resources\Finance\InvoiceResource\Pages;
 use App\Filament\Resources\Finance\InvoiceResource\RelationManagers;
-use App\Models\Finance\Invoice;
-use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class InvoiceResource extends Resource
 {
@@ -44,6 +41,7 @@ class InvoiceResource extends Resource
             ->schema([
                 TextInput::make('reference')
                     ->helperText('Leave this blank and the system will generate a reference')
+                    ->unique()
                     ->maxLength(255),
                 TextInput::make('customer_email')
                     ->email()
@@ -68,13 +66,20 @@ class InvoiceResource extends Resource
                         ->mask(fn (TextInput\Mask $mask) => $mask
                             ->money(self::getSystemDefaultCurrency())
                         ),
+                    TextInput::make('total_transaction_amount')
+                        ->label('Total Received')
+                        ->disabled()
+                        ->numeric()
+                        ->mask(fn (TextInput\Mask $mask) => $mask
+                            ->money(self::getSystemDefaultCurrency())
+                        ),
                     TextInput::make('outstanding_amount')
                         ->disabled()
                         ->numeric()
                         ->mask(fn (TextInput\Mask $mask) => $mask
                             ->money(self::getSystemDefaultCurrency())
                         ),
-                ])->columns(2),
+                ])->columns(3),
                 TextInput::make('status')
                     ->disabled(),
             ]);
@@ -87,7 +92,10 @@ class InvoiceResource extends Resource
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('outstanding_amount')->money(self::getSystemDefaultCurrency()),
-                Tables\Columns\BadgeColumn::make('status')->sortable(),
+                Tables\Columns\BadgeColumn::make('status')->sortable()
+                    ->color(static function ($state): string {
+                        return InvoiceStatusEnum::getDisplayColor($state);
+                    }),
                 Tables\Columns\TextColumn::make('created_at')->sortable()
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')->sortable()

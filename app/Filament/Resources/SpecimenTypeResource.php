@@ -29,6 +29,7 @@ class SpecimenTypeResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('key')
                     ->required()
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
                     ->required()

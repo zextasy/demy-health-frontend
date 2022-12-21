@@ -44,6 +44,7 @@ class TestBookingResource extends Resource
                 Forms\Components\Fieldset::make('General Info')->schema([
                     Forms\Components\TextInput::make('reference')
                         ->maxLength(255)
+                        ->unique()
                         ->helperText('Leave this blank and the system will generate one for you'),
                     Forms\Components\BelongsToSelect::make('testType')
                         ->relationship('testType', 'name')

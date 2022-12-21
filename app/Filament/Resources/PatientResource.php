@@ -37,6 +37,7 @@ class PatientResource extends Resource
             ->schema([
                 TextInput::make('reference')
                     ->maxLength(255)
+                    ->unique()
                     ->helperText('Reference number for the patient. Leave this blank and the system will generate one for you'),
                 Fieldset::make('Name')->schema([
                     TextInput::make('first_name')
@@ -61,6 +62,7 @@ class PatientResource extends Resource
                         ->searchable()
                         ->label('Nationality'),
                     TextInput::make('passport_number')
+                        ->unique()
                         ->maxLength(255),
                 ])->columns(2),
                 Fieldset::make('Contact')->schema([
@@ -69,6 +71,7 @@ class PatientResource extends Resource
                         ->disabled(),
                     TextInput::make('phone_number')
                         ->tel()
+                        ->unique()
                         ->maxLength(255),
                 ])->columns(2),
                 Fieldset::make('Referral')->schema([
