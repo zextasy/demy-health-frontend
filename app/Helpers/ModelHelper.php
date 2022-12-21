@@ -16,15 +16,14 @@ class ModelHelper
 
                 return $statement[0]->Auto_increment;
             case 'pgsql':
-                return 2;
             default:
-                return 1;
+                return floor(time() - 999999999);
         }
     }
 
     private function getNextIdFromModelCount(Model $model): int
     {
-        return get_class($model)::count() + 1;
+        return get_class($model)::withThrashed()->count() + 1;
     }
 
     public function getNextId(Model $model)
