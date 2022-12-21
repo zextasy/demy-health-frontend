@@ -18,7 +18,7 @@ class CustomerEnquiryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $recordTitleAttribute = 'message';
+    protected static ?string $recordTitleAttribute = 'customer_message';
 
     protected static ?string $navigationGroup = 'CRM';
 
