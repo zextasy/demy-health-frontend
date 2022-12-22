@@ -5,11 +5,14 @@ namespace App\Models\Finance;
 use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\EncryptsId;
-use App\Contracts\PayableContract;
+use App\Contracts\PayerContract;
 use App\Enums\Orders\OrderStatusEnum;
 use App\Traits\Models\HasFilamentUrl;
+use App\Traits\Models\LaravelMorphable;
 use App\Traits\Models\GeneratesReference;
-use App\Traits\Models\SumsTotalAmountFromItems;
+use App\Traits\Relationships\Discountable;
+use App\Traits\Models\SumsSubTotalAmountFromItems;
+use App\Contracts\TransactionCreditableContract;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Enums\Finance\Invoices\InvoiceStatusEnum;
 use App\Filament\Resources\Finance\InvoiceResource;
@@ -21,16 +24,18 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use App\Traits\Relationships\MorphsTransactionsAsCredit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Invoice extends BaseModel  implements PayableContract
+class Invoice extends BaseModel  implements TransactionCreditableContract
 {
     use HasFactory;
     use GeneratesReference;
     use BelongsToBusinessGroup;
     use MorphsTransactionsAsCredit;
     use EncryptsId;
-    use SumsTotalAmountFromItems;
+    use SumsSubTotalAmountFromItems;
+    use Discountable;
     use HasRelationships;
     use HasFilamentUrl;
+    use LaravelMorphable;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -47,7 +52,14 @@ class Invoice extends BaseModel  implements PayableContract
 
     protected $with = ['items','transactions'];
 
-    protected $appends = ['sub_total_amount','total_discount_amount','total_amount','outstanding_amount','status'];
+    protected $appends = [
+        'sub_total_amount',
+        'total_discount_amount',
+        'total_amount',
+        'outstanding_amount',
+        'total_transaction_amount',
+        'status'
+    ];
     //endregion
 
     //region ATTRIBUTES
@@ -62,14 +74,7 @@ class Invoice extends BaseModel  implements PayableContract
     public function outstandingAmount(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->total_amount - $this->total_paid,
-        );
-    }
-
-    public function totalPaid(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $this->transactions->sum('amount'),
+            get: fn ($value) => $this->getMaximumCreditableAmount(),
         );
     }
 
@@ -89,6 +94,18 @@ class Invoice extends BaseModel  implements PayableContract
     public function getFilamentUrl(): string
     {
         return $this->filament_url;
+    }
+    public function getMaximumCreditableAmount(): float
+    {
+        $value = $this->total_amount - $this->total_transaction_amount;
+
+        return max($value, 0);
+    }
+
+
+    protected function getTotalAmount(): float
+    {
+        return max(($this->sub_total_amount - $this->total_discount_amount), 0);
     }
     //endregion
 
@@ -128,6 +145,10 @@ class Invoice extends BaseModel  implements PayableContract
 
         if ($this->transactions()->exists()) {
             $status = InvoiceStatusEnum::PAYMENT_RECEIVED->value;
+        }
+
+        if ($this->outstanding_amount < 1) {
+            $status = InvoiceStatusEnum::SETTLED->value;
         }
 
         return $status;

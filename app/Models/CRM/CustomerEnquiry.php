@@ -2,6 +2,7 @@
 
 namespace App\Models\CRM;
 
+use App\Traits\Models\HasFilamentUrl;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Filament\Resources\CRM\CustomerEnquiryResource;
 use App\Models\BaseModel;
@@ -11,7 +12,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CustomerEnquiry extends BaseModel
 {
-    use HasFactory, MorphsAddresses, BelongsToBusinessGroup;
+    use HasFactory;
+    use MorphsAddresses;
+    use BelongsToBusinessGroup;
+    use HasFilamentUrl;
 
     protected $guarded = ['id'];
 
@@ -21,8 +25,8 @@ class CustomerEnquiry extends BaseModel
 
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-    public function getFilamentUrlAttribute(): string
+    public function getFilamentResourceClass(): string
     {
-        return CustomerEnquiryResource::getUrl('view', ['record' => $this->id]);
+        return CustomerEnquiryResource::class;
     }
 }

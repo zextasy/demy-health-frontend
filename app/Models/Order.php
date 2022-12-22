@@ -14,7 +14,7 @@ use App\Filament\Resources\OrderResource;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\Discountable;
 use App\Traits\Relationships\MorphsInvoice;
-use App\Traits\Models\SumsTotalAmountFromItems;
+use App\Traits\Models\SumsSubTotalAmountFromItems;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Filament\Resources\Finance\InvoiceResource;
@@ -29,7 +29,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     use GeneratesReference;
     use ReferencesUsersViaEmail;
     use BelongsToBusinessGroup;
-    use SumsTotalAmountFromItems;
+    use SumsSubTotalAmountFromItems;
     use EncryptsId;
     use MorphsInvoice;
     use LaravelMorphable;
@@ -102,6 +102,11 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
         }
 
         return $totalDiscountAmount;
+    }
+
+    protected function getTotalAmount(): float
+    {
+        return max(($this->sub_total_amount - $this->total_discount_amount), 0);
     }
     //endregion
 

@@ -2,10 +2,17 @@
 
 namespace App\Traits\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 trait CalculatesTotalAmount
 {
-    public function getTotalAmountAttribute(): float
+
+    protected function totalAmount(): Attribute
     {
-        return $this->price * $this->quantity;
+        return Attribute::make(
+            get: fn () => $this->getTotalAmount(),
+        );
     }
+
+    abstract protected function getTotalAmount(): float;
 }

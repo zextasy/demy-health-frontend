@@ -4,9 +4,9 @@ namespace App\Traits\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-trait SumsTotalAmountFromItems
+trait SumsSubTotalAmountFromItems
 {
-    public function initializeSumsTotalAmountFromItemsTrait()
+    public function initializeSumsSubTotalAmountFromItemsTrait()
     {
         //FIXME this seems not to work for filament
         $this->append(['sub_total_amount','total_discount_amount','total_amount']);
@@ -18,19 +18,14 @@ trait SumsTotalAmountFromItems
         );
     }
 
-    protected function totalDiscountAmount(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->getTotalDiscountAmount(),
-        );
-    }
+
 
     protected function totalAmount(): Attribute
     {
         return Attribute::make(
-            get: fn () => max(($this->sub_total_amount - $this->total_discount_amount), 0),
+            get: fn () => $this->getTotalAmount(),
         );
     }
 
-    abstract private function getTotalDiscountAmount(): float;
+    abstract private function getTotalAmount(): float;
 }

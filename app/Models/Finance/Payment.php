@@ -4,18 +4,22 @@ namespace App\Models\Finance;
 
 use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
+use App\Traits\Models\LaravelMorphable;
 use App\Traits\Models\GeneratesReference;
+use App\Contracts\TransactionDebitableContract;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Traits\Relationships\MorphsTransactionsAsDebit;
 
-class Payment extends BaseModel
+class Payment extends BaseModel implements TransactionDebitableContract
 {
     use HasFactory;
     use BelongsToBusinessGroup;
     use GeneratesReference;
     use MorphsTransactionsAsDebit;
+    use LaravelMorphable;
 
     //region CONFIG
     protected $guarded = ['id'];
@@ -38,11 +42,21 @@ class Payment extends BaseModel
     //endregion
 
     //region ATTRIBUTES
-
+    public function balance(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->getMaximumDebitableAmount(),
+        );
+    }
     //endregion
 
     //region HELPERS
+    public function getMaximumDebitableAmount(): float
+    {
+        $value = $this->amount - $this->total_transaction_amount;
 
+        return max($value, 0);
+    }
     //endregion
 
     //region SCOPES
@@ -50,10 +64,6 @@ class Payment extends BaseModel
     //endregion
 
     //region RELATIONSHIPS
-    public function payable() : MorphTo
-    {
-        return $this->morphTo('payable');
-    }
 
     public function payer() : MorphTo
     {

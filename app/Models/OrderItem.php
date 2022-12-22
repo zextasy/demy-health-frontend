@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Base\Item;
 use App\Traits\Models\CalculatesTotalAmount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OrderItem extends BaseModel
+class OrderItem extends Item
 {
     use HasFactory;
     use CalculatesTotalAmount;

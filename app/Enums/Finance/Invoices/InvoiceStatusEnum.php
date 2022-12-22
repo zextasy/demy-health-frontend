@@ -21,4 +21,12 @@ enum InvoiceStatusEnum: string
 
     case SETTLED = 'Settled';
 
+    public static function getDisplayColor(string $value):string
+    {
+        return match ($value) {
+            self::PAYMENT_RECEIVED->value => 'primary',
+            self::SETTLED->value => 'success',
+            default => 'secondary',
+        };
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Actions\Payments;
 
 use App\Models\Finance\Payment;
+use App\Events\PaymentAddedEvent;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 
 class CreatePaymentAction
@@ -11,6 +12,7 @@ class CreatePaymentAction
     private ?array $internalReferences = null;
     private ?string $externalReference = null;
     private ?array $metadata = null;
+    private bool $shouldRaiseEvents = true;
 
     public function run(int $amount, int|PaymentMethodEnum $method) : Payment
     {
@@ -22,6 +24,7 @@ class CreatePaymentAction
         $payment->metadata = $this->metadata;
         $payment->save();
 
+        $this->raiseEvents($this->shouldRaiseEvents, $payment);
         return $payment;
     }
 
@@ -46,5 +49,17 @@ class CreatePaymentAction
         $this->metadata = $metadata;
 
         return  $this;
+    }
+
+    public function withEvents(bool $shouldRaiseEvents = true) : self
+    {
+        $this->shouldRaiseEvents = $shouldRaiseEvents;
+
+        return  $this;
+    }
+
+    private function raiseEvents(bool $shouldRaiseEvents, Payment $payment): void
+    {
+        PaymentAddedEvent::dispatchIf($shouldRaiseEvents, $payment);
     }
 }

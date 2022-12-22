@@ -3,11 +3,12 @@
 namespace App\Models\Finance;
 
 use App\Models\BaseModel;
+use App\Models\Base\Item;
 use App\Traits\Models\CalculatesTotalAmount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class InvoiceItem extends BaseModel
+class InvoiceItem extends Item
 {
     use HasFactory;
     use CalculatesTotalAmount;
@@ -17,7 +18,7 @@ class InvoiceItem extends BaseModel
 
     protected $dates = ['created_at', 'updated_at'];
     protected $appends = ['total_amount'];
-//    protected $with = ['invoice'];
+    protected $with = ['invoiceableItem'];
 
     protected $casts = ['price' => 'float'];
     //endregion
