@@ -91,14 +91,13 @@ class InvoiceResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
                 Tables\Columns\TextColumn::make('outstanding_amount')->money(self::getSystemDefaultCurrency()),
-                Tables\Columns\BadgeColumn::make('status')->sortable()
-                    ->color(static function ($state): string {
-                        return InvoiceStatusEnum::getDisplayColor($state);
-                    }),
+                Tables\Columns\BadgeColumn::make('status')->sortable(),
+//                    ->color(static function ($state): string {
+//                        return InvoiceStatusEnum::getDisplayColor($state);
+//                    }),
                 Tables\Columns\TextColumn::make('created_at')->sortable()
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')->sortable()
                     ->dateTime(),
             ])
             ->defaultSort('created_at', 'desc')
