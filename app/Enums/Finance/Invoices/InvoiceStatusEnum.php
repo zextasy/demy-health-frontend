@@ -17,7 +17,7 @@ enum InvoiceStatusEnum: string
     use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
 
     case GENERATED = 'Invoiced';
-    case PAYMENT_RECEIVED = 'Payment recieved';
+    case PAYMENT_RECEIVED = 'Payment received';
 
     case SETTLED = 'Settled';
 

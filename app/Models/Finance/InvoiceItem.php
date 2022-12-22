@@ -18,7 +18,7 @@ class InvoiceItem extends Item
 
     protected $dates = ['created_at', 'updated_at'];
     protected $appends = ['total_amount'];
-    protected $with = ['invoiceableItem'];
+//    protected $with = ['invoiceableItem'];
 
     protected $casts = ['price' => 'float'];
     //endregion
