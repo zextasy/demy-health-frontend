@@ -65,7 +65,7 @@ class CustomerEnquiryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('customer_name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
-                Tables\Columns\BadgeColumn::make('status')->sortable(),
+                Tables\Columns\BadgeColumn::make('status'),
                 Tables\Columns\BadgeColumn::make('type')
                     ->enum(EnquiryTypeEnum::optionsAsSelectArray())->sortable(),
             ])

@@ -52,7 +52,7 @@ class TestBookingsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('due_date')
                     ->date()
                     ->sortable(),
-                Tables\Columns\BadgeColumn::make('status')->sortable(),
+                Tables\Columns\BadgeColumn::make('status'),
                 Tables\Columns\BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray())
                     ->sortable(),

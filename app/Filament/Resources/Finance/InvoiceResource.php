@@ -93,7 +93,7 @@ class InvoiceResource extends Resource
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
                 Tables\Columns\TextColumn::make('outstanding_amount')->money(self::getSystemDefaultCurrency()),
-                Tables\Columns\BadgeColumn::make('status')->sortable(),
+                Tables\Columns\BadgeColumn::make('status'),
 //                    ->color(static function ($state): string {
 //                        return InvoiceStatusEnum::getDisplayColor($state);
 //                    }),
