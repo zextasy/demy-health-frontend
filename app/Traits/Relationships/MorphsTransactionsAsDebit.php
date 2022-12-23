@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait MorphsTransactionsAsDebit
 {
-    public function initializeMorphsTransactionsAsCreditTrait()
+    public function initializeMorphsTransactionsAsDebit()
     {
         $this->append('total_transaction_amount');
     }

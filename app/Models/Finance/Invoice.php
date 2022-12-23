@@ -63,7 +63,6 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
         'total_discount_amount',
         'total_amount',
         'outstanding_amount',
-        'total_transaction_amount',
         'status'
     ];
     //endregion

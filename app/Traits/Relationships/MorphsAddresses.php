@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait MorphsAddresses
 {
-    public function initializeHasAddressesTrait()
+    public function initializeHasAddresses()
     {
-        $this->loadMissing('addresses');
+//        $this->loadMissing('addresses');
         $this->append('latest_address');
     }
 
     public function scopeInState($query, $stateId)
     {
-        $query->whereHas('addresses', function ($query) use ($stateId) {
+        return $query->whereHas('addresses', function ($query) use ($stateId) {
             $query->where('state_id', '=', $stateId);
         });
     }
 
     public function scopeInLocalGovernmentArea($query, $localGovernmentAreaId)
     {
-        $query->whereHas('addresses', function ($query) use ($localGovernmentAreaId) {
+        return $query->whereHas('addresses', function ($query) use ($localGovernmentAreaId) {
             $query->where('local_government_area_id', '=', $localGovernmentAreaId);
         });
     }

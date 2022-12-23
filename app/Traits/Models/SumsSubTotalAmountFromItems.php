@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait SumsSubTotalAmountFromItems
 {
-    public function initializeSumsSubTotalAmountFromItemsTrait()
+    public function initializeSumsSubTotalAmountFromItems()
     {
         //FIXME this seems not to work for filament
         $this->append(['sub_total_amount','total_discount_amount','total_amount']);
