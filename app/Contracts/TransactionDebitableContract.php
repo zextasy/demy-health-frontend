@@ -13,4 +13,6 @@ interface TransactionDebitableContract
     public function getLaravelMorphModelType(): string;
 
     public function getLaravelMorphModelId(): int;
+
+    public function updatePaymentStatus(): void;
 }

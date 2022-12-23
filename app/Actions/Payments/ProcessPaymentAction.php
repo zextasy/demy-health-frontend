@@ -5,6 +5,7 @@ namespace App\Actions\Payments;
 use App\Models\Finance\Payment;
 use App\Models\Finance\Invoice;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use App\Actions\Transactions\CreateTransactionAction;
 
 
@@ -23,12 +24,16 @@ class ProcessPaymentAction
         $count = 0;
         $payment = $payment instanceof Payment ? $payment : Payment::findOrFail($payment);
         $this->payables = $this->resolveOutstandingPayables($payment->internal_references);
-        $action = new CreateTransactionAction;
-        foreach ($this->payables as $payable) {
-            if ($action->run($payable, $payment)) {
-                $count++;
+
+        DB::transaction(function () use ($payment, $count) {
+            $action = new CreateTransactionAction;
+            foreach ($this->payables as $payable) {
+                if ($action->run($payable, $payment)) {
+                    $count++;
+                }
             }
-        }
+        });
+
 
         return $count;
     }

@@ -4,6 +4,7 @@ namespace App\Models\Finance;
 
 use App\Models\BaseModel;
 use App\Traits\Models\HasAmounts;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cost extends BaseModel

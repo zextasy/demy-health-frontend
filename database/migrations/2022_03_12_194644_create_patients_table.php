@@ -32,7 +32,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('weight')->nullable();
 
             $table->foreignId('referral_channel_id')->nullable()->constrained('referral_channels');
-            $table->string('referral_code')->nullable()->unique();
+            $table->string('referral_code')->nullable()->unique();//TODO make this not unique in a new migration or remove it totally
             $table->timestamps();
             $table->softDeletes();
         });

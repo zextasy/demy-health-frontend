@@ -10,6 +10,7 @@ use Filament\Forms\ComponentContainer;
 use App\Actions\Tasks\AssignTaskAction;
 use Filament\Forms\Components\TextInput;
 use App\Jobs\ResolvePatientEmailIssueJob;
+use App\Jobs\ResolveUnprocessedPaymentsJob;
 use App\Jobs\ResolveOrdersWithoutInvoicesJob;
 use App\Jobs\ResolveTestBookingsWithoutOrdersJob;
 use RyanChandler\FilamentProfile\Pages\Profile as BaseProfile;
@@ -26,6 +27,8 @@ class Profile extends BaseProfile
                     ResolveTestBookingsWithoutOrdersJob::dispatch();
                     ResolveOrdersWithoutInvoicesJob::dispatch();
                     ResolvePatientEmailIssueJob::dispatch();
+                    ResolveUnprocessedPaymentsJob::dispatch();
+                    $this->redirect(Profile::getUrl());
                 })->visible(auth()->user()->isFilamentAdmin())
         ];
     }

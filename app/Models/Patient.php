@@ -107,7 +107,7 @@ class Patient extends BaseModel implements DiscounterContract
     //endregion
 
     //region SCOPES
-    public function scopeWithCustomerDetails(Builder $query, string $identifier): Builder
+    public function scopeWithCustomerDetails($query, string $identifier)
     {
         return $query->where('email', $identifier)
             ->orWhere('phone_number', $identifier);

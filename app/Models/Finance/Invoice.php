@@ -5,24 +5,22 @@ namespace App\Models\Finance;
 use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\EncryptsId;
-use App\Contracts\PayerContract;
-use App\Enums\Orders\OrderStatusEnum;
 use App\Traits\Models\HasFilamentUrl;
 use App\Traits\Models\LaravelMorphable;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\Discountable;
-use App\Traits\Models\SumsSubTotalAmountFromItems;
 use App\Contracts\TransactionCreditableContract;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Enums\Finance\Invoices\InvoiceStatusEnum;
+use App\Traits\Models\SumsSubTotalAmountFromItems;
 use App\Filament\Resources\Finance\InvoiceResource;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use App\Traits\Relationships\MorphsTransactionsAsCredit;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Invoice extends BaseModel  implements TransactionCreditableContract
 {
@@ -48,7 +46,15 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
 
     protected $guarded = ['id'];
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'sent_at',
+        'payment_received_at',
+        'payment_refunded_at',
+        'credit_approved_at',
+        'cancelled_at',
+    ];
 
     protected $with = ['items','transactions'];
 
@@ -107,10 +113,41 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
     {
         return max(($this->sub_total_amount - $this->total_discount_amount), 0);
     }
+
+    public function hasBeenSettled() : bool
+    {
+        return !empty($this->payment_received_at);
+    }
+
+    public function hasNotBeenSettled() : bool
+    {
+        return !$this->hasBeenSettled();
+    }
+
+    public function updatePaymentStatus(): void
+    {
+        ray('updatePaymentStatus - invoice', $this);
+        if ($this->outstanding_amount < 1 && empty($this->payment_received_at)) {
+            $this->update(['payment_received_at' => now()]);
+        }
+        ray('updatePaymentStatus - invoice', $this);
+    }
     //endregion
 
     //region SCOPES
+    public function scopeHasBeenSettled($query)
+    {
+        return $query->whereNotNull('payment_received_at');
+    }
 
+    public function scopeHasNotBeenSettled($query)
+    {
+        return $query->whereNull('payment_received_at');
+    }
+    public function scopeNeedsProcessing($query)
+    {
+        return $query->hasNotBeenSettled();
+    }
     //endregion
 
     //region RELATIONSHIPS
@@ -155,5 +192,4 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
     }
 
     //endregion
-
 }

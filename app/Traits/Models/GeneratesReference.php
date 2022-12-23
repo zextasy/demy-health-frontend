@@ -3,7 +3,6 @@
 namespace App\Traits\Models;
 
 use App\Helpers\ModelHelper;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 trait GeneratesReference
@@ -24,7 +23,7 @@ trait GeneratesReference
 
     abstract public function referenceConfig(): array;
 
-    public function scopeWithIdOrReference(Builder $query, null|string|int $id): Builder
+    public function scopeWithIdOrReference($query, null|string|int $id)
     {
         $config = $this->referenceConfig();
         $key = $config['reference_key'];

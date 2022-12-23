@@ -2,6 +2,7 @@
 
 namespace App\Actions\Transactions;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Finance\Transaction;
 use App\Contracts\TransactionDebitableContract;
 use App\Contracts\TransactionCreditableContract;
@@ -19,6 +20,8 @@ class CreateTransactionAction
         $amount = min($creditable->getMaximumCreditableAmount(), $debitable->getMaximumDebitableAmount());
 
         if ($amount < 1) {
+            $creditable->updatePaymentStatus();
+            $debitable->updatePaymentStatus();
             return null;
         }
 
@@ -28,7 +31,12 @@ class CreateTransactionAction
         $transaction->creditable_type = $creditable->getLaravelMorphModelType();
         $transaction->debitable_id = $debitable->getLaravelMorphModelId();
         $transaction->debitable_type = $debitable->getLaravelMorphModelType();
-        $transaction->save();
+        DB::transaction(function () use ($debitable, $creditable, $transaction) {
+            $transaction->save();
+            $creditable->updatePaymentStatus();
+            $debitable->updatePaymentStatus();
+        });
+
         return $transaction;
     }
 }

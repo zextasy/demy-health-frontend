@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait MorphsTransactionsAsDebit
 {
+    public function initializeMorphsTransactionsAsCreditTrait()
+    {
+        $this->append('total_transaction_amount');
+    }
+
     public function transactions(): MorphMany
     {
         return $this->morphMany(Transaction::class, 'debitable');
@@ -16,7 +21,28 @@ trait MorphsTransactionsAsDebit
     protected function totalTransactionAmount(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->transactions()->sum('amount'),
+            get: fn ($value) => $this->totalTransactionSum(),
         );
+    }
+
+    public function scopeHasTransactions($query)
+    {
+        return $query->has('transactions');
+    }
+
+    public function scopeDoesntHaveTransactions($query)
+    {
+        return $query->doesntHave('transactions');
+    }
+
+    abstract public function scopeHasBeenSettled($query);
+
+    abstract public function scopeHasNotBeenSettled($query);
+
+    abstract public function scopeNeedsProcessing($query);
+
+    public function totalTransactionSum()
+    {
+        return $this->transactions()->sum('amount');
     }
 }

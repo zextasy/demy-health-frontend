@@ -23,7 +23,7 @@ class ModelHelper
 
     private function getNextIdFromModelCount(Model $model): int
     {
-        return get_class($model)::count() + 1;
+        return get_class($model)::withTrashed()->count() + 1;
     }
 
     public function getNextId(Model $model)
