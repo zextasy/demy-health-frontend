@@ -125,11 +125,9 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
 
     public function updatePaymentStatus(): void
     {
-        ray('updatePaymentStatus - invoice', $this);
         if ($this->outstanding_amount < 1 && empty($this->payment_received_at)) {
             $this->update(['payment_received_at' => now()]);
         }
-        ray('updatePaymentStatus - invoice', $this);
     }
     //endregion
 

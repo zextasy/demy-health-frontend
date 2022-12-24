@@ -70,11 +70,9 @@ class Payment extends BaseModel implements TransactionDebitableContract
 
     public function updatePaymentStatus(): void
     {
-        ray('updatePaymentStatus - payment', $this);
         if ($this->balance < 1 && empty($this->payment_received_at)) {
             $this->update(['exhausted_at' => now()]);
         }
-        ray('updatePaymentStatus - payment', $this);
     }
     //endregion
 

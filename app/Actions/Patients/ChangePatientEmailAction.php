@@ -13,7 +13,6 @@ class ChangePatientEmailAction
     public function run(Patient|int $patient, string $email): Patient
     {
         $patient = $patient instanceof Patient ? $patient : Patient::findOrFail($patient);
-        ray($patient, $email);
         DB::transaction(function () use ($email, $patient) {
             $patient->update(['email' => $email]);
             $patient->loadMissing(['testBookings','testResults']);
@@ -26,7 +25,6 @@ class ChangePatientEmailAction
                 $testResultAction->run($testResult, $email);
             }
         });
-        ray($patient);
         return $patient;
     }
 }

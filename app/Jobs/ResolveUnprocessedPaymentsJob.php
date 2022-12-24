@@ -33,7 +33,6 @@ class ResolveUnprocessedPaymentsJob implements ShouldQueue
     public function handle()
     {
         $unresolvedPayments = Payment::needsProcessing()->get();
-        ray($unresolvedPayments);
         foreach ($unresolvedPayments as $payment) {
             ProcessPaymentJob::dispatch($payment);
         }
