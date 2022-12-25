@@ -5,12 +5,9 @@ namespace App\Filament\Resources\ReferralChannelResource\Pages;
 use App\Models\Finance\Discount;
 use Filament\Pages\Actions\Action;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use App\Actions\Payments\CreatePaymentAction;
-use App\Enums\Finance\Payments\PaymentMethodEnum;
+use Filament\Resources\Pages\ViewRecord;
 use App\Actions\Discounts\LinkDiscounterAction;
 use App\Filament\Resources\ReferralChannelResource;
-use Filament\Resources\Pages\ViewRecord;
 
 class ViewReferralChannel extends ViewRecord
 {

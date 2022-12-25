@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Finance\Discount;
 use App\Traits\Models\EncryptsId;
 use App\Settings\GeneralSettings;
 use App\Enums\Orders\OrderStatusEnum;
@@ -10,18 +9,17 @@ use App\Traits\Models\HasFilamentUrl;
 use App\Contracts\InvoiceableContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Contracts\DiscountableContract;
-use App\Filament\Resources\OrderResource;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\Discountable;
 use App\Traits\Relationships\MorphsInvoice;
-use App\Traits\Models\SumsSubTotalAmountFromItems;
+use App\Traits\Relationships\MorphsToCustomer;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Traits\Models\SumsSubTotalAmountFromItems;
 use App\Filament\Resources\Finance\InvoiceResource;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends BaseModel implements InvoiceableContract, DiscountableContract
 {
@@ -35,6 +33,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     use LaravelMorphable;
     use Discountable;
     use HasFilamentUrl;
+    use MorphsToCustomer;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -120,10 +119,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
         return $this->hasMany(OrderItem::class);
     }
 
-    public function customer()
-    {
-        return $this->morphTo('customer');
-    }
+
     //endregion
 
     //region PRIVATE

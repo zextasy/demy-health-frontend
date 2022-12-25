@@ -9,6 +9,7 @@ use App\Traits\Models\HasFilamentUrl;
 use App\Traits\Models\LaravelMorphable;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Relationships\Discountable;
+use App\Traits\Relationships\MorphsToCustomer;
 use App\Contracts\TransactionCreditableContract;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Enums\Finance\Invoices\InvoiceStatusEnum;
@@ -34,6 +35,7 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
     use HasRelationships;
     use HasFilamentUrl;
     use LaravelMorphable;
+    use MorphsToCustomer;
 
     //region CONFIG
     public function referenceConfig(): array
