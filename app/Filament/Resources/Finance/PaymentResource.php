@@ -8,7 +8,9 @@ use Filament\Resources\Table;
 use App\Models\Finance\Payment;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Builder;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\Finance\PaymentResource\Pages;
@@ -29,6 +31,11 @@ class PaymentResource extends Resource
         return auth()->user()->hasPermissionTo('backend');
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with(['payer']);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,10 +46,16 @@ class PaymentResource extends Resource
                     ->required()
                     ->unique()
                     ->maxLength(255),
+                TextInput::make('status')
+                    ->disabled(),
+                TextInput::make('payer_name')
+                    ->label("Paid By")
+                    ->disabled(),
+                Select::make('payment_method')
+                    ->options(PaymentMethodEnum::optionsAsSelectArray())
+                    ->disabled(),
                 TextInput::make('amount')
-                    ->required(),
-                Toggle::make('type')
-                    ->required(),
+                    ->disabled(),
             ]);
     }
 
@@ -53,14 +66,13 @@ class PaymentResource extends Resource
 //                Tables\Columns\TextColumn::make('business_group_id'),
                 Tables\Columns\TextColumn::make('reference'),
                 Tables\Columns\TextColumn::make('amount')->money(self::getSystemDefaultCurrency()),
+                Tables\Columns\TextColumn::make('balance')->money(self::getSystemDefaultCurrency()),
                 Tables\Columns\BadgeColumn::make('payment_method')
                     ->enum(PaymentMethodEnum::optionsAsSelectArray())->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label('Payment Date')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('payer_name')->label('Paid By'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -68,7 +80,7 @@ class PaymentResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-//                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
 //                Tables\Actions\DeleteBulkAction::make(),
@@ -88,7 +100,7 @@ class PaymentResource extends Resource
             'index' => Pages\ListPayments::route('/'),
 //            'create' => Pages\CreatePayment::route('/create'),
             'view' => Pages\ViewPayment::route('/{record}'),
-//            'edit' => Pages\EditPayment::route('/{record}/edit'),
+            'edit' => Pages\EditPayment::route('/{record}/edit'),
         ];
     }
 
