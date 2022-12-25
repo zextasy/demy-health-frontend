@@ -17,7 +17,7 @@ class BaseMorphManyTestBookingsRelationManager extends RelationManager
 
     protected function canCreate(): bool
     {
-        return auth()->user()->isFilamentBackendUser();
+        return false;
     }
 
     protected function canAttach(): bool
@@ -40,7 +40,7 @@ class BaseMorphManyTestBookingsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->sortable(),
-                Tables\Columns\TextColumn::make('testType.description')->sortable(),
+                Tables\Columns\TextColumn::make('testType.name')->sortable(),
                 Tables\Columns\TextColumn::make('due_date')
                     ->date()
                     ->sortable(),

@@ -91,7 +91,7 @@ class TestBookingResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('reference')->searchable()->sortable(),
-                TextColumn::make('testType.description')->searchable()->sortable(),
+                TextColumn::make('testType.name')->searchable()->sortable(),
                 TextColumn::make('due_date')
                     ->dateTime()->sortable(),
                 TextColumn::make('patient.full_name')->label('Patient')->sortable(),
