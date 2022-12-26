@@ -46,7 +46,7 @@ class CreateInvoiceAction
         return $this->invoice;
     }
 
-    public function forInvoiceableCustomer(null|InvoiceableCustomerContract $invoiceableCustomer): self
+    public function forCustomer(null|InvoiceableCustomerContract $invoiceableCustomer): self
     {
         $this->invoiceableCustomer = $invoiceableCustomer;
 
