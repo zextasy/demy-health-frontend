@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('payments', function (Blueprint $table) {
             $table->timestamp('exhausted_at')->after('metadata')->nullable();
+            $table->string('customer_email')->after('external_reference')->nullable()->index();
         });
     }
 
@@ -28,6 +29,10 @@ return new class extends Migration
         Schema::table('payments', function (Blueprint $table) {
             if (Schema::hasColumn('payments', 'exhausted_at')) {
                 $table->dropColumn('exhausted_at');
+            }
+
+            if (Schema::hasColumn('payments', 'customer_email')) {
+                $table->dropColumn('customer_email');
             }
         });
     }
