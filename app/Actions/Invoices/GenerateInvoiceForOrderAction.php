@@ -32,7 +32,7 @@ class GenerateInvoiceForOrderAction
 
         $this->invoice = (new CreateInvoiceAction)
             ->forInvoiceable($order)
-            ->forInvoiceableCustomer($order->customer)
+            ->forCustomer($order->customer)
             ->run($orderableItemModelCollection, $order->customer_email);
 
         $this->raiseEvents();

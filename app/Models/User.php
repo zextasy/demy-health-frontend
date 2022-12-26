@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\PayerContract;
 use App\Contracts\AddressableContract;
 use App\Contracts\OrderableCustomerContract;
 use App\Traits\Relationships\HasTasks;
@@ -28,7 +29,8 @@ class User extends Authenticatable implements
     MustVerifyEmail,
     AddressableContract,
     OrderableCustomerContract,
-    InvoiceableCustomerContract
+    InvoiceableCustomerContract,
+    PayerContract
 {
     use SoftDeletes;
     use HasApiTokens;

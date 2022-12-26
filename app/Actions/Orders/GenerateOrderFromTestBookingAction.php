@@ -4,22 +4,16 @@ namespace App\Actions\Orders;
 
 use App\Models\User;
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\TestBooking;
-use App\Helpers\TestBookingHelper;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use App\Events\CartCheckedOutEvent;
-use Darryldecode\Cart\CartCollection;
-use Illuminate\Database\Eloquent\Model;
+use App\Contracts\OrderableCustomerContract;
 use App\Events\OrderGeneratedFromBookingEvent;
-use App\Actions\Discounts\LinkDiscountableAction;
 
 class GenerateOrderFromTestBookingAction
 {
     private Order $order;
 
-    private ?User $user = null;
+    private ?OrderableCustomerContract $orderableCustomer = null;
 
     private TestBooking $testBooking;
 
@@ -41,8 +35,12 @@ class GenerateOrderFromTestBookingAction
             );
             $orderItemCollections = collect([$orderItemCollection]);
 
+            if (empty($this->orderableCustomer)) {
+                $this->orderableCustomer = $this->testBooking->patient->user;
+            }
+
             $this->order = (new CreateOrderAction)->withDiscounter($this->testBooking->patient)
-                ->run($orderItemCollections, $customerEmail, $this->user);
+                ->run($orderItemCollections, $customerEmail, $this->orderableCustomer);
         });
 
         $this->raiseEvents();
@@ -50,9 +48,9 @@ class GenerateOrderFromTestBookingAction
         return $this->order;
     }
 
-    public function forUser(?User $user): self
+    public function forCustomer(?OrderableCustomerContract $orderableCustomer): self
     {
-        $this->user = $user;
+        $this->orderableCustomer = $orderableCustomer;
         return $this;
     }
 

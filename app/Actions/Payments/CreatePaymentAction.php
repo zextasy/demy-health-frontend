@@ -3,6 +3,7 @@
 namespace App\Actions\Payments;
 
 use App\Models\Finance\Payment;
+use App\Contracts\PayerContract;
 use App\Events\PaymentAddedEvent;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 
@@ -13,6 +14,7 @@ class CreatePaymentAction
     private ?string $externalReference = null;
     private ?array $metadata = null;
     private bool $shouldRaiseEvents = true;
+    private ?PayerContract $payer = null;
 
     public function run(int $amount, int|PaymentMethodEnum $method) : Payment
     {
@@ -21,11 +23,19 @@ class CreatePaymentAction
         $payment->payment_method = $method;
         $payment->internal_references = $this->internalReferences;
         $payment->external_reference = $this->externalReference;
+        $payment->payer_id = $this->payer?->getLaravelMorphModelId();
+        $payment->payer_type = $this->payer?->getLaravelMorphModelType();
         $payment->metadata = $this->metadata;
         $payment->save();
 
         $this->raiseEvents($this->shouldRaiseEvents, $payment);
         return $payment;
+    }
+
+    public function paidBy(PayerContract $payer): self
+    {
+        $this->payer = $payer;
+        return $this;
     }
 
     public function withInternalReferences(array|string $internalReferences) : self

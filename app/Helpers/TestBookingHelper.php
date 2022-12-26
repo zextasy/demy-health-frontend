@@ -18,21 +18,35 @@ class TestBookingHelper
         $patientDetails = $cartItem->attributes->customerEmail ?? $cartItem->attributes->customerPhoneNumber;
         $testBookingPatient = Patient::withCustomerDetails($patientDetails)->first();
         if (empty($testBookingPatient)) {
-            $customerDateOfBirth = isset($customerDateOfBirth) ? Carbon::parse($cartItem->attributes->customerDateOfBirth) : null;
+            $customerDateOfBirth = isset($customerDateOfBirth) ?
+                Carbon::parse($cartItem->attributes->customerDateOfBirth)
+                : null;
             $testBookingPatient = (new CreatePatientAction)
                 ->withContactDetails($cartItem->attributes->customerEmail, $cartItem->attributes->customerPhoneNumber)
                 ->withAgeDetails(null, $customerDateOfBirth, null)
-                ->withCountryDetails($cartItem->attributes->customerCountryId, $cartItem->attributes->customerPassportNumber)
-                ->run($cartItem->attributes->customerFirstName, $cartItem->attributes->customerLastName, $cartItem->attributes->customerGender);
+                ->withCountryDetails(
+                    $cartItem->attributes->customerCountryId,
+                    $cartItem->attributes->customerPassportNumber
+                )
+                ->run(
+                    $cartItem->attributes->customerFirstName,
+                    $cartItem->attributes->customerLastName,
+                    $cartItem->attributes->customerGender
+                );
         }
         $locationTypeEnum = LocationTypeEnum::from($cartItem->attributes->locationType);
         $dueDate = Carbon::parse($cartItem->attributes->dueDate);
         $testBooking = (new CreateTestBookingAction)
             ->atTestCenter($cartItem->attributes->selectedTestCenter)
             ->forPatient($testBookingPatient)
-            ->withCustomerCommunicationDetails($cartItem->attributes->customerEmail, $cartItem->attributes->customerPhoneNumber)
+            ->withCustomerCommunicationDetails(
+                $cartItem->attributes->customerEmail,
+                $cartItem->attributes->customerPhoneNumber
+            )
             ->run(
-                $cartItem->attributes->selectedTestType, $locationTypeEnum, $dueDate
+                $cartItem->attributes->selectedTestType,
+                $locationTypeEnum,
+                $dueDate
             );
         if ($locationTypeEnum == LocationTypeEnum::HOME) {
             $address = (new CreateAddressAction)->run(
