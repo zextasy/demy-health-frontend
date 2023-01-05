@@ -117,6 +117,7 @@ class InvoiceResource extends Resource
     {
         return [
             RelationManagers\ItemsRelationManager::class,
+            RelationManagers\TransactionRelationManager::class,
             RelationManagers\DiscountRelationManager::class,
         ];
     }

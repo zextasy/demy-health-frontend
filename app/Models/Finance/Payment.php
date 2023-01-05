@@ -36,7 +36,7 @@ class Payment extends BaseModel implements TransactionDebitableContract
 
     protected $with = ['transactions'];
 
-    protected $appends = ['status'];
+    protected $appends = ['status','payer_name'];
 
     public function referenceConfig(): array
     {
@@ -65,7 +65,7 @@ class Payment extends BaseModel implements TransactionDebitableContract
     public function payerName(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->payer?->payer_name,
+            get: fn ($value) => $this->getCreditorName(),
         );
     }
     //endregion
@@ -93,6 +93,11 @@ class Payment extends BaseModel implements TransactionDebitableContract
         if ($this->balance < 1 && empty($this->payment_received_at)) {
             $this->update(['exhausted_at' => now()]);
         }
+    }
+
+    public function getCreditorName(): string
+    {
+        return empty($this->payer) ? 'Unknown' : $this->payer?->full_name;
     }
     //endregion
 

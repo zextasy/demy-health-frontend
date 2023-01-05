@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Filament\RelationManagers;
+
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Forms\Components\Fieldset;
+use App\Traits\Resources\DisplaysCurrencies;
+use Filament\Resources\RelationManagers\RelationManager;
+
+class BaseTransactionsRelationManager extends RelationManager
+{
+    use DisplaysCurrencies;
+
+    protected static string $relationship = 'transactions';
+
+    protected static ?string $recordTitleAttribute = 'reference';
+
+    protected static ?string $title = 'Transactions';
+
+    protected function canCreate(): bool
+    {
+        return false;
+    }
+
+    protected function canAttach(): bool
+    {
+        return false;
+    }
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('amount')->money(self::getSystemDefaultCurrency())
+                    ->label('Price')->sortable(),
+                Tables\Columns\TextColumn::make('reference')->label('Reference')->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->label('Date')->date()->sortable(),
+//                Tables\Columns\TextColumn::make('debitable.id')->label('Source'),
+//                Tables\Columns\TextColumn::make('creditable.id')->label('Destination'),
+            ])
+            ->filters([])
+            ->headerActions([])
+            ->actions([]);
+    }
+}
