@@ -22,6 +22,7 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use App\Traits\Relationships\MorphsTransactionsAsCredit;
+use App\Traits\Relationships\BelongsToActiveCustomerViaCustomerEmail;
 
 class Invoice extends BaseModel  implements TransactionCreditableContract
 {
@@ -36,6 +37,7 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
     use HasFilamentUrl;
     use LaravelMorphable;
     use MorphsToCustomer;
+    use BelongsToActiveCustomerViaCustomerEmail;
 
     //region CONFIG
     public function referenceConfig(): array
