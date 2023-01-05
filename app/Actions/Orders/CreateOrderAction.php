@@ -21,10 +21,14 @@ class CreateOrderAction
 
     private ?Collection $discounts = null;
 
-    public function run(Collection $orderItems, ?string $customerEmail, OrderableCustomerContract $orderableCustomer = null): Order
+    public function run(
+        Collection $orderItems,
+        ?string $customerEmail,
+        OrderableCustomerContract $orderableCustomer = null
+    ): Order
     {
         $this->order = new Order;
-        $this->order->customer_email = $customerEmail ?? 'care@demyhealth.com'; //TODO move to general settings
+        $this->order->customer_email = $customerEmail ?? config('constants.default_email');
         $this->order->customer_id = $orderableCustomer?->getLaravelMorphModelId();
         $this->order->customer_type = $orderableCustomer?->getLaravelMorphModelType();
         DB::transaction(function () use ($orderItems) {

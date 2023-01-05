@@ -94,7 +94,7 @@ class TestBookingResource extends Resource
                 TextColumn::make('testType.name')->searchable()->sortable(),
                 TextColumn::make('due_date')
                     ->dateTime()->sortable(),
-                TextColumn::make('patient.full_name')->label('Patient')->sortable(),
+                TextColumn::make('patient.full_name')->label('Patient'),
                 TextColumn::make('customer_email')->sortable(),
                 BadgeColumn::make('status')
                     ->sortable(),
@@ -129,7 +129,8 @@ class TestBookingResource extends Resource
             'index' => Pages\ListTestBookings::route('/'),
             //            'create' => Pages\CreateTestBooking::route('/create'),
             'view' => Pages\ViewTestBooking::route('/{record}'),
-            //            'edit' => Pages\EditTestBooking::route('/{record}/edit'), //TODO enable editing when the issue with the user relationship is set
+            //            'edit' => Pages\EditTestBooking::route('/{record}/edit'),
+            //TODO enable editing when the issue with the user relationship is set
         ];
     }
 

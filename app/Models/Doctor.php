@@ -12,7 +12,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Doctor extends BaseModel
 {
-    use HasFactory, GeneratesReference, MorphsAddresses, BelongsToBusinessGroup, ReferencesUsersViaEmail;
+    use HasFactory;
+    use GeneratesReference;
+    use MorphsAddresses;
+    use BelongsToBusinessGroup;
+    use ReferencesUsersViaEmail;
 
 //region CONFIG
     protected $guarded = ['id'];
