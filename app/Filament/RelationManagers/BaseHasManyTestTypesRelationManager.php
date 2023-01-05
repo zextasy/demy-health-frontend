@@ -5,12 +5,13 @@ namespace App\Filament\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Resources\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseHasManyTestTypesRelationManager extends HasManyRelationManager
+class BaseHasManyTestTypesRelationManager extends RelationManager
 {
     protected static string $relationship = 'testTypes';
 

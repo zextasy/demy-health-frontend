@@ -3,12 +3,12 @@
 namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class BaseBelongsToManyLocalGovernmentAreasRelationManager extends BelongsToManyRelationManager
+class BaseBelongsToManyLocalGovernmentAreasRelationManager extends RelationManager
 {
     protected static string $relationship = 'localGovernmentAreas';
 
@@ -46,6 +46,14 @@ class BaseBelongsToManyLocalGovernmentAreasRelationManager extends BelongsToMany
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+                Tables\Actions\AttachAction::make(),
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DetachAction::make(),
             ]);
     }
 }

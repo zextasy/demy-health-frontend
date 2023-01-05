@@ -2,15 +2,15 @@
 
 namespace App\Filament\RelationManagers;
 
-use App\Models\State;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\MorphToManyRelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\State;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class BaseAddressesRelationManager extends MorphToManyRelationManager
+class BaseAddressesRelationManager extends RelationManager
 {
     protected static string $relationship = 'Addresses';
 
@@ -84,6 +84,13 @@ class BaseAddressesRelationManager extends MorphToManyRelationManager
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DetachAction::make(),
             ])
             ->defaultSort('line_1', 'desc');
     }

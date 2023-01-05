@@ -3,14 +3,14 @@
 namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Components\Fieldset;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Forms\Components\Fieldset;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class BaseBelongsToManyTestTypesRelationManager extends BelongsToManyRelationManager
+class BaseBelongsToManyTestTypesRelationManager extends RelationManager
 {
     protected static string $relationship = 'testTypes';
 

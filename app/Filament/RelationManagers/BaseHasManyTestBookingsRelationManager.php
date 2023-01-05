@@ -2,14 +2,14 @@
 
 namespace App\Filament\RelationManagers;
 
-use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\HasManyRelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use App\Enums\TestBookings\LocationTypeEnum;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class BaseHasManyTestBookingsRelationManager extends HasManyRelationManager
+class BaseHasManyTestBookingsRelationManager extends RelationManager
 {
     protected static string $relationship = 'testBookings';
 
