@@ -12,9 +12,12 @@ use App\Contracts\DiscounterContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Traits\Relationships\Discounter;
 use App\Traits\Models\GeneratesReference;
-use Illuminate\Database\Eloquent\Builder;
+use App\Contracts\ActiveCustomerContract;
 use App\Traits\Relationships\MorphsAddresses;
+use App\Traits\Relationships\HasOrdersViaEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Traits\Relationships\HasInvoicesViaEmail;
+use App\Traits\Relationships\HasPaymentsViaEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\ReferencesUsersViaEmail;
@@ -22,7 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class Patient extends BaseModel implements DiscounterContract
+class Patient extends BaseModel implements DiscounterContract, ActiveCustomerContract
 {
     use HasFactory;
     use GeneratesReference;
@@ -31,6 +34,9 @@ class Patient extends BaseModel implements DiscounterContract
     use ReferencesUsersViaEmail;
     use Discounter;
     use LaravelMorphable;
+    use HasOrdersViaEmail;
+    use HasInvoicesViaEmail;
+    use HasPaymentsViaEmail;
 
     //region CONFIG
     protected $guarded = ['id'];
@@ -63,8 +69,13 @@ class Patient extends BaseModel implements DiscounterContract
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->last_name.' '.$this->first_name,
+            get: fn () => $this->getFullName(),
         );
+    }
+
+    public function getFullName():string
+    {
+        return $this->last_name.' '.$this->first_name;
     }
 
     //endregion

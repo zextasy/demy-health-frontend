@@ -11,4 +11,14 @@ trait MorphsOrderItems
     {
         return $this->MorphMany(OrderItem::class, 'orderable_item');
     }
+
+    public function orderHasBeenPlaced(): bool
+    {
+        return  $this->orderItems()->exists();
+    }
+
+    public function orderHasNotBeenPlaced(): bool
+    {
+        return  !$this->hasBeenInvoiced();
+    }
 }

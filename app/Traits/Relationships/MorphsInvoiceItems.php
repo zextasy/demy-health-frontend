@@ -11,4 +11,14 @@ trait MorphsInvoiceItems
     {
         return $this->MorphMany(InvoiceItem::class, 'invoiceable_item');
     }
+
+    public function hasBeenInvoiced(): bool
+    {
+        return  $this->invoiceItems()->exists();
+    }
+
+    public function hasNotBeenInvoiced(): bool
+    {
+        return  !$this->hasBeenInvoiced();
+    }
 }

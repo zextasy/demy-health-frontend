@@ -2,31 +2,33 @@
 
 namespace App\Models;
 
+use App\Settings\GeneralSettings;
 use App\Contracts\AssignableContract;
 use App\Traits\Models\HasFilamentUrl;
 use App\Contracts\AddressableContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Contracts\OrderableItemContract;
 use App\Traits\Relationships\Assignable;
+use App\Traits\Models\GeneratesReference;
 use App\Contracts\InvoiceableItemContract;
 use App\Enums\TestBookings\LocationTypeEnum;
-use App\Filament\Resources\TestBookingResource;
-use App\Settings\GeneralSettings;
-use App\Traits\Models\GeneratesReference;
-use App\Traits\Relationships\MorphsInvoiceItems;
-use App\Enums\Finance\Invoices\InvoiceStatusEnum;
-use App\Filament\Resources\Finance\InvoiceResource;
-use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\MorphsAddresses;
 use App\Traits\Relationships\MorphsOrderItems;
-use App\Traits\Relationships\ReferencesUsersViaEmail;
+use App\Filament\Resources\TestBookingResource;
+use App\Traits\Relationships\MorphsInvoiceItems;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\Relationships\BelongsToBusinessGroup;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Enums\Finance\TestBookings\TestBookingStatusEnum;
+use App\Traits\Relationships\BelongsToActiveCustomerViaCustomerEmail;
 
-class TestBooking extends BaseModel implements OrderableItemContract, InvoiceableItemContract, AddressableContract, AssignableContract
+class TestBooking extends BaseModel implements
+    OrderableItemContract,
+    InvoiceableItemContract,
+    AddressableContract,
+    AssignableContract
 {
     use HasFactory;
     use MorphsAddresses;
@@ -34,7 +36,7 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     use MorphsInvoiceItems;
     use LaravelMorphable;
     use GeneratesReference;
-    use ReferencesUsersViaEmail;
+    use BelongsToActiveCustomerViaCustomerEmail;
     use BelongsToBusinessGroup;
     use Assignable;
     use HasFilamentUrl;
@@ -129,6 +131,16 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
         return $this->processing_completed_at !== null;
     }
 
+    public function resultHasBeenGenerated(): bool
+    {
+        return $this->testResults()->exists();
+    }
+
+    public function resultHasNotBeenGenerated(): bool
+    {
+        return !$this->resultHasBeenGenerated();
+    }
+
     public function resultHasBeenApproved(): bool
     {
         return $this->result_approved_at !== null;
@@ -137,16 +149,6 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     public function sampleWasRejected(): bool
     {
         return $this->sample_rejected_at !== null;
-    }
-
-    public function hasBeenInvoiced(): bool
-    {
-        return  $this->invoiceItems()->exists();
-    }
-
-    public function hasNotBeenInvoiced(): bool
-    {
-        return  !$this->hasBeenInvoiced();
     }
 
     public function testResultIsComplete():bool
@@ -161,7 +163,7 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
 
     public function getInvoiceableItemName(): string
     {
-        return $this->name;
+        return $this->getAssignableName();
     }
 
     public function getInvoiceableItemPrice(): float
@@ -171,12 +173,12 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
 
     public function getOrderableItemName(): string
     {
-        return $this->name;
+        return $this->getInvoiceableItemName();
     }
 
     public function getOrderableItemPrice(): float
     {
-        return $this->price;
+        return $this->getInvoiceableItemPrice();
     }
     //endregion
 
@@ -236,15 +238,15 @@ class TestBooking extends BaseModel implements OrderableItemContract, Invoiceabl
     {
         $status = TestBookingStatusEnum::BOOKED->value;
 
-        if ($this->orderItems()->exists()) {
+        if ($this->orderHasBeenPlaced()) {
             $status = TestBookingStatusEnum::ORDER_PLACED->value;
         }
 
-        if ($this->invoiceItems()->exists()) {
+        if ($this->hasBeenInvoiced()) {
             $status = TestBookingStatusEnum::INVOICE_GENERATED->value;
         }
 
-        if ($this->testResults()->exists()) {
+        if ($this->resultHasBeenGenerated()) {
             $status = TestBookingStatusEnum::RESULT_GENERATED->value;
         }
 

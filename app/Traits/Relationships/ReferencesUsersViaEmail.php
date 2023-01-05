@@ -9,6 +9,6 @@ trait ReferencesUsersViaEmail
 {
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'customer_email', 'email');
+        return $this->belongsTo(User::class, 'email', 'email');
     }
 }

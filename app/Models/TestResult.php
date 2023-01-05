@@ -3,17 +3,21 @@
 namespace App\Models;
 
 use App\Settings\GeneralSettings;
-use App\Traits\Models\GeneratesReference;
-use App\Traits\Relationships\BelongsToBusinessGroup;
-use App\Traits\Relationships\ReferencesUsersViaEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
+use App\Traits\Models\GeneratesReference;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Traits\Relationships\BelongsToBusinessGroup;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Relationships\BelongsToActiveCustomerViaCustomerEmail;
 
 class TestResult extends BaseModel implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, GeneratesReference, ReferencesUsersViaEmail, BelongsToBusinessGroup;
+    use HasFactory;
+    use InteractsWithMedia;
+    use GeneratesReference;
+    use BelongsToActiveCustomerViaCustomerEmail;
+    use BelongsToBusinessGroup;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -45,11 +49,6 @@ class TestResult extends BaseModel implements HasMedia
     public function testBooking(): BelongsTo
     {
         return $this->belongsTo(TestBooking::class);
-    }
-
-    public function patient(): BelongsTo
-    {
-        return $this->testBooking->patient();
     }
 
     public function testType(): BelongsTo

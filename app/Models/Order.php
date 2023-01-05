@@ -18,14 +18,13 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Traits\Models\SumsSubTotalAmountFromItems;
 use App\Filament\Resources\Finance\InvoiceResource;
 use App\Traits\Relationships\BelongsToBusinessGroup;
-use App\Traits\Relationships\ReferencesUsersViaEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Relationships\BelongsToActiveCustomerViaCustomerEmail;
 
 class Order extends BaseModel implements InvoiceableContract, DiscountableContract
 {
     use HasFactory;
     use GeneratesReference;
-    use ReferencesUsersViaEmail;
     use BelongsToBusinessGroup;
     use SumsSubTotalAmountFromItems;
     use EncryptsId;
@@ -34,6 +33,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     use Discountable;
     use HasFilamentUrl;
     use MorphsToCustomer;
+    use BelongsToActiveCustomerViaCustomerEmail;
 
     //region CONFIG
     public function referenceConfig(): array

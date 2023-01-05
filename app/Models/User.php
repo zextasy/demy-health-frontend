@@ -3,26 +3,29 @@
 namespace App\Models;
 
 use App\Contracts\PayerContract;
+use Laravel\Sanctum\HasApiTokens;
 use App\Contracts\AddressableContract;
-use App\Contracts\OrderableCustomerContract;
 use App\Traits\Relationships\HasTasks;
-use App\Contracts\InvoiceableCustomerContract;
+use Spatie\Permission\Traits\HasRoles;
 use App\Traits\Models\LaravelMorphable;
-use App\Traits\Relationships\MorphsInvoicesAsCustomer;
-use App\Traits\Relationships\BelongsToBusinessGroup;
+use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use App\Contracts\OrderableCustomerContract;
+use Spatie\Permission\Traits\HasPermissions;
 use App\Traits\Relationships\HasTestBookings;
 use App\Traits\Relationships\MorphsAddresses;
-use App\Traits\Relationships\MorphsOrdersAsCustomer;
-use Filament\Models\Contracts\FilamentUser;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Contracts\InvoiceableCustomerContract;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Relationships\HasPaymentsViaEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\Relationships\BelongsToBusinessGroup;
+use App\Traits\Relationships\MorphsOrdersAsCustomer;
+use App\Traits\Relationships\MorphsInvoicesAsCustomer;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasPermissions;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements
     FilamentUser,
@@ -42,6 +45,7 @@ class User extends Authenticatable implements
     use MorphsAddresses;
     use MorphsOrdersAsCustomer;
     use MorphsInvoicesAsCustomer;
+    use HasPaymentsViaEmail;
     use BelongsToBusinessGroup;
     use HasTasks;
     use LaravelMorphable;
@@ -67,7 +71,12 @@ class User extends Authenticatable implements
     //endregion
 
     //region ATTRIBUTES
-
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->getFullName(),
+        );
+    }
     //endregion
 
     //region HELPERS
@@ -85,6 +94,17 @@ class User extends Authenticatable implements
     {
         return $this->hasPermissionTo('admin');
     }
+
+    public function getFullName():string
+    {
+        $name = $this->name;
+
+        if ($this->patient()->exists()) {
+            $name = $this->patient->full_name;
+        }
+
+        return $name;
+    }
     //endregion
 
     //region SCOPES
@@ -92,6 +112,10 @@ class User extends Authenticatable implements
     //endregion
 
     //region RELATIONSHIPS
+    public function patient(): HasOne
+    {
+        return $this->hasOne(Patient::class, 'email', 'email');
+    }
     public function testBookings(): HasMany
     {
         return $this->hasMany(TestBooking::class, 'customer_email', 'email');
