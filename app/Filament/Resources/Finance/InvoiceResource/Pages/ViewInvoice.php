@@ -22,7 +22,7 @@ class ViewInvoice extends ViewRecord
                 ->action(function (array $data): void {
                     (new CreatePaymentAction)
                         ->withInternalReferences($this->record->reference)
-                        ->paidBy($this->record->customer)
+                        ->paidBy($this->record->activeCustomer)
                         ->run($data['amount'], $data['method']);
                     $this->notify('success', 'Success!');
                     $this->redirect(InvoiceResource::getUrl('view', ['record' => $this->record->id]));

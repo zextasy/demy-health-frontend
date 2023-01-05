@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\GenderEnum;
 use Illuminate\Support\Carbon;
 use App\Models\Finance\Discount;
+use App\Contracts\PayerContract;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Collection;
 use App\Enums\AgeClassificationEnum;
@@ -25,7 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class Patient extends BaseModel implements DiscounterContract, ActiveCustomerContract
+class Patient extends BaseModel implements DiscounterContract, ActiveCustomerContract, PayerContract
 {
     use HasFactory;
     use GeneratesReference;

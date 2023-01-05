@@ -82,7 +82,12 @@ class User extends Authenticatable implements
     //region HELPERS
     public function canAccessFilament(): bool
     {
-        return $this->hasAnyPermission(['frontend', 'backend']);
+        return $this->hasAnyPermission(['frontend', 'backend','admin']);
+    }
+
+    public function isFilamentFrontendUser(): bool
+    {
+        return $this->hasPermissionTo('frontend');
     }
 
     public function isFilamentBackendUser(): bool

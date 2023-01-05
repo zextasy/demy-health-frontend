@@ -76,7 +76,6 @@ class TestTypeResource extends Resource
 
     public static function table(Table $table): Table
     {
-        $currency = app(GeneralSettings::class)->default_currency;
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('test_id')->searchable()->sortable(),

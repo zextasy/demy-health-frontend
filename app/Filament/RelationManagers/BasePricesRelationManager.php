@@ -3,13 +3,13 @@
 namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Components\Fieldset;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\MorphManyRelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Forms\Components\Fieldset;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class BasePricesRelationManager extends MorphManyRelationManager
+class BasePricesRelationManager extends RelationManager
 {
     protected static string $relationship = 'prices';
 
@@ -50,8 +50,11 @@ class BasePricesRelationManager extends MorphManyRelationManager
                 Tables\Columns\TextColumn::make('start_date')->label('From')->date()->sortable(),
                 Tables\Columns\TextColumn::make('end_date')->label('To')->date()->sortable(),
             ])
-            ->filters([
-                //
-            ])->actions([]);
+            ->defaultSort('end_date')
+            ->filters([])
+            ->headerActions([
+                Tables\Actions\CreateAction::make()->label('Set New Price'),
+            ])
+            ->actions([]);
     }
 }
