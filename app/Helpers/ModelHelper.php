@@ -48,6 +48,8 @@ class ModelHelper
     {
         $nextId = $this->getNextId($model);
         $padding = str_pad($nextId, 9, '0', STR_PAD_LEFT);
+//        $currentDate = now();
+//        $reference = $prefix.$currentDate->year.'-'.$currentDate->month.'-'.$padding;
         $reference = $prefix.$padding;
 
         if (get_class($model)::where($key, $reference)->exists()) {
