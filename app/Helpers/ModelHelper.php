@@ -47,7 +47,7 @@ class ModelHelper
     public function getNextReference(Model $model, string $prefix, string $key): string
     {
         $nextId = $this->getNextId($model);
-        $padding = str_pad($nextId, 12, '0', STR_PAD_LEFT);
+        $padding = str_pad($nextId, 9, '0', STR_PAD_LEFT);
         $reference = $prefix.$padding;
 
         if (get_class($model)::where($key, $reference)->exists()) {
