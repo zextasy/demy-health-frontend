@@ -26,7 +26,7 @@ class ModelHelper
         return get_class($model)::withTrashed()->count() + 1;
     }
 
-    public function getNextId(Model $model)
+    public function getNextId(Model $model): string
     {
         $nextId = $this->getNextIdFromDb($model->getTable());
         $existingModel = get_class($model)::where('id', $nextId)->exists();
@@ -42,5 +42,18 @@ class ModelHelper
         }
 
         return floor(time() - 999999999);
+    }
+
+    public function getNextReference(Model $model, string $prefix, string $key): string
+    {
+        $nextId = $this->getNextId($model);
+        $padding = str_pad($nextId, 12, '0', STR_PAD_LEFT);
+        $reference = $prefix.$padding;
+
+        if (get_class($model)::where($key, $reference)->exists()) {
+            $reference = $reference.'-'.$nextId;
+        }
+
+        return $reference;
     }
 }
