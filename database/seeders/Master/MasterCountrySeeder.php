@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Master;
 
 use App\Models\Country;
 use Illuminate\Database\Seeder;
 
-class CountrySeeder extends Seeder
+class MasterCountrySeeder extends Seeder
 {
     private $countries = [
         ['name' => 'Afghanistan', 'code' => 'AF'],
@@ -262,7 +262,7 @@ class CountrySeeder extends Seeder
     public function run()
     {
         foreach ($this->countries as $country) {
-            Country::create([
+            Country::firstOrCreate([
                 'code' => $country['code'],
                 'name' => $country['name'],
                 'nationality' => $country['name'],

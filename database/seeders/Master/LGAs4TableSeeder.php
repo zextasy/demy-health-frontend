@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Master;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class Lgas_4_TableSeeder extends Seeder
+class LGAs4TableSeeder extends Seeder
 {
     public function run()
     {

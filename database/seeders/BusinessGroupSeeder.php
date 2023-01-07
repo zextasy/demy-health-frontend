@@ -14,10 +14,6 @@ class BusinessGroupSeeder extends Seeder
      */
     public function run()
     {
-        BusinessGroup::firstOrCreate([
-            'name' => 'Root',
-            'description' => 'The Root Business Group for this Organisation',
-            'order' => 0,
-        ]);
+
     }
 }

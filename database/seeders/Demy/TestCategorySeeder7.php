@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Demy;
 
 use App\Models\SpecimenType;
 use App\Models\TestCategory;

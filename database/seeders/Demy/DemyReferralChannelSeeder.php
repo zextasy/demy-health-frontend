@@ -1,21 +1,14 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Demy;
 
 use App\Models\ReferralChannel;
 use Illuminate\Database\Seeder;
 
-class ReferralChannelSeeder extends Seeder
+class DemyReferralChannelSeeder extends Seeder
 {
     private $channels = [
-        'Facebook',
-        'Instagram',
-        'Twitter',
-        'WhatsApp',
-        'Email',
         'www.demyhealth.com',
-        'Flyer',
-        'Word of mouth',
     ];
 
     public function run()

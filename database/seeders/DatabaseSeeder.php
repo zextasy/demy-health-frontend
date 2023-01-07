@@ -4,6 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Database\Seeders\Master\MasterStateSeeder;
+use Database\Seeders\Master\MasterCountrySeeder;
+use Database\Seeders\Master\MasterSpecimenTypeSeeder;
+use Database\Seeders\Master\MasterBusinessGroupSeeder;
+use Database\Seeders\Master\MasterReferralChannelSeeder;
+use Database\Seeders\Master\MasterLocalGovernmentAreaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,18 +22,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BusinessGroupSeeder::class);
+        $this->call(MasterBusinessGroupSeeder::class);
         $this->seedUsers();
-        $this->call(UserSeeder::class);
-        $this->call(CountrySeeder::class);
-        $this->call(StateSeeder::class);
-        $this->call(LocalGovernmentAreaSeeder::class);
-        $this->call(ReferralChannelSeeder::class);
-        $this->call(TestCenterSeeder::class);
-        $this->call(ProductCategorySeeder::class);
-        $this->call(ProductSeeder::class);
-        $this->call(SpecimenTypeSeeder::class);
-        $this->call(TestTypeSeeder::class);
+        $this->call(MasterCountrySeeder::class);
+        $this->call(MasterStateSeeder::class);
+        $this->call(MasterLocalGovernmentAreaSeeder::class);
+        $this->call(MasterReferralChannelSeeder::class);
+        $this->call(MasterSpecimenTypeSeeder::class);
     }
 
     private function seedUsers()

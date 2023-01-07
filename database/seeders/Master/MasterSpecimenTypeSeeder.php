@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Master;
 
 use App\Models\SpecimenType;
 use Illuminate\Database\Seeder;
 
-class SpecimenTypeSeeder extends Seeder
+class MasterSpecimenTypeSeeder extends Seeder
 {
     private $specimens = [
         ['key' => 'G', 'description' => 'SST/Plain/Gold cap bottle'],

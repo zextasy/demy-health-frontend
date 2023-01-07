@@ -1,13 +1,13 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Demy;
 
 use App\Models\SpecimenType;
 use App\Models\TestCategory;
 use App\Models\TestType;
 use Illuminate\Database\Seeder;
 
-class TestCategorySeeder9 extends Seeder
+class TestCategorySeeder8 extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,10 +24,10 @@ class TestCategorySeeder9 extends Seeder
 
     }
 
-    private function getTest($testCategory, string $testId, string $description, int $minTAT, int $maxTAT, float $price): TestType
+    private function getTest(string $prefix, $testCategory, string $testId, string $description, int $minTAT, int $maxTAT, float $price): TestType
     {
         $test = new TestType;
-        $test->test_id = $testId;
+        $test->test_id = "GTL {$prefix} {$testId}";
         $test->name = $description;
         $test->minimum_tat = $minTAT;
         $test->maximum_tat = $maxTAT;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Master;
 
 use App\Models\Country;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class StateSeeder extends Seeder
+class MasterStateSeeder extends Seeder
 {
     /**
      * Run the database seeds.
