@@ -41,10 +41,10 @@ class VirtualFieldResource extends Resource
             ->schema([
                 Forms\Components\Fieldset::make('Details')->schema([
                     TextInput::make('name')
-                        ->required()
+                        ->required()->unique()
                         ->maxLength(255),
                         TextInput::make('label')
-                            ->required()
+                            ->required()->unique()
                             ->maxLength(255),
                         Select::make('field_type')
                             ->options(FieldTypeEnum::optionsAsSelectArray())

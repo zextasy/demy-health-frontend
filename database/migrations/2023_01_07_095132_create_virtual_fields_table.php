@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('virtual_fields', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('label');
             $table->unsignedSmallInteger('field_type');//FieldTypeEnum
             $table->json('options')->nullable();

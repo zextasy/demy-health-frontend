@@ -38,7 +38,7 @@ class TestResultTemplateResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required()
+                    ->required()->unique()
                     ->maxLength(255),
             ]);
     }
@@ -70,7 +70,7 @@ class TestResultTemplateResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\VirtualFieldsRelationManager::class,
         ];
     }
 

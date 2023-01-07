@@ -5,33 +5,39 @@ namespace App\Models;
 use App\Models\BaseModel;
 use App\Enums\FieldTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class VirtualField extends BaseModel
 {
     use HasFactory;
 
-//region CONFIG
+    //region CONFIG
     protected $guarded = ['id'];
     protected $casts = [
         'options' => 'array',
         'field_type' => FieldTypeEnum::class,
     ];
-//endregion
+    //endregion
 
-//region ATTRIBUTES
+    //region ATTRIBUTES
 
-//endregion
+    //endregion
 
-//region HELPERS
+    //region HELPERS
 
-//endregion
+    //endregion
 
-//region SCOPES
+    //region SCOPES
 
-//endregion
+    //endregion
 
-//region RELATIONSHIPS
-
-//endregion
+    //region RELATIONSHIPS
+    public function testResultTemplates(): BelongsToMany
+    {
+        return $this->belongsToMany(TestResultTemplate::class)
+//            ->withPivot(['display_weight','is_required','is_searchable','should_display_on_index'])
+            ->using(TestResultTemplateVirtualField::class);
+    }
+    //endregion
 
 }

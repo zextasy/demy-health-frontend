@@ -4,29 +4,35 @@ namespace App\Models;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TestResultTemplate extends BaseModel
 {
     use HasFactory;
 
-//region CONFIG
+    //region CONFIG
     protected $guarded = ['id'];
-//endregion
+    //endregion
 
-//region ATTRIBUTES
+    //region ATTRIBUTES
 
-//endregion
+    //endregion
 
-//region HELPERS
+    //region HELPERS
 
-//endregion
+    //endregion
 
-//region SCOPES
+    //region SCOPES
 
-//endregion
+    //endregion
 
-//region RELATIONSHIPS
-
-//endregion
+    //region RELATIONSHIPS
+    public function virtualFields(): BelongsToMany
+    {
+        return $this->belongsToMany(VirtualField::class)
+//            ->withPivot(['display_weight','is_required','is_searchable','should_display_on_index'])
+            ->using(TestResultTemplateVirtualField::class);
+    }
+    //endregion
 
 }
