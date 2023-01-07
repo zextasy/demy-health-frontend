@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1346d505593caeb49a438176885dd981",
+    "content-hash": "588dd89409ad21eab3374b800644a601",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -7299,6 +7299,50 @@
                 }
             ],
             "time": "2022-08-23T07:15:15+00:00"
+        },
+        {
+            "name": "stancl/virtualcolumn",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/archtechx/virtualcolumn.git",
+                "reference": "ab3f943990e8b3e0a6ba5e90be6bf216bdaf1719"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/archtechx/virtualcolumn/zipball/ab3f943990e8b3e0a6ba5e90be6bf216bdaf1719",
+                "reference": "ab3f943990e8b3e0a6ba5e90be6bf216bdaf1719",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^6.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^8.0|^9.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0|^6.0|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stancl\\VirtualColumn\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Štancl",
+                    "email": "samuel.stancl@gmail.com"
+                }
+            ],
+            "description": "Eloquent virtual column.",
+            "support": {
+                "issues": "https://github.com/archtechx/virtualcolumn/issues",
+                "source": "https://github.com/archtechx/virtualcolumn/tree/v1.3.0"
+            },
+            "time": "2022-10-21T12:09:30+00:00"
         },
         {
             "name": "staudenmeir/belongs-to-through",

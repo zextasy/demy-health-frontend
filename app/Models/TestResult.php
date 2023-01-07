@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Settings\GeneralSettings;
 use Spatie\MediaLibrary\HasMedia;
+use Stancl\VirtualColumn\VirtualColumn;
 use App\Traits\Models\GeneratesReference;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Traits\Relationships\BelongsToBusinessGroup;
@@ -18,6 +19,7 @@ class TestResult extends BaseModel implements HasMedia
     use GeneratesReference;
     use BelongsToActiveCustomerViaCustomerEmail;
     use BelongsToBusinessGroup;
+    use VirtualColumn;
 
     //region CONFIG
     public function referenceConfig(): array
@@ -31,6 +33,27 @@ class TestResult extends BaseModel implements HasMedia
     protected $guarded = ['id'];
 
     protected $dates = ['created_at', 'updated_at'];
+
+    public static function getDataColumn(): string
+    {
+        return 'virtual_data_column';
+    }
+
+    public static function getCustomColumns(): array
+    {
+        return [
+            'id',
+            'business_group_id',
+            'reference',
+            'test_booking_id',
+            'customer_email',
+            'customer_phone_number',
+            'approved_at',
+            'approved_by',
+            'rejected_at',
+            'rejected_by',
+        ];
+    }
     //endregion
 
     //region ATTRIBUTES
