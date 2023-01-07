@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('{{ table }}', function (Blueprint $table) {
+        Schema::create('virtual_fields', function (Blueprint $table) {
             $table->id();
-
+            $table->string('name');
+            $table->string('label');
+            $table->unsignedSmallInteger('field_type');//FieldTypeEnum
+            $table->json('options')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('{{ table }}');
+        Schema::dropIfExists('virtual_fields');
     }
 };
