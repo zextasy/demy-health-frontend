@@ -47,7 +47,9 @@ class TestType extends BaseModel
             return "{$this->tat_hours} hours";
         }
 
-        return $this->minimum_tat == $this->maximum_tat ? "{$this->maximum_tat} days" : "{$this->minimum_tat} - {$this->maximum_tat} days";
+        return $this->minimum_tat == $this->maximum_tat ?
+            "{$this->maximum_tat} days"
+            : "{$this->minimum_tat} - {$this->maximum_tat} days";
     }
 
     public function getFilamentUrlAttribute(): string
@@ -63,5 +65,10 @@ class TestType extends BaseModel
     public function specimenTypes(): BelongsToMany
     {
         return $this->belongsToMany(SpecimenType::class, 'specimen_types_test_types');
+    }
+
+    public function testResultTemplate(): BelongsTo
+    {
+        return $this->belongsTo(TestResultTemplate::class);
     }
 }

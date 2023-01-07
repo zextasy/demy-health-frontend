@@ -39,10 +39,13 @@ class TestTypeResource extends Resource
                         ->maxLength(255)
                         ->unique()
                         ->helperText('Internal unique name for this test type'),
-                    Forms\Components\BelongsToSelect::make('test_category_id')
+                    Forms\Components\Select::make('test_category_id')
                         ->relationship('category', 'name')
                         ->searchable()
                         ->required(),
+                    Forms\Components\Select::make('test_result_template_id')
+                        ->relationship('testResultTemplate', 'name')
+                        ->searchable(),
                 ]),
                 Fieldset::make('Pricing')->schema([
                     Forms\Components\Toggle::make('should_call_in_for_details')
@@ -87,7 +90,8 @@ class TestTypeResource extends Resource
                     ->counts('testBookings')
                     ->label('Bookings')
                     ->sortable(),
-
+                Tables\Columns\TextColumn::make('testResultTemplate.name')->label('Template')
+                    ->searchable()->sortable(),
             ])
             ->filters([
                 //
