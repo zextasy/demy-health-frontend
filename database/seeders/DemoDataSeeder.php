@@ -11,7 +11,7 @@ class DemoDataSeeder extends Seeder
     public function run()
     {
         $this->call(BusinessGroupSeeder::class);
-        $this->call(UserSeeder::class);
+        $this->call(VirtualFieldSeeder::class);
         $this->call(TestCenterSeeder::class);
         $this->call(ProductCategorySeeder::class);
         $this->call(ProductSeeder::class);

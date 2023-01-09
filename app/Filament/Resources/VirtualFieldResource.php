@@ -23,7 +23,7 @@ class VirtualFieldResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'label';
 
     protected static function shouldRegisterNavigation(): bool
     {
@@ -42,9 +42,11 @@ class VirtualFieldResource extends Resource
                 Forms\Components\Fieldset::make('Details')->schema([
                     TextInput::make('name')
                         ->required()->unique()
+                        ->helperText('This is the internal name. It should be all lowercase with underscores instead of spaces')
                         ->maxLength(255),
                         TextInput::make('label')
                             ->required()->unique()
+                            ->helperText('This is how the field will be displayed to users')
                             ->maxLength(255),
                         Select::make('field_type')
                             ->options(FieldTypeEnum::optionsAsSelectArray())
@@ -62,8 +64,8 @@ class VirtualFieldResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('label'),
+                Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\BadgeColumn::make('field_type')->label('Field Type')
                 ->enum(FieldTypeEnum::optionsAsSelectArray()),
             ])
