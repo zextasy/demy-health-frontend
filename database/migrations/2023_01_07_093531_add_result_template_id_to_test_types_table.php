@@ -29,7 +29,7 @@ return new class extends Migration
     {
         Schema::table('test_types', function (Blueprint $table) {
             if (Schema::hasColumn('test_types', 'test_result_template_id')) {
-                $table->dropForeignIdFor(TestResultTemplate::class);
+                $table->dropForeign(['test_result_template_id']);
                 $table->dropColumn('test_result_template_id');
             }
         });
