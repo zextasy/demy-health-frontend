@@ -40,6 +40,7 @@
         "staudenmeir/belongs-to-through": "^2.12",
         "staudenmeir/eloquent-has-many-deep": "^1.7",
         "stechstudio/filament-impersonate": "^2.4",
+        "stephenjude/filament-blog": "^0.1.6",
         "symfony/http-client": "^6.1",
         "symfony/postmark-mailer": "^6.1",
         "unicodeveloper/laravel-paystack": "^1.0",
