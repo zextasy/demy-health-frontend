@@ -30,11 +30,14 @@ class CustomFilamentServiceProvider extends ServiceProvider
         Filament::serving(function () {
             Filament::registerNavigationGroups([
                 'Account',
+                'Personal',
                 'CRM',
                 'Consultation',
                 'Tests',
                 'Finance',
                 'Products',
+                'Blog',
+                'Marketing',
                 'Locations',
             ]);
         });
