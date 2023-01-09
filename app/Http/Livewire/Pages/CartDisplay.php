@@ -21,7 +21,7 @@ class CartDisplay extends Component
 
     public $cartSubTotal;
 
-    public int $paymentMethod;
+    public ?int $paymentMethod = null;
 
     public ?string $customerEmail = null;
 
@@ -40,7 +40,7 @@ class CartDisplay extends Component
         $this->updateCartTotals();
         $this->cartItems = Cart::getContent();
         $this->customerEmail = $this->getSessionCustomerEmail();
-        $this->paymentMethod = PaymentMethodEnum::OTHER->value;
+//        $this->paymentMethod = PaymentMethodEnum::OTHER->value;
     }
 
     public function updateCartTotals()
@@ -66,6 +66,7 @@ class CartDisplay extends Component
     {
         $currentUrl = request()->header('Referer');
         try {
+            $this->setSessionCustomerEmail($this->customerEmail);
             $this->validate();
         } catch (\Throwable $th) {
             $this->flash('error', $th->getMessage(), [], $currentUrl);

@@ -34,14 +34,17 @@
             <div class="summary-delivery">
                 <label for="payment-method">Choose Payment Method</label>
                 <select wire:model="paymentMethod" id="payment-method" class="summary-delivery-selection">
+                    <option value="">
+                        Please select
+                    </option>
+                    <option value="{{\App\Enums\Finance\Payments\PaymentMethodEnum::PAYSTACK->value}}">
+                        PAYSTACK
+                    </option>
                     <option value="{{\App\Enums\Finance\Payments\PaymentMethodEnum::OTHER->value}}">
                         Book and Pay on arrival
                     </option>
                     <option value="{{\App\Enums\Finance\Payments\PaymentMethodEnum::BANK_TRANSFER->value}}">
                         Bank Transfer
-                    </option>
-                    <option value="{{\App\Enums\Finance\Payments\PaymentMethodEnum::PAYSTACK->value}}">
-                        PAYSTACK
                     </option>
                 </select>
             </div>
