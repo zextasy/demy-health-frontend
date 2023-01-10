@@ -11,9 +11,10 @@ class PaystackTransaction extends BaseModel
     use HasFactory;
 
 //region CONFIG
-    protected $fillable = ['reference', 'success', 'amount', 'status', 'channel', 'currency', 'metadata'];
+    protected $fillable = ['reference', 'success', 'amount', 'status', 'channel', 'currency','customer', 'metadata'];
 
     protected $casts = [
+        'customer' => 'array',
         'metadata' => 'array'
     ];
 //endregion

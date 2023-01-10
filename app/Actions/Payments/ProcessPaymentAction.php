@@ -21,6 +21,10 @@ class ProcessPaymentAction
 
     public function run(int|Payment $payment): int
     {
+        if (empty($payment->internal_references)) {
+            return 0;
+        }
+
         $count = 0;
         $payment = $payment instanceof Payment ? $payment : Payment::findOrFail($payment);
         $this->payables = $this->resolveOutstandingPayables($payment->internal_references);

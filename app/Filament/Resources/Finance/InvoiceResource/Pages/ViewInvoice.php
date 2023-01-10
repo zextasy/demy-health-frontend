@@ -23,6 +23,7 @@ class ViewInvoice extends ViewRecord
                     (new CreatePaymentAction)
                         ->withInternalReferences($this->record->reference)
                         ->paidBy($this->record->activeCustomer)
+                        ->withCustomerEmail($this->record->customer_email)
                         ->run($data['amount'], $data['method']);
                     $this->notify('success', 'Success!');
                     $this->redirect(InvoiceResource::getUrl('view', ['record' => $this->record->id]));
@@ -37,10 +38,6 @@ class ViewInvoice extends ViewRecord
                         ->options(PaymentMethodEnum::optionsAsSelectArray())
                         ->searchable()
                         ->required(),
-                    //                    DateTimePicker::make('received_at')
-                    //                        ->minDate(now())
-                    //                        ->withoutSeconds()
-                    //                        ->required(),
                 ]),
         ];
     }

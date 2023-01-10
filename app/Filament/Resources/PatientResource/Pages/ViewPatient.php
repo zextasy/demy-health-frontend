@@ -18,9 +18,11 @@ use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\PatientResource;
 use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Forms\Components\DateTimePicker;
+use App\Actions\Payments\CreatePaymentAction;
 use App\Actions\Discounts\LinkDiscounterAction;
 use App\Filament\Resources\TestBookingResource;
 use App\Actions\Discounts\LinkDiscountableAction;
+use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Actions\TestBookings\CreateTestBookingAction;
 use App\Actions\Orders\GenerateOrderFromTestBookingAction;
 
@@ -87,6 +89,26 @@ class ViewPatient extends ViewRecord
                             ->helperText('The discount will only be applied if you place an order immediately')
                             ->options(Discount::all()->toSelectArray())->searchable(),
                     ]),
+                ]),
+            Action::make('Capture Payment')
+                ->action(function (array $data): void {
+                    (new CreatePaymentAction)
+                        ->paidBy($this->record)
+                        ->withCustomerEmail($this->record->customer_email)
+                        ->run($data['amount'], $data['method']);
+                    $this->notify('success', 'Success!');
+                    $this->redirect(PatientResource::getUrl('view', ['record' => $this->record->id]));
+                })
+                ->form([
+                    TextInput::make('amount')
+                        ->label('Amount')
+                        ->numeric()
+                        ->required(),
+                    Select::make('method')
+                        ->label('Payment Method')
+                        ->options(PaymentMethodEnum::optionsAsSelectArray())
+                        ->searchable()
+                        ->required(),
                 ]),
             Action::make('Attach Discount')
                 ->action(function (array $data): void {

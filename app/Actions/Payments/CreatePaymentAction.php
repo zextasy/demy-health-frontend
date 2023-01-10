@@ -15,6 +15,7 @@ class CreatePaymentAction
     private ?array $metadata = null;
     private bool $shouldRaiseEvents = true;
     private ?PayerContract $payer = null;
+    private ?string $customerEmail = null;
 
     public function run(int $amount, int|PaymentMethodEnum $method) : Payment
     {
@@ -23,6 +24,7 @@ class CreatePaymentAction
         $payment->payment_method = $method;
         $payment->internal_references = $this->internalReferences;
         $payment->external_reference = $this->externalReference;
+        $payment->customer_email = $this->customerEmail;
         $payment->payer_id = $this->payer?->getLaravelMorphModelId();
         $payment->payer_type = $this->payer?->getLaravelMorphModelType();
         $payment->metadata = $this->metadata;
@@ -57,6 +59,13 @@ class CreatePaymentAction
     public function withMetadata(array $metadata) : self
     {
         $this->metadata = $metadata;
+
+        return  $this;
+    }
+
+    public function withCustomerEmail(?string $customerEmail) : self
+    {
+        $this->customerEmail = $customerEmail;
 
         return  $this;
     }

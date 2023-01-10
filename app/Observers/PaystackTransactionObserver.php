@@ -16,6 +16,7 @@ class PaystackTransactionObserver
             (new CreatePaymentAction)
                 ->withExternalReference($model->reference)
                 ->withInternalReferences($model->invoice_reference)
+                ->withCustomerEmail($model->customer_email)
                 ->withMetadata($model->metadata)
                 ->run($model->amount/100, PaymentMethodEnum::PAYSTACK);
         }
