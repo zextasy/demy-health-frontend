@@ -20,6 +20,7 @@ class GenerateTestResultAction
         $this->testResult = new TestResult;
         $this->testResult->test_booking_id = $testBookingId;
         $this->testResult->customer_email = $this->customerEmail;
+        $this->testResult->has_media_upload = true;
 
         DB::transaction(function () {
             $this->testResult->save();
