@@ -7,6 +7,7 @@ use App\Contracts\AssignableContract;
 use App\Traits\Models\HasFilamentUrl;
 use App\Contracts\AddressableContract;
 use App\Traits\Models\LaravelMorphable;
+use Illuminate\Database\Eloquent\Model;
 use App\Contracts\OrderableItemContract;
 use App\Traits\Relationships\Assignable;
 use App\Traits\Models\GeneratesReference;
@@ -70,6 +71,13 @@ class TestBooking extends BaseModel implements
     {
         return Attribute::make(
             get: fn ($value) => $this->testType->name,
+        );
+    }
+
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->testType->price,
         );
     }
 
@@ -168,7 +176,7 @@ class TestBooking extends BaseModel implements
 
     public function getInvoiceableItemPrice(): float
     {
-        return $this->price;
+        return $this->price ?? 0;
     }
 
     public function getOrderableItemName(): string
@@ -179,6 +187,11 @@ class TestBooking extends BaseModel implements
     public function getOrderableItemPrice(): float
     {
         return $this->getInvoiceableItemPrice();
+    }
+
+    public function getOrderableItemModel() : Model
+    {
+        return $this;
     }
     //endregion
 

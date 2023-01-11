@@ -6,6 +6,7 @@ use App\Helpers\HerokuHelper;
 use App\Settings\GeneralSettings;
 use Spatie\MediaLibrary\HasMedia;
 use App\Traits\Models\LaravelMorphable;
+use Illuminate\Database\Eloquent\Model;
 use App\Contracts\OrderableItemContract;
 use App\Traits\Models\GeneratesReference;
 use App\Contracts\InvoiceableItemContract;
@@ -65,7 +66,30 @@ class Product extends BaseModel implements HasMedia, OrderableItemContract, Invo
     //endregion
 
     //region HELPERS
+    public function getInvoiceableItemName(): string
+    {
+        return $this->name;
+    }
 
+    public function getInvoiceableItemPrice(): float
+    {
+        return $this->price ?? 0;
+    }
+
+    public function getOrderableItemName(): string
+    {
+        return $this->getInvoiceableItemName();
+    }
+
+    public function getOrderableItemPrice(): float
+    {
+        return $this->getInvoiceableItemPrice();
+    }
+
+    public function getOrderableItemModel() : Model
+    {
+        return $this;
+    }
     //endregion
 
     //region SCOPES
@@ -83,23 +107,5 @@ class Product extends BaseModel implements HasMedia, OrderableItemContract, Invo
         return $this->media()->where('collection_name', 'pictures');
     }
     //endregion
-    public function getInvoiceableItemName(): string
-    {
-        return $this->name;
-    }
 
-    public function getInvoiceableItemPrice(): float
-    {
-        return $this->price;
-    }
-
-    public function getOrderableItemName(): string
-    {
-        return $this->name;
-    }
-
-    public function getOrderableItemPrice(): float
-    {
-        return $this->price;
-    }
 }
