@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('test_results', function (Blueprint $table) {
-            $table->json('virtual_data_column')->after('customer_phone_number');
+            $table->json('virtual_data_column')->nullable()->after('customer_phone_number');
         });
     }
 
