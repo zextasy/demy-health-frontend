@@ -17,7 +17,7 @@ class CreatePaymentAction
     private ?PayerContract $payer = null;
     private ?string $customerEmail = null;
 
-    public function run(int $amount, int|PaymentMethodEnum $method) : Payment
+    public function run(int $amount, int|PaymentMethodEnum $method) : ?Payment
     {
         $payment =  new Payment();
         $payment->amount = $amount;

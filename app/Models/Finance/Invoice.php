@@ -5,6 +5,7 @@ namespace App\Models\Finance;
 use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\EncryptsId;
+use Illuminate\Support\Collection;
 use App\Traits\Models\HasFilamentUrl;
 use App\Traits\Models\LaravelMorphable;
 use App\Traits\Models\GeneratesReference;
@@ -133,6 +134,16 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
             $this->update(['payment_received_at' => now()]);
         }
     }
+
+    public function getPayableReference(): string
+    {
+        return $this->reference;
+    }
+
+    public function getApplicablePayments(): ?Collection
+    {
+        return Payment::query()->whereCustomerEmail($this->customer_email)->hasNotBeenSettled()->get();
+    }
     //endregion
 
     //region SCOPES
@@ -171,6 +182,7 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
     //region PRIVATE
     private function getTotalDiscountAmount(): float
     {
+        $this->loadMissing('invoiceable');
         if (empty($this->invoiceable)) {
             return 0;
         }

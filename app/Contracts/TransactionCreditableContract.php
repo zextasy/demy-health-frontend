@@ -15,4 +15,7 @@ interface TransactionCreditableContract
     public function getLaravelMorphModelId(): int;
 
     public function updatePaymentStatus(): void;
+
+    public function getPayableReference(): string;
+    public function getApplicablePayments();
 }

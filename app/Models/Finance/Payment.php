@@ -59,14 +59,21 @@ class Payment extends BaseModel implements TransactionDebitableContract
     {
         return Attribute::make(
             get: fn ($value) => $this->determineStatus(),
-        )->shouldCache();
+        );
     }
 
     public function payerName(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $this->getCreditorName(),
-        );
+        )->shouldCache();
+    }
+
+    public function nameForSelect(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->reference . ' - ' . number_format($this->amount, 2),
+        )->shouldCache();
     }
     //endregion
 
