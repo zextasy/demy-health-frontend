@@ -11,6 +11,7 @@ use App\Jobs\ChangePatientEmailJob;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\Actions\EditAction;
+use App\Helpers\HelpTextMessageHelper;
 use Filament\Forms\Components\Fieldset;
 use Filament\Pages\Actions\ActionGroup;
 use Filament\Resources\Pages\ViewRecord;
@@ -47,24 +48,60 @@ class ViewPatient extends ViewRecord
                             ->required(),
                     ])
                     ->groupedIcon('heroicon-s-at-symbol')
-                    ->modalSubheading('This will change the email for the patient and all associated test bookings, test results, orders and invoices.'),
+                    ->modalSubheading(HelpTextMessageHelper::CHANGE_EMAIL_ACTION_MODAL_SUBHEADING),
             ])->icon('heroicon-s-pencil'),
+            ActionGroup::make([
+                Action::make('Capture Payment')
+                    ->action(function (array $data): void {
+                        (new CreatePaymentAction)
+                            ->paidBy($this->record)
+                            ->run($data['amount'], $data['method']);
+                        $this->notify('success', HelpTextMessageHelper::DEFAULT_SUCCESS_MESSAGE);
+                        $this->redirect(PatientResource::getUrl('view', ['record' => $this->record->id]));
+                    })
+                    ->form([
+                        TextInput::make('amount')
+                            ->label('Amount')
+                            ->numeric()
+                            ->required(),
+                        Select::make('method')
+                            ->label('Payment Method')
+                            ->options(PaymentMethodEnum::optionsAsSelectArray())
+                            ->searchable()
+                            ->required(),
+                    ]),
+                Action::make('Attach Discount')
+                    ->action(function (array $data): void {
+                        (new LinkDiscounterAction)
+                            ->run($data['discount_id'], $this->record);
+                        $this->notify('success', HelpTextMessageHelper::DEFAULT_SUCCESS_MESSAGE);
+                        $this->redirect(PatientResource::getUrl('view', ['record' => $this->record->id]));
+                    })
+                    ->form([
+                        Select::make('discount_id')
+                            ->label('Discount')
+                            ->options(Discount::all()->toSelectArray())
+                            ->searchable()
+                            ->required(),
+                    ])
+                    ->visible($this->record->canApplyDiscount()),
+            ])->icon('heroicon-s-cash')->label('Finance'),
             Action::make('Book A Test')
                 ->action(function (array $data): void {
                     $dueDate = Carbon::parse($data['due_date']);
-                $testBooking = (new CreateTestBookingAction)
-                    ->forPatient($this->record)
-                    ->atTestCenter($data['test_center_id'])
-                    ->run($data['test_type_id'], LocationTypeEnum::CENTER, $dueDate);
-                    $this->notify('success', 'Success!');
+                    $testBooking = (new CreateTestBookingAction)
+                        ->forPatient($this->record)
+                        ->atTestCenter($data['test_center_id'])
+                        ->run($data['test_type_id'], LocationTypeEnum::CENTER, $dueDate);
+                    $this->notify('success', HelpTextMessageHelper::DEFAULT_SUCCESS_MESSAGE);
                     $this->redirect(TestBookingResource::getUrl('view', ['record' => $testBooking->id]));
-                if ($data['place_order']) {
-                    $order = (new GenerateOrderFromTestBookingAction)->run($testBooking);
-                    if (isset($data['discount_id'])) {
-                        (new LinkDiscountableAction())->run($data['discount_id'], $order);
+                    if ($data['place_order']) {
+                        $order = (new GenerateOrderFromTestBookingAction)->run($testBooking);
+                        if (isset($data['discount_id'])) {
+                            (new LinkDiscountableAction())->run($data['discount_id'], $order);
+                        }
                     }
-                }
-            })
+                })
                 ->form([
                     Fieldset::make('General Info')->schema([
                         TextInput::make('reference')
@@ -90,41 +127,6 @@ class ViewPatient extends ViewRecord
                             ->options(Discount::all()->toSelectArray())->searchable(),
                     ]),
                 ]),
-            Action::make('Capture Payment')
-                ->action(function (array $data): void {
-                    (new CreatePaymentAction)
-                        ->paidBy($this->record)
-                        ->withCustomerEmail($this->record->customer_email)
-                        ->run($data['amount'], $data['method']);
-                    $this->notify('success', 'Success!');
-                    $this->redirect(PatientResource::getUrl('view', ['record' => $this->record->id]));
-                })
-                ->form([
-                    TextInput::make('amount')
-                        ->label('Amount')
-                        ->numeric()
-                        ->required(),
-                    Select::make('method')
-                        ->label('Payment Method')
-                        ->options(PaymentMethodEnum::optionsAsSelectArray())
-                        ->searchable()
-                        ->required(),
-                ]),
-            Action::make('Attach Discount')
-                ->action(function (array $data): void {
-                    (new LinkDiscounterAction)
-                        ->run($data['discount_id'], $this->record);
-                    $this->notify('success', 'Success!');
-                    $this->redirect(PatientResource::getUrl('view', ['record' => $this->record->id]));
-                })
-                ->form([
-                    Select::make('discount_id')
-                        ->label('Discount')
-                        ->options(Discount::all()->toSelectArray())
-                        ->searchable()
-                        ->required(),
-                ])
-                ->visible($this->record->canApplyDiscount()),
         ];
     }
 }

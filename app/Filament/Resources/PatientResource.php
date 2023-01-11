@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\AgeClassificationEnum;
 use App\Enums\GenderEnum;
+use App\Helpers\HelpTextMessageHelper;
 use App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource\RelationManagers;
 use App\Models\Country;
@@ -38,7 +39,7 @@ class PatientResource extends Resource
                 TextInput::make('reference')
                     ->maxLength(255)
                     ->unique()
-                    ->helperText('Reference number for the patient. Leave this blank and the system will generate one for you'),
+                    ->helperText(HelpTextMessageHelper::REFERENCE_HELPER_MSG),
                 Fieldset::make('Name')->schema([
                     TextInput::make('first_name')
                         ->required(),
@@ -107,6 +108,7 @@ class PatientResource extends Resource
     {
         return [
             RelationManagers\TestBookingsRelationManager::class,
+            RelationManagers\PaymentsRelationManager::class,
             RelationManagers\DiscountRelationManager::class,
         ];
     }

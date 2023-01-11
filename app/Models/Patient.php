@@ -79,6 +79,10 @@ class Patient extends BaseModel implements DiscounterContract, ActiveCustomerCon
         return $this->last_name.' '.$this->first_name;
     }
 
+    public function getEmailForPayment(): ?string
+    {
+        return $this->email;
+    }
     //endregion
 
     //region HELPERS

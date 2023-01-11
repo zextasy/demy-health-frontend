@@ -110,6 +110,11 @@ class User extends Authenticatable implements
 
         return $name;
     }
+
+    public function getEmailForPayment(): ?string
+    {
+        return $this->email;
+    }
     //endregion
 
     //region SCOPES

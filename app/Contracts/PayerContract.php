@@ -7,4 +7,6 @@ interface PayerContract
     public function getLaravelMorphModelType(): string;
 
     public function getLaravelMorphModelId(): int;
+
+    public function getEmailForPayment(): ?string;
 }

@@ -30,13 +30,17 @@ class CreatePaymentAction
         $payment->metadata = $this->metadata;
         $payment->save();
 
-        $this->raiseEvents($this->shouldRaiseEvents, $payment);
+        $this->raiseEvents($payment);
         return $payment;
     }
 
-    public function paidBy(PayerContract $payer): self
+    public function paidBy(?PayerContract $payer): self
     {
-        $this->payer = $payer;
+        if (isset($payer)) {
+            $this->payer = $payer;
+            $this->customerEmail = $payer->getEmailForPayment();
+        }
+
         return $this;
     }
 
@@ -77,8 +81,8 @@ class CreatePaymentAction
         return  $this;
     }
 
-    private function raiseEvents(bool $shouldRaiseEvents, Payment $payment): void
+    private function raiseEvents(Payment $payment): void
     {
-        PaymentAddedEvent::dispatchIf($shouldRaiseEvents, $payment);
+        PaymentAddedEvent::dispatchIf($this->shouldRaiseEvents, $payment);
     }
 }
