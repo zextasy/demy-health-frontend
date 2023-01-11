@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\TestBooking;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,11 @@ class TestResultFactory extends Factory
      */
     public function definition()
     {
+        $parent = TestBooking::inRandomOrder()->firstOrFail();
         return [
-            //
+            'test_booking_id' => $parent->id,
+            'customer_email' => $parent->customer_email,
+            'customer_phone_number' => $parent->customer_phone_number
         ];
     }
 }

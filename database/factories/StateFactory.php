@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StateFactory extends Factory
@@ -13,8 +14,10 @@ class StateFactory extends Factory
      */
     public function definition()
     {
+        $parent = Country::inRandomOrder()->firstOrFail();
         return [
-            //
+            'name' => $this->faker->word,
+            'country_id' => $parent->id,
         ];
     }
 }
