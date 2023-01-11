@@ -29,7 +29,6 @@ class AttachPaymentToPayablesAction
                     }
                 }
                 $payment->internal_references = $references;
-                ray($payment->internal_references);
                 $payment->save();
             });
             $this->raiseEvents($payment);
