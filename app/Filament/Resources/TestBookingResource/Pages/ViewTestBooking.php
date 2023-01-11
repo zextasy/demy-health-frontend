@@ -2,25 +2,20 @@
 
 namespace App\Filament\Resources\TestBookingResource\Pages;
 
-use App\Models\User;
 use App\Models\TestResult;
-use Illuminate\Support\Carbon;
 use Filament\Pages\Actions\Action;
 use App\Jobs\DeleteTestBookingJob;
 use App\Helpers\FlashMessageHelper;
-use Filament\Forms\Components\Select;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Components\Textarea;
-use App\Actions\Tasks\AssignTaskAction;
+use App\Helpers\HelpTextMessageHelper;
 use Filament\Forms\Components\Fieldset;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use App\Filament\Resources\OrderResource;
-use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\TestResultResource;
 use App\Filament\Resources\TestBookingResource;
 use App\Actions\TestResults\GenerateTestResultAction;
+use App\Filament\Actions\Pages\Tasks\AssignTaskAction;
 use App\Actions\Orders\GenerateOrderFromTestBookingAction;
 
 class ViewTestBooking extends ViewRecord
@@ -30,35 +25,7 @@ class ViewTestBooking extends ViewRecord
     protected function getActions(): array
     {
         return [
-            Action::make('assign task')
-                ->mountUsing(fn (ComponentContainer $form) => $form->fill([
-                'assignedById' => auth()->id(),
-            ]))
-                ->action(function (array $data): void {
-                    $dueAt = Carbon::parse($data['due_at']);
-                    (new AssignTaskAction)->assignedBy($data['assignedById'])
-                        ->run($this->record, $data['assignedToId'], $data['details'], $dueAt);
-                    $this->notify('success', FlashMessageHelper::DEFAULT_SUCCESS_MESSAGE);
-                    $this->redirect(TestBookingResource::getUrl('view', ['record' => $this->record->id]));
-                })
-                ->form([
-                    Select::make('assignedById')
-                        ->label('Assigned by')
-                        ->options(User::query()->pluck('name', 'id'))
-                        ->disabled(),
-                    Select::make('assignedToId')
-                        ->label('Assigned To')
-                        ->options(User::query()->pluck('name', 'id'))
-                        ->searchable()
-                        ->required(),
-                    Textarea::make('details')
-                        ->required()
-                        ->maxLength(512),
-                    DateTimePicker::make('due_at')
-                        ->minDate(now())
-                        ->withoutSeconds()
-                        ->required(),
-                ]),
+            AssignTaskAction::make()->assignable($this->record),
             Action::make('generate order')
                 ->action(function (): void {
                     $order = (new GenerateOrderFromTestBookingAction)->run($this->record);
@@ -89,7 +56,7 @@ class ViewTestBooking extends ViewRecord
                         TextInput::make('customer_email')
                             ->email()
                             ->maxLength(255)
-                            ->helperText('Leave this blank and the system will use the customer email from the booking'),
+                            ->helperText(HelpTextMessageHelper::TEST_RESULT_CUSTOMER_EMAIL_MSG),
                     ]),
                 ])
                 ->visible($this->record->testResultIsNotComplete()),
