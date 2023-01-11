@@ -13,4 +13,6 @@ class HelpTextMessageHelper
     public const CHANGE_EMAIL_ACTION_MODAL_SUBHEADING =
         'This will change the email for the patient and all associated entities.'
         .'Including test bookings, test results, orders and invoices.';
+	public const NAME_SLUG_TEXT =
+        'This is the internal name. It should be all lowercase with underscores instead of spaces';
 }

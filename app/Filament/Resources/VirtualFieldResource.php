@@ -2,8 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use Closure;
+use Illuminate\Support\Str;
 use App\Enums\FieldTypeEnum;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Hidden;
+use App\Helpers\HelpTextMessageHelper;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\VirtualFieldResource\Pages;
@@ -40,14 +44,28 @@ class VirtualFieldResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Fieldset::make('Details')->schema([
-                    TextInput::make('name')
-                        ->required()->unique()
-                        ->helperText('This is the internal name. It should be all lowercase with underscores instead of spaces')
+                    TextInput::make('label')
+                        ->afterStateUpdated(function (Closure $get, Closure $set, ?string $state) {
+                            if (! $get('is_slug_changed_manually') && filled($state)) {
+                                $set('name', Str::snake($state));
+                            }
+                        })
+                        ->reactive()
+                        ->required()
+                        ->unique()
+                        ->helperText('This is how the field will be displayed to users')
                         ->maxLength(255),
-                        TextInput::make('label')
-                            ->required()->unique()
-                            ->helperText('This is how the field will be displayed to users')
-                            ->maxLength(255),
+                    TextInput::make('name')
+                        ->afterStateUpdated(function (Closure $set) {
+                            $set('is_slug_changed_manually', true);
+                        })
+                        ->required()
+                        ->unique()
+                        ->helperText(HelpTextMessageHelper::NAME_SLUG_TEXT)
+                        ->maxLength(255),
+                    Hidden::make('is_slug_changed_manually')
+                        ->default(false)
+                        ->dehydrated(false),
                         Select::make('field_type')
                             ->options(FieldTypeEnum::optionsAsSelectArray())
                             ->required(),
