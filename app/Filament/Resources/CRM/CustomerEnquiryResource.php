@@ -41,6 +41,8 @@ class CustomerEnquiryResource extends Resource
                         ->maxLength(255),
                 ])->columns(3),
                 Forms\Components\Fieldset::make('Message Details')->schema([
+                    Forms\Components\DateTimePicker::make('created_at')
+                        ->label('Received on')->disabled(),
                     Forms\Components\Textarea::make('customer_message')
                         ->required()
                         ->maxLength(255),
@@ -68,6 +70,7 @@ class CustomerEnquiryResource extends Resource
                 Tables\Columns\BadgeColumn::make('status'),
                 Tables\Columns\BadgeColumn::make('type')
                     ->enum(EnquiryTypeEnum::optionsAsSelectArray())->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->label('Received on')->date()->sortable(),
             ])
             ->filters([
                 //
