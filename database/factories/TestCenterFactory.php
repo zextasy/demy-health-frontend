@@ -14,7 +14,8 @@ class TestCenterFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->word,
+            'offers_home_collection' => $this->faker->boolean
         ];
     }
 }

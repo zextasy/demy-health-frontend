@@ -4,12 +4,14 @@ namespace App\Models;
 
 use App\Traits\Relationships\HasAddresses;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class State extends BaseModel
 {
-    use HasFactory, HasAddresses;
+    use HasFactory;
+    use HasAddresses;
 
     //region CONFIG
     protected $dates = ['created_at', 'updated_at'];
@@ -50,6 +52,11 @@ class State extends BaseModel
     public function localGovernmentAreasWithHomeSampleCollection(): HasMany
     {
         return $this->hasMany(LocalGovernmentArea::class)->isReadyForSampleCollection();
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
     }
     //endregion
 }

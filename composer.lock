@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cfd5875244efbd2044dfcbc6e9cfc4f6",
+    "content-hash": "89af69e47b3ab7aa119c3e129cca9308",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -136,6 +136,68 @@
                 "source": "https://github.com/Althinect/filament-spatie-roles-permissions/tree/v1.0.1"
             },
             "time": "2022-07-31T19:50:14+00:00"
+        },
+        {
+            "name": "anourvalar/eloquent-serialize",
+            "version": "1.2.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AnourValar/eloquent-serialize.git",
+                "reference": "fcfe9fc67c392c379158085110353ebbde1cce34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AnourValar/eloquent-serialize/zipball/fcfe9fc67c392c379158085110353ebbde1cce34",
+                "reference": "fcfe9fc67c392c379158085110353ebbde1cce34",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.1",
+                "orchestra/testbench": "~3.6.0|~3.7.0|~3.8.0|^4.0|^5.0|^6.0|^7.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "EloquentSerialize": "AnourValar\\EloquentSerialize\\Facades\\EloquentSerializeFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AnourValar\\EloquentSerialize\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel Query Builder (Eloquent) serialization",
+            "homepage": "https://github.com/AnourValar/eloquent-serialize",
+            "keywords": [
+                "anourvalar",
+                "builder",
+                "copy",
+                "eloquent",
+                "job",
+                "laravel",
+                "query",
+                "querybuilder",
+                "queue",
+                "serializable",
+                "serialization",
+                "serialize"
+            ],
+            "support": {
+                "issues": "https://github.com/AnourValar/eloquent-serialize/issues",
+                "source": "https://github.com/AnourValar/eloquent-serialize/tree/1.2.13"
+            },
+            "time": "2022-11-22T17:07:23+00:00"
         },
         {
             "name": "archtechx/enums",
@@ -5444,19 +5506,20 @@
         },
         {
             "name": "pxlrbt/filament-excel",
-            "version": "0.1.4",
+            "version": "v1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pxlrbt/filament-excel.git",
-                "reference": "453530a1a97321ab81a8c43c560e8dada1f4ba41"
+                "reference": "7d238b0e2a4ebf678aa7b9317e08439e62611d8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pxlrbt/filament-excel/zipball/453530a1a97321ab81a8c43c560e8dada1f4ba41",
-                "reference": "453530a1a97321ab81a8c43c560e8dada1f4ba41",
+                "url": "https://api.github.com/repos/pxlrbt/filament-excel/zipball/7d238b0e2a4ebf678aa7b9317e08439e62611d8a",
+                "reference": "7d238b0e2a4ebf678aa7b9317e08439e62611d8a",
                 "shasum": ""
             },
             "require": {
+                "anourvalar/eloquent-serialize": "^1.2",
                 "filament/filament": "^2.0",
                 "maatwebsite/excel": "^3.1",
                 "php": "^8.0"
@@ -5467,7 +5530,9 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": []
+                    "providers": [
+                        "pxlrbt\\FilamentExcel\\FilamentExcelServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -5496,9 +5561,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pxlrbt/filament-excel/issues",
-                "source": "https://github.com/pxlrbt/filament-excel/tree/0.1.4"
+                "source": "https://github.com/pxlrbt/filament-excel/tree/v1.1.6"
             },
-            "time": "2022-06-16T09:22:19+00:00"
+            "time": "2022-11-16T16:12:38+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

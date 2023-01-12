@@ -57,6 +57,11 @@ class TestType extends BaseModel
         return TestTypeResource::getUrl('view', ['record' => $this->id]);
     }
 
+    public function hasTestResultTemplate(): bool
+    {
+        return $this->testResultTemplate()->exists();
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(TestCategory::class, 'test_category_id');

@@ -25,7 +25,7 @@
         "livewire/livewire": "^2.10",
         "maatwebsite/excel": "^3.1",
         "predis/predis": "^1.1",
-        "pxlrbt/filament-excel": "^0.1.2",
+        "pxlrbt/filament-excel": "^1.1",
         "realrashid/sweet-alert": "^5.0",
         "ryangjchandler/filament-profile": "^0.2.0",
         "saade/filament-fullcalendar": "^0.2.1",
