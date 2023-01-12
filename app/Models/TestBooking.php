@@ -193,6 +193,11 @@ class TestBooking extends BaseModel implements
     {
         return $this;
     }
+
+    public function hasTestResultTemplate(): bool
+    {
+        return $this->testType->hasTestResultTemplate();
+    }
     //endregion
 
     //region SCOPES
