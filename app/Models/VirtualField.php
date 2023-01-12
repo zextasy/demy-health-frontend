@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\BaseModel;
 use App\Enums\FieldTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class VirtualField extends BaseModel
 {
@@ -32,11 +32,11 @@ class VirtualField extends BaseModel
     //endregion
 
     //region RELATIONSHIPS
-    public function testResultTemplates(): BelongsToMany
+    public function testResultTemplates(): MorphToMany
     {
-        return $this->belongsToMany(TestResultTemplate::class)
+        return $this->morphedByMany(TestResultTemplate::class, 'virtual_fieldable')
 //            ->withPivot(['display_weight','is_required','is_searchable','should_display_on_index'])
-            ->using(TestResultTemplateVirtualField::class);
+            ->using(VirtualFieldable::class);
     }
     //endregion
 

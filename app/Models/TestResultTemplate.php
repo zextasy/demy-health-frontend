@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\Models\BaseModel;
+use App\Contracts\VirtualFieldableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\morphToMany;
 
-class TestResultTemplate extends BaseModel
+class TestResultTemplate extends BaseModel implements VirtualFieldableContract
 {
     use HasFactory;
 
@@ -27,11 +28,11 @@ class TestResultTemplate extends BaseModel
     //endregion
 
     //region RELATIONSHIPS
-    public function virtualFields(): BelongsToMany
+    public function virtualFields(): morphToMany
     {
-        return $this->belongsToMany(VirtualField::class)
+        return $this->morphToMany(VirtualField::class, 'virtual_fieldable')
 //            ->withPivot(['display_weight','is_required','is_searchable','should_display_on_index'])
-            ->using(TestResultTemplateVirtualField::class);
+            ->using(VirtualFieldable::class);
     }
     //endregion
 

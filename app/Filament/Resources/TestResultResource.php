@@ -40,7 +40,7 @@ class TestResultResource extends Resource
                         ->maxLength(255)
                         ->helperText('Leave this blank and the system will generate one for you'),
                 ])->columns(1),
-                Forms\Components\Fieldset::make('Result')->schema([
+                Forms\Components\Fieldset::make('Result File')->schema([
                     SpatieMediaLibraryFileUpload::make('result')
                         ->multiple()
                         ->collection('result')

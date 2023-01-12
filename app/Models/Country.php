@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Country extends BaseModel
 {
-    use HasFactory;
 
     //region CONFIG
     protected $guarded = ['id'];

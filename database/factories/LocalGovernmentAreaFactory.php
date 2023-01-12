@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\State;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LocalGovernmentAreaFactory extends Factory
@@ -13,8 +14,11 @@ class LocalGovernmentAreaFactory extends Factory
      */
     public function definition()
     {
+        $parent = State::inRandomOrder()->firstOrFail();
         return [
-            //
+            'name' => $this->faker->word,
+            'state_id' => $parent->id,
+            'is_ready_for_sample_collection' => $this->faker->boolean
         ];
     }
 }

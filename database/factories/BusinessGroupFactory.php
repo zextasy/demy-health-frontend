@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\BusinessGroup;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,12 @@ class BusinessGroupFactory extends Factory
      */
     public function definition()
     {
+        $parent = BusinessGroup::inRandomOrder()->firstOrFail();
         return [
-            //
+            'name' => $this->faker->word,
+            'description' => $this->faker->words,
+            'order' => $parent->order + 1,
+            'parent_id' => $parent->id,
         ];
     }
 }

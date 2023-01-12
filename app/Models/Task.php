@@ -30,7 +30,7 @@ class Task extends BaseModel
     //region ATTRIBUTES
     public function getAssignableNameAttribute(): string
     {
-        return $this->assignable->assignable_name;
+        return $this->assignable->getAssignableName();
     }
     //endregion
 

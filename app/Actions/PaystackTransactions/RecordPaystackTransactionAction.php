@@ -13,7 +13,6 @@ class RecordPaystackTransactionAction
 
     public function run(bool $success, array $paymentDataArray) : PaystackTransaction
     {
-        ray($paymentDataArray);
         $reference = $paymentDataArray['reference'];
         $paystackTransaction = PaystackTransaction::firstOrNew(['reference' =>  $reference]);
 
