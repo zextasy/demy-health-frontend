@@ -25,7 +25,6 @@ class GenerateOrderForSingleItemAction extends BasePageAction
         $this->requiresConfirmation()
             ->icon('heroicon-o-lightning-bolt')
             ->action(function (): void {
-                $this->successRedirectUrl(OrderResource::getUrl('view', ['record' => $this->order->id]));
                 $this->runAction() ? $this->success() : $this->failure();
 
 
@@ -43,6 +42,7 @@ class GenerateOrderForSingleItemAction extends BasePageAction
     {
         try {
             $this->order = (new GenerateOrderFromTestBookingAction)->run($this->subject);
+            $this->successRedirectUrl(OrderResource::getUrl('view', ['record' => $this->order->id]));
             return true;
         } catch (\Exception $e) {
             report($e);
