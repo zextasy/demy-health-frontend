@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Settings\GeneralSettings;
+use App\Helpers\HelpTextMessageHelper;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Resources\TestTypeResource\Pages;
 use App\Filament\Resources\TestTypeResource\RelationManagers;
@@ -13,10 +14,12 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class TestTypeResource extends Resource
 {
     use DisplaysCurrencies;
+
     protected static ?string $model = TestType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
@@ -33,7 +36,7 @@ class TestTypeResource extends Resource
                     Forms\Components\TextInput::make('test_id')
                         ->maxLength(255)
                         ->unique()
-                        ->helperText('Internal unique reference for this test type. Leave blank and the system will generate one for you'),
+                        ->helperText(HelpTextMessageHelper::TEST_TYPE_REFERENCE_HELPER_MSG),
                     Forms\Components\TextInput::make('name')
                         ->required()
                         ->maxLength(255)
@@ -49,7 +52,7 @@ class TestTypeResource extends Resource
                 ]),
                 Fieldset::make('Pricing')->schema([
                     Forms\Components\Toggle::make('should_call_in_for_details')
-                        ->helperText('If this is selected, customers will not see the price of this item and will be asked to call in instead')
+                        ->helperText(HelpTextMessageHelper::TEST_TYPE_CALL_IN_MSG)
                         ->required(),
                 ]),
                 Fieldset::make('Turn around time')
@@ -95,6 +98,9 @@ class TestTypeResource extends Resource
             ])
             ->filters([
                 //
+            ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
             ])
             ->defaultSort('test_id');
     }
