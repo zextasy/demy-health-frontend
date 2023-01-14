@@ -14,7 +14,8 @@ class StateFactory extends Factory
      */
     public function definition()
     {
-        $parent = Country::inRandomOrder()->firstOrFail();
+        $parent = Country::inRandomOrder()->first() ??
+            Country::create(['code' =>'COU','name' => 'Country','nationality' => 'Countrish']);
         return [
             'name' => $this->faker->word,
             'country_id' => $parent->id,

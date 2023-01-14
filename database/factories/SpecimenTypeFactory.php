@@ -14,8 +14,8 @@ class SpecimenTypeFactory extends Factory
     public function definition()
     {
         return [
-            'key' => $this->faker->word,
-            'description' => $this->faker->words,
+            'key' => $this->faker->unique()->word,
+            'description' => $this->faker->words(5, true),
         ];
     }
 }

@@ -25,10 +25,8 @@ class OrderFactory extends Factory
 
     public function configure()
     {
-        $randomNumber = $this->faker->randomDigitNotZero();
-        return $this->afterMaking(function (Order $model) use ($randomNumber) {
-            OrderItem::factory($randomNumber)->make(['order_id' => $model->id]);
-        })->afterCreating(function (Order $model) use ($randomNumber) {
+        $randomNumber = $this->faker->numberBetween(1, 5);
+        return $this->afterCreating(function (Order $model) use ($randomNumber) {
             OrderItem::factory($randomNumber)->create(['order_id' => $model->id]);
         });
     }

@@ -2,6 +2,9 @@
 
 namespace Database\Factories\Finance;
 
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Finance\Invoice;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +19,15 @@ class InvoiceItemFactory extends Factory
      */
     public function definition()
     {
+        $randomProduct = Product::inRandomOrder()->first() ?? Product::factory()->create();
+        $parent = Invoice::inRandomOrder()->first() ?? Invoice::factory()->create();
         return [
-            //
+            'invoice_id' => $parent->id,
+            'name' => $randomProduct->getOrderableItemName(),
+            'price' => $randomProduct->getInvoiceableItemPrice(),
+            'quantity' => $this->faker->randomNumber(),
+            'invoiceable_item_type' => $randomProduct->getLaravelMorphModelType(),
+            'invoiceable_item_id' => $randomProduct->getLaravelMorphModelId()
         ];
     }
 }

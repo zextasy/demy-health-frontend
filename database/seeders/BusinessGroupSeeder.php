@@ -14,6 +14,6 @@ class BusinessGroupSeeder extends Seeder
      */
     public function run()
     {
-
+        BusinessGroup::factory()->count(10)->create();
     }
 }

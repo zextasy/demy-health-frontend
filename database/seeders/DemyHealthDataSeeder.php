@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BusinessGroup;
 use Illuminate\Database\Seeder;
 use Database\Seeders\Demy\DemyUserSeeder;
 use Database\Seeders\Demy\DemyProductSeeder;
@@ -21,7 +22,9 @@ class DemyHealthDataSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(DatabaseSeeder::class);
+        if (BusinessGroup::whereNotNull('parent_id')->doesntExist()) {
+            $this->call(DatabaseSeeder::class);
+        }
         $this->call(DemyUserSeeder::class);
         $this->call(DemyReferralChannelSeeder::class);
         $this->call(DemyTestCenterSeeder::class);

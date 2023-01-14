@@ -22,14 +22,13 @@ class ProductFactory extends Factory
         ];
     }
 
-//    public function configure()
-//    {
-//        $randomNumber = $this->faker->numberBetween(1, 10000000);
-//        return $this->afterMaking(function (Product $model) use ($randomNumber) {
-//            $model->setPrice($randomNumber);
-//        })->afterCreating(function (Product $model) use ($randomNumber) {
-//            $model->fresh();
-//            $model->setPrice($randomNumber);
-//        });
-//    }
+    public function configure()
+    {
+        $randomNumber = $this->faker->numberBetween(1, 1000000);
+        return $this->afterCreating(function (Product $model) use ($randomNumber) {
+            Price::factory()->create([
+                'amount' => $randomNumber, 'priceable_id' => $model->id,'priceable_type' => get_class($model)
+            ]);
+        });
+    }
 }
