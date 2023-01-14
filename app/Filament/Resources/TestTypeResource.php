@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Settings\GeneralSettings;
 use App\Helpers\HelpTextMessageHelper;
+use Illuminate\Database\Eloquent\Builder;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Resources\TestTypeResource\Pages;
 use App\Filament\Resources\TestTypeResource\RelationManagers;
@@ -27,6 +28,11 @@ class TestTypeResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationGroup = 'Tests';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with(['category', 'testResultTemplate']);
+    }
 
     public static function form(Form $form): Form
     {
