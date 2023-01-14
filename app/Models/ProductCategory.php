@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Relationships\BelongsToSelf;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductCategory extends BaseModel
 {
     use HasFactory;
+    use BelongsToSelf;
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -20,13 +20,9 @@ class ProductCategory extends BaseModel
         return $this->belongsToMany(Product::class, 'products_product_categories');
     }
 
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(ProductCategory::class, 'product_category_id');
-    }
 
-    public function children(): HasMany
+    protected function getLocalForeignKey(): string
     {
-        return $this->hasMany(ProductCategory::class, 'product_category_id');
+        return 'product_category_id';
     }
 }

@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use App\Enums\BusinessGroups\BusinessGroupHierarchyDirectionEnum;
+use App\Traits\Relationships\BelongsToSelf;
 use App\Queries\BusinessGroups\GetBusinessGroupsQuery;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Enums\BusinessGroups\BusinessGroupHierarchyDirectionEnum;
 
 class BusinessGroup extends BaseModel
 {
     use HasFactory;
+    use BelongsToSelf;
 
     //region CONFIG
     protected $guarded = ['id'];
@@ -28,34 +28,35 @@ class BusinessGroup extends BaseModel
         return self::whereNull('parent_id')->first();
     }
 
-    public function isParentOfBusinessGroup($childBusinessGroup): bool
+    public function isParentOfBusinessGroup(self|int $childBusinessGroup): bool
     {
-        $childBusinessGroupParentId = $childBusinessGroup instanceof self ? $childBusinessGroup->parent_id : $childBusinessGroup;
 
-        return $this->id == $childBusinessGroupParentId;
+        return $this->isParentOf($childBusinessGroup);
     }
 
-    public function isAncestorOfBusinessGroup($childBusinessGroup): bool
+    public function isAncestorOfBusinessGroup(self|int $childBusinessGroup): bool
     {
-        $childBusinessGroupParentId = $childBusinessGroup instanceof self ? $childBusinessGroup->parent_id : $childBusinessGroup;
-        $AncestralBusinessGroups = (new GetBusinessGroupsQuery())->forBusinessGroup($childBusinessGroupParentId,
-            BusinessGroupHierarchyDirectionEnum::UP)->query();
+        $childBusinessGroupParentId = $childBusinessGroup instanceof self ?
+            $childBusinessGroup->parent_id : $childBusinessGroup;
+        $ancestralBusinessGroups = (new GetBusinessGroupsQuery())
+            ->forBusinessGroup($childBusinessGroupParentId, BusinessGroupHierarchyDirectionEnum::UP)
+            ->query();
 
-        return $AncestralBusinessGroups->contains($this);
+        return $ancestralBusinessGroups->contains($this);
     }
 
-    public function isChildOfBusinessGroup($parentBusinessGroup): bool
+    public function isChildOfBusinessGroup(self|int $parentBusinessGroup): bool
+    {
+        return $this->isChildOf($parentBusinessGroup);
+    }
+
+    public function isDescendantOfBusinessGroup(self|int $parentBusinessGroup): bool
     {
         $parentBusinessGroupId = $parentBusinessGroup instanceof self ? $parentBusinessGroup->id : $parentBusinessGroup;
-
-        return $this->parent_id == $parentBusinessGroupId;
-    }
-
-    public function isDescendantOfBusinessGroup($parentBusinessGroup): bool
-    {
-        $parentBusinessGroupId = $parentBusinessGroup instanceof self ? $parentBusinessGroup->id : $parentBusinessGroup;
-        $descendantBusinessGroups = (new GetBusinessGroupsQuery())->forBusinessGroup($parentBusinessGroupId,
-            BusinessGroupHierarchyDirectionEnum::DOWN)->includeCurrentBusinessGroup()->query();
+        $descendantBusinessGroups = (new GetBusinessGroupsQuery())
+            ->forBusinessGroup($parentBusinessGroupId, BusinessGroupHierarchyDirectionEnum::DOWN)
+            ->includeCurrentBusinessGroup()
+            ->query();
 
         return $descendantBusinessGroups->contains($this);
     }
@@ -66,19 +67,10 @@ class BusinessGroup extends BaseModel
     //endregion
 
     //region RELATIONSHIPS
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(self::class, 'parent_id', 'id');
-    }
 
-    public function children(): HasMany
-    {
-        return $this->hasMany(self::class, 'parent_id', 'id');
-    }
-
-    public function allChildren(): HasMany
-    {
-        return $this->hasMany(self::class, 'parent_id', 'id')->with('allChildren');
-    }
     //endregion
+    protected function getLocalForeignKey(): string
+    {
+        return 'parent_id';
+    }
 }
