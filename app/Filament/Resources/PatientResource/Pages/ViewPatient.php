@@ -51,7 +51,8 @@ class ViewPatient extends ViewRecord
             Action::make('Place an Order')
                 ->url(PlaceOrder::getUrl([
                     'customerEmail' => $this->record->email,
-                    'customerPhoneNumber' => $this->record->phone_number
+                    'customerPhoneNumber' => $this->record->phone_number,
+                    'patientId' => $this->record->id
                 ])),
             BookATestForPatientAction::make('Book A Test')->subject($this->record),
         ];

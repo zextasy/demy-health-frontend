@@ -21,4 +21,8 @@ class HelpTextMessageHelper
         'If this is selected, customers will not see the price of this item and will be asked to call in instead';
     public const TEST_TYPE_REFERENCE_HELPER_MSG =
         'Internal unique reference for this test type. Leave blank and the system will generate one for you';
+    public const ORDER_REFERENCE_TEXT =
+        'Reference number for the order. Leave this blank and the system will generate one for you';
+    public const ORDER_CUSTOMER_EMAIL_TEXT =
+        'Customer email address. This is required for the system to know who to send the order to';
 }
