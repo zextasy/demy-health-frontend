@@ -9,10 +9,10 @@ use App\Models\TestResult;
 class ChangeTestResultEmailAction
 {
 
-    public function run(TestResult|int $invoice, string $email): TestResult
+    public function run(TestResult|int $testResult, string $email): TestResult
     {
-        $invoice = $invoice instanceof TestResult ? $invoice : TestResult::findOrFail($invoice);
-        $invoice->update(['customer_email' => $email]);
-        return $invoice;
+        $testResult = $testResult instanceof TestResult ? $testResult : TestResult::findOrFail($testResult);
+        $testResult->update(['customer_email' => $email]);
+        return $testResult;
     }
 }
