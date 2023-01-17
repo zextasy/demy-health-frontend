@@ -22,6 +22,16 @@ class TasksAssignedToMe extends Page implements HasTable
 
     protected static string $view = 'filament.pages.tasks-assigned-to-me';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isFilamentBackendUser();
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->isFilamentBackendUser(), 403);
+    }
+
     public function getTableQuery(): Builder
     {
         return Task::query()->where('assigned_to', auth()->user()->id);

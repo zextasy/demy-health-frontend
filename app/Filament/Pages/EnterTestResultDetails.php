@@ -34,6 +34,7 @@ class EnterTestResultDetails extends Page implements HasForms
 
     public function mount(): void
     {
+        abort_unless(auth()->user()->isFilamentBackendUser(), 403);
         $this->testBooking = TestBooking::findOrFail(request()->get('testBookingId'));
         $this->form->fill([
             'test_booking_id' => $this->testBooking->id,

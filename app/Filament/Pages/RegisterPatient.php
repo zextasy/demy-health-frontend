@@ -73,7 +73,12 @@ class RegisterPatient extends Page implements HasForms
 
     protected static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->hasPermissionTo('backend');
+        return auth()->user()->isFilamentBackendUser();
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->isFilamentBackendUser(), 403);
     }
 
     protected function getFormSchema(): array
