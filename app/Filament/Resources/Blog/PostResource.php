@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+use Filament\Forms\Components\SpatieTagsInput;
 use function now;
 
 
@@ -98,9 +99,9 @@ class PostResource extends Resource
 
                         Forms\Components\DatePicker::make('published_at')
                             ->label(__('blog.published_date')),
-//                        SpatieTagsInput::make('tags')
-//                            ->label(__('blog.tags'))
-//                            ->required(),
+                        SpatieTagsInput::make('tags')
+                            ->label(__('blog.tags'))
+                            ->required(),
                     ])
                     ->columns([
                         'sm' => 2,
