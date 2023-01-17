@@ -4,6 +4,7 @@ namespace App\Actions\Patients;
 
 use App\Models\Patient;
 use Illuminate\Support\Facades\DB;
+use App\Actions\Payments\ChangePaymentEmailAction;
 use App\Actions\TestResults\ChangeTestResultEmailAction;
 use App\Actions\TestBookings\ChangeTestBookingEmailAction;
 
@@ -14,16 +15,20 @@ class ChangePatientEmailAction
     {
         $patient = $patient instanceof Patient ? $patient : Patient::findOrFail($patient);
         DB::transaction(function () use ($email, $patient) {
-            $patient->update(['email' => $email]);
-            $patient->loadMissing(['testBookings','testResults']);
+            $patient->loadMissing(['testBookings','testResults','payments']);
             $testBookingAction = new ChangeTestBookingEmailAction;
             $testResultAction = new ChangeTestResultEmailAction;
+            $paymentAction = new ChangePaymentEmailAction;
             foreach ($patient->testBookings as $testBooking) {
                 $testBookingAction->run($testBooking, $email);
             }
             foreach ($patient->testResults as $testResult) {
                 $testResultAction->run($testResult, $email);
             }
+            foreach ($patient->payments as $payment) {
+                $paymentAction->run($payment, $email);
+            }
+            $patient->update(['email' => $email]);
         });
         return $patient;
     }

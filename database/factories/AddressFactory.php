@@ -15,7 +15,7 @@ class AddressFactory extends Factory
      */
     public function definition()
     {
-        $lga = LocalGovernmentArea::inRandomOrder()->firstOrFail();
+        $lga = LocalGovernmentArea::inRandomOrder()->first() ?? LocalGovernmentArea::factory()->create();
         return [
             'line_1' => $this->faker->streetAddress,
             'line_2' => $this->faker->address,

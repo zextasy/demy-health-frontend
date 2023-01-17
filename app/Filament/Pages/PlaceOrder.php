@@ -2,17 +2,32 @@
 
 namespace App\Filament\Pages;
 
-use App\Actions\Orders\CreateOrderAction;
-use App\Enums\Finance\Payments\PaymentMethodEnum;
-use App\Filament\Resources\OrderResource;
+
 use App\Models\Product;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Wizard\Step;
+use App\Models\Patient;
 use Filament\Pages\Page;
+use App\Models\TestType;
+use App\Enums\GenderEnum;
+use Illuminate\Support\Carbon;
+use App\Models\Finance\Discount;
 use Illuminate\Support\Collection;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Wizard;
+use App\Helpers\HelpTextMessageHelper;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\TextInput;
+use App\Actions\Orders\CreateOrderAction;
+use App\Filament\Resources\OrderResource;
+use Filament\Forms\Components\Wizard\Step;
+use Filament\Forms\Components\Placeholder;
+use App\Enums\TestBookings\LocationTypeEnum;
+use Filament\Forms\Components\DateTimePicker;
+use App\Actions\Patients\CreatePatientAction;
+use App\Actions\Discounts\LinkDiscountableAction;
+use App\Actions\TestBookings\CreateTestBookingAction;
 use App\Actions\Invoices\GenerateInvoiceForOrderAction;
 
 class PlaceOrder extends Page
@@ -27,34 +42,48 @@ class PlaceOrder extends Page
 
     protected static ?int $navigationSort = 2;
 
-    public $reference;
+    public ?string $reference = null;
 
-    public $customerEmail;
+    public ?string $customerEmail = null;
 
-    public $paymentMethod;
+    public ?string $customerPhoneNumber = null;
+
+    private bool $hasCustomer = false;
+
 
     protected static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
     }
 
+    public function mount(): void
+    {
+        $customer = Patient::find(request()->get('patientId'));
+        $this->form->fill([
+            'customerEmail' => request()->get('customerEmail'),
+            'customerPhoneNumber' => request()->get('customerPhoneNumber'),
+            'customerFirstName' => $customer?->first_name,
+            'customerLastName' => $customer?->last_name,
+            'customerGender' => $customer?->gender->value,
+        ]);
+
+        if ($customer) {
+            $this->hasCustomer = true;
+        }
+    }
+
     protected function getFormSchema(): array
     {
         return [
             Wizard::make([
-                Step::make('Intro')
-                    ->schema([
-                        TextInput::make('reference')
-                            ->maxLength(255)
-                            ->helperText('Reference number for the order. Leave this blank and the system will generate one for you'),
-                        TextInput::make('customerEmail')
-                            ->email()
-                            ->maxLength(255)
-                            ->required()
-                            ->helperText('Customer email address. This is required for the system to know who to send the order to'),
-                    ]),
                 Step::make('Order Data')
                     ->schema([
+                        Grid::make()
+                            ->schema([
+                                TextInput::make('reference')
+                                    ->maxLength(255)
+                                    ->helperText(HelpTextMessageHelper::ORDER_REFERENCE_TEXT),
+                            ]),
                         Repeater::make('products')
                             ->schema([
                                 Select::make('productId')
@@ -64,15 +93,51 @@ class PlaceOrder extends Page
                                     ->required(),
                                 TextInput::make('quantity')->integer()->required(),
                             ])
+                            ->columns(2),
+                        Repeater::make('tests')
+                            ->schema([
+                                Select::make('testTypeId')
+                                    ->label('Test')
+                                    ->options(TestType::all()->toSelectArray())
+                                    ->searchable()
+                                    ->required(),
+                                TextInput::make('quantity')->integer()->required()
+                                    ->default(1)->maxLength(10),
+                                DateTimePicker::make('dueDate')->required(),
+                            ])
                             ->columns(3),
+                    ]),
+                Step::make('Customer Details')
+                    ->schema([
+                        Card::make()->schema([
+                            TextInput::make('customerEmail')
+                                ->email()
+                                ->maxLength(255)
+                                ->required()
+                                ->disabled($this->hasCustomer)
+                                ->helperText(HelpTextMessageHelper::ORDER_CUSTOMER_EMAIL_TEXT),
+                            TextInput::make('customerPhoneNumber')
+                                ->disabled($this->hasCustomer)
+                                ->maxLength(25),
+                            TextInput::make('customerFirstName')->required()->disabled($this->hasCustomer),
+                            TextInput::make('customerLastName')->required()->disabled($this->hasCustomer),
+                            Select::make('customerGender')->options(GenderEnum::optionsAsSelectArray())
+                                ->required()->disabled($this->hasCustomer),
+                        ])->columns(2),
+                    ]),
+                Step::make('Discount')
+                    ->schema([
+                        Select::make('discountId')
+                            ->label('Discount')
+                            ->options(Discount::all()->toSelectArray())
+                            ->searchable(),
                     ]),
                 Step::make('Confirmation')
                     ->schema([
-                        TextInput::make('summary')
-                            ->disabled()
-                            ->afterStateHydrated(function (TextInput $component, $state) {
-                                $component->state($this->getOrderSummary());
-                            })
+                        Checkbox::make('shouldGenerateInvoice')->label('Generate Invoice?')
+                            ->helperText('Check this box to generate an invoice for this Order automatically.'),
+                        Placeholder::make('summary')
+                            //                            ->content($this->getOrderSummary())
                             ->helperText('Summary of the order. Please confirm that this is correct before submitting'),
                     ]),
             ])
@@ -83,22 +148,58 @@ class PlaceOrder extends Page
     public function submitWizard(): void
     {
         try {
-            $productCollection = new Collection();
-            foreach ($this->products as $productArray) {
-                $productModel = Product::find($productArray['productId']);
-                $orderableItemCollection = collect(
-                    [
-                        'model' => $productModel,
-                        'name' => $productModel->name,
-                        'price' => $productModel->price,
-                        'quantity' => $productArray['quantity'],
-                    ]
-                );
-                $productCollection->push($orderableItemCollection);
+            $orderItems = new Collection();
+            if (!empty($this->products)) {
+                foreach ($this->products as $productArray) {
+                    $productModel = Product::find($productArray['productId']);
+                    $orderableItemCollection = collect(
+                        [
+                            'model' => $productModel,
+                            'name' => $productModel->name,
+                            'price' => $productModel->price,
+                            'quantity' => $productArray['quantity'],
+                        ]
+                    );
+                    $orderItems->push($orderableItemCollection);
+                }
             }
-            $order = (new CreateOrderAction)->run($productCollection, $this->customerEmail);
-            (new GenerateInvoiceForOrderAction)->run($order);
 
+            if (!empty($this->tests)) {
+                foreach ($this->tests as $testArray) {
+                    $testType = TestType::find($testArray['testTypeId']);
+                    $dueDate = Carbon::parse($testArray['dueDate']);
+                    $patient = Patient::where('email', $this->customerEmail)->first();
+                    if (empty($patient)) {
+                        $genderEnum = GenderEnum::from(intval($this->customerGender));
+                        $patient = (new CreatePatientAction)
+                            ->withContactDetails($this->customerEmail, $this->customerPhoneNumber)
+                            ->run($this->customerFirstName, $this->customerLastName, $genderEnum);
+                    }
+                    $testBooking = (new CreateTestBookingAction())->forPatient($patient)
+                        ->run($testType, LocationTypeEnum::CENTER, $dueDate);
+                    $orderableItemCollection = collect(
+                        [
+                            'model' => $testBooking,
+                            'name' => $testBooking->name,
+                            'price' => $testBooking->price,
+                            'quantity' => $testArray['quantity'],
+                        ]
+                    );
+                    $orderItems->push($orderableItemCollection);
+                }
+            }
+
+            $order = (new CreateOrderAction)->run($orderItems, $this->customerEmail);
+
+            if (isset($this->discountId)) {
+                (new LinkDiscountableAction)->run($this->discountId, $order);
+            }
+
+            if ($this->shouldGenerateInvoice) {
+                (new GenerateInvoiceForOrderAction)->run($order);
+            }
+
+            $this->notify('success', 'Order created!');
             $this->redirect(OrderResource::getUrl('view', ['record' => $order->id]));
         } catch (\Exception $e) {
             $this->notify('danger', 'Something went wrong'.$e->getMessage());

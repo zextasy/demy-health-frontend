@@ -13,10 +13,10 @@ class ChangeOrderEmailAction
     {
         $order = $order instanceof Order ? $order : Order::findOrFail($order);
         DB::transaction(function () use ($email, $order) {
-            $order->update(['customer_email' => $email]);
             if (isset($order->invoice)) {
                 (new ChangeInvoiceEmailAction)->run($order->invoice, $email);
             }
+            $order->update(['customer_email' => $email]);
         });
 
         return $order;

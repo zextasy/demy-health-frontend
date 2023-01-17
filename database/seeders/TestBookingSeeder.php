@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TestBooking;
 use Illuminate\Database\Seeder;
 
 class TestBookingSeeder extends Seeder
@@ -13,6 +14,6 @@ class TestBookingSeeder extends Seeder
      */
     public function run()
     {
-        //
+        TestBooking::factory(20)->create();
     }
 }

@@ -18,8 +18,8 @@ class OrderItemFactory extends Factory
      */
     public function definition()
     {
-        $randomProduct = Product::inRandomOrder()->firstOrFail();
-        $parent = Order::inRandomOrder()->firstOrFail();
+        $randomProduct = Product::inRandomOrder()->first() ?? Product::factory()->create();
+        $parent = Order::inRandomOrder()->first() ?? Order::factory()->create();
         return [
             'order_id' => $parent->id,
             'name' => $randomProduct->getOrderableItemName(),

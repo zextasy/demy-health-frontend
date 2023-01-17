@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Finance;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,13 @@ class PriceFactory extends Factory
      */
     public function definition()
     {
+        $parent = Product::inRandomOrder()->first() ?? Product::factory()->create();
+
         return [
-            //
+            'amount' => $this->faker->numberBetween(1, 10000000),
+            'start_date' => $this->faker->dateTimeBetween('-1 years'),
+            'priceable_id' => $parent->id,
+            'priceable_type' => get_class($parent),
         ];
     }
 }

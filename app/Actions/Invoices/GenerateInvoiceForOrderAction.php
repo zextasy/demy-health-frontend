@@ -14,14 +14,16 @@ class GenerateInvoiceForOrderAction
 
     public function run(Order|int $order): Invoice
     {
-        $order = $order instanceof Order ? $order : Order::findOrFail($order);
+        $order = $order instanceof Order ?
+            $order->loadMissing(['items.orderableItem'])
+            : Order::with(['items.orderableItem'])->findOrFail($order);
         $this->invoice = new Invoice;
         $orderableItemModelCollection = new Collection();
         foreach ($order->items as $orderItem) {
             // model, name, price, qty
             $orderableItemCollection = collect(
                 [
-                    'model' => $orderItem->orderableItem,
+                    'model' => $orderItem->orderableItem ?? $orderItem->orderable_item,
                     'name' => $orderItem->name,
                     'price' => floatval($orderItem->price),
                     'quantity' => $orderItem->quantity,

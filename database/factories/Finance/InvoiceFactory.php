@@ -2,6 +2,8 @@
 
 namespace Database\Factories\Finance;
 
+use App\Models\Finance\Invoice;
+use App\Models\Finance\InvoiceItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,15 @@ class InvoiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'customer_email' => $this->faker->email,
         ];
     }
+        public function configure()
+    {
+        $randomNumber = $this->faker->numberBetween(1, 5);
+        return $this->afterCreating(function (Invoice $model) use ($randomNumber) {
+            InvoiceItem::factory($randomNumber)->create(['invoice_id' => $model->id]);
+        });
+    }
+
 }

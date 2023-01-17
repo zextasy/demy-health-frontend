@@ -17,10 +17,15 @@ class BusinessGroupFactory extends Factory
      */
     public function definition()
     {
-        $parent = BusinessGroup::inRandomOrder()->firstOrFail();
+        $parent = BusinessGroup::inRandomOrder()->first() ??
+            BusinessGroup::create([
+                'name' => 'Root',
+                'description' => 'The Root Business Group for this Organisation',
+                'order' => 0,
+                ]);
         return [
-            'name' => $this->faker->word,
-            'description' => $this->faker->words,
+            'name' => $this->faker->unique()->word,
+            'description' => $this->faker->words(5, true),
             'order' => $parent->order + 1,
             'parent_id' => $parent->id,
         ];

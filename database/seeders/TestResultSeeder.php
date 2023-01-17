@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TestResult;
 use Illuminate\Database\Seeder;
 
 class TestResultSeeder extends Seeder
@@ -13,6 +14,6 @@ class TestResultSeeder extends Seeder
      */
     public function run()
     {
-        //
+        TestResult::factory(10)->create();
     }
 }

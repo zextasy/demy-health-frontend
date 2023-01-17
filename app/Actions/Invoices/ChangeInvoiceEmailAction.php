@@ -14,7 +14,6 @@ class ChangeInvoiceEmailAction
     {
         $invoice = $invoice instanceof Invoice ? $invoice : Invoice::findOrFail($invoice);
         DB::transaction(function () use ($email, $invoice) {
-            $invoice->update(['customer_email' => $email]);
             if ($invoice->transactions()->count() > 0) {
                 foreach ($invoice->transactions as $transaction) {
                     if ($transaction->debitable instanceof Payment) {
@@ -22,6 +21,7 @@ class ChangeInvoiceEmailAction
                     }
                 }
             }
+            $invoice->update(['customer_email' => $email]);
         });
 
         return $invoice;
