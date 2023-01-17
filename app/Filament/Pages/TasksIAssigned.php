@@ -23,6 +23,16 @@ class TasksIAssigned extends Page implements HasTable
 
     protected static string $view = 'filament.pages.tasks-i-assigned';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isFilamentBackendUser();
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->isFilamentBackendUser(), 403);
+    }
+
     public function getTableQuery(): Builder
     {
         return Task::query()->where('assigned_by', auth()->user()->id);
@@ -54,7 +64,8 @@ class TasksIAssigned extends Page implements HasTable
                 ->modalButton('Yes, confirm')
                 ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
             Action::make('rejectCompletion')
-                ->action(fn (Task $record, array $data) => (new RejectTaskCompletionConfirmationAction())->run($record, $data['markAsFailed']))
+                ->action(fn (Task $record, array $data) => (new RejectTaskCompletionConfirmationAction())->run($record, $data['markAsFailed'])
+                )
                 ->form([
                     Toggle::make('markAsFailed')
                         ->label('mark as failed')

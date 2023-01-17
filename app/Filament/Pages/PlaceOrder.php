@@ -53,11 +53,12 @@ class PlaceOrder extends Page
 
     protected static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->hasPermissionTo('backend');
+        return auth()->user()->isFilamentBackendUser();
     }
 
     public function mount(): void
     {
+        abort_unless(auth()->user()->isFilamentBackendUser(), 403);
         $customer = Patient::find(request()->get('patientId'));
         $this->form->fill([
             'customerEmail' => request()->get('customerEmail'),

@@ -22,6 +22,16 @@ class DiscountResource extends Resource
 
     protected static ?string $navigationGroup = 'Finance';
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isFilamentBackendUser();
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->isFilamentBackendUser(), 403);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
