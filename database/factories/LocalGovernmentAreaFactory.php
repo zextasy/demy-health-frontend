@@ -14,7 +14,7 @@ class LocalGovernmentAreaFactory extends Factory
      */
     public function definition()
     {
-        $parent = State::inRandomOrder()->firstOrFail();
+        $parent = State::inRandomOrder()->first() ?? State::factory()->create();
         return [
             'name' => $this->faker->word,
             'state_id' => $parent->id,

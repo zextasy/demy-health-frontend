@@ -13,7 +13,6 @@ class ChangeTestBookingEmailAction
     {
         $testBooking = $testBooking instanceof TestBooking ? $testBooking : TestBooking::findOrFail($testBooking);
         DB::transaction(function () use ($email, $testBooking) {
-            $testBooking->update(['customer_email' => $email]);
             $testBooking->loadMissing(['orderItems.order']);
             $action = new ChangeOrderEmailAction;
             foreach ($testBooking->orderItems as $orderItem) {
@@ -22,6 +21,7 @@ class ChangeTestBookingEmailAction
                 }
 
             }
+            $testBooking->update(['customer_email' => $email]);
         });
 
         return $testBooking;

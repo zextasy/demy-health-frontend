@@ -19,9 +19,9 @@ class TestBookingFactory extends Factory
      */
     public function definition()
     {
-        $parent = TestType::inRandomOrder()->firstOrFail();
-        $parent2 = Patient::inRandomOrder()->firstOrFail();
-        $parent3 = TestCenter::inRandomOrder()->first();
+        $parent = TestType::inRandomOrder()->first() ?? TestType::factory()->create();
+        $parent2 = Patient::inRandomOrder()->first() ?? Patient::factory()->create();
+        $parent3 = TestCenter::inRandomOrder()->first() ?? TestCenter::factory()->create();
         return [
             'test_type_id' => $parent->id,
             'location_type' => isset($parent3) ? LocationTypeEnum::CENTER : LocationTypeEnum::HOME,

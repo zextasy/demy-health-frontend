@@ -10,6 +10,6 @@ class ProductCategorySeeder extends Seeder
 
     public function run()
     {
-
+        ProductCategory::factory(10)->create();
     }
 }

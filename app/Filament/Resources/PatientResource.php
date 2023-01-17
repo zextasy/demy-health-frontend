@@ -39,7 +39,7 @@ class PatientResource extends Resource
                 TextInput::make('reference')
                     ->maxLength(255)
                     ->unique()
-                    ->helperText(HelpTextMessageHelper::REFERENCE_HELPER_MSG),
+                    ->helperText(HelpTextMessageHelper::PATIENT_REFERENCE_HELPER_MSG),
                 Fieldset::make('Name')->schema([
                     TextInput::make('first_name')
                         ->required(),
