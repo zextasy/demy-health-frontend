@@ -9,7 +9,9 @@ use App\Contracts\DiscounterContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Traits\Relationships\Discounter;
 use App\Traits\Models\GeneratesReference;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class ReferralChannel extends BaseModel implements DiscounterContract
 {
@@ -32,11 +34,11 @@ class ReferralChannel extends BaseModel implements DiscounterContract
     }
     //endregion
 
-//region ATTRIBUTES
+    //region ATTRIBUTES
 
-//endregion
+    //endregion
 
-//region HELPERS
+    //region HELPERS
     public function getApplicableDiscounts(): Collection
     {
         return $this->discounts;
@@ -46,13 +48,21 @@ class ReferralChannel extends BaseModel implements DiscounterContract
     {
         return app()->isLocal();
     }
-//endregion
+    //endregion
 
-//region SCOPES
+    //region SCOPES
 
-//endregion
+    //endregion
 
-//region RELATIONSHIPS
+    //region RELATIONSHIPS
+    public function patients(): HasMany
+    {
+        return $this->hasMany(Patient::class);
+    }
 
-//endregion
+    public function testBookings(): HasManyThrough
+    {
+        return $this->hasManyThrough(TestBooking::class, Patient::class);
+    }
+    //endregion
 }

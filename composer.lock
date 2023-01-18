@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0994d72c40ede9d0cf99b00ee4e984de",
+    "content-hash": "c89114d409a1e3d54083c886848b6ba5",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -1895,6 +1895,43 @@
             "time": "2022-10-22T11:51:58+00:00"
         },
         {
+            "name": "filament/spatie-laravel-tags-plugin",
+            "version": "v2.16.62",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filamentphp/spatie-laravel-tags-plugin.git",
+                "reference": "2be0ba209d89f262a5a0b55e97eac62cd508665c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filamentphp/spatie-laravel-tags-plugin/zipball/2be0ba209d89f262a5a0b55e97eac62cd508665c",
+                "reference": "2be0ba209d89f262a5a0b55e97eac62cd508665c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.6|^9.0",
+                "php": "^8.0",
+                "spatie/laravel-tags": "^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Filament\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Filament support for `spatie/laravel-tags`.",
+            "homepage": "https://github.com/filamentphp/filament",
+            "support": {
+                "issues": "https://github.com/filamentphp/filament/issues",
+                "source": "https://github.com/filamentphp/filament"
+            },
+            "time": "2022-11-05T11:16:15+00:00"
+        },
+        {
             "name": "filament/support",
             "version": "v2.16.36",
             "source": {
@@ -2768,6 +2805,76 @@
                 }
             ],
             "time": "2022-03-15T17:39:01+00:00"
+        },
+        {
+            "name": "konnco/filament-import",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/konnco/filament-import.git",
+                "reference": "b572b210b6eb5a7962405dd801fc4eb39f05b5db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/konnco/filament-import/zipball/b572b210b6eb5a7962405dd801fc4eb39f05b5db",
+                "reference": "b572b210b6eb5a7962405dd801fc4eb39f05b5db",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "filament/notifications": "^2.0",
+                "illuminate/contracts": "^9.0",
+                "illuminate/support": "^9.0",
+                "maatwebsite/excel": "^3.1",
+                "php": "^8.0",
+                "psr/simple-cache": "^2.0",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^6.0",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Konnco\\FilamentImport\\FilamentImportServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Konnco\\FilamentImport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Franky So",
+                    "email": "frankyso.mail@gmail.com"
+                }
+            ],
+            "keywords": [
+                "filament-import",
+                "import",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/konnco/filament-import/issues",
+                "source": "https://github.com/konnco/filament-import/tree/1.4.1"
+            },
+            "time": "2022-11-15T08:37:51+00:00"
         },
         {
             "name": "lab404/laravel-impersonate",
@@ -3745,6 +3852,78 @@
                 "source": "https://github.com/thephpleague/uri-parser/tree/master"
             },
             "time": "2018-11-22T07:55:51+00:00"
+        },
+        {
+            "name": "leandrocfe/filament-apex-charts",
+            "version": "0.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leandrocfe/filament-apex-charts.git",
+                "reference": "0a73c832b68f63575c513cb69d0a73b1bbb88a2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leandrocfe/filament-apex-charts/zipball/0a73c832b68f63575c513cb69d0a73b1bbb88a2e",
+                "reference": "0a73c832b68f63575c513cb69d0a73b1bbb88a2e",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.16",
+                "illuminate/contracts": "^9.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.13.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^6.0",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Leandrocfe\\FilamentApexCharts\\FilamentApexChartsServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentApexCharts": "Leandrocfe\\FilamentApexCharts\\Facades\\FilamentApexCharts"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Leandrocfe\\FilamentApexCharts\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Leandro Costa Ferreira",
+                    "email": "leandrocfe@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Apex Charts integration for Filament PHP.",
+            "homepage": "https://github.com/leandrocfe/filament-apex-charts",
+            "keywords": [
+                "filament-apex-charts",
+                "laravel",
+                "leandrocfe"
+            ],
+            "support": {
+                "issues": "https://github.com/leandrocfe/filament-apex-charts/issues",
+                "source": "https://github.com/leandrocfe/filament-apex-charts/tree/0.1.5"
+            },
+            "time": "2023-01-17T13:16:28+00:00"
         },
         {
             "name": "livewire/livewire",
@@ -10904,16 +11083,16 @@
         },
         {
             "name": "webbingbrasil/filament-advancedfilter",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webbingbrasil/filament-advancedfilter.git",
-                "reference": "71b36a01f7158fbf2d3914d5ecfca82956c03cbd"
+                "reference": "3d2397773b8d620c6c12b6f5b5d2fdf4b1c8658d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webbingbrasil/filament-advancedfilter/zipball/71b36a01f7158fbf2d3914d5ecfca82956c03cbd",
-                "reference": "71b36a01f7158fbf2d3914d5ecfca82956c03cbd",
+                "url": "https://api.github.com/repos/webbingbrasil/filament-advancedfilter/zipball/3d2397773b8d620c6c12b6f5b5d2fdf4b1c8658d",
+                "reference": "3d2397773b8d620c6c12b6f5b5d2fdf4b1c8658d",
                 "shasum": ""
             },
             "require": {
@@ -10954,9 +11133,57 @@
             ],
             "support": {
                 "issues": "https://github.com/webbingbrasil/filament-advancedfilter/issues",
-                "source": "https://github.com/webbingbrasil/filament-advancedfilter/tree/v1.1.1"
+                "source": "https://github.com/webbingbrasil/filament-advancedfilter/tree/v1.1.2"
             },
-            "time": "2022-09-22T16:29:50+00:00"
+            "time": "2022-11-01T13:37:21+00:00"
+        },
+        {
+            "name": "webbingbrasil/filament-datefilter",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webbingbrasil/filament-datefilter.git",
+                "reference": "3613479d857ee5192966b9450441b577a3d1ed1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webbingbrasil/filament-datefilter/zipball/3613479d857ee5192966b9450441b577a3d1ed1f",
+                "reference": "3613479d857ee5192966b9450441b577a3d1ed1f",
+                "shasum": ""
+            },
+            "require": {
+                "filament/tables": "^2.15",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Webbingbrasil\\FilamentDateFilter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Danilo Andrade",
+                    "email": "danilo@webbingbrasil.com.br",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Date filter component for filament tables.",
+            "homepage": "https://github.com/webbingbrasil/filament-datefilter",
+            "keywords": [
+                "filament",
+                "filter",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/webbingbrasil/filament-datefilter/issues",
+                "source": "https://github.com/webbingbrasil/filament-datefilter/tree/1.1.1"
+            },
+            "time": "2022-10-24T21:46:22+00:00"
         },
         {
             "name": "webmozart/assert",
