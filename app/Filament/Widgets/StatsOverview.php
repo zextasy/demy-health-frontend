@@ -17,6 +17,8 @@ class StatsOverview extends BaseWidget
         return auth()->user()->isFilamentAdmin();
     }
 
+    protected int | string | array $columnSpan = 'full';
+
     protected function getCards(): array
     {
         return [
