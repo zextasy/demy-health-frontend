@@ -22,12 +22,11 @@ class TotalTestsApexBarChart extends ApexChartWidget
 
     protected static ?string $heading = 'Tests';
 
-    /**
-     * Chart options (series, labels, types, size, animations...)
-     * https://apexcharts.com/docs/options
-     *
-     * @return array
-     */
+    public static function canView(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
     protected function getOptions(): array
     {
         $trend = Trend::query(TestBooking::query())
