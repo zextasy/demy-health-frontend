@@ -29,12 +29,11 @@ class TestsByPatientApexDonutChart extends ApexChartWidget
      */
     protected static ?string $heading = 'Tests By Patient';
 
-    /**
-     * Chart options (series, labels, types, size, animations...)
-     * https://apexcharts.com/docs/options
-     *
-     * @return array
-     */
+    public static function canView(): bool
+    {
+        return auth()->user()->isFilamentAdmin();
+    }
+
     protected function getOptions(): array
     {
         $trend = Patient::query()->has('testBookings')->withCount('testBookings')
