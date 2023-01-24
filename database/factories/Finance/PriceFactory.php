@@ -3,6 +3,7 @@
 namespace Database\Factories\Finance;
 
 use App\Models\Product;
+use App\Models\Finance\Price;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PriceFactory extends Factory
 {
+    protected $model = Price::class;
     /**
      * Define the model's default state.
      *

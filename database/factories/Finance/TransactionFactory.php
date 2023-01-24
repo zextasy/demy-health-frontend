@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Finance;
 
+use App\Models\Finance\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TransactionFactory extends Factory
 {
+    protected $model = Transaction::class;
     /**
      * Define the model's default state.
      *
