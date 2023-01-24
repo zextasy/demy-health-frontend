@@ -2,10 +2,15 @@
 
 namespace App\Traits\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 trait HasAmounts
 {
-    public function getformattedAmountAttribute()
+    protected function formattedAmount(): Attribute
     {
-        return number_format($this->amount);
+        return Attribute::make(
+            get: fn () => number_format($this->amount),
+        );
     }
+
 }
