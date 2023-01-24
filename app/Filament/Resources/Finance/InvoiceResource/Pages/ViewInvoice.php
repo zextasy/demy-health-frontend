@@ -14,6 +14,8 @@ use App\Filament\Resources\Finance\InvoiceResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use App\Actions\Payments\AttachPaymentToPayablesAction;
+use App\Filament\Actions\Pages\Payments\CapturePaymentAction;
+use App\Filament\Actions\Pages\Payments\AttachExistingPaymentAction;
 
 class ViewInvoice extends ViewRecord
 {
@@ -23,34 +25,8 @@ class ViewInvoice extends ViewRecord
     {
         return [
             ActionGroup::make([
-                Action::make('New Payment')
-                    ->action(function (array $data): void {
-                        $result = (new CreatePaymentAction)
-                            ->withInternalReferences($this->record->reference)
-                            ->paidBy($this->record->activeCustomer)
-                            ->withCustomerEmail($this->record->customer_email)
-                            ->run($data['amount'], $data['method']);
-                        $message = isset($result) ?
-                            HelpTextMessageHelper::DEFAULT_SUCCESS_MESSAGE
-                            : HelpTextMessageHelper::DEFAULT_ERROR_MESSAGE;
-                        $status = isset($result) ?
-                            NotificationStatusHelper::SUCCESS
-                            : NotificationStatusHelper::ERROR;
-                        $this->notify($status, $message);
-                        $this->redirect(InvoiceResource::getUrl('view', ['record' => $this->record->id]));
-                    })
-                    ->form([
-                        TextInput::make('amount')
-                            ->label('Amount')
-                            ->numeric()
-                            ->required(),
-                        Select::make('method')
-                            ->label('Payment Method')
-                            ->options(PaymentMethodEnum::optionsAsSelectArray())
-                            ->searchable()
-                            ->required(),
-                    ])
-                    ->visible($this->record->hasNotBeenSettled()),
+                CapturePaymentAction::make()->payer($this->record->activeCustomer)
+                    ->creditable($this->record)->visible($this->record->hasNotBeenSettled()),
                 Action::make('Attach Payment')
                     ->action(function (array $data): void {
                         $result = (new AttachPaymentToPayablesAction)

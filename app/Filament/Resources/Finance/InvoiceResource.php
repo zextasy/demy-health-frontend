@@ -11,8 +11,8 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Traits\Resources\DisplaysCurrencies;
-use App\Enums\Finance\Invoices\InvoiceStatusEnum;
 use App\Filament\Resources\Finance\InvoiceResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\Finance\InvoiceResource\RelationManagers;
 
 class InvoiceResource extends Resource
@@ -114,7 +114,7 @@ class InvoiceResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                FilamentExportBulkAction::make('export')
             ]);
     }
 

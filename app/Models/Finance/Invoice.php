@@ -112,6 +112,10 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
         return max($value, 0);
     }
 
+    public function getEmailForPayment(): ?string
+    {
+        return $this->customer_email;
+    }
 
     protected function getTotalAmount(): float
     {
