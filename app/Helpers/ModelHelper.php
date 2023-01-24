@@ -20,23 +20,27 @@ class ModelHelper
                 return floor(time() - 999999999);
         }
     }
-
     private function getNextIdFromModelCount(Model $model): int
     {
         return get_class($model)::withTrashed()->count() + 1;
     }
 
+    private function getNextIdForMonth(Model $model): int
+    {
+        return get_class($model)::withTrashed()->whereMonth('created_at', '=', now()->month)->count() + 1;
+    }
+
     public function getNextId(Model $model): string
     {
         $nextId = $this->getNextIdFromDb($model->getTable());
-        $existingModel = get_class($model)::where('id', $nextId)->exists();
+        $existingModel = get_class($model)::withThrashed()->where('id', $nextId)->exists();
 
         if (! $existingModel) {
             return $nextId;
         }
 
         $nextId = $this->getNextIdFromModelCount($model);
-        $existingModel = get_class($model)::where('id', $nextId)->exists();
+        $existingModel = get_class($model)::withThrashed()->where('id', $nextId)->exists();
         if (! $existingModel) {
             return $nextId;
         }
@@ -52,7 +56,7 @@ class ModelHelper
 //        $reference = $prefix.$currentDate->year.'-'.$currentDate->month.'-'.$padding;
         $reference = $prefix.$padding;
 
-        if (get_class($model)::where($key, $reference)->exists()) {
+        if (get_class($model)::withThrashed()->where($key, $reference)->exists()) {
             $reference = $reference.'-'.$nextId;
         }
 
