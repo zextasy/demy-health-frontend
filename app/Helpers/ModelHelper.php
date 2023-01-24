@@ -33,14 +33,14 @@ class ModelHelper
     public function getNextId(Model $model): string
     {
         $nextId = $this->getNextIdFromDb($model->getTable());
-        $existingModel = get_class($model)::withThrashed()->where('id', $nextId)->exists();
+        $existingModel = get_class($model)::withTrashed()->where('id', $nextId)->exists();
 
         if (! $existingModel) {
             return $nextId;
         }
 
         $nextId = $this->getNextIdFromModelCount($model);
-        $existingModel = get_class($model)::withThrashed()->where('id', $nextId)->exists();
+        $existingModel = get_class($model)::withTrashed()->where('id', $nextId)->exists();
         if (! $existingModel) {
             return $nextId;
         }
@@ -52,11 +52,11 @@ class ModelHelper
     {
         $nextId = $this->getNextId($model);
         $padding = str_pad($nextId, 9, '0', STR_PAD_LEFT);
-//        $currentDate = now();
-//        $reference = $prefix.$currentDate->year.'-'.$currentDate->month.'-'.$padding;
+        //        $currentDate = now();
+        //        $reference = $prefix.$currentDate->year.'-'.$currentDate->month.'-'.$padding;
         $reference = $prefix.$padding;
 
-        if (get_class($model)::withThrashed()->where($key, $reference)->exists()) {
+        if (get_class($model)::withTrashed()->where($key, $reference)->exists()) {
             $reference = $reference.'-'.$nextId;
         }
 
