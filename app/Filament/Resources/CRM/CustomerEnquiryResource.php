@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CRM;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Filament\Resources\CRM\CustomerEnquiryResource\Pages;
 use App\Filament\Resources\CRM\CustomerEnquiryResource\RelationManagers;
@@ -18,11 +19,18 @@ class CustomerEnquiryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $recordTitleAttribute = 'customer_message';
-
     protected static ?string $navigationGroup = 'CRM';
 
     protected static ?int $navigationSort = 5;
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->customer_name .' - '. $record->id;
+    }
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['customer_name', 'customer_message', 'customer_email', 'customer_phone'];
+    }
 
     public static function form(Form $form): Form
     {

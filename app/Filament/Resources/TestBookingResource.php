@@ -4,9 +4,11 @@ namespace App\Filament\Resources;
 
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
+use Illuminate\Database\Eloquent\Builder;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
 use App\Models\TestBooking;
 use Filament\Forms;
@@ -35,6 +37,11 @@ class TestBookingResource extends Resource
     public function mount(): void
     {
         abort_unless(auth()->user()->hasPermissionTo('backend'), 403);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with(['patient','testType']);
     }
 
     public static function form(Form $form): Form
@@ -111,7 +118,11 @@ class TestBookingResource extends Resource
             ])
             ->filters([
 
-            ])->defaultSort('created_at', 'desc');
+            ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
