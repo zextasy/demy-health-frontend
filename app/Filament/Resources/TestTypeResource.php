@@ -58,7 +58,7 @@ class TestTypeResource extends Resource
                 ]),
                 Fieldset::make('Pricing')->schema([
                     Forms\Components\Toggle::make('should_call_in_for_details')
-                        ->helperText(HelpTextMessageHelper::TEST_TYPE_CALL_IN_MSG)
+                        ->helperText(HelpTextMessageHelper::GENERAL_CALL_IN_MSG)
                         ->required(),
                 ]),
                 Fieldset::make('Turn around time')

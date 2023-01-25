@@ -2,6 +2,7 @@
 
 namespace App\Contracts;
 
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface TransactionCreditableContract
@@ -17,5 +18,8 @@ interface TransactionCreditableContract
     public function updatePaymentStatus(): void;
 
     public function getPayableReference(): string;
-    public function getApplicablePayments();
+
+    public function getEmailForPayment(): ?string;
+    
+    public function getApplicablePayments(): ?Collection;
 }

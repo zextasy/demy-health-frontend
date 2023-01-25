@@ -7,11 +7,14 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use App\Actions\Payments\CreatePaymentAction;
 use App\Filament\Actions\Pages\BasePageAction;
+use App\Contracts\TransactionCreditableContract;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 
 class CapturePaymentAction extends BasePageAction
 {
     private ?PayerContract $payer = null;
+
+    private ?TransactionCreditableContract $creditable = null;
 
     public static function getDefaultName(): ?string
     {
@@ -38,9 +41,16 @@ class CapturePaymentAction extends BasePageAction
             });
     }
 
-    public function payer(PayerContract $payer): self
+    public function payer(?PayerContract $payer): self
     {
         $this->payer = $payer;
+
+        return $this;
+    }
+
+    public function creditable(TransactionCreditableContract $payable): self
+    {
+        $this->creditable = $payable;
 
         return $this;
     }
@@ -50,6 +60,8 @@ class CapturePaymentAction extends BasePageAction
         try {
             (new CreatePaymentAction)
                 ->paidBy($this->payer)
+                ->withInternalReferences($this->creditable?->getPayableReference())
+                ->withCustomerEmail($this->creditable?->getEmailForPayment())
                 ->run($data['amount'], $data['method']);
             return true;
         } catch (\Exception $e) {

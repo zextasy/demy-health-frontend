@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductCategoryResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\ProductCategoryResource\RelationManagers;
 use App\Models\ProductCategory;
 use Filament\Forms;
@@ -55,6 +56,9 @@ class ProductCategoryResource extends Resource
             ])
             ->filters([
                 //
+            ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
             ])
             ->defaultSort('name');
     }

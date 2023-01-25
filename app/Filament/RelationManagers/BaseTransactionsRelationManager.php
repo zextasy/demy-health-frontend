@@ -9,6 +9,7 @@ use Filament\Resources\Table;
 use Filament\Forms\Components\Fieldset;
 use App\Traits\Resources\DisplaysCurrencies;
 use Filament\Resources\RelationManagers\RelationManager;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class BaseTransactionsRelationManager extends RelationManager
 {
@@ -49,6 +50,9 @@ class BaseTransactionsRelationManager extends RelationManager
             ])
             ->filters([])
             ->headerActions([])
-            ->actions([]);
+            ->actions([])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
+            ]);
     }
 }

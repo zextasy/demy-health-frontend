@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait Discountable
 {
+    public function initializeDiscountable()
+    {
+        $this->append('total_discount_amount');
+    }
+
     public function discounts(): MorphToMany
     {
         return $this->MorphToMany(Discount::class, 'discountable');

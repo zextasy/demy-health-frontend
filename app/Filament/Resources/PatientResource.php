@@ -18,6 +18,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class PatientResource extends Resource
 {
@@ -26,6 +27,13 @@ class PatientResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'Consultation';
+
+    protected static ?string $recordTitleAttribute = 'full_name';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['first_name', 'middle_name', 'last_name', 'email','referredBy.name'];
+    }
 
     protected static function shouldRegisterNavigation(): bool
     {
@@ -101,14 +109,20 @@ class PatientResource extends Resource
             ])
             ->filters([
                 //
-            ])->defaultSort('created_at', 'desc');
+            ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
     {
         return [
             RelationManagers\TestBookingsRelationManager::class,
+            RelationManagers\OrdersRelationManager::class,
             RelationManagers\PaymentsRelationManager::class,
+            RelationManagers\InvoicesRelationManager::class,
             RelationManagers\DiscountRelationManager::class,
         ];
     }
