@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use Filament\Resources\RelationManagers\RelationManager;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class BasePaymentsRelationManager extends RelationManager
 {
@@ -57,8 +58,8 @@ class BasePaymentsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('amount')->money(self::getSystemDefaultCurrency()),
+                Tables\Columns\TextColumn::make('reference')->searchable(),
+                Tables\Columns\TextColumn::make('amount')->money(self::getSystemDefaultCurrency())->searchable(),
                 Tables\Columns\TextColumn::make('balance')->money(self::getSystemDefaultCurrency()),
                 Tables\Columns\BadgeColumn::make('payment_method')
                     ->enum(PaymentMethodEnum::optionsAsSelectArray())->sortable(),
@@ -71,6 +72,9 @@ class BasePaymentsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()->label('Set New Price'),
             ])
-            ->actions([]);
+            ->actions([])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
+            ]);
     }
 }

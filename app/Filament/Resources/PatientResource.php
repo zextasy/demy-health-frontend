@@ -28,6 +28,13 @@ class PatientResource extends Resource
 
     protected static ?string $navigationGroup = 'Consultation';
 
+    protected static ?string $recordTitleAttribute = 'full_name';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['first_name', 'middle_name', 'last_name', 'email','referredBy.name'];
+    }
+
     protected static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
@@ -113,7 +120,9 @@ class PatientResource extends Resource
     {
         return [
             RelationManagers\TestBookingsRelationManager::class,
+            RelationManagers\OrdersRelationManager::class,
             RelationManagers\PaymentsRelationManager::class,
+            RelationManagers\InvoicesRelationManager::class,
             RelationManagers\DiscountRelationManager::class,
         ];
     }

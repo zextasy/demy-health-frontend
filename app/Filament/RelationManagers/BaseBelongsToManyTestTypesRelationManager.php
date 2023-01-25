@@ -9,6 +9,7 @@ use Filament\Resources\Table;
 use Filament\Forms\Components\Fieldset;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\RelationManager;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class BaseBelongsToManyTestTypesRelationManager extends RelationManager
 {
@@ -75,6 +76,9 @@ class BaseBelongsToManyTestTypesRelationManager extends RelationManager
             ])
             ->filters([
                 //
+            ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
             ])
             ->defaultSort('test_id');
     }

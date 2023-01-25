@@ -7,6 +7,7 @@ use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\RelationManagers\RelationManager;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class BaseBelongsToManyLocalGovernmentAreasRelationManager extends RelationManager
 {
@@ -54,6 +55,9 @@ class BaseBelongsToManyLocalGovernmentAreasRelationManager extends RelationManag
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\DetachAction::make(),
+            ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
             ]);
     }
 }

@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
+use Filament\Tables\Columns\TextColumn;
 use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Resources\RelationManagers\RelationManager;
 
@@ -40,10 +41,11 @@ class BaseHasManyTestBookingsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->sortable(),
-                Tables\Columns\TextColumn::make('testType.description')->sortable(),
+                Tables\Columns\TextColumn::make('testType.name')->sortable(),
                 Tables\Columns\TextColumn::make('due_date')
                     ->date()
                     ->sortable(),
+                TextColumn::make('patient.full_name')->label('Patient'),
                 Tables\Columns\BadgeColumn::make('status'),
                 Tables\Columns\BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray())
