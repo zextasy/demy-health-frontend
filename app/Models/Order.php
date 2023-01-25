@@ -10,6 +10,7 @@ use App\Contracts\InvoiceableContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Contracts\DiscountableContract;
 use App\Traits\Models\GeneratesReference;
+use App\Filament\Resources\OrderResource;
 use App\Traits\Relationships\Discountable;
 use App\Traits\Relationships\MorphsInvoice;
 use App\Traits\Relationships\MorphsToCustomer;
@@ -76,11 +77,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     //region HELPERS
     public function getFilamentResourceClass(): string
     {
-        return InvoiceResource::class;
-    }
-    public function getFilamentUrl(): string
-    {
-        return $this->filament_url;
+        return OrderResource::class;
     }
     public function hasBeenInvoiced(): bool
     {

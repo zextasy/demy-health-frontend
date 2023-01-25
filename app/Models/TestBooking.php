@@ -94,10 +94,6 @@ class TestBooking extends BaseModel implements
     {
         return TestBookingResource::class;
     }
-    public function getFilamentUrl(): string
-    {
-        return $this->filament_url;
-    }
 
     public function getAssignableName(): string
     {

@@ -101,10 +101,7 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
     {
         return InvoiceResource::class;
     }
-    public function getFilamentUrl(): string
-    {
-        return $this->filament_url;
-    }
+
     public function getMaximumCreditableAmount(): float
     {
         $value = $this->total_amount - $this->total_transaction_amount;
