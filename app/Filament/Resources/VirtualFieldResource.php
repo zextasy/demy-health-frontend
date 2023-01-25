@@ -20,6 +20,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class VirtualFieldResource extends Resource
 {
@@ -95,8 +96,9 @@ class VirtualFieldResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ])->defaultSort('id', 'desc');
+                FilamentExportBulkAction::make('export'),
+            ])
+            ->defaultSort('id', 'desc');
     }
 
     public static function getRelations(): array
