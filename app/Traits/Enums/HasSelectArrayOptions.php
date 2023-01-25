@@ -2,6 +2,8 @@
 
 namespace App\Traits\Enums;
 
+use App\Helpers\StringHelper;
+
 trait HasSelectArrayOptions
 {
     /** Get an associative array of [case name => case value]. */
@@ -9,8 +11,10 @@ trait HasSelectArrayOptions
     {
         $cases = static::cases();
 
-        return isset($cases[0])// && $cases[0] instanceof enum
+        $cases = isset($cases[0])// && $cases[0] instanceof enum
             ? array_column($cases, 'name', 'value')
             : array_column($cases, 'name');
+
+        return StringHelper::convertUppercaseCamelArrayValuesToWords($cases);
     }
 }
