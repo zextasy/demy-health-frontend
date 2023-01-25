@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class SpecimenTypeResource extends Resource
 {
@@ -47,7 +48,11 @@ class SpecimenTypeResource extends Resource
             ])
             ->filters([
                 //
-            ])->defaultSort('key');
+            ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
+            ])
+            ->defaultSort('key');
     }
 
     public static function getRelations(): array

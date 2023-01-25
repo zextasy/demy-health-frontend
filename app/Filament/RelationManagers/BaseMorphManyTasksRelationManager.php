@@ -7,6 +7,7 @@ use Filament\Resources\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class BaseMorphManyTasksRelationManager extends RelationManager
 {
@@ -35,7 +36,7 @@ class BaseMorphManyTasksRelationManager extends RelationManager
                     ->dateTime(),
                 TextColumn::make('status'),
             ])
-            ->defaultSort('id','desc')
+            ->defaultSort('id', 'desc')
             ->filters([
                 //
             ])
@@ -46,7 +47,7 @@ class BaseMorphManyTasksRelationManager extends RelationManager
 
             ])
             ->bulkActions([
-
+                FilamentExportBulkAction::make('export'),
             ]);
     }
 }

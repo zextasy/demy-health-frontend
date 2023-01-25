@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Finance;
 
+use App\Models\Order;
 use App\Models\Finance\Invoice;
 use App\Models\Finance\InvoiceItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class InvoiceFactory extends Factory
 {
+    protected $model = Invoice::class;
     /**
      * Define the model's default state.
      *
@@ -18,8 +20,11 @@ class InvoiceFactory extends Factory
      */
     public function definition()
     {
+        $invoiceable = Order::doesntHave('invoice')->inRandomOrder()->first() ?? Order::factory()->create();
         return [
             'customer_email' => $this->faker->email,
+            'invoiceable_id' => $invoiceable->id,
+            'invoiceable_type' => get_class($invoiceable),
         ];
     }
         public function configure()

@@ -8,7 +8,6 @@ trait SumsSubTotalAmountFromItems
 {
     public function initializeSumsSubTotalAmountFromItems()
     {
-        //FIXME this seems not to work for filament
         $this->append(['sub_total_amount','total_discount_amount','total_amount']);
     }
     protected function subTotalAmount(): Attribute
@@ -17,8 +16,6 @@ trait SumsSubTotalAmountFromItems
             get: fn () => $this->items->sum('total_amount'),
         );
     }
-
-
 
     protected function totalAmount(): Attribute
     {

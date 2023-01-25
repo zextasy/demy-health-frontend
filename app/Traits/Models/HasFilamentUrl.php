@@ -2,9 +2,18 @@
 
 namespace App\Traits\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 trait HasFilamentUrl
 {
-    public function getFilamentUrlAttribute(): string
+    protected function filamentUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->getFilamentUrl(),
+        );
+    }
+
+    public function getFilamentUrl(): string
     {
         $filamentResource = $this->getFilamentResourceClass();
 

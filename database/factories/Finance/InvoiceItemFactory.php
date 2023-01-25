@@ -5,6 +5,7 @@ namespace Database\Factories\Finance;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Finance\Invoice;
+use App\Models\Finance\InvoiceItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class InvoiceItemFactory extends Factory
 {
+    protected $model = InvoiceItem::class;
     /**
      * Define the model's default state.
      *

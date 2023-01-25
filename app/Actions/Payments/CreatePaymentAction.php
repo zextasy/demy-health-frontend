@@ -44,11 +44,13 @@ class CreatePaymentAction
         return $this;
     }
 
-    public function withInternalReferences(array|string $internalReferences) : self
+    public function withInternalReferences(null|array|string $internalReferences) : self
     {
-        $this->internalReferences = is_array($internalReferences) ?
-            $internalReferences
-            : explode(', ', $internalReferences);
+        if (isset($internalReferences)) {
+            $this->internalReferences = is_array($internalReferences) ?
+                $internalReferences
+                : explode(', ', $internalReferences);
+        }
 
         return  $this;
     }
@@ -69,8 +71,9 @@ class CreatePaymentAction
 
     public function withCustomerEmail(?string $customerEmail) : self
     {
-        $this->customerEmail = $customerEmail;
-
+        if (empty($this->customerEmail)) {
+            $this->customerEmail = $customerEmail;
+        }
         return  $this;
     }
 

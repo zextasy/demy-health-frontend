@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Resources\Finance\PaymentResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\Finance\PaymentResource\RelationManagers;
 
 class PaymentResource extends Resource
@@ -88,6 +89,7 @@ class PaymentResource extends Resource
             ])
             ->bulkActions([
 //                Tables\Actions\DeleteBulkAction::make(),
+                FilamentExportBulkAction::make('export')
             ]);
     }
 
@@ -102,7 +104,7 @@ class PaymentResource extends Resource
     {
         return [
             'index' => Pages\ListPayments::route('/'),
-//            'create' => Pages\CreatePayment::route('/create'),
+            'create' => Pages\CreatePayment::route('/create'),
             'view' => Pages\ViewPayment::route('/{record}'),
             'edit' => Pages\EditPayment::route('/{record}/edit'),
         ];
@@ -110,6 +112,6 @@ class PaymentResource extends Resource
 
     public static function canCreate(): bool
     {
-        return false;
+        return true;
     }
 }

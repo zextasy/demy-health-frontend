@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class TestResultResource extends Resource
 {
@@ -72,6 +73,9 @@ class TestResultResource extends Resource
             ])
             ->filters([
                 //
+            ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
             ])
             ->defaultSort('created_at', 'desc');
     }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReferralChannelResource\Pages;
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\ReferralChannelResource\RelationManagers;
 use App\Models\ReferralChannel;
 use Filament\Forms;
@@ -48,12 +49,17 @@ class ReferralChannelResource extends Resource
             ->filters([
                 //
             ])
+            ->bulkActions([
+                FilamentExportBulkAction::make('export'),
+            ])
             ->defaultSort('name');
     }
 
     public static function getRelations(): array
     {
         return [
+            RelationManagers\PatientsRelationManager::class,
+            RelationManagers\TestBookingsRelationManager::class,
             RelationManagers\DiscountRelationManager::class,
         ];
     }
