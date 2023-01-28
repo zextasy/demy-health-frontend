@@ -6,6 +6,7 @@ use Filament\Pages\Actions\EditAction;
 use Filament\Pages\Actions\ActionGroup;
 use App\Filament\Resources\UserResource;
 use Filament\Resources\Pages\ViewRecord;
+use App\Enums\Communication\CommunicationChannelEnum;
 use App\Filament\Actions\Pages\Communications\SendCommunicationAction;
 
 class ViewUser extends ViewRecord
@@ -16,7 +17,8 @@ class ViewUser extends ViewRecord
     {
         return [
             ActionGroup::make([
-                SendCommunicationAction::make()->communicable($this->record),
+                SendCommunicationAction::make()->communicable($this->record)
+                    ->visible($this->record->hasValidRoute(CommunicationChannelEnum::EMAIL())),
             ])->icon('heroicon-s-at-symbol')->label('Communication'),
             EditAction::make(),
         ];

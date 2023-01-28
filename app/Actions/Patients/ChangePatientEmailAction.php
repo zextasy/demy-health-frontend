@@ -25,8 +25,10 @@ class ChangePatientEmailAction
             foreach ($patient->testResults as $testResult) {
                 $testResultAction->run($testResult, $email);
             }
-            foreach ($patient->payments as $payment) {
-                $paymentAction->run($payment, $email);
+            if (!empty($patient->email)) {
+                foreach ($patient->payments as $payment) {
+                    $paymentAction->run($payment, $email);
+                }
             }
             $patient->update(['email' => $email]);
         });
