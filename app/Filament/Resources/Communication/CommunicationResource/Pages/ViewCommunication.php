@@ -13,6 +13,7 @@ use App\Enums\Communication\CommunicationChannelEnum;
 use App\Filament\Resources\Communication\CommunicationResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
+use App\Filament\Actions\Pages\Communications\ReSendCommunicationAction;
 
 class ViewCommunication extends ViewRecord
 {
@@ -51,6 +52,8 @@ class ViewCommunication extends ViewRecord
     protected function getActions(): array
     {
         return [
+            ReSendCommunicationAction::make()->communication($this->record)
+            ->visible($this->record->canBeSent()),
             Actions\EditAction::make(),
         ];
     }

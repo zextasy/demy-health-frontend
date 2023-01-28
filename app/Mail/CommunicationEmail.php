@@ -22,7 +22,7 @@ class CommunicationEmail extends Mailable
     public function __construct(Communication $communication)
     {
         $this->communication = $communication;
-        $this->subject = $communication->subject;
+        $this->subject = $communication->communication->subject;
         $this->content = $communication->content;
         $this->replyToAddress = $communication->reply_to;
     }

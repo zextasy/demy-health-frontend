@@ -90,12 +90,12 @@ class Communication extends BaseModel
 
     public function canBeSent(): bool
     {
-        return $this->status->notIn([CommunicationStatusEnum::Sent(), CommunicationStatusEnum::Cancelled()]);
+        return !$this->canNotBeSent();
     }
 
     public function canNotBeSent(): bool
     {
-        return !$this->canBeSent();
+        return $this->status == CommunicationStatusEnum::SUCCESSFUL || $this->status == CommunicationStatusEnum::CANCELLED;
     }
     //endregion
 
