@@ -20,6 +20,10 @@ class Communication extends BaseModel
     protected $casts = [
         'status' => CommunicationStatusEnum::class,
     ];
+
+    protected $with = ['communication'];
+
+    protected $appends = ['channel','content','contact_details','contact_name'];
     //endregion
 
     //region ATTRIBUTES contact details
@@ -35,6 +39,13 @@ class Communication extends BaseModel
     {
         return Attribute::make(
             get: fn() => $this->communication->content,
+        );
+    }
+
+    protected function contactName(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->communicable->full_name,
         );
     }
 
