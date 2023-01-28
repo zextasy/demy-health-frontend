@@ -31,6 +31,7 @@ use App\Filament\Actions\Pages\Payments\CapturePaymentAction;
 use App\Filament\Actions\Pages\Discounts\AttachDiscountAction;
 use App\Filament\Actions\Pages\Patients\ChangePatientEmailAction;
 use App\Filament\Actions\Pages\TestBookings\BookATestForPatientAction;
+use App\Filament\Actions\Pages\Communications\SendCommunicationAction;
 
 class ViewPatient extends ViewRecord
 {
@@ -48,6 +49,9 @@ class ViewPatient extends ViewRecord
                 AttachDiscountAction::make()->subject($this->record)
                     ->visible($this->record->canApplyDiscount()),
             ])->icon('heroicon-s-cash')->label('Finance'),
+            ActionGroup::make([
+                SendCommunicationAction::make()->communicable($this->record),
+            ])->icon('heroicon-s-at-symbol')->label('Communication'),
             Action::make('Place an Order')
                 ->url(PlaceOrder::getUrl([
                     'customerEmail' => $this->record->email,

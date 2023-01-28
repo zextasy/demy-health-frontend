@@ -8,8 +8,10 @@ use App\Contracts\AddressableContract;
 use App\Traits\Relationships\HasTasks;
 use Spatie\Permission\Traits\HasRoles;
 use App\Traits\Models\LaravelMorphable;
+use App\Contracts\CommunicableContract;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
+use App\Traits\Models\RoutesCommunications;
 use App\Contracts\OrderableCustomerContract;
 use Spatie\Permission\Traits\HasPermissions;
 use App\Traits\Relationships\HasTestBookings;
@@ -33,7 +35,8 @@ class User extends Authenticatable implements
     AddressableContract,
     OrderableCustomerContract,
     InvoiceableCustomerContract,
-    PayerContract
+    PayerContract,
+    CommunicableContract
 {
     use SoftDeletes;
     use HasApiTokens;
@@ -49,6 +52,7 @@ class User extends Authenticatable implements
     use BelongsToBusinessGroup;
     use HasTasks;
     use LaravelMorphable;
+    use RoutesCommunications;
 
     //region CONFIG
     protected $fillable = [
@@ -114,6 +118,11 @@ class User extends Authenticatable implements
     public function getEmailForPayment(): ?string
     {
         return $this->email;
+    }
+
+    public function routeNotificationForSMS()
+    {
+        return $this->patient->phone_number;
     }
     //endregion
 
