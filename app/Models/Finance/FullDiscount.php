@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FullDiscount extends BaseModel implements DiscountContract
 {
-    use HasFactory;
     use LaravelMorphable;
 
 //region CONFIG
@@ -41,7 +40,7 @@ class FullDiscount extends BaseModel implements DiscountContract
 
     public function setDiscountValue(int|float $value): void
     {
-        return;
+        $this->refresh();
     }
 //endregion
 

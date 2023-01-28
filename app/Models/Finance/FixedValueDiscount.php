@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FixedValueDiscount extends BaseModel implements DiscountContract
 {
-    use HasFactory;
     use LaravelMorphable;
 
 //region CONFIG
