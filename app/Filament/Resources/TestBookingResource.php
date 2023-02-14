@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Helpers\HelpTextMessageHelper;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
@@ -52,7 +53,7 @@ class TestBookingResource extends Resource
                     Forms\Components\TextInput::make('reference')
                         ->maxLength(255)
                         ->unique()
-                        ->helperText('Leave this blank and the system will generate one for you'),
+                        ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
                     Forms\Components\BelongsToSelect::make('testType')
                         ->relationship('testType', 'name')
                         ->disabled(),

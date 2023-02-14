@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Settings\GeneralSettings;
+use App\Helpers\HelpTextMessageHelper;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
@@ -45,7 +46,7 @@ class ProductResource extends Resource
                         ->label('SKU')
                         ->unique()
                         ->maxLength(255)
-                        ->helperText('Leave this blank and the system will generate one for you'),
+                        ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
                     Forms\Components\TextInput::make('name')
                         ->required()
                         ->maxLength(255),

@@ -75,7 +75,7 @@ class VisitResource extends Resource
     {
         return [
             'index' => Pages\ListVisits::route('/'),
-            'create' => Pages\CreateVisit::route('/create'),
+//            'create' => Pages\CreateVisit::route('/create'),
             'view' => Pages\ViewVisit::route('/{record}'),
             'edit' => Pages\EditVisit::route('/{record}/edit'),
         ];
