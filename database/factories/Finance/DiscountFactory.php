@@ -1,7 +1,8 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Finance;
 
+use App\Models\Finance\Discount;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,11 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DiscountFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Discount::class;
+
     public function definition()
     {
         return [

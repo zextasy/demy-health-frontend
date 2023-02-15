@@ -27,4 +27,5 @@ class HelpTextMessageHelper
         'Customer email address. This is required for the system to know who to send the order to';
 	const GENERAL_REFERENCE_HELP_TEXT =
         'Internal unique reference. Leave blank and the system will generate one for you';
+    public const RESEND_COMMUNICATION_MODAL_SUBHEADING = 'This will attempt to send the communication again';
 }
