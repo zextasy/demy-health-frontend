@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\BlogPostController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\FrontendController;
@@ -81,4 +82,7 @@ Route::name('frontend.')->group(function () {
         ->name('cart.checkout-successful');
     Route::get('cart-checkout-failed.html', [CartController::class, 'checkoutFailed'])
         ->name('cart.checkout-failed');
+
+    //
+    Route::resource('blog-posts', BlogPostController::class)->names('blog-posts');
 });

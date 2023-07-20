@@ -10,6 +10,7 @@ class ProductController extends Controller
 {
     public function allProducts()
     {
+        //TODO rewrite this to use single route with category filter and handle empty query results
         $products = Product::with(['media', 'currentPrice'])->inRandomOrder()->limit(5)->get();
 
         $data['products'] = $products;
