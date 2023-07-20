@@ -119,6 +119,11 @@
                         <a class="text-black dropdown-item text-primary display-4" href="{{route('frontend.contact')}}">Contact</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link link text-black display-4" href="{{route('frontend.blog-posts.index')}}" data-bs-auto-close="outside" aria-expanded="false">
+                        Blog
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link link text-black dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         My Account
