@@ -26,6 +26,7 @@ class BlogList extends Component
      */
     public function render()
     {
+        ray($this->blogPosts);
         return view('components.mobirise.blocks.blog-list', ['blogPosts' => $this->blogPosts]);
     }
 }
