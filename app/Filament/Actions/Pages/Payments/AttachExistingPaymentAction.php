@@ -23,7 +23,6 @@ class AttachExistingPaymentAction extends BasePageAction
     {
         //TODO issues populating the select after this runs - fix later if necessary
         parent::setUp();
-        ray($this->availablePayments);
         $this->icon('heroicon-o-cash')
             ->form([
                 Select::make('payment_id')
@@ -46,7 +45,6 @@ class AttachExistingPaymentAction extends BasePageAction
     {
         if (isset($payments)) {
             $this->availablePayments = $payments instanceof Collection ? $payments->toArray() : $payments;
-            ray($this->availablePayments);
         }
 
         return $this;
