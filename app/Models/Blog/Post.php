@@ -44,11 +44,22 @@ class Post extends Model
      */
     protected $appends = [
         'banner_url',
+        'public_url',
     ];
 
     public function bannerUrl(): Attribute
     {
         return Attribute::get(fn () => asset(Storage::url($this->banner)));
+    }
+
+    public function publicUrl(): Attribute
+    {
+        return Attribute::get(fn () => route('frontend.blog-posts.show', $this));
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     public function scopePublished(Builder $query)
