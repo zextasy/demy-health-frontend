@@ -119,6 +119,11 @@ class PostResource extends Resource
                             ->content(fn (
                                 ?Post $record
                             ): string => $record ? $record->updated_at->diffForHumans() : '-'),
+                        Forms\Components\Placeholder::make('public_url')
+                            ->label("Public Url")
+                            ->content(fn (
+                                ?Post $record
+                            ): string => $record ? $record->public_url : '-'),
                     ])
                     ->columnSpan(1),
             ])
@@ -183,6 +188,7 @@ class PostResource extends Resource
             'index' => Pages\ListPosts::route('/'),
             'create' => Pages\CreatePost::route('/create'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
+            'view' => Pages\ViewPost::route('/{record}'),
         ];
     }
 
