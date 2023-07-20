@@ -15,7 +15,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        $blogPosts = Post::with(['author','tags','category'])->latest()->get();
+        $blogPosts = Post::published()->with(['author','tags','category'])->latest()->get();
         $data['blogPosts'] = $blogPosts;
         return view('frontend.blog-posts.index', $data);
     }
