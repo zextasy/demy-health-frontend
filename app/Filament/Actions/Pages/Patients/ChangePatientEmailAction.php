@@ -25,6 +25,7 @@ class ChangePatientEmailAction extends BasePageAction
         $this->form([
             TextInput::make('email')
                 ->label('email')
+                ->email()
                 ->unique('patients')
                 ->default($this->subject?->email)
                 ->required(),

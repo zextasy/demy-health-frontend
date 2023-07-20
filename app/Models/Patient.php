@@ -11,9 +11,12 @@ use Illuminate\Support\Collection;
 use App\Enums\AgeClassificationEnum;
 use App\Contracts\DiscounterContract;
 use App\Traits\Models\LaravelMorphable;
+use App\Contracts\CommunicableContract;
 use App\Traits\Relationships\Discounter;
+use Illuminate\Notifications\Notifiable;
 use App\Traits\Models\GeneratesReference;
 use App\Contracts\ActiveCustomerContract;
+use App\Traits\Models\RoutesCommunications;
 use App\Traits\Relationships\MorphsAddresses;
 use App\Traits\Relationships\HasOrdersViaEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -26,7 +29,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class Patient extends BaseModel implements DiscounterContract, ActiveCustomerContract, PayerContract
+class Patient extends BaseModel implements
+    DiscounterContract,
+    ActiveCustomerContract,
+    PayerContract,
+    CommunicableContract
 {
     use HasFactory;
     use GeneratesReference;
@@ -38,6 +45,8 @@ class Patient extends BaseModel implements DiscounterContract, ActiveCustomerCon
     use HasOrdersViaEmail;
     use HasInvoicesViaEmail;
     use HasPaymentsViaEmail;
+    use Notifiable;
+    use RoutesCommunications;
 
     //region CONFIG
     protected $guarded = ['id'];
@@ -63,29 +72,29 @@ class Patient extends BaseModel implements DiscounterContract, ActiveCustomerCon
     protected function age(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->calculateAge(),
+            get: fn() => $this->calculateAge(),
         );
     }
 
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->getFullName(),
+            get: fn() => $this->getFullName(),
         );
     }
+    //endregion
 
-    public function getFullName():string
+    //region HELPERS
+    public function getFullName(): string
     {
-        return $this->last_name.' '.$this->first_name;
+        return $this->last_name . ' ' . $this->first_name;
     }
 
     public function getEmailForPayment(): ?string
     {
         return $this->email;
     }
-    //endregion
 
-    //region HELPERS
     public function resolveAgeClassification(int|Carbon $age): AgeClassificationEnum
     {
         $age = $age instanceof Carbon ? $age->age : $age;
@@ -113,6 +122,7 @@ class Patient extends BaseModel implements DiscounterContract, ActiveCustomerCon
         if (isset($this->referredBy)) {
             $discounts = $discounts->merge($this->referredBy?->discounts);
         }
+
         return $discounts;
     }
 
@@ -120,6 +130,7 @@ class Patient extends BaseModel implements DiscounterContract, ActiveCustomerCon
     {
         return app()->isLocal();
     }
+
     //endregion
 
     //region SCOPES
