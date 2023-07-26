@@ -440,7 +440,9 @@ class DemyProductSeeder extends Seeder
             if (file_exists($ProductUrl)) {
                 $mediaUrl = $ProductUrl;
             }
-            $productModel->copyMedia($mediaUrl)->toMediaCollection('pictures');
+            if (file_exists($mediaUrl)) {
+                $productModel->copyMedia($mediaUrl)->toMediaCollection('pictures');
+            }
             if (array_key_exists('extra_information', $product)) {
                 $extraInformation = $product['extra_information'];
 
