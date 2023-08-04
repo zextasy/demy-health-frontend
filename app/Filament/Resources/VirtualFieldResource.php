@@ -53,7 +53,7 @@ class VirtualFieldResource extends Resource
                         })
                         ->reactive()
                         ->required()
-                        ->unique()
+	                    ->unique('virtual_fields', 'label', fn ($record) => $record)
                         ->helperText('This is how the field will be displayed to users')
                         ->maxLength(255),
                     TextInput::make('name')
@@ -61,7 +61,7 @@ class VirtualFieldResource extends Resource
                             $set('is_slug_changed_manually', true);
                         })
                         ->required()
-                        ->unique()
+	                    ->unique('virtual_fields', 'name', fn ($record) => $record)
                         ->helperText(HelpTextMessageHelper::NAME_SLUG_TEXT)
                         ->maxLength(255),
                     Hidden::make('is_slug_changed_manually')

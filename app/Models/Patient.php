@@ -58,6 +58,7 @@ class Patient extends BaseModel implements
         'age_classification' => AgeClassificationEnum::class,
     ];
 
+//    protected $appends = ['full_name'];
     public function referenceConfig(): array
     {
         return [
@@ -80,7 +81,7 @@ class Patient extends BaseModel implements
     {
         return Attribute::make(
             get: fn() => $this->getFullName(),
-        );
+        )->shouldCache();
     }
     //endregion
 
