@@ -8,6 +8,9 @@ use App\Traits\Models\HasFilamentUrl;
 use App\Traits\Models\GeneratesReference;
 use App\Filament\Resources\VisitResource;
 use App\Traits\Relationships\BelongsToPatient;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,5 +54,19 @@ class Visit extends BaseModel
 
 //region RELATIONSHIPS
 
+	public function vitalSignsRecords(): HasMany
+	{
+		return $this->hasMany(VitalSignsRecord::class);
+	}
+
+	public function latestVitalSignsRecord(): HasOne
+	{
+		return $this->hasOne(VitalSignsRecord::class)->ofMany()->latest();
+	}
+
+	public function visitableLocation(): MorphTo
+	{
+		return $this->morphTo();
+	}
 //endregion
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\NavigationGroupEnum;
 use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\VisitResource\Pages;
 use App\Filament\Resources\VisitResource\RelationManagers;
@@ -21,7 +22,7 @@ class VisitResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'CRM';
+    protected static ?string $navigationGroup = 'CONSULTATION';
 
     protected static function shouldRegisterNavigation(): bool
     {
@@ -56,6 +57,7 @@ class VisitResource extends Resource
                 TextColumn::make('patient.full_name')->label('Patient'),
                 TextColumn::make('created_at')->label('Date and Time')
                     ->dateTime(),
+	            TextColumn::make('visitableLocation.name')->label('Location'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([

@@ -29,7 +29,7 @@ class RegisterPatientVisitAction extends BasePageAction
                 ->unique('visits')
                 ->maxLength(255)
                 ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
-            Select::make('testCenterId')->label('Test Center')
+            Select::make('testCenterId')->label('Location')
                 ->options(TestCenter::all()->toSelectArray())->searchable()->required(),
         ])
             ->action(function (array $data): void {
