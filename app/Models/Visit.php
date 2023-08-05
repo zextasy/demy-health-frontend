@@ -7,6 +7,7 @@ use App\Settings\GeneralSettings;
 use App\Traits\Models\HasFilamentUrl;
 use App\Traits\Models\GeneratesReference;
 use App\Filament\Resources\VisitResource;
+use App\Traits\Relationships\BelongsToPatient;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,7 @@ class Visit extends BaseModel
     use GeneratesReference;
     use HasFilamentUrl;
     use BelongsToBusinessGroup;
+	use BelongsToPatient;
 
 //region CONFIG
     protected $guarded = ['id'];
@@ -48,9 +50,6 @@ class Visit extends BaseModel
 //endregion
 
 //region RELATIONSHIPS
-    public function patient(): BelongsTo
-    {
-        return $this->belongsTo(Patient::class);
-    }
+
 //endregion
 }
