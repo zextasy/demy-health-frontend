@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\BaseModel;
+use App\Enums\Tasks\TaskTypeEnum;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,9 @@ class Task extends BaseModel
         'completed_at',
         'failed_at'
     ];
+	protected $casts = [
+		'type' => TaskTypeEnum::class,
+	];
     //endregion
 
     //region ATTRIBUTES
@@ -36,6 +40,15 @@ class Task extends BaseModel
 
     //region HELPERS
 
+	public function isGeneric(): bool
+	{
+		return $this->type == TaskTypeEnum::GENERIC;
+	}
+
+	public function isNotGeneric(): bool
+	{
+		return !$this->isGeneric();
+	}
     //endregion
 
     //region SCOPES

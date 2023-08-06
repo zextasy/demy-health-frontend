@@ -8,6 +8,8 @@ use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Actions\ViewAction;
+use App\Filament\Resources\TaskResource;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Concerns\InteractsWithTable;
 use App\Actions\Tasks\RejectTaskCompletionConfirmationAction;
@@ -73,6 +75,8 @@ class TasksIAssigned extends Page implements HasTable
                         ->helperText('This task will be marked as failed if you select this option '),
                 ])
                 ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
+	        Action::make('view')
+		        ->url(fn (Task $record): string => TaskResource::getUrl('view', $record)),
         ];
     }
 }

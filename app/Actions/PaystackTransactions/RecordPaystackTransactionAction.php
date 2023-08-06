@@ -2,10 +2,6 @@
 
 namespace App\Actions\PaystackTransactions;
 
-use App\Models\User;
-use App\Models\Task;
-use Illuminate\Support\Carbon;
-use App\Contracts\AssignableContract;
 use App\Models\Finance\PaystackTransaction;
 
 class RecordPaystackTransactionAction

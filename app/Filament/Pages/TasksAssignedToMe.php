@@ -8,6 +8,8 @@ use Filament\Tables\Actions\Action;
 use App\Actions\Tasks\StartTaskAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Actions\ViewAction;
+use App\Filament\Resources\TaskResource;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Concerns\InteractsWithTable;
 use App\Actions\Tasks\RequestTaskCompletionConfirmationAction;
@@ -69,6 +71,8 @@ class TasksAssignedToMe extends Page implements HasTable
                 ->modalSubheading('This will indicate that you have completed this task and it will be sent for approval')
                 ->modalButton('Yes, mark')
                 ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
+	        Action::make('view')
+		        ->url(fn (Task $record): string => TaskResource::getUrl('view', $record)),
         ];
     }
 }

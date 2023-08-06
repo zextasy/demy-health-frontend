@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\VisitResource\Pages;
 
+use App\Enums\Tasks\TaskTypeEnum;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
@@ -11,6 +12,7 @@ use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\PatientResource;
 use Filament\Forms\Components\DateTimePicker;
+use App\Filament\Actions\Pages\Tasks\AssignTaskAction;
 use App\Filament\Actions\Pages\Visits\RecordVItalSignsAction;
 
 class ViewVisit extends ViewRecord
@@ -22,6 +24,7 @@ class ViewVisit extends ViewRecord
         return [
             Actions\EditAction::make(),
 	        RecordVItalSignsAction::make()->forVisit($this->record),
+	        AssignTaskAction::make('Request Consultation')->type(TaskTypeEnum::CONSULTATION)->assignable($this->record),
         ];
     }
 

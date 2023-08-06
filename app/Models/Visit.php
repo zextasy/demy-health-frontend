@@ -5,9 +5,13 @@ namespace App\Models;
 use App\Models\BaseModel;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\HasFilamentUrl;
+use App\Contracts\AssignableContract;
+use App\Traits\Models\LaravelMorphable;
+use App\Traits\Relationships\Assignable;
 use App\Traits\Models\GeneratesReference;
 use App\Filament\Resources\VisitResource;
 use App\Traits\Relationships\BelongsToPatient;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -15,13 +19,15 @@ use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Visit extends BaseModel
+class Visit extends BaseModel implements AssignableContract
 {
     use HasFactory;
     use GeneratesReference;
     use HasFilamentUrl;
     use BelongsToBusinessGroup;
 	use BelongsToPatient;
+	use Assignable;
+	use LaravelMorphable;
 
 //region CONFIG
     protected $guarded = ['id'];
@@ -41,11 +47,19 @@ class Visit extends BaseModel
 //endregion
 
 //region ATTRIBUTES
-
+	protected function name(): Attribute
+	{
+		return Attribute::make(
+			get: fn ($value) => 'Visit - ' .$this->created_at->toDateString() . ' - ' . $this->patient->full_name,
+		);
+	}
 //endregion
 
 //region HELPERS
-
+	public function getAssignableName(): string
+	{
+		return $this->name;
+	}
 //endregion
 
 //region SCOPES
