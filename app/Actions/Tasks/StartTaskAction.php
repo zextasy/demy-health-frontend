@@ -3,6 +3,7 @@
 namespace App\Actions\Tasks;
 
 use App\Models\Task;
+use App\Events\TaskStartedEvent;
 
 class StartTaskAction
 {
@@ -17,7 +18,13 @@ class StartTaskAction
             'started_by' => auth()->id()
         ]);
 
+		$this->raiseEvents($task);
         return $task;
     }
+
+	private function raiseEvents(Task $task): void
+	{
+		TaskStartedEvent::dispatch($task);
+	}
 
 }

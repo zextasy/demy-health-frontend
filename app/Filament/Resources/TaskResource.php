@@ -29,38 +29,43 @@ class TaskResource extends Resource
 
     public static function form(Form $form): Form
     {
+		$users =  User::all()->pluck('name', 'id');
         return $form
             ->schema([
-                Forms\Components\Select::make('parent_id')->label('Parent')
-                    ->disabled(),
-                Forms\Components\Select::make('business_group_id')->label('Business Group')
-                    ->disabled(),
+//                Forms\Components\Select::make('parent_id')->label('Parent')
+//                    ->disabled()->placeholder('-'),
+//                Forms\Components\Select::make('business_group_id')->label('Business Group')
+//	                ->options($users)->disabled()->placeholder('-'),
                 Forms\Components\Select::make('assigned_by')
-                    ->disabled(),
-                Forms\Components\Select::make('assigned_to')->options(User::all()->pluck('name', 'id'))
-                    ->required(),
-                Forms\Components\TextInput::make('started_by'),
-                Forms\Components\TextInput::make('completion_confirmation_requested_by')->disabled(),
-                Forms\Components\TextInput::make('completion_confirmation_confirmed_by')->disabled(),
-                Forms\Components\TextInput::make('completion_confirmation_rejected_by')->disabled(),
-                Forms\Components\TextInput::make('completed_by')->disabled(),
-                Forms\Components\TextInput::make('failed_by')->disabled(),
-                Forms\Components\Textarea::make('details')
-                    ->required()
-                    ->maxLength(65535),
-                Forms\Components\DateTimePicker::make('due_at')
-                    ->required(),
-                Forms\Components\Textarea::make('assignable_url')
-                    ->disabled()
-                    ->maxLength(65535),
-                Forms\Components\DateTimePicker::make('assigned_at')
-                    ->disabled(),
-                Forms\Components\DateTimePicker::make('started_at')->disabled(),
-                Forms\Components\DateTimePicker::make('completion_confirmation_requested_at')->disabled(),
-                Forms\Components\DateTimePicker::make('completion_confirmation_confirmed_at')->disabled(),
-                Forms\Components\DateTimePicker::make('completion_confirmation_rejected_at')->disabled(),
-                Forms\Components\DateTimePicker::make('completed_at')->disabled(),
-                Forms\Components\DateTimePicker::make('failed_at')->disabled(),
+	                ->options($users)
+                    ->disabled()->placeholder('-'),
+                Forms\Components\Select::make('assigned_to')
+	                ->options($users)
+                    ->disabled()->placeholder('-'),
+	            Forms\Components\DateTimePicker::make('assigned_at')
+		            ->disabled(),
+	            Forms\Components\DateTimePicker::make('due_at')
+		            ->disabled(),
+	            Forms\Components\Textarea::make('details')
+		            ->required()
+		            ->maxLength(65535),
+				Forms\Components\Fieldset::make('Status')->schema([
+					Forms\Components\Select::make('started_by')->options($users)->disabled()->placeholder('-'),
+					Forms\Components\DateTimePicker::make('started_at')->disabled(),
+					Forms\Components\Select::make('completion_confirmation_requested_by')->options($users)
+						->disabled()->placeholder('-'),
+					Forms\Components\DateTimePicker::make('completion_confirmation_requested_at')->disabled(),
+					Forms\Components\Select::make('completion_confirmation_confirmed_by')->options($users)
+						->disabled()->placeholder('-'),
+					Forms\Components\DateTimePicker::make('completion_confirmation_confirmed_at')->disabled(),
+					Forms\Components\Select::make('completion_confirmation_rejected_by')
+						->options($users)->disabled()->placeholder('-'),
+					Forms\Components\DateTimePicker::make('completion_confirmation_rejected_at')->disabled(),
+					Forms\Components\Select::make('completed_by')->options($users)->disabled()->placeholder('-'),
+					Forms\Components\DateTimePicker::make('completed_at')->disabled(),
+					Forms\Components\Select::make('failed_by')->options($users)->disabled()->placeholder('-'),
+					Forms\Components\DateTimePicker::make('failed_at')->disabled(),
+				]),
                 Forms\Components\Toggle::make('completion_rating')->disabled(),
             ]);
     }
