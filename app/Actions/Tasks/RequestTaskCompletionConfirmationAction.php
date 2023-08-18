@@ -3,6 +3,7 @@
 namespace App\Actions\Tasks;
 
 use App\Models\Task;
+use App\Events\TaskCompletionApprovalRequestedEvent;
 
 class RequestTaskCompletionConfirmationAction
 {
@@ -17,7 +18,13 @@ class RequestTaskCompletionConfirmationAction
             'completion_confirmation_requested_by' => auth()->id()
         ]);
 
+        $this->raiseEvents($task);
         return $task;
+    }
+
+    private function raiseEvents(Task $task): void
+    {
+        TaskCompletionApprovalRequestedEvent::dispatch($task);
     }
 
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Task;
 use Illuminate\Support\Carbon;
 use App\Enums\Tasks\TaskTypeEnum;
+use App\Events\TaskAssignedEvent;
 use App\Contracts\AssignableContract;
 
 class AssignTaskAction
@@ -31,6 +32,7 @@ class AssignTaskAction
         $task->assigned_to = $assignedToId;
         $task->save();
 
+        $this->raiseEvents($task);
         return $task;
     }
 
@@ -45,4 +47,9 @@ class AssignTaskAction
 		$this->type = $type;
 		return $this;
 	}
+
+    private function raiseEvents(Task $task): void
+    {
+        TaskAssignedEvent::dispatch($task);
+    }
 }

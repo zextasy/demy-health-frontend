@@ -4,9 +4,9 @@ namespace App\Actions\Tasks;
 
 use App\Models\Task;
 use App\Models\User;
-use App\Events\TaskStartedEvent;
+use App\Events\TaskCompletedEvent;
 
-class StartTaskAction
+class CompleteTaskAction
 {
 
 
@@ -18,11 +18,9 @@ class StartTaskAction
             $userId = $user instanceof User ? $user->id : $user;
         }
 
-
-
         $task->update([
-            'started_at' => now(),
-            'started_by' => $userId
+            'completed_at' => now(),
+            'completed_by' => $userId
         ]);
 
 		$this->raiseEvents($task);
@@ -31,7 +29,7 @@ class StartTaskAction
 
 	private function raiseEvents(Task $task): void
 	{
-		TaskStartedEvent::dispatch($task);
+        TaskCompletedEvent::dispatch($task);
 	}
 
 }
