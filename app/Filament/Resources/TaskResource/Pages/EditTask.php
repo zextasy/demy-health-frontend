@@ -30,5 +30,4 @@ class EditTask extends EditRecord
 				->required(),
 		];
 	}
-	//TODO edit form - Now!
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->unsignedSmallInteger('type')->default(TaskTypeEnum::GENERIC->value);
+            $table->unsignedSmallInteger('type')->default(TaskTypeEnum::GENERIC->value)->after('assignable_url');
         });
     }
 
