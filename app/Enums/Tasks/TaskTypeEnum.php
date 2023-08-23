@@ -15,5 +15,5 @@ enum TaskTypeEnum: int
     case GENERIC = 1;
     case CONSULTATION = 10;
 
-    case OTHER = 200;
+    case OTHER = 100000;
 }

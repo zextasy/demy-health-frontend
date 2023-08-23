@@ -22,7 +22,7 @@ class VisitResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'CONSULTATION';
+    protected static ?string $navigationGroup = 'Consultation';
 
     protected static function shouldRegisterNavigation(): bool
     {

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
 use App\Enums\Tasks\TaskTypeEnum;
+use App\Enums\Tasks\TaskActionEnum;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +28,7 @@ class Task extends BaseModel
     ];
 	protected $casts = [
 		'type' => TaskTypeEnum::class,
+        'action' => TaskActionEnum::class,
 	];
     //endregion
 

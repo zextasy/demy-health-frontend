@@ -5,10 +5,10 @@ namespace App\Traits\Relationships;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait Assignable
+trait Actionable
 {
-    public function assignedTasks(): MorphMany
+    public function actionableTasks(): MorphMany
     {
-        return $this->MorphMany(Task::class, 'assignable');
+        return $this->MorphMany(Task::class, 'actionable');
     }
 }

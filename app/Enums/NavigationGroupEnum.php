@@ -13,17 +13,17 @@ enum NavigationGroupEnum: string
     use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
 
     case NONE = '';
-	case ADMIN = 'ADMIN';
-	case DASHBOARDS = 'DASHBOARDS';
-	case PERSONAL = 'PERSONAL';
+	case ADMIN = 'Admin';
+	case DASHBOARDS = 'Dashboards';
+	case PERSONAL = 'Personal';
 	case CRM = 'CRM';
-	case CONSULTATION = 'CONSULTATION';
-	case TESTS = 'TESTS';
-	case FINANCE = 'FINANCE';
-	case PRODUCTS = 'PRODUCTS';
-	case BLOG = 'BLOG';
-	case MARKETING = 'MARKETING';
-	case LOCATIONS = 'LOCATIONS';
-	case ROLES_AND_PERMISSIONS = 'ROLES AND PERMISSIONS';
+	case CONSULTATION = 'Consultation';
+	case TESTS = 'Tests';
+	case FINANCE = 'Finance';
+	case PRODUCTS = 'Products';
+	case BLOG = 'Blog';
+	case MARKETING = 'Marketing';
+	case LOCATIONS = 'Locations';
+	case ROLES_AND_PERMISSIONS = 'Roles and Permissions';
 
 }

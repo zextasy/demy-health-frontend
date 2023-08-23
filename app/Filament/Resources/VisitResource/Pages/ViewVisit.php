@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\VisitResource\Pages;
 
 use App\Enums\Tasks\TaskTypeEnum;
+use App\Enums\Tasks\TaskActionEnum;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
@@ -24,7 +25,8 @@ class ViewVisit extends ViewRecord
         return [
             Actions\EditAction::make(),
 	        RecordVItalSignsAction::make()->forVisit($this->record),
-	        AssignTaskAction::make('Request Consultation')->type(TaskTypeEnum::CONSULTATION)->assignable($this->record),
+	        AssignTaskAction::make('Request Consultation')->assignable($this->record)
+                ->type(TaskTypeEnum::CONSULTATION)->taskAction(TaskActionEnum::CREATE),
         ];
     }
 

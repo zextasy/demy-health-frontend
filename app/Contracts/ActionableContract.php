@@ -4,11 +4,11 @@ namespace App\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-interface AssignableContract
+interface ActionableContract
 {
-    public function assignedTasks(): MorphMany;
+    public function actionableTasks(): MorphMany;
     public function getLaravelMorphModelType(): string;
     public function getLaravelMorphModelId(): int;
     public function getFilamentUrl(): string;
-    public function getAssignableName(): string;
+    public function getActionableName(): string;
 }

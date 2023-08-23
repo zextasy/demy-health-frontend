@@ -13,7 +13,7 @@ enum TaskActionEnum: int
     use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
 
     case UNKNOWN = 1;
-    case START = 10;
-
-    case COMPLETE = 500;
+    case CREATE = 10;
+    case START = 20;
+    case COMPLETE = 100;
 }
