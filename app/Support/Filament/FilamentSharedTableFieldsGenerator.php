@@ -25,13 +25,9 @@ class FilamentSharedTableFieldsGenerator
             TextColumn::make('due_at')
                 ->dateTime(),
             BadgeColumn::make('status')
-                ->colors([
-                    'primary' => TaskStatusEnum::ONGOING->value,
-                    'secondary' => TaskStatusEnum::PENDING->value,
-                    'danger' => TaskStatusEnum::FAILED->value,
-                    'warning' => TaskStatusEnum::UNDER_REVIEW->value,
-                    'success' => TaskStatusEnum::COMPLETE->value,
-                ]),
+                ->color(static function ($state): string {
+                    return TaskStatusEnum::getFilamentBadgeColor($state);
+                }),
         ];
     }
 }
