@@ -17,6 +17,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Support\Filament\FilamentSharedTableFieldsGenerator;
 use App\Actions\Tasks\RejectTaskCompletionConfirmationAction;
 use App\Actions\Tasks\RequestTaskCompletionConfirmationAction;
 use App\Actions\Tasks\ApproveTaskCompletionConfirmationAction;
@@ -78,22 +79,9 @@ class TaskResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $columns = FilamentSharedTableFieldsGenerator::getTaskTable();
         return $table
-            ->columns([
-//                TextColumn::make('business_group.name'),
-                TextColumn::make('assignedBy.name'),
-                TextColumn::make('assignedTo.name'),
-                TextColumn::make('details'),
-                TextColumn::make('assignable_name')
-                    ->label('Target')
-                    ->url(fn (Task $record): string => $record->assignable_url),
-                TextColumn::make('actionable_name')
-                    ->label('Result')
-                    ->url(fn (Task $record): string => $record->actionable_url ?? '#'),
-                TextColumn::make('due_at')
-                    ->dateTime(),
-                TextColumn::make('status'),
-            ])
+            ->columns($columns)
             ->defaultSort('created_at', 'desc')
             ->filters([
                 //

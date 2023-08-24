@@ -12,6 +12,7 @@ use Filament\Tables\Actions\ViewAction;
 use App\Filament\Resources\TaskResource;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Concerns\InteractsWithTable;
+use App\Support\Filament\FilamentSharedTableFieldsGenerator;
 use App\Actions\Tasks\RequestTaskCompletionConfirmationAction;
 
 class TasksAssignedToMe extends Page implements HasTable
@@ -41,20 +42,7 @@ class TasksAssignedToMe extends Page implements HasTable
 
     protected function getTableColumns(): array
     {
-        return [
-            TextColumn::make('assignedBy.name'),
-            TextColumn::make('assignedTo.name'),
-            TextColumn::make('details'),
-            TextColumn::make('assignable_name')
-                ->label('Target')
-                ->url(fn (Task $record): string => $record->assignable_url),
-            TextColumn::make('actionable_name')
-                ->label('Result')
-                ->url(fn (Task $record): string => $record->actionable_url ?? '#'),
-            TextColumn::make('due_at')
-                ->dateTime(),
-            TextColumn::make('status'),
-        ];
+        return FilamentSharedTableFieldsGenerator::getTaskTable();
     }
 
     protected function getTableActions(): array
