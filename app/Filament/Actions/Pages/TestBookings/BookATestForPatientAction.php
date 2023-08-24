@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use App\Models\Finance\Discount;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
+use App\Helpers\HelpTextMessageHelper;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use App\Enums\TestBookings\LocationTypeEnum;
@@ -38,7 +39,7 @@ class BookATestForPatientAction extends BasePageAction
                 Fieldset::make('General Info')->schema([
                     TextInput::make('reference')
                         ->maxLength(255)
-                        ->helperText('Leave this blank and the system will generate one for you'),
+                        ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
                     Select::make('test_type_id')->label('Test Type')
                         ->options(TestType::all()->toSelectArray())->searchable(),
                 ])->columns(1),

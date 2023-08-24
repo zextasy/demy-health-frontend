@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\RelationManagers\BaseMorphManyTasksRelationManager;
 
-class TasksRelationManager extends BaseMorphManyTasksRelationManager
+class AssignedTasksRelationManager extends BaseMorphManyTasksRelationManager
 {
+    protected static string $relationship = 'assignedTasks';
 
+    protected static ?string $title = 'Assigned Tasks';
 }

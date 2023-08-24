@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use App\Helpers\HelpTextMessageHelper;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
+use App\Enums\Finance\TestBookings\TestBookingStatusEnum;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
@@ -52,7 +54,7 @@ class TestBookingResource extends Resource
                     Forms\Components\TextInput::make('reference')
                         ->maxLength(255)
                         ->unique()
-                        ->helperText('Leave this blank and the system will generate one for you'),
+                        ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
                     Forms\Components\BelongsToSelect::make('testType')
                         ->relationship('testType', 'name')
                         ->disabled(),
@@ -104,14 +106,9 @@ class TestBookingResource extends Resource
                 TextColumn::make('patient.full_name')->label('Patient'),
                 TextColumn::make('customer_email')->sortable(),
                 BadgeColumn::make('status')
-                    ->sortable(),
-                //            ->colors([
-                //                'gray' => StatusEnum::Booked->value,
-                //                'primary'=> '1',//Booked
-                //                'danger' => 'none',
-                //                'warning' => 'reviewing',
-                //                'success' => 'complete',
-                //            ])
+                    ->color(static function ($state): string {
+                        return TestBookingStatusEnum::getFilamentBadgeColor($state);
+                    }),
                 BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray())
                     ->sortable(),
@@ -128,8 +125,9 @@ class TestBookingResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\TasksRelationManager::class,
             RelationManagers\TestResultsRelationManager::class,
+            RelationManagers\AssignedTasksRelationManager::class,
+//            RelationManagers\ActionableTasksRelationManager::class,
             RelationManagers\AddressesRelationManager::class,
         ];
     }

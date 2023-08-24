@@ -5,6 +5,8 @@ namespace App\Filament\Actions\Pages\Tasks;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Filament\Facades\Filament;
+use App\Enums\Tasks\TaskTypeEnum;
+use App\Enums\Tasks\TaskActionEnum;
 use Filament\Forms\Components\Select;
 use App\Contracts\AssignableContract;
 use Filament\Forms\ComponentContainer;
@@ -16,8 +18,10 @@ use App\Filament\Actions\Pages\BasePageAction;
 class AssignTaskAction extends BasePageAction
 {
     private ?AssignableContract $assignable = null;
+	private ?TaskTypeEnum $type = null;
+    private ?TaskActionEnum $taskAction = null;
 
-    public static function getDefaultName(): ?string
+	public static function getDefaultName(): ?string
     {
         return 'assign task';
     }
@@ -69,11 +73,24 @@ class AssignTaskAction extends BasePageAction
         return $this;
     }
 
+	public function type(TaskTypeEnum $type): self
+	{
+		$this->type = $type;
+		return $this;
+	}
+
+    public function taskAction(?TaskActionEnum $taskAction): self
+    {
+        $this->taskAction = $taskAction;
+        return $this;
+    }
+
     protected function runAction(array $data): bool
     {
         try {
             $dueAt = Carbon::parse($data['due_at']);
             (new \App\Actions\Tasks\AssignTaskAction)->assignedBy($data['assignedById'])
+	            ->type($this->type)->action($this->taskAction)
                 ->run($this->assignable, $data['assignedToId'], $data['details'], $dueAt);
             return true;
         } catch (\Exception $e) {

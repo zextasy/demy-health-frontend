@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\VisitResource\Pages;
 
-use App\Filament\Resources\VisitResource;
 use Filament\Pages\Actions;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\VisitResource;
 
 class EditVisit extends EditRecord
 {
@@ -14,7 +15,16 @@ class EditVisit extends EditRecord
     {
         return [
             Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+//            Actions\DeleteAction::make(),
+        ];
+    }
+
+    protected function getFormSchema(): array
+    {
+        return [
+            TextInput::make('reference')
+                ->unique('visits', 'reference', fn ($record) => $record)
+                ->maxLength(255),
         ];
     }
 }

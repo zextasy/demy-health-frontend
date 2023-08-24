@@ -31,6 +31,7 @@ use App\Actions\Orders\GenerateOrderFromTestBookingAction;
 use App\Filament\Actions\Pages\Payments\CapturePaymentAction;
 use App\Filament\Actions\Pages\Discounts\AttachDiscountAction;
 use App\Filament\Actions\Pages\Patients\ChangePatientEmailAction;
+use App\Filament\Actions\Pages\Patients\RegisterPatientVisitAction;
 use App\Filament\Actions\Pages\TestBookings\BookATestForPatientAction;
 use App\Filament\Actions\Pages\Communications\SendCommunicationAction;
 
@@ -54,13 +55,16 @@ class ViewPatient extends ViewRecord
                 SendCommunicationAction::make()->communicable($this->record)
                     ->visible($this->record->hasValidRoute(CommunicationChannelEnum::EMAIL())),
             ])->icon('heroicon-s-at-symbol')->label('Communication'),
-            Action::make('Place an Order')
-                ->url(PlaceOrder::getUrl([
-                    'customerEmail' => $this->record->email,
-                    'customerPhoneNumber' => $this->record->phone_number,
-                    'patientId' => $this->record->id
-                ])),
-            BookATestForPatientAction::make('Book A Test')->subject($this->record),
+            ActionGroup::make([
+                Action::make('Place an Order')
+                    ->url(PlaceOrder::getUrl([
+                        'customerEmail' => $this->record->email,
+                        'customerPhoneNumber' => $this->record->phone_number,
+                        'patientId' => $this->record->id
+                    ])),
+                BookATestForPatientAction::make('Book A Test')->subject($this->record),
+            ])->icon('heroicon-s-bookmark'),
+            RegisterPatientVisitAction::make()->subject($this->record),
         ];
     }
 }

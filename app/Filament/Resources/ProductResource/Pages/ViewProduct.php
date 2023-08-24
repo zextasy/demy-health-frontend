@@ -42,8 +42,7 @@ class ViewProduct extends ViewRecord
                 TextInput::make('sku')
                     ->label('SKU')
                     ->unique()
-                    ->maxLength(255)
-                    ->helperText('Leave this blank and the system will generate one for you'),
+                    ->maxLength(255),
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
