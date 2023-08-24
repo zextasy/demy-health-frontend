@@ -8,6 +8,7 @@ use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Resources\TestBookingResource\Pages;
+use App\Enums\Finance\TestBookings\TestBookingStatusEnum;
 use App\Filament\Resources\TestBookingResource\RelationManagers;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
@@ -105,14 +106,9 @@ class TestBookingResource extends Resource
                 TextColumn::make('patient.full_name')->label('Patient'),
                 TextColumn::make('customer_email')->sortable(),
                 BadgeColumn::make('status')
-                    ->sortable(),
-                //            ->colors([
-                //                'gray' => StatusEnum::Booked->value,
-                //                'primary'=> '1',//Booked
-                //                'danger' => 'none',
-                //                'warning' => 'reviewing',
-                //                'success' => 'complete',
-                //            ])
+                    ->color(static function ($state): string {
+                        return TestBookingStatusEnum::getFilamentBadgeColor($state);
+                    }),
                 BadgeColumn::make('location_type')
                     ->enum(LocationTypeEnum::optionsAsSelectArray())
                     ->sortable(),

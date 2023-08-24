@@ -55,6 +55,7 @@ class TestBooking extends BaseModel implements
 
     protected $casts = [
         'location_type' => LocationTypeEnum::class,
+        'status' => TestBookingStatusEnum::class
     ];
 
     protected $with = ['testType','orderItems','InvoiceItems'];
@@ -71,8 +72,6 @@ class TestBooking extends BaseModel implements
     //endregion
 
     //region ATTRIBUTES
-
-    //TODO: move user relationships to appropriate traits
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -171,20 +170,20 @@ class TestBooking extends BaseModel implements
     //endregion
 
     //region PRIVATE
-    private function determineStatus(): string
+    private function determineStatus(): TestBookingStatusEnum
     {
-        $status = TestBookingStatusEnum::BOOKED->value;
+        $status = TestBookingStatusEnum::BOOKED;
 
         if ($this->orderHasBeenPlaced()) {
-            $status = TestBookingStatusEnum::ORDER_PLACED->value;
+            $status = TestBookingStatusEnum::ORDER_PLACED;
         }
 
         if ($this->hasBeenInvoiced()) {
-            $status = TestBookingStatusEnum::INVOICE_GENERATED->value;
+            $status = TestBookingStatusEnum::INVOICE_GENERATED;
         }
 
         if ($this->resultHasBeenGenerated()) {
-            $status = TestBookingStatusEnum::RESULT_GENERATED->value;
+            $status = TestBookingStatusEnum::RESULT_GENERATED;
         }
 
         return $status;
