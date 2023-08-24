@@ -26,8 +26,8 @@ class EditTask extends EditRecord
 			Textarea::make('details')
 				->required()
 				->maxLength(65535),
-			DateTimePicker::make('due_at')
-				->required(),
+//			DateTimePicker::make('due_at')
+//				->required(),
 		];
 	}
 }

@@ -17,6 +17,7 @@ class AssignTaskAction
     private ?int $assignedById = null;
 	private ?TaskTypeEnum $type = null;
     private ?TaskActionEnum $action = null;
+    private ?int $parentId = null;
 
     public function run(AssignableContract $assignable, User| int $assignedTo, string $details, ?Carbon $dueAt) : Task
     {
@@ -33,6 +34,7 @@ class AssignTaskAction
         $task->assigned_at = now();
         $task->assigned_by = $this->assignedById ?? auth()?->id() ?? 1;
         $task->assigned_to = $assignedToId;
+        $task->parent_id = $this->parentId;
         $task->save();
 
         $this->raiseEvents($task);
@@ -54,6 +56,14 @@ class AssignTaskAction
     public function action(?TaskActionEnum $action): self
     {
         $this->action = $action;
+        return $this;
+    }
+
+    public function parent(null|int|Task $parentTask): self
+    {
+        if (isset($parentTask)){
+            $this->parentId = $parentTask instanceof Task ? $parentTask->id : $parentTask;
+        }
         return $this;
     }
 

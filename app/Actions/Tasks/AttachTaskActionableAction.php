@@ -16,7 +16,8 @@ class AttachTaskActionableAction
 
         $task->update([
             'actionable_type' => $actionableContract->getLaravelMorphModelType(),
-            'actionable_id' => $actionableContract->getLaravelMorphModelId()
+            'actionable_id' => $actionableContract->getLaravelMorphModelId(),
+            'assignable_url' => $actionableContract->getFilamentUrl()
         ]);
 
         $this->raiseEvents($task, $actionableContract);

@@ -49,9 +49,10 @@ class Visit extends BaseModel implements AssignableContract
 //region ATTRIBUTES
 	protected function name(): Attribute
 	{
+        $this->loadMissing('patient');
 		return Attribute::make(
 			get: fn ($value) => 'Visit - ' .$this->created_at->toDateString() . ' - ' . $this->patient->full_name,
-		);
+		)->shouldCache();
 	}
 //endregion
 

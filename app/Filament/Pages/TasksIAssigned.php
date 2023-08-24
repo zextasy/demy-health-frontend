@@ -49,6 +49,9 @@ class TasksIAssigned extends Page implements HasTable
             TextColumn::make('assignable_name')
                 ->label('Target')
                 ->url(fn (Task $record): string => $record->assignable_url),
+            TextColumn::make('actionable_name')
+                ->label('Result')
+                ->url(fn (Task $record): string => $record->actionable_url ?? '#'),
             TextColumn::make('due_at')
                 ->dateTime(),
             TextColumn::make('status'),
@@ -64,7 +67,7 @@ class TasksIAssigned extends Page implements HasTable
                 ->modalHeading('Confirm Task is Complete')
                 ->modalSubheading('This will indicate that you have reviewed this task and are satisfied')
                 ->modalButton('Yes, confirm')
-                ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
+                ->visible(fn (Task $record): bool => auth()->user()->can('reviewCompletionRequest', $record)),
             Action::make('rejectCompletion')
                 ->action(fn (Task $record, array $data) => (new RejectTaskCompletionConfirmationAction())->run($record, $data['markAsFailed'])
                 )
@@ -74,7 +77,7 @@ class TasksIAssigned extends Page implements HasTable
                         ->required()
                         ->helperText('This task will be marked as failed if you select this option '),
                 ])
-                ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
+                ->visible(fn (Task $record): bool => auth()->user()->can('reviewCompletionRequest', $record)),
 	        Action::make('view')
 		        ->url(fn (Task $record): string => TaskResource::getUrl('view', $record)),
         ];

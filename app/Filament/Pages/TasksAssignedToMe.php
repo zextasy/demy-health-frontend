@@ -48,6 +48,9 @@ class TasksAssignedToMe extends Page implements HasTable
             TextColumn::make('assignable_name')
                 ->label('Target')
                 ->url(fn (Task $record): string => $record->assignable_url),
+            TextColumn::make('actionable_name')
+                ->label('Result')
+                ->url(fn (Task $record): string => $record->actionable_url ?? '#'),
             TextColumn::make('due_at')
                 ->dateTime(),
             TextColumn::make('status'),
@@ -63,16 +66,16 @@ class TasksAssignedToMe extends Page implements HasTable
                 ->modalHeading('Start Task')
                 ->modalSubheading('This will indicate that you have started this task')
                 ->modalButton('Yes, start')
-                ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
+                ->visible(fn (Task $record): bool => auth()->user()->can('start', $record)),
             Action::make('markAsComplete')
                 ->action(fn (Task $record) => (new RequestTaskCompletionConfirmationAction)->run($record))
                 ->requiresConfirmation()
                 ->modalHeading('Mark Task as Complete')
                 ->modalSubheading('This will indicate that you have completed this task and it will be sent for approval')
                 ->modalButton('Yes, mark')
-                ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
-	        Action::make('view')
-		        ->url(fn (Task $record): string => TaskResource::getUrl('view', $record)),
+                ->visible(fn (Task $record): bool => auth()->user()->can('requestCompletionConfirmation', $record)),
+            Action::make('view')
+                ->url(fn (Task $record): string => TaskResource::getUrl('view', $record)),
         ];
     }
 }
