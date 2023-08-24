@@ -7,6 +7,8 @@ use Spatie\MediaLibrary\HasMedia;
 use Stancl\VirtualColumn\VirtualColumn;
 use App\Traits\Models\GeneratesReference;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Traits\Models\CanBeApprovedByUsers;
+use App\Traits\Models\CanBeRejectedByUsers;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +22,8 @@ class TestResult extends BaseModel implements HasMedia
     use BelongsToActiveCustomerViaCustomerEmail;
     use BelongsToBusinessGroup;
     use VirtualColumn;
+    use CanBeApprovedByUsers;
+    use CanBeRejectedByUsers;
 
     //region CONFIG
     public function referenceConfig(): array

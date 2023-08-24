@@ -97,7 +97,7 @@ class TestBooking extends BaseModel implements
 
     public function getAssignableName(): string
     {
-        return $this->name;
+        return 'Test Booking - '.$this->name;
     }
     public function toFullCalenderEventArray(): array
     {

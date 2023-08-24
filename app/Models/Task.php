@@ -6,7 +6,12 @@ use App\Enums\Tasks\TaskTypeEnum;
 use Spatie\Activitylog\LogOptions;
 use App\Enums\Tasks\TaskActionEnum;
 use App\Enums\Tasks\TaskStatusEnum;
+use App\Traits\Models\CanBeStartedByUsers;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Traits\Models\CanBeReviewedByUsers;
+use App\Traits\Models\CanBeAssignedByUsers;
+use App\Traits\Models\CanBeAssignedToUsers;
+use App\Traits\Models\CanBeCompletedByUsers;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Traits\Relationships\BelongsToBusinessGroup;
@@ -18,10 +23,16 @@ class Task extends BaseModel
     use HasFactory;
     use BelongsToBusinessGroup;
     use LogsActivity;
+    use CanBeStartedByUsers;
+    use CanBeCompletedByUsers;
+    use CanBeReviewedByUsers;
+    use CanBeAssignedByUsers;
+    use CanBeAssignedToUsers;
 
     //region CONFIG
     protected $guarded = ['id'];
     protected $with = ['actionable','assignable', 'assignedBy', 'assignedTo'];
+    //XTODO: move assignedBY and assignedTO to appropriate traits
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at',
         'assigned_at',
@@ -76,17 +87,6 @@ class Task extends BaseModel
 		return !$this->isGeneric();
 	}
 
-    public function wasAssignedBy(int|User $user): bool
-    {
-        $userId = $user instanceof User ? $user->id : $user;
-        return $this->assigned_by === $userId;
-    }
-
-    public function wasAssignedTo(int|User $user): bool
-    {
-        $userId = $user instanceof User ? $user->id : $user;
-        return $this->assigned_to === $userId;
-    }
     public function canBeStarted(): bool
     {
         if ($this->hasNotBeenStarted()){
@@ -120,33 +120,6 @@ class Task extends BaseModel
         return false;
     }
 
-    public function needsCompletionReview(): bool
-    {
-        return isset($this->completion_confirmation_requested_at) && isset($this->completion_confirmation_requested_by);
-    }
-
-    public function doesNotNeedCompletionReview(): bool
-    {
-        return !$this->needsCompletionReview();
-    }
-    public function hasBeenStarted(): bool
-    {
-        return isset($this->started_at) && isset($this->started_by);
-    }
-
-    public function hasNotBeenStarted(): bool
-    {
-        return !$this->hasBeenStarted();
-    }
-    public function hasBeenCompleted(): bool
-    {
-        return isset($this->completed_at) && isset($this->completed_by);
-    }
-
-    public function hasNotBeenCompleted(): bool
-    {
-        return !$this->hasBeenCompleted();
-    }
     public function hasBeenFailed(): bool
     {
         return isset($this->failed_at) && isset($this->failed_by);
@@ -196,31 +169,6 @@ class Task extends BaseModel
     public function actionable(): MorphTo
     {
         return $this->morphTo('actionable');
-    }
-
-    public function assignedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'assigned_by');
-    }
-
-    public function assignedTo(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'assigned_to');
-    }
-
-    public function startedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'started_by');
-    }
-
-    public function completionApprovedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'completion_approved_by');
-    }
-
-    public function completedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'completed_by');
     }
     //endregion
 

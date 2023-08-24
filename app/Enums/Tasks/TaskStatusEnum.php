@@ -12,7 +12,7 @@ enum TaskStatusEnum: string
     case FAILED = 'failed';
     case UNKNOWN = 'unknown';
 
-    public static function getFilamentBadgeColor($value)
+    public static function getFilamentBadgeColor($value): string
     {
         return match ($value) {
             TaskStatusEnum::COMPLETE->value => 'success',
