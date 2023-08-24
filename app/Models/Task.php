@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Tasks\TaskTypeEnum;
 use Spatie\Activitylog\LogOptions;
 use App\Enums\Tasks\TaskActionEnum;
+use App\Enums\Tasks\TaskStatusEnum;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -35,8 +36,9 @@ class Task extends BaseModel
 	protected $casts = [
 		'type' => TaskTypeEnum::class,
         'action' => TaskActionEnum::class,
+        'status' => TaskStatusEnum::class,
 	];
-    protected $appends = ['assignable_name', 'actionable_name'];
+    protected $appends = ['status','assignable_name', 'actionable_name'];
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -52,6 +54,13 @@ class Task extends BaseModel
     protected function getActionableNameAttribute()
     {
         return $this->actionable?->getActionableName() ?? 'N/A';
+    }
+
+    protected function status(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->calculateStatus(),
+        );
     }
     //endregion
 
@@ -92,7 +101,7 @@ class Task extends BaseModel
 
     public function canBeCompleted(): bool
     {
-        if ($this->hasBeenStarted()){
+        if ($this->hasBeenStarted() && $this->doesNotNeedCompletionReview()){
             return $this->hasNotBeenCompleted() && $this->hasNotBeenFailed();
         }
         return false;
@@ -103,12 +112,17 @@ class Task extends BaseModel
         return !$this->canBeCompleted();
     }
 
-    public function needsCompletionReview(): bool
+    public function canBeReviewed(): bool
     {
-        if ($this->canBeCompleted()){
-            return isset($this->completion_confirmation_requested_at) && isset($this->completion_confirmation_requested_by);
+        if ($this->hasBeenStarted() && $this->hasNotBeenCompleted() && $this->hasNotBeenFailed()){
+            return $this->needsCompletionReview();
         }
         return false;
+    }
+
+    public function needsCompletionReview(): bool
+    {
+        return isset($this->completion_confirmation_requested_at) && isset($this->completion_confirmation_requested_by);
     }
 
     public function doesNotNeedCompletionReview(): bool
@@ -141,6 +155,30 @@ class Task extends BaseModel
     public function hasNotBeenFailed(): bool
     {
         return !$this->hasBeenFailed();
+    }
+
+    private function calculateStatus(): TaskStatusEnum
+    {
+        if ($this->hasBeenFailed()){
+            return TaskStatusEnum::FAILED;
+        }
+
+        if ($this->hasBeenCompleted()){
+            return TaskStatusEnum::COMPLETE;
+        }
+
+        if ($this->needsCompletionReview()){
+            return TaskStatusEnum::UNDER_REVIEW;
+        }
+
+        if ($this->hasBeenStarted()){
+            return TaskStatusEnum::ONGOING;
+        }
+
+        if ($this->hasNotBeenStarted()){
+            return TaskStatusEnum::PENDING;
+        }
+        return TaskStatusEnum::UNKNOWN;
     }
 
     //endregion

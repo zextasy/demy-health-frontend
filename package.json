@@ -11,15 +11,16 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.1",
-        "@tailwindcss/typography": "^0.5.2",
+        "@tailwindcss/typography": "^0.5.9",
         "alpinejs": "^3.4.2",
-        "autoprefixer": "^10.1.0",
+        "autoprefixer": "^10.4.15",
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.2.1",
         "postcss-import": "^14.0.1",
-        "tailwindcss": "^3.0.24"
+        "tailwindcss": "^3.3.3",
+        "tippy.js": "^6.3.7"
     },
     "dependencies": {
         "flatpickr": "^4.6.13"

@@ -56,5 +56,8 @@ class CustomFilamentServiceProvider extends ServiceProvider
             'global-search.end',
             fn (): string => Blade::render("<livewire:notifications></livewire:notifications>"),
         );
+        Filament::registerTheme(
+            mix('css/filament.css'),
+        );
     }
 }

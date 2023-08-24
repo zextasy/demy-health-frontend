@@ -57,6 +57,6 @@ class TaskPolicy
 
     public function reviewCompletionRequest(User $user, Task $task)
     {
-        return $task->wasAssignedBy($user)  && $task->needsCompletionReview();
+        return $task->wasAssignedBy($user)  && $task->canBeReviewed();
     }
 }
