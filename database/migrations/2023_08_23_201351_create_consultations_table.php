@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
             $table->string('reference')->unique();
+            $table->foreignId('consultant_id')->constrained('users', 'id');
             $table->timestamp('due_at');
             $table->timestamp('started_at')->nullable();
             $table->foreignId('started_by')->nullable()->constrained('users', 'id');

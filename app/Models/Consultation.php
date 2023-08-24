@@ -66,6 +66,10 @@ class Consultation extends BaseModel implements ActionableContract, AssignableCo
 
 //region RELATIONSHIPS
 
+    public function consultant()
+    {
+        return $this->belongsTo(User::class,'consultant_id');
+    }
 //endregion
 
 }
