@@ -32,7 +32,7 @@ class Task extends BaseModel
     //region CONFIG
     protected $guarded = ['id'];
     protected $with = ['actionable','assignable', 'assignedBy', 'assignedTo'];
-    //XTODO: move assignedBY and assignedTO to appropriate traits
+    //TODO: move assignedBY and assignedTO to appropriate traits
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at',
         'assigned_at',
@@ -132,26 +132,23 @@ class Task extends BaseModel
 
     private function calculateStatus(): TaskStatusEnum
     {
-        if ($this->hasBeenFailed()){
-            return TaskStatusEnum::FAILED;
-        }
-
-        if ($this->hasBeenCompleted()){
-            return TaskStatusEnum::COMPLETE;
-        }
-
-        if ($this->needsCompletionReview()){
-            return TaskStatusEnum::UNDER_REVIEW;
-        }
-
-        if ($this->hasBeenStarted()){
-            return TaskStatusEnum::ONGOING;
-        }
-
+        $status = TaskStatusEnum::UNKNOWN;
         if ($this->hasNotBeenStarted()){
-            return TaskStatusEnum::PENDING;
+            $status = TaskStatusEnum::PENDING;
         }
-        return TaskStatusEnum::UNKNOWN;
+        if ($this->hasBeenStarted()){
+            $status = TaskStatusEnum::ONGOING;
+        }
+        if ($this->needsCompletionReview()){
+            $status = TaskStatusEnum::UNDER_REVIEW;
+        }
+        if ($this->hasBeenCompleted()){
+            $status = TaskStatusEnum::COMPLETE;
+        }
+        if ($this->hasBeenFailed()){
+            $status = TaskStatusEnum::FAILED;
+        }
+        return $status;
     }
 
     //endregion

@@ -13,11 +13,14 @@ use App\Traits\Relationships\Assignable;
 use App\Traits\Models\GeneratesReference;
 use App\Contracts\InvoiceableItemContract;
 use App\Enums\TestBookings\LocationTypeEnum;
+use App\Traits\Relationships\HasTestResults;
 use App\Traits\Relationships\MorphsAddresses;
 use App\Traits\Relationships\MorphsOrderItems;
 use App\Filament\Resources\TestBookingResource;
 use App\Traits\Relationships\MorphsInvoiceItems;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Traits\Models\SamplesAreProcessedByUsers;
+use App\Traits\Models\PaymentsAreReceivedByUsers;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -41,6 +44,9 @@ class TestBooking extends BaseModel implements
     use BelongsToBusinessGroup;
     use Assignable;
     use HasFilamentUrl;
+    use SamplesAreProcessedByUsers;
+    use PaymentsAreReceivedByUsers;
+    use HasTestResults;
 
     //region CONFIG
     protected $dates = ['created_at', 'updated_at', 'due_date'];
@@ -66,7 +72,7 @@ class TestBooking extends BaseModel implements
 
     //region ATTRIBUTES
 
-
+    //TODO: move user relationships to appropriate traits
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -108,61 +114,6 @@ class TestBooking extends BaseModel implements
             'start' => $this->due_date,
             'url' => $this->filament_url,
         ];
-    }
-
-    public function paymentHasBeenReceived(): bool
-    {
-        return $this->payment_received_at !== null;
-    }
-
-    public function sampleCollectionHasBeenApproved(): bool
-    {
-        return $this->sample_collection_approved_at !== null;
-    }
-
-    public function sampleHasBeenReceived(): bool
-    {
-        return $this->sample_received_at !== null;
-    }
-
-    public function processingHasBeenInitiated(): bool
-    {
-        return $this->processing_initiated_at !== null;
-    }
-
-    public function processingIsComplete(): bool
-    {
-        return $this->processing_completed_at !== null;
-    }
-
-    public function resultHasBeenGenerated(): bool
-    {
-        return $this->testResults()->exists();
-    }
-
-    public function resultHasNotBeenGenerated(): bool
-    {
-        return !$this->resultHasBeenGenerated();
-    }
-
-    public function resultHasBeenApproved(): bool
-    {
-        return $this->result_approved_at !== null;
-    }
-
-    public function sampleWasRejected(): bool
-    {
-        return $this->sample_rejected_at !== null;
-    }
-
-    public function testResultIsComplete():bool
-    {
-        return false;
-    }
-
-    public function testResultIsNotComplete():bool
-    {
-        return !$this->testResultIsComplete();
     }
 
     public function getInvoiceableItemName(): string
@@ -211,40 +162,12 @@ class TestBooking extends BaseModel implements
         return $this->belongsTo(TestCenter::class);
     }
 
-    public function testResults(): HasMany
-    {
-        return $this->hasMany(TestResult::class);
-    }
-
     public function patient(): BelongsTo
     {
         return $this->belongsTo(Patient::class);
     }
 
-    public function paymentRecordedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'payment_recorded_by');
-    }
 
-    public function sampleCollectionApprovedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'sample_collection_approved_by');
-    }
-
-    public function sampleReceivedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'sample_received_by');
-    }
-
-    public function resultApprovedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'result_approved_by');
-    }
-
-    public function sampleRejectedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'sample_rejected_by');
-    }
     //endregion
 
     //region PRIVATE
