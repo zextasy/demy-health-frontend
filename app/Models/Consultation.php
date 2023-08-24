@@ -12,6 +12,7 @@ use App\Traits\Relationships\Assignable;
 use App\Traits\Models\GeneratesReference;
 use App\Filament\Resources\ConsultationResource;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Enums\Consultations\ConsultationChannelEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Consultation extends BaseModel implements ActionableContract, AssignableContract
@@ -25,6 +26,9 @@ class Consultation extends BaseModel implements ActionableContract, AssignableCo
 
 //region CONFIG
     protected $guarded = ['id'];
+    protected $casts = [
+        'channel' => ConsultationChannelEnum::class,
+    ];
     public function referenceConfig(): array
     {
         return [
