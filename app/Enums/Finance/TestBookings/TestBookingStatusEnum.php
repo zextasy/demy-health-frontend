@@ -2,6 +2,7 @@
 
 namespace App\Enums\Finance\TestBookings;
 
+use App\Enums\Tasks\TaskStatusEnum;
 use App\Models\Finance\FullDiscount;
 use App\Models\Finance\FixedValueDiscount;
 use App\Models\Finance\PercentageOffDiscount;
@@ -26,4 +27,14 @@ enum TestBookingStatusEnum: string
 
     case Complete = 'Complete';
 
+	public static function getFilamentBadgeColor($value)
+	{
+        return match ($value) {
+            TestBookingStatusEnum::RESULT_APPROVED->value => 'success',
+            TestBookingStatusEnum::PROCESSING->value => 'primary',
+            TestBookingStatusEnum::RESULT_REJECTED->value => 'danger',
+            TestBookingStatusEnum::RESULT_GENERATED->value => 'warning',
+            default => 'secondary'
+        };
+	}
 }

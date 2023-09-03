@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
+use App\Helpers\HelpTextMessageHelper;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
@@ -22,7 +23,7 @@ class TestResultsRelationManager extends RelationManager
                 Forms\Components\Fieldset::make('General Info')->schema([
                     Forms\Components\TextInput::make('reference')
                         ->maxLength(255)
-                        ->helperText('Leave this blank and the system will generate one for you'),
+                        ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
                 ])->columns(1),
                 Forms\Components\Fieldset::make('Result')->schema([
                     SpatieMediaLibraryFileUpload::make('result')

@@ -2,10 +2,8 @@
 
 namespace App\Actions\Tasks;
 
-use App\Models\User;
 use App\Models\Task;
-use Illuminate\Support\Carbon;
-use App\Contracts\AssignableContract;
+use App\Events\TaskCompletionRequestRejectedEvent;
 
 class RejectTaskCompletionConfirmationAction
 {
@@ -24,7 +22,13 @@ class RejectTaskCompletionConfirmationAction
             'failed_by' => $markAsFailed ? $task->assigned_to : null,
         ]);
 
+        $this->raiseEvents($task);
         return $task;
+    }
+
+    private function raiseEvents(Task $task): void
+    {
+        TaskCompletionRequestRejectedEvent::dispatch($task);
     }
 
 }

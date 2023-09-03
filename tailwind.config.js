@@ -1,3 +1,7 @@
+import colors from 'tailwindcss/colors'
+import forms from '@tailwindcss/forms'
+import typography from '@tailwindcss/typography'
+
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
@@ -12,8 +16,17 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                danger: colors.rose,
+                primary: colors.yellow,
+                success: colors.green,
+                warning: colors.orange,
+            },
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [
+        forms,
+        typography,
+    ],
 };

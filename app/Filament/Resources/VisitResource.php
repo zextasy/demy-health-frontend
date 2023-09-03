@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\NavigationGroupEnum;
+use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\VisitResource\Pages;
 use App\Filament\Resources\VisitResource\RelationManagers;
 use App\Models\Visit;
@@ -20,21 +22,26 @@ class VisitResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'CRM';
+    protected static ?string $navigationGroup = 'Consultation';
 
     protected static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with(['patient']);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('business_group_id')->label('Business Group')
-                    ->disabled(),
-                Forms\Components\TextInput::make('patient_id')
-                    ->required(),
+//                Forms\Components\Select::make('business_group_id')->label('Business Group')
+//                    ->disabled(),
+                Forms\Components\Select::make('patient_id')->label('Patient')
+                    ->options(PatientResource::getModel()::all()->toSelectArray('full_name'))->required(),
                 Forms\Components\TextInput::make('reference')
                     ->unique()
                     ->maxLength(255),
@@ -46,10 +53,11 @@ class VisitResource extends Resource
         return $table
             ->columns([
 //                Tables\Columns\TextColumn::make('business_group_id'),
-                Tables\Columns\TextColumn::make('patient.first_name'),
-                Tables\Columns\TextColumn::make('reference'),
-                Tables\Columns\TextColumn::make('created_at')->label('Date and Time')
+                TextColumn::make('reference'),
+                TextColumn::make('patient.full_name')->label('Patient'),
+                TextColumn::make('created_at')->label('Date and Time')
                     ->dateTime(),
+	            TextColumn::make('visitableLocation.name')->label('Location'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -75,7 +83,7 @@ class VisitResource extends Resource
     {
         return [
             'index' => Pages\ListVisits::route('/'),
-            'create' => Pages\CreateVisit::route('/create'),
+//            'create' => Pages\CreateVisit::route('/create'),
             'view' => Pages\ViewVisit::route('/{record}'),
             'edit' => Pages\EditVisit::route('/{record}/edit'),
         ];

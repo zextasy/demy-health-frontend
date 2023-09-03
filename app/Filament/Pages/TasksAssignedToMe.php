@@ -8,8 +8,11 @@ use Filament\Tables\Actions\Action;
 use App\Actions\Tasks\StartTaskAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Actions\ViewAction;
+use App\Filament\Resources\TaskResource;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Concerns\InteractsWithTable;
+use App\Support\Filament\FilamentSharedTableFieldsGenerator;
 use App\Actions\Tasks\RequestTaskCompletionConfirmationAction;
 
 class TasksAssignedToMe extends Page implements HasTable
@@ -39,17 +42,7 @@ class TasksAssignedToMe extends Page implements HasTable
 
     protected function getTableColumns(): array
     {
-        return [
-            TextColumn::make('assignedBy.name'),
-            TextColumn::make('assignedTo.name'),
-            TextColumn::make('details'),
-            TextColumn::make('assignable_name')
-                ->label('Target')
-                ->url(fn (Task $record): string => $record->assignable_url),
-            TextColumn::make('due_at')
-                ->dateTime(),
-            TextColumn::make('status'),
-        ];
+        return FilamentSharedTableFieldsGenerator::getTaskTable();
     }
 
     protected function getTableActions(): array
@@ -61,14 +54,16 @@ class TasksAssignedToMe extends Page implements HasTable
                 ->modalHeading('Start Task')
                 ->modalSubheading('This will indicate that you have started this task')
                 ->modalButton('Yes, start')
-                ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
+                ->visible(fn (Task $record): bool => auth()->user()->can('start', $record)),
             Action::make('markAsComplete')
                 ->action(fn (Task $record) => (new RequestTaskCompletionConfirmationAction)->run($record))
                 ->requiresConfirmation()
                 ->modalHeading('Mark Task as Complete')
                 ->modalSubheading('This will indicate that you have completed this task and it will be sent for approval')
                 ->modalButton('Yes, mark')
-                ->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),
+                ->visible(fn (Task $record): bool => auth()->user()->can('requestCompletionConfirmation', $record)),
+            Action::make('view')
+                ->url(fn (Task $record): string => TaskResource::getUrl('view', $record)),
         ];
     }
 }

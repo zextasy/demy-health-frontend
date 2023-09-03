@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Helpers\HelpTextMessageHelper;
 use App\Filament\Resources\ReferralChannelResource\Pages;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\ReferralChannelResource\RelationManagers;
@@ -32,7 +33,7 @@ class ReferralChannelResource extends Resource
                 Forms\Components\TextInput::make('referral_code')
                     ->unique()
                     ->maxLength(255)
-                    ->helperText('Leave this blank and the system will generate one for you'),
+                    ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->unique()

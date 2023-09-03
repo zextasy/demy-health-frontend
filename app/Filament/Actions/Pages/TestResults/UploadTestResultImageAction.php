@@ -33,7 +33,7 @@ class UploadTestResultImageAction extends BasePageAction
                 TextInput::make('reference')
                     ->maxLength(255)
                     ->unique(table: TestResult::class)
-                    ->helperText('Leave this blank and the system will generate one for you'),
+                    ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
             ])->columns(1),
             Fieldset::make('Result')->schema([
                 FileUpload::make('result_file')

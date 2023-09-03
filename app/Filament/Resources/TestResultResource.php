@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Helpers\HelpTextMessageHelper;
 use App\Filament\Resources\TestResultResource\Pages;
 use App\Models\TestResult;
 use Filament\Forms;
@@ -39,7 +40,7 @@ class TestResultResource extends Resource
                 Forms\Components\Fieldset::make('General Info')->schema([
                     Forms\Components\TextInput::make('reference')
                         ->maxLength(255)
-                        ->helperText('Leave this blank and the system will generate one for you'),
+                        ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
                 ])->columns(1),
                 Forms\Components\Fieldset::make('Result File')->schema([
                     SpatieMediaLibraryFileUpload::make('result')

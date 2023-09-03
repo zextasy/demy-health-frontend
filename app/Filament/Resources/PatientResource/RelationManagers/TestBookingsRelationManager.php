@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PatientResource\RelationManagers;
 
+use App\Helpers\HelpTextMessageHelper;
 use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -21,7 +22,7 @@ class TestBookingsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\TextInput::make('reference')
                     ->maxLength(255)
-                    ->helperText('Leave this blank and the system will generate one for you'),
+                    ->helperText(HelpTextMessageHelper::DEFAULT_REFERENCE_SUFFIX),
                 Forms\Components\Select::make('test_type_id')->label('Test Type')
                     ->relationship('testType', 'name')
                     ->searchable()

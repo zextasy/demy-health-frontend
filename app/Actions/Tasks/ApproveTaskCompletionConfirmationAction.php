@@ -2,10 +2,9 @@
 
 namespace App\Actions\Tasks;
 
-use App\Models\User;
 use App\Models\Task;
-use Illuminate\Support\Carbon;
-use App\Contracts\AssignableContract;
+use App\Events\TaskCompletedEvent;
+use App\Events\TaskCompletionRequestConfirmedEvent;
 
 class ApproveTaskCompletionConfirmationAction
 {
@@ -28,7 +27,13 @@ class ApproveTaskCompletionConfirmationAction
             'completion_confirmation_requested_by' => null,
         ]);
 
+        $this->raiseEvents($task);
         return $task;
     }
 
+    private function raiseEvents(Task $task): void
+    {
+        TaskCompletionRequestConfirmedEvent::dispatch($task);
+        TaskCompletedEvent::dispatch($task);
+    }
 }
