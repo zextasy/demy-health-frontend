@@ -7,9 +7,9 @@ use App\Filament\Resources\TestResultResource\Pages;
 use App\Models\TestResult;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
@@ -23,7 +23,7 @@ class TestResultResource extends Resource
 
     protected static ?string $navigationGroup = 'Tests';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
     }

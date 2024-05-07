@@ -25,7 +25,7 @@ class CapturePaymentAction extends BasePageAction
     {
         parent::setUp();
 
-        $this->icon('heroicon-o-cash')
+        $this->icon('heroicon-o-banknotes')
             ->form([
                 TextInput::make('amount')
                     ->label('Amount')

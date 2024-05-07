@@ -19,7 +19,7 @@ class SiteSettings extends SettingsPage
 
     protected static string $settings = GeneralSettings::class;
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentAdmin();
     }

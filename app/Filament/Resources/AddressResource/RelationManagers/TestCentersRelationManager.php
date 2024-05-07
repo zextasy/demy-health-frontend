@@ -3,18 +3,18 @@
 namespace App\Filament\Resources\AddressResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\MorphToManyRelationManager;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables\Table;
 use Filament\Tables;
 
-class TestCentersRelationManager extends MorphToManyRelationManager
+class TestCentersRelationManager extends RelationManager
 {
     protected static string $relationship = 'TestCenters';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -24,7 +24,7 @@ class TestCentersRelationManager extends MorphToManyRelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

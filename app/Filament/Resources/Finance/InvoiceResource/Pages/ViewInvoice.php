@@ -21,7 +21,7 @@ class ViewInvoice extends ViewRecord
 {
     protected static string $resource = InvoiceResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             ActionGroup::make([
@@ -47,7 +47,7 @@ class ViewInvoice extends ViewRecord
                             ->required(),
                     ])
                     ->visible($this->record->hasNotBeenSettled()),
-            ])->icon('heroicon-s-cash')->label('Finance'),
+            ])->icon('heroicon-m-banknotes')->label('Finance'),
         ];
     }
 }

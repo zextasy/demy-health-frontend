@@ -38,7 +38,7 @@ class AssignTaskAction extends BasePageAction
             ->failureNotification(Notification::make()
                 ->title('Something went wrong')
                 ->danger())
-            ->icon('heroicon-o-inbox-in')
+            ->icon('heroicon-o-inbox-arrow-down')
             ->mountUsing(fn (ComponentContainer $form) => $form->fill([
                 'assignedById' => auth()->id(),
             ]))

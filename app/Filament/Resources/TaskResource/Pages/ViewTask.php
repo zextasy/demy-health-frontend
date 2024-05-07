@@ -11,7 +11,7 @@ class ViewTask extends ViewRecord
 {
     protected static string $resource = TaskResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make()->visible(fn (Task $record): bool => auth()->user()->can('update', $record)),

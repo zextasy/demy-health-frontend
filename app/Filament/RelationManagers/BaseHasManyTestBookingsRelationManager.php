@@ -4,8 +4,8 @@ namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -26,7 +26,7 @@ class BaseHasManyTestBookingsRelationManager extends RelationManager
         return auth()->user()->isFilamentAdmin();
     }
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -36,7 +36,7 @@ class BaseHasManyTestBookingsRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

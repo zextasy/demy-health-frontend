@@ -6,9 +6,9 @@ use App\Filament\Resources\TestCategoryResource\Pages;
 use App\Filament\Resources\TestCategoryResource\RelationManagers;
 use App\Models\TestCategory;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
@@ -16,7 +16,7 @@ class TestCategoryResource extends Resource
 {
     protected static ?string $model = TestCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $recordTitleAttribute = 'name';
 

@@ -10,7 +10,7 @@ class ViewPrescription extends ViewRecord
 {
     protected static string $resource = PrescriptionResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),

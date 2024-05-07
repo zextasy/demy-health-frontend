@@ -24,7 +24,7 @@ class PatientsByReferralApexDonutChart extends ApexChartWidget
      *
      * @var string
      */
-    protected static string $chartId = 'pie-patients-by-referral-donut-chart';
+    protected static ?string $chartId = 'pie-patients-by-referral-donut-chart';
 
     /**
      * Widget Title

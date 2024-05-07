@@ -25,7 +25,7 @@ class TasksAssignedToMe extends Page implements HasTable
 
     protected static string $view = 'filament.pages.tasks-assigned-to-me';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }

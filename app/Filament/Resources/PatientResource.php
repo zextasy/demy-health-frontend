@@ -14,9 +14,9 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
@@ -35,7 +35,7 @@ class PatientResource extends Resource
         return ['first_name', 'middle_name', 'last_name', 'email','referredBy.name'];
     }
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
     }

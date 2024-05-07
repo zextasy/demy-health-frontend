@@ -12,7 +12,7 @@ use App\Filament\Widgets\PatientsByReferralApexDonutChart;
 
 class Dashboard extends BasePage
 {
-    protected function getWidgets(): array
+    public function getWidgets(): array
     {
         return [
             AccountWidget::class,

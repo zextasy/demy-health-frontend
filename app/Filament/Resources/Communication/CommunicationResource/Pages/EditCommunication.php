@@ -18,7 +18,7 @@ class EditCommunication extends EditRecord
         ];
     }
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\ViewAction::make(),

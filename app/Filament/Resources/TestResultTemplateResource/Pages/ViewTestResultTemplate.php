@@ -10,7 +10,7 @@ class ViewTestResultTemplate extends ViewRecord
 {
     protected static string $resource = TestResultTemplateResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),

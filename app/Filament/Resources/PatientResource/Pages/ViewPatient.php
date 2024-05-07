@@ -39,7 +39,7 @@ class ViewPatient extends ViewRecord
 {
     protected static string $resource = PatientResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             ActionGroup::make([
@@ -50,7 +50,7 @@ class ViewPatient extends ViewRecord
                 CapturePaymentAction::make()->payer($this->record),
                 AttachDiscountAction::make()->subject($this->record)
                     ->visible($this->record->canApplyDiscount()),
-            ])->icon('heroicon-s-cash')->label('Finance'),
+            ])->icon('heroicon-m-banknotes')->label('Finance'),
             ActionGroup::make([
                 SendCommunicationAction::make()->communicable($this->record)
                     ->visible($this->record->hasValidRoute(CommunicationChannelEnum::EMAIL())),

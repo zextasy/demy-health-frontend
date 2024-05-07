@@ -5,9 +5,9 @@ namespace App\Filament\Resources\Blog;
 use Filament\Forms;
 use App\Models\Blog\Post;
 use App\Traits\Blog\HasContentEditor;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -36,7 +36,7 @@ class PostResource extends Resource
 
     protected static ?int $navigationSort = 0;
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }
@@ -192,7 +192,7 @@ class PostResource extends Resource
         ];
     }
 
-    protected static function getGlobalSearchEloquentQuery(): Builder
+    public static function getGlobalSearchEloquentQuery(): Builder
     {
         return parent::getGlobalSearchEloquentQuery()->with(['author', 'category']);
     }

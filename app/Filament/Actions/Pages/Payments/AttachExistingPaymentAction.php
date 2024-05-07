@@ -23,7 +23,7 @@ class AttachExistingPaymentAction extends BasePageAction
     {
         //TODO issues populating the select after this runs - fix later if necessary
         parent::setUp();
-        $this->icon('heroicon-o-cash')
+        $this->icon('heroicon-o-banknotes')
             ->form([
                 Select::make('payment_id')
                     ->label('Payment')

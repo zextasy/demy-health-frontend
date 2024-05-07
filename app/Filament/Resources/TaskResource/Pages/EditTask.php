@@ -12,7 +12,7 @@ class EditTask extends EditRecord
 {
     protected static string $resource = TaskResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\ViewAction::make(),

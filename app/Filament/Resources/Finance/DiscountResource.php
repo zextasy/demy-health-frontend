@@ -7,9 +7,9 @@ use App\Filament\Resources\Finance\DiscountResource\Pages;
 use App\Filament\Resources\Finance\DiscountResource\RelationManagers;
 use App\Models\Finance\Discount;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -22,7 +22,7 @@ class DiscountResource extends Resource
 
     protected static ?string $navigationGroup = 'Finance';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }

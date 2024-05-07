@@ -24,7 +24,7 @@ class RecordVItalSignsAction extends BasePageAction
     {
         parent::setUp();
 
-        $this->icon('heroicon-o-clipboard-check')
+        $this->icon('heroicon-o-clipboard-document-check')
             ->form([
 				Fieldset::make('Vital signs')->schema([
 						TextInput::make('height')->numeric(),

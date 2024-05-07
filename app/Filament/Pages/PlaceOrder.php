@@ -51,7 +51,7 @@ class PlaceOrder extends Page
     private bool $hasCustomer = false;
 
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }

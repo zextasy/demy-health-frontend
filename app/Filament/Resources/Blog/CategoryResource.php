@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\Blog;
 
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use App\Models\Blog\Category;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Support\Str;
 use App\Traits\Blog\HasContentEditor;
@@ -28,7 +28,7 @@ class CategoryResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }

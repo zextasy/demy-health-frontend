@@ -10,7 +10,7 @@ class EditDoctor extends EditRecord
 {
     protected static string $resource = DoctorResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\ViewAction::make(),

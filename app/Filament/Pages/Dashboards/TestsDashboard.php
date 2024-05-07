@@ -14,12 +14,12 @@ class TestsDashboard extends Page
 
     protected static string $view = 'filament.pages.dashboard';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return app()->islocal();
     }
 
-    protected function getWidgets(): array
+    public function getWidgets(): array
     {
         return [
             TotalTestsApexBarChart::class,

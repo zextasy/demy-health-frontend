@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Finance\DiscountResource\Pages;
 
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
@@ -16,7 +16,7 @@ class EditDiscount extends EditRecord
 {
     protected static string $resource = DiscountResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\ViewAction::make(),
@@ -24,7 +24,7 @@ class EditDiscount extends EditRecord
         ];
     }
 
-    protected function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([

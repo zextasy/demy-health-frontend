@@ -27,7 +27,7 @@ class UploadTestResultImageAction extends BasePageAction
     {
         parent::setUp();
 
-        $this->icon('heroicon-o-cloud-upload')
+        $this->icon('heroicon-o-cloud-arrow-up')
             ->form([
             Fieldset::make('General Info')->schema([
                 TextInput::make('reference')

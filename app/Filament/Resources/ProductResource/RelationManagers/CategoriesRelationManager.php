@@ -3,18 +3,18 @@
 namespace App\Filament\Resources\ProductResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class CategoriesRelationManager extends BelongsToManyRelationManager
+class CategoriesRelationManager extends RelationManager
 {
     protected static string $relationship = 'productCategories';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -24,7 +24,7 @@ class CategoriesRelationManager extends BelongsToManyRelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

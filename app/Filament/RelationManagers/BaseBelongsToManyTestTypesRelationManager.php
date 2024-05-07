@@ -4,8 +4,8 @@ namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Forms\Components\Fieldset;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -42,7 +42,7 @@ class BaseBelongsToManyTestTypesRelationManager extends RelationManager
         return auth()->user()->isFilamentAdmin();
     }
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -66,7 +66,7 @@ class BaseBelongsToManyTestTypesRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

@@ -26,7 +26,7 @@ class TasksIAssigned extends Page implements HasTable
 
     protected static string $view = 'filament.pages.tasks-i-assigned';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }

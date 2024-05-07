@@ -3,13 +3,13 @@
 namespace App\Filament\Resources\OrderResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\HasManyRelationManager;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Resources\RelationManagers\RelationManager;
 
-class ItemsRelationManager extends HasManyRelationManager
+class ItemsRelationManager extends RelationManager
 {
     protected static string $relationship = 'items';
 
@@ -30,7 +30,7 @@ class ItemsRelationManager extends HasManyRelationManager
         return false;
     }
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -49,7 +49,7 @@ class ItemsRelationManager extends HasManyRelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

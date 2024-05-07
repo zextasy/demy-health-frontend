@@ -10,7 +10,7 @@ class ViewPayment extends ViewRecord
 {
     protected static string $resource = PaymentResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),

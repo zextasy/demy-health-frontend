@@ -20,7 +20,7 @@ class ViewVisit extends ViewRecord
 {
     protected static string $resource = VisitResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),

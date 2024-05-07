@@ -10,13 +10,13 @@ use App\Jobs\ResolvePatientEmailIssueJob;
 use App\Jobs\ResolveUnprocessedPaymentsJob;
 use App\Jobs\ResolveOrdersWithoutInvoicesJob;
 use App\Jobs\ResolveTestBookingsWithoutOrdersJob;
-use RyanChandler\FilamentProfile\Pages\Profile as BaseProfile;
+use Filament\Pages\Page as BaseProfile;
 
 class Profile extends BaseProfile
 {
     protected static ?string $navigationGroup = null;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make('update system')

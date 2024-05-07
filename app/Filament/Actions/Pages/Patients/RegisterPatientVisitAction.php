@@ -35,7 +35,7 @@ class RegisterPatientVisitAction extends BasePageAction
             ->action(function (array $data): void {
             $this->runAction($data) ? $this->success() : $this->failure();
         })
-            ->icon('heroicon-s-clipboard-check');
+            ->icon('heroicon-m-clipboard-document-check');
     }
 
     public function subject(Patient $subject): self

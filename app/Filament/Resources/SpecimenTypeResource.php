@@ -6,9 +6,9 @@ use App\Filament\Resources\SpecimenTypeResource\Pages;
 use App\Filament\Resources\SpecimenTypeResource\RelationManagers;
 use App\Models\SpecimenType;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
@@ -16,7 +16,7 @@ class SpecimenTypeResource extends Resource
 {
     protected static ?string $model = SpecimenType::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $recordTitleAttribute = 'description';
 

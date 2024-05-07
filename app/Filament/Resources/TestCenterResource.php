@@ -6,9 +6,9 @@ use App\Filament\Resources\TestCenterResource\Pages;
 use App\Filament\Resources\TestCenterResource\RelationManagers;
 use App\Models\TestCenter;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
@@ -16,7 +16,7 @@ class TestCenterResource extends Resource
 {
     protected static ?string $model = TestCenter::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $recordTitleAttribute = 'name';
 

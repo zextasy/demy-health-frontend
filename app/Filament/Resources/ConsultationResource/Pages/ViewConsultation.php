@@ -10,7 +10,7 @@ class ViewConsultation extends ViewRecord
 {
     protected static string $resource = ConsultationResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),

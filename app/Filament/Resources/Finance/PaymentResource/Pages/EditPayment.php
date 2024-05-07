@@ -19,7 +19,7 @@ class EditPayment extends EditRecord
                 ->maxLength(255),
         ];
     }
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\ViewAction::make(),

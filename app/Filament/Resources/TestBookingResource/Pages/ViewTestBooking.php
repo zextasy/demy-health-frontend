@@ -15,7 +15,7 @@ class ViewTestBooking extends ViewRecord
 {
     protected static string $resource = TestBookingResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             AssignTaskAction::make()->assignable($this->record),

@@ -18,7 +18,7 @@ class TotalTestsApexBarChart extends ApexChartWidget
      *
      * @var string
      */
-    protected static string $chartId = 'bar-total-tests-apex-bar-chart';
+    protected static ?string $chartId = 'bar-total-tests-apex-bar-chart';
 
     protected static ?string $heading = 'Tests';
 

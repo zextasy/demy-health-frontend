@@ -14,9 +14,9 @@ use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
 use App\Models\TestBooking;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 
 class TestBookingResource extends Resource
@@ -31,7 +31,7 @@ class TestBookingResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
     }

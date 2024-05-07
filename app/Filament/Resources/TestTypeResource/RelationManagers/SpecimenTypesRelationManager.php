@@ -3,12 +3,13 @@
 namespace App\Filament\Resources\TestTypeResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\BelongsToManyRelationManager;
-use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Forms\Form;
 
-class SpecimenTypesRelationManager extends BelongsToManyRelationManager
+use Filament\Tables\Table;
+use Filament\Tables;
+use Filament\Resources\RelationManagers\RelationManager;
+
+class SpecimenTypesRelationManager extends RelationManager
 {
     protected static string $relationship = 'specimenTypes';
 
@@ -24,7 +25,7 @@ class SpecimenTypesRelationManager extends BelongsToManyRelationManager
         return auth()->user()->isFilamentAdmin();
     }
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -37,7 +38,7 @@ class SpecimenTypesRelationManager extends BelongsToManyRelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

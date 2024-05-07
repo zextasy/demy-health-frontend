@@ -4,8 +4,8 @@ namespace App\Filament\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Forms\Components\Fieldset;
 use App\Traits\Resources\DisplaysCurrencies;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -31,7 +31,7 @@ class BasePricesRelationManager extends RelationManager
         return false;
     }
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -46,7 +46,7 @@ class BasePricesRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

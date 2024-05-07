@@ -16,7 +16,7 @@ class ListDiscounts extends ListRecords
         return parent::getTableQuery()->with(['discount','orders']);
     }
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         //TODO fix n+1 query - order
         return [

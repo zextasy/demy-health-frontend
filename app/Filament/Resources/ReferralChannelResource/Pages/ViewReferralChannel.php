@@ -13,7 +13,7 @@ class ViewReferralChannel extends ViewRecord
 {
     protected static string $resource = ReferralChannelResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make('Attach Discount')

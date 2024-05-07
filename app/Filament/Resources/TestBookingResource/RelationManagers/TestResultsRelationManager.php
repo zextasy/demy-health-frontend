@@ -4,8 +4,8 @@ namespace App\Filament\Resources\TestBookingResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use App\Helpers\HelpTextMessageHelper;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -16,7 +16,7 @@ class TestResultsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'test_booking_id';
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -42,7 +42,7 @@ class TestResultsRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

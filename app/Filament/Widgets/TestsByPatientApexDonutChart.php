@@ -20,7 +20,7 @@ class TestsByPatientApexDonutChart extends ApexChartWidget
      *
      * @var string
      */
-    protected static string $chartId = 'pie-tests-by-patient-donut-chart';
+    protected static ?string $chartId = 'pie-tests-by-patient-donut-chart';
 
     /**
      * Widget Title

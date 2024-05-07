@@ -5,8 +5,8 @@ namespace App\Filament\RelationManagers;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\State;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\RelationManager;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
@@ -42,7 +42,7 @@ class BaseAddressesRelationManager extends RelationManager
         return auth()->user()->isFilamentAdmin();
     }
 
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -73,7 +73,7 @@ class BaseAddressesRelationManager extends RelationManager
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->columns([

@@ -4,8 +4,8 @@ namespace App\Filament\Resources;
 
 use Filament\Tables;
 use App\Models\Order;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
@@ -26,7 +26,7 @@ class OrderResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
     }

@@ -49,7 +49,7 @@ class ViewCommunication extends ViewRecord
         ];
     }
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             ReSendCommunicationAction::make()->communication($this->record)

@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Finance;
 
 use Filament\Tables;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use App\Models\Finance\Payment;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
@@ -26,7 +26,7 @@ class PaymentResource extends Resource
 
     protected static ?string $navigationGroup = 'Finance';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }

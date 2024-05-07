@@ -8,9 +8,9 @@ use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\ReferralChannelResource\RelationManagers;
 use App\Models\ReferralChannel;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 
 class ReferralChannelResource extends Resource
@@ -21,7 +21,7 @@ class ReferralChannelResource extends Resource
 
     protected static ?string $navigationGroup = 'Marketing';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }

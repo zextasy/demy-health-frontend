@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Panel;
 use App\Contracts\PayerContract;
 use Laravel\Sanctum\HasApiTokens;
 use App\Contracts\AddressableContract;
@@ -103,7 +104,10 @@ class User extends Authenticatable implements
     {
         return $this->hasPermissionTo('admin');
     }
-
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->canAccessFilament();
+    }
     public function getFullName():string
     {
         $name = $this->name;

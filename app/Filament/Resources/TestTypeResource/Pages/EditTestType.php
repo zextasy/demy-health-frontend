@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\TestTypeResource\Pages;
 
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
@@ -16,7 +16,7 @@ class EditTestType extends EditRecord
 {
     protected static string $resource = TestTypeResource::class;
 
-    protected function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([

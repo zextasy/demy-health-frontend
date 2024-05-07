@@ -5,9 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\LocalGovernmentAreaResource\Pages;
 use App\Models\LocalGovernmentArea;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 
 class LocalGovernmentAreaResource extends Resource
@@ -20,7 +20,7 @@ class LocalGovernmentAreaResource extends Resource
 
     protected static ?string $navigationGroup = 'Locations';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentAdmin();
     }

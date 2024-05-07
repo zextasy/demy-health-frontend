@@ -4,9 +4,9 @@ namespace App\Filament\Resources\Blog;
 
 use Filament\Forms;
 use App\Models\Blog\Author;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use App\Traits\Blog\HasContentEditor;
 use App\Filament\Resources\Blog\AuthorResource\Pages;
@@ -27,7 +27,7 @@ class AuthorResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->isFilamentBackendUser();
     }

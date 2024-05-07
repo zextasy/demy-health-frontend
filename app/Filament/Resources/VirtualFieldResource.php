@@ -14,9 +14,9 @@ use App\Filament\Resources\VirtualFieldResource\Pages;
 use App\Filament\Resources\VirtualFieldResource\RelationManagers;
 use App\Models\VirtualField;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -30,7 +30,7 @@ class VirtualFieldResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'label';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
     }

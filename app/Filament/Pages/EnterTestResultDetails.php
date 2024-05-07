@@ -27,7 +27,7 @@ class EnterTestResultDetails extends Page implements HasForms
 
     protected static string $view = 'filament.pages.enter-test-result-details';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return false;
     }

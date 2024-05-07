@@ -6,9 +6,9 @@ use App\Filament\Resources\PrescriptionResource\Pages;
 use App\Filament\Resources\PrescriptionResource\RelationManagers;
 use App\Models\Prescription;
 use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -21,7 +21,7 @@ class PrescriptionResource extends Resource
 
     protected static ?string $navigationGroup = 'Consultation';
 
-    protected static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return auth()->user()->hasPermissionTo('backend');
     }

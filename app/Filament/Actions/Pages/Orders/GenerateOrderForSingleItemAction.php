@@ -23,7 +23,7 @@ class GenerateOrderForSingleItemAction extends BasePageAction
         parent::setUp();
 
         $this->requiresConfirmation()
-            ->icon('heroicon-o-lightning-bolt')
+            ->icon('heroicon-o-bolt')
             ->action(function (): void {
                 $this->runAction() ? $this->success() : $this->failure();
 
