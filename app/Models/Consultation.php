@@ -10,7 +10,7 @@ use App\Traits\Models\LaravelMorphable;
 use App\Traits\Relationships\Actionable;
 use App\Traits\Relationships\Assignable;
 use App\Traits\Models\GeneratesReference;
-use App\Filament\Resources\ConsultationResource;
+use App\Filament\Admin\Resources\ConsultationResource;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Enums\Consultations\ConsultationChannelEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

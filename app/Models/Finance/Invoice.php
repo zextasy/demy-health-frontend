@@ -15,7 +15,7 @@ use App\Contracts\TransactionCreditableContract;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Enums\Finance\Invoices\InvoiceStatusEnum;
 use App\Traits\Models\SumsSubTotalAmountFromItems;
-use App\Filament\Resources\Finance\InvoiceResource;
+use App\Filament\Admin\Resources\Finance\InvoiceResource;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Traits\Relationships\BelongsToBusinessGroup;

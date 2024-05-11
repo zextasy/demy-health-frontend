@@ -6,7 +6,7 @@ use App\Traits\Models\HasFilamentUrl;
 use App\Contracts\AddressableContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Contracts\VisitableLocationContract;
-use App\Filament\Resources\TestCenterResource;
+use App\Filament\Admin\Resources\TestCenterResource;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\HasTestBookings;
 use App\Traits\Relationships\MorphsAddresses;

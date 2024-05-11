@@ -6,7 +6,7 @@ use App\Models\Patient;
 use App\Jobs\ChangePatientEmailJob;
 use App\Helpers\HelpTextMessageHelper;
 use Filament\Forms\Components\TextInput;
-use App\Filament\Resources\PatientResource;
+use App\Filament\Admin\Resources\PatientResource;
 use App\Filament\Actions\Pages\BasePageAction;
 
 class ChangePatientEmailAction extends BasePageAction

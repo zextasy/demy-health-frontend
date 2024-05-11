@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Filament\Admin\Resources\StateResource\Pages;
+
+use App\Filament\Admin\Resources\StateResource;
+use Filament\Resources\Pages\ListRecords;
+use Illuminate\Database\Eloquent\Builder;
+
+class ListStates extends ListRecords
+{
+    protected static string $resource = StateResource::class;
+
+    protected function getTableQuery(): Builder
+    {
+        return parent::getTableQuery()->with('localGovernmentAreasWithHomeSampleCollection');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->isFilamentAdmin(), 403);
+        parent::mount();
+    }
+}

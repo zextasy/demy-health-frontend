@@ -15,7 +15,7 @@ use Filament\Forms\Components\TextInput;
 use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Actions\Pages\BasePageAction;
-use App\Filament\Resources\TestBookingResource;
+use App\Filament\Admin\Resources\TestBookingResource;
 use App\Actions\Discounts\LinkDiscountableAction;
 use App\Actions\TestBookings\CreateTestBookingAction;
 use App\Actions\Orders\GenerateOrderFromTestBookingAction;

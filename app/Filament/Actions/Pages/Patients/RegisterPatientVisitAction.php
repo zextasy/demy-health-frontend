@@ -7,7 +7,7 @@ use App\Models\TestCenter;
 use Filament\Forms\Components\Select;
 use App\Helpers\HelpTextMessageHelper;
 use Filament\Forms\Components\TextInput;
-use App\Filament\Resources\VisitResource;
+use App\Filament\Admin\Resources\VisitResource;
 use App\Actions\Visits\CreateVisitAction;
 use App\Filament\Actions\Pages\BasePageAction;
 

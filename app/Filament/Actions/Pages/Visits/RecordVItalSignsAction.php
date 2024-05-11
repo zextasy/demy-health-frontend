@@ -7,7 +7,7 @@ use App\Models\TestBooking;
 use App\Models\VitalSignsRecord;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
-use App\Filament\Resources\VisitResource;
+use App\Filament\Admin\Resources\VisitResource;
 use App\Filament\Actions\Pages\BasePageAction;
 
 class RecordVItalSignsAction extends BasePageAction

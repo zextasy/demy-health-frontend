@@ -4,7 +4,7 @@ namespace App\Models\CRM;
 
 use App\Traits\Models\HasFilamentUrl;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
-use App\Filament\Resources\CRM\CustomerEnquiryResource;
+use App\Filament\Admin\Resources\CRM\CustomerEnquiryResource;
 use App\Models\BaseModel;
 use App\Traits\Relationships\BelongsToBusinessGroup;
 use App\Traits\Relationships\MorphsAddresses;

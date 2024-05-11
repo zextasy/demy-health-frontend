@@ -9,7 +9,7 @@ use App\Contracts\AssignableContract;
 use App\Traits\Models\LaravelMorphable;
 use App\Traits\Relationships\Assignable;
 use App\Traits\Models\GeneratesReference;
-use App\Filament\Resources\VisitResource;
+use App\Filament\Admin\Resources\VisitResource;
 use App\Traits\Relationships\BelongsToPatient;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;

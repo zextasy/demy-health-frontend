@@ -16,7 +16,7 @@ use App\Enums\TestBookings\LocationTypeEnum;
 use App\Traits\Relationships\HasTestResults;
 use App\Traits\Relationships\MorphsAddresses;
 use App\Traits\Relationships\MorphsOrderItems;
-use App\Filament\Resources\TestBookingResource;
+use App\Filament\Admin\Resources\TestBookingResource;
 use App\Traits\Relationships\MorphsInvoiceItems;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Traits\Models\SamplesAreProcessedByUsers;

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Filament\Resources\TestTypeResource;
+use App\Filament\Admin\Resources\TestTypeResource;
 use App\Settings\GeneralSettings;
 use App\Traits\Models\GeneratesReference;
 use App\Traits\Models\HasFilamentUrl;

@@ -12,7 +12,7 @@ use Filament\Forms\Components\Fieldset;
 use App\Contracts\CommunicableContract;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
-use App\Filament\Resources\PatientResource;
+use App\Filament\Admin\Resources\PatientResource;
 use App\Models\Communication\Communication;
 use App\Filament\Actions\Pages\BasePageAction;
 use App\Enums\Communication\CommunicationChannelEnum;

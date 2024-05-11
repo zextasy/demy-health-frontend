@@ -85,10 +85,6 @@ class User extends Authenticatable implements
     //endregion
 
     //region HELPERS
-    public function canAccessFilament(): bool
-    {
-        return $this->hasAnyPermission(['frontend', 'backend','admin']);
-    }
 
     public function isFilamentFrontendUser(): bool
     {
@@ -106,7 +102,8 @@ class User extends Authenticatable implements
     }
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->canAccessFilament();
+        //Todo switch when creating customer panel
+        return $this->hasAnyPermission(['frontend', 'backend','admin']);
     }
     public function getFullName():string
     {

@@ -4,7 +4,7 @@ namespace App\Filament\Actions\Pages\Orders;
 
 use App\Models\Order;
 use App\Contracts\OrderableItemContract;
-use App\Filament\Resources\OrderResource;
+use App\Filament\Admin\Resources\OrderResource;
 use App\Filament\Actions\Pages\BasePageAction;
 use App\Actions\Orders\GenerateOrderFromTestBookingAction;
 

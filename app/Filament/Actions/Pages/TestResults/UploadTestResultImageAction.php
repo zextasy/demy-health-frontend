@@ -9,7 +9,7 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use App\Filament\Actions\Pages\BasePageAction;
-use App\Filament\Resources\TestResultResource;
+use App\Filament\Admin\Resources\TestResultResource;
 use App\Actions\TestResults\GenerateTestResultAction;
 
 class UploadTestResultImageAction extends BasePageAction
