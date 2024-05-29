@@ -42,6 +42,7 @@
         "symfony/http-client": "^6.1",
         "symfony/postmark-mailer": "^6.1",
         "unicodeveloper/laravel-paystack": "^1.0",
+        "victorybiz/laravel-simple-select": "^1.7",
         "webbingbrasil/filament-advancedfilter": "^3.0"
     },
     "require-dev": {

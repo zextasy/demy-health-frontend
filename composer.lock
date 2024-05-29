@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84006f4e9ee2d90173f991a28ad05235",
+    "content-hash": "7ac6e7a0b8da0ac81f574434be95bbab",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
@@ -11287,6 +11287,79 @@
                 "source": "https://github.com/unicodeveloper/laravel-paystack/tree/1.2.0"
             },
             "time": "2024-04-08T09:40:49+00:00"
+        },
+        {
+            "name": "victorybiz/laravel-simple-select",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/victorybiz/laravel-simple-select.git",
+                "reference": "64db0ebe7e2d00b33e48eebae2ab9b8c4615028f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/victorybiz/laravel-simple-select/zipball/64db0ebe7e2d00b33e48eebae2ab9b8c4615028f",
+                "reference": "64db0ebe7e2d00b33e48eebae2ab9b8c4615028f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "livewire/livewire": "^2.4|^3.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.0|^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Victorybiz\\SimpleSelect\\SimpleSelectServiceProvider"
+                    ],
+                    "aliases": {
+                        "SimpleSelect": "Victorybiz\\SimpleSelect\\SimpleSelectFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Victorybiz\\SimpleSelect\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Victory Osayi Airuoyuwa",
+                    "email": "lavictorybiz@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Simple Select inputs component for Blade and Livewire.",
+            "homepage": "https://github.com/victorybiz/laravel-simple-select",
+            "keywords": [
+                "alpinejs",
+                "blade",
+                "custom select",
+                "laravel",
+                "laravel-blade",
+                "laravel-livewire",
+                "laravel-simple-select",
+                "livewire",
+                "multi select",
+                "select",
+                "select-input",
+                "simple-select",
+                "victorybiz"
+            ],
+            "support": {
+                "issues": "https://github.com/victorybiz/laravel-simple-select/issues",
+                "source": "https://github.com/victorybiz/laravel-simple-select/tree/v1.7.0"
+            },
+            "time": "2024-04-01T18:55:13+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

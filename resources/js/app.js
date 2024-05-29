@@ -1,9 +1,10 @@
-require('./bootstrap');
-
-import Alpine from 'alpinejs';
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import './bootstrap';
+import flatpickr  from "flatpickr";
+import { createPopper } from "@popperjs/core";
 
 window.Alpine = Alpine;
 
-Alpine.start();
+Livewire.start();
+window.createPopper = createPopper;
 
-flatpickr = require('flatpickr');

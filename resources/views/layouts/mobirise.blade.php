@@ -27,7 +27,7 @@
     <link rel="preload" as="style" href="{{asset('assets/mobirise/css/mbr-additional.css')}}">
     <link rel="stylesheet" href="{{asset('assets/mobirise/css/mbr-additional.css')}}" type="text/css">
     <!-- Laravel Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <!-- My Custom Styles -->
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
@@ -84,10 +84,7 @@
 
 <input name="animation" type="hidden">
 <!-- Laravel Scripts -->
-@livewireScripts
-<script src="{{ asset('js/app.js') }}"></script>
-@livewireSelectScripts
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+@livewireScriptConfig
 <!-- sweet alert scripts -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <x-livewire-alert::scripts/>
