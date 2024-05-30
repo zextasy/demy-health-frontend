@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\State;
+use App\Models\Country;
 use App\Models\TestCategory;
 use App\Models\TestType;
 use Illuminate\Contracts\Foundation\Application;
@@ -15,15 +17,18 @@ class BookATestForCovid extends BookATest
     use LivewireAlert;
 
     public ?int $selectedTestCategory = null;
-
-    public array|Collection $testCategories;
-
-    public Collection $testTypes;
-
+    public array $testCategories = [];
+    public $testTypes = [];
+    public $countries = [];
+    public $statesForHomeBooking = [];
+    public $statesForCenterBooking = [];
     public function mount()
     {
-        $this->testCategories = TestCategory::query()->where('name', 'like', '%COVID%')->get();
-        $this->testTypes = collect();
+        $this->testCategories = TestCategory::query()->where('name', 'like', '%COVID%')->pluck('name','id')->toArray();
+        $this->testTypes = [];
+        $this->countries = Country::all()->pluck('name','id')->toArray();
+        $this->statesForHomeBooking = State::query()->isReadyForSampleCollection()->pluck('name','id')->toArray();
+        $this->statesForCenterBooking = State::query()->has('testCenters')->pluck('name','id')->toArray();
         $this->customerEmail = $this->getSessionCustomerEmail();
     }
 
@@ -32,10 +37,10 @@ class BookATestForCovid extends BookATest
         return view('livewire.forms.book-a-test-for-covid');
     }
 
-    public function updatedSelectedTestCategory($testCategoryId)
+    public function hydrate()
     {
-        if (! is_null($testCategoryId)) {
-            $this->testTypes = TestType::where('test_category_id', $testCategoryId)->get();
+        if (! is_null($this->selectedTestCategory)) {
+            $this->testTypes = TestType::where('test_category_id', $this->selectedTestCategory)->get();
         }
     }
 }

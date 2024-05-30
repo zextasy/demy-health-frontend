@@ -2,6 +2,10 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\State;
+use App\Models\Country;
+use App\Models\TestCenter;
+use App\Models\LocalGovernmentArea;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Events\TestAddedToCartEvent;
 use App\Helpers\FlashMessageHelper;
@@ -21,6 +25,14 @@ class BookATest extends Component
 {
     use LivewireAlert, ManipulatesCustomerSession;
 
+    public $testTypes = [];
+    public $countries = [];
+    public $statesForHomeBooking = [];
+    public $statesForCenterBooking = [];
+
+    public $localGovernmentAreas = [];
+
+    public $testCenters = [];
     public $selectedTestCenter;
 
     public $selectedCustomerCountry;
@@ -64,11 +76,6 @@ class BookATest extends Component
     public $customerPassportNumber = null;
 
     protected $listeners = [
-        'selectedTestCenterUpdated' => 'setSelectedTestCenter',
-        'selectedStateForHomeBookingUpdated' => 'setSelectedStateForHomeBooking',
-        'selectedStateForTestCenterBookingUpdated' => 'setSelectedStateForTestCenterBooking',
-        'selectedLocalGovernmentAreaUpdated' => 'setSelectedLocalGovernmentArea',
-        'selectedTestTypeUpdated' => 'setSelectedTestType',
         'postBookingCart' => 'goToCart',
         'postBookingHome' => 'goHome',
     ];
@@ -85,9 +92,24 @@ class BookATest extends Component
 
     public function mount()
     {
+        $this->testTypes = TestType::all()->pluck('name','id')->toArray();
+        $this->countries = Country::all()->pluck('name','id')->toArray();
+        $this->statesForHomeBooking = State::query()->isReadyForSampleCollection()->pluck('name','id')->toArray();
+        $this->statesForCenterBooking = State::query()->has('testCenters')->pluck('name','id')->toArray();
         $this->customerEmail = $this->getSessionCustomerEmail();
     }
 
+    public function hydrate()
+    {
+        // Runs at the beginning of every "subsequent" request...
+        // This doesn't run on the initial request ("mount" does)...
+        if (isset($this->selectedStateForHomeBooking)){
+            $this->localGovernmentAreas = LocalGovernmentArea::query()->where('state_id', $this->selectedStateForHomeBooking)->pluck('name','id')->toArray();
+        }
+        if (isset($this->selectedStateForTestCenterBooking)){
+            $this->testCenters = TestCenter::query()->inState($this->selectedStateForHomeBooking)->pluck('name','id')->toArray();
+        }
+    }
     public function render(): Factory|View|Application
     {
         return view('livewire.forms.book-a-test');
@@ -154,31 +176,17 @@ class BookATest extends Component
         }
     }
 
-    public function setSelectedTestCenter($object)
+    public function updatedSelectedStateForTestCenterBooking($value, $key)
     {
-        $this->selectedTestCenter = $object['value'];
+        ray($value, $key);
+
     }
 
-    public function setSelectedStateForTestCenterBooking($object)
+    public function updatedSelectedStateForHomeBooking($value, $key)
     {
-        $this->selectedStateForTestCenterBooking = $object['value'];
-    }
+        ray($value, $key);
 
-    public function setSelectedStateForHomeBooking($object)
-    {
-        $this->selectedStateForHomeBooking = $object['value'];
     }
-
-    public function setSelectedLocalGovernmentArea($object)
-    {
-        $this->selectedLocalGovernmentArea = $object['value'];
-    }
-
-    public function setSelectedTestType($object)
-    {
-        $this->selectedTestType = $object['value'];
-    }
-
     public function goToCart()
     {
         $this->redirect(route('frontend.cart.display'));

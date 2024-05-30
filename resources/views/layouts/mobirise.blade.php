@@ -10,6 +10,8 @@
 
 
     <title>DemyHealth</title>
+    <!-- Tailwind -->
+{{--    <script src="https://cdn.tailwindcss.com"></script>--}}
     <!-- Mobirise Styles -->
     <link rel="stylesheet" href="{{asset('assets/web/assets/mobirise-icons2/mobirise2.css')}}">
     <link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
@@ -26,11 +28,17 @@
     </noscript>
     <link rel="preload" as="style" href="{{asset('assets/mobirise/css/mbr-additional.css')}}">
     <link rel="stylesheet" href="{{asset('assets/mobirise/css/mbr-additional.css')}}" type="text/css">
+    <!-- Select2 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Laravel Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite('resources/css/app.css')
     @livewireStyles
+    @vite('resources/js/app.js')
     <!-- My Custom Styles -->
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
     @stack('styles')
 </head>
 <body>

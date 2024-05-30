@@ -21,11 +21,10 @@
         </div>
     </div>
     <div class="col-12 form-group mb-3" data-for="select">
-        <livewire:forms.select.livewire-select.test-type-select
-            name="selectedTestType"
-            :value="$selectedTestType"
+        <x-alpine-select-search
+            wire:model="selectedTestType"
+            :data="$testTypes"
             placeholder="Choose a Test"
-            :searchable="true"
         />
         @error('selectedTestType') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
@@ -35,30 +34,34 @@
         @error('dueDate') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-12 form-group mb-3" data-for="radio">
-        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBookings\LocationTypeEnum::HOME->value}}">
+        <input type="radio" wire:model.live="locationType" name="locationType" value="{{\App\Enums\TestBookings\LocationTypeEnum::HOME->value}}">
         <label for="html">Home sample collection</label><br>
-        <input type="radio" wire:model="locationType" value="{{\App\Enums\TestBookings\LocationTypeEnum::CENTER->value}}">
+        <input type="radio" wire:model.live="locationType" name="locationType" value="{{\App\Enums\TestBookings\LocationTypeEnum::CENTER->value}}">
         <label for="css">Take the Test at a center</label><br>
         @error('locationType') <span class="alert-danger">{{ $message }}</span> @enderror
     </div>
     @if ($locationType == \App\Enums\TestBookings\LocationTypeEnum::HOME->value)
         <div class="col-12 form-group mb-3" data-for="select">
-            <livewire:forms.select.livewire-select.state-select
-                name="selectedStateForHomeBooking"
-                :value="$selectedStateForHomeBooking"
+            <x-alpine-select-search
+                wire:model.live="selectedStateForHomeBooking"
+                :data="$statesForHomeBooking"
                 placeholder="Choose a State"
-                :is-for-sample="true"
             />
             @error('selectedStateForHomeBooking') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="select">
-            <livewire:forms.select.livewire-select.local-government-area-select
-                name="selectedLocalGovernmentArea"
-                :value="$selectedLocalGovernmentArea"
-                placeholder="Choose a Local Government Area"
-                :depends-on="['selectedStateForHomeBooking']"
-                :is-for-sample="true"
-            />
+{{--            <x-alpine-select-search--}}
+{{--                wire:model.live="selectedLocalGovernmentArea"--}}
+{{--                wire:key="{{ $selectedStateForHomeBooking }}"--}}
+{{--                :data="$localGovernmentAreas"--}}
+{{--                placeholder="Choose a Region"--}}
+{{--            />--}}
+            <select class="form-control" wire:model.live="selectedLocalGovernmentArea" wire:key="{{ $selectedStateForHomeBooking }}">
+                <option value="" >Choose a Region</option>
+                @foreach (\App\Models\LocalGovernmentArea::query()->where('state_id',$selectedStateForHomeBooking)->get() as $testCenter)
+                    <option value="{{ $testCenter->id }}">{{ $testCenter->name }}</option>
+                @endforeach
+            </select>
             @error('selectedLocalGovernmentArea') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="text">
@@ -76,27 +79,32 @@
     @endif
     @if ($locationType == \App\Enums\TestBookings\LocationTypeEnum::CENTER->value)
         <div class="col-12 form-group mb-3" data-for="select">
-            <livewire:forms.select.livewire-select.state-select
-                name="selectedStateForTestCenterBooking"
-                :value="$selectedStateForTestCenterBooking"
+            <x-alpine-select-search
+                wire:model.live="selectedStateForTestCenterBooking"
+                :data="$statesForCenterBooking"
                 placeholder="Choose a State"
-                :is-for-test-center="true"
             />
             @error('selectedStateForTestCenterBooking') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-12 form-group mb-3" data-for="select">
-            <livewire:forms.select.livewire-select.test-center-select
-                name="selectedTestCenter"
-                :value="$selectedTestCenter"
-                placeholder="Choose a Center"
-                :depends-on="['selectedStateForTestCenterBooking']"
-            />
+{{--            <x-alpine-select-search--}}
+{{--                wire:model.live="selectedTestCenter"--}}
+{{--                :data="$testCenters"--}}
+{{--                placeholder="Choose a Center"--}}
+{{--            />--}}
+            <!-- dependent select menu... -->
+            <select class="form-control" wire:model.live="selectedTestCenter" wire:key="{{ $selectedStateForTestCenterBooking }}">
+                <option value="" >Choose a Center</option>
+                @foreach (\App\Models\TestCenter::query()->inState($selectedStateForTestCenterBooking)->get() as $testCenter)
+                    <option value="{{ $testCenter->id }}">{{ $testCenter->name }}</option>
+                @endforeach
+            </select>
             @error('selectedTestCenter') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
     @endif
     <div class="dragArea row">
         <div class="col-md col-sm-12 form-group mb-3" data-for="select">
-            <select name="selectedCustomerGender" wire:model.lazy="customerGender" class="form-control">
+            <select class="form-control" name="selectedCustomerGender" wire:model.lazy="customerGender" class="form-control">
                 <option value="" selected>Please select your gender (optional)</option>
                 @foreach(\App\Enums\GenderEnum::cases() as $enumOption)
                     <option value="{{ $enumOption->value }}">{{ $enumOption->name }}</option>
@@ -105,11 +113,10 @@
             @error('customerGender') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-md col-sm-12 form-group mb-3 " data-for="select">
-            <livewire:forms.select.livewire-select.country-select
-            name="selectedCustomerCountry"
-            :value="$customerCountryId"
-            placeholder="Please select your nationality (optional)"
-            :searchable="true"
+            <x-alpine-select-search
+                wire:model="customerCountryId"
+                :data="$countries"
+                placeholder="Select Country"
             />
             @error('customerCountryId') <span class="alert-danger">{{ $message }}</span> @enderror
         </div>
