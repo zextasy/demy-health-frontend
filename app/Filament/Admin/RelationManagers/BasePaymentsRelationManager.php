@@ -10,7 +10,7 @@ use Filament\Forms\Components\TextInput;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use Filament\Resources\RelationManagers\RelationManager;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class BasePaymentsRelationManager extends RelationManager
 {
@@ -74,7 +74,7 @@ class BasePaymentsRelationManager extends RelationManager
             ])
             ->actions([])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ]);
     }
 }

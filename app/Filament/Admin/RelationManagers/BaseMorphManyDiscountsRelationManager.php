@@ -10,7 +10,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use App\Enums\Finance\Discounts\DiscountTypeEnum;
 use Filament\Resources\RelationManagers\RelationManager;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class BaseMorphManyDiscountsRelationManager extends RelationManager
 {
@@ -69,7 +69,7 @@ class BaseMorphManyDiscountsRelationManager extends RelationManager
                 //
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ]);
     }
 }

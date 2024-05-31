@@ -11,7 +11,7 @@ use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class BaseOrdersRelationManager extends RelationManager
 {
@@ -45,7 +45,7 @@ class BaseOrdersRelationManager extends RelationManager
 
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ]);
     }
 

@@ -7,7 +7,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class BaseMorphManyTasksRelationManager extends RelationManager
 {
@@ -47,7 +47,7 @@ class BaseMorphManyTasksRelationManager extends RelationManager
 
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ]);
     }
 }

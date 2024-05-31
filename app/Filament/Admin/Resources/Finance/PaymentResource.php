@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Admin\Resources\Finance\PaymentResource\Pages;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 use App\Filament\Admin\Resources\Finance\PaymentResource\RelationManagers;
 
 class PaymentResource extends Resource
@@ -89,7 +89,6 @@ class PaymentResource extends Resource
             ])
             ->bulkActions([
 //                Tables\Actions\DeleteBulkAction::make(),
-                FilamentExportBulkAction::make('export')
             ]);
     }
 

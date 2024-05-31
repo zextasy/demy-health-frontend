@@ -12,7 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
 use STS\FilamentImpersonate\Impersonate;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class UserResource extends Resource
 {
@@ -61,7 +61,7 @@ class UserResource extends Resource
                 Impersonate::make('impersonate'), // <---
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('created_at', 'desc');
     }

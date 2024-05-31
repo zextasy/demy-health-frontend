@@ -10,7 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class SpecimenTypeResource extends Resource
 {
@@ -50,7 +50,7 @@ class SpecimenTypeResource extends Resource
                 //
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('key');
     }

@@ -3,7 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\TestResultTemplateResource\Pages;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 use App\Filament\Admin\Resources\TestResultTemplateResource\RelationManagers;
 use App\Models\TestResultTemplate;
 use Filament\Forms;
@@ -64,7 +64,7 @@ class TestResultTemplateResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ]);
     }
 

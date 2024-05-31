@@ -2,26 +2,22 @@
 
 namespace App\Filament\Admin\Resources;
 
+use Filament\Forms;
 use App\Models\User;
+use App\Models\Task;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Toggle;
 use App\Actions\Tasks\StartTaskAction;
-use Filament\Tables\Columns\TextColumn;
 use App\Filament\Admin\Resources\TaskResource\Pages;
-use App\Filament\Admin\Resources\TaskResource\RelationManagers;
-use App\Models\Task;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Support\Filament\FilamentSharedTableFieldsGenerator;
 use App\Actions\Tasks\RejectTaskCompletionConfirmationAction;
 use App\Actions\Tasks\RequestTaskCompletionConfirmationAction;
 use App\Actions\Tasks\ApproveTaskCompletionConfirmationAction;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use App\Filament\Admin\Resources\TaskResource\RelationManagers;
 
 class TaskResource extends Resource
 {
@@ -121,7 +117,7 @@ class TaskResource extends Resource
                 Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ]);
     }
 

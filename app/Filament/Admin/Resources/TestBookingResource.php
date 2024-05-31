@@ -12,7 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Admin\Resources\TestBookingResource\Pages;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 use App\Filament\Admin\Resources\TestBookingResource\RelationManagers;
 use App\Filament\Admin\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
 
@@ -112,7 +112,7 @@ class TestBookingResource extends Resource
 
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('created_at', 'desc');
     }

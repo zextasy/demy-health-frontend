@@ -12,7 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Admin\Resources\Finance\InvoiceResource\Pages;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 use App\Filament\Admin\Resources\Finance\InvoiceResource\RelationManagers;
 
 class InvoiceResource extends Resource
@@ -111,7 +111,7 @@ class InvoiceResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export')
+
             ]);
     }
 

@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\RelationManagers\RelationManager;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class BaseAddressesRelationManager extends RelationManager
 {
@@ -94,7 +93,7 @@ class BaseAddressesRelationManager extends RelationManager
                 Tables\Actions\DetachAction::make(),
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('line_1', 'desc');
     }

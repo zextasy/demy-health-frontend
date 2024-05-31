@@ -15,7 +15,6 @@ use App\Traits\Models\CanBeCompletedByUsers;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Traits\Relationships\BelongsToBusinessGroup;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends BaseModel
@@ -47,7 +46,6 @@ class Task extends BaseModel
 	protected $casts = [
 		'type' => TaskTypeEnum::class,
         'action' => TaskActionEnum::class,
-        'status' => TaskStatusEnum::class,
 	];
     protected $appends = ['status','assignable_name', 'actionable_name'];
 

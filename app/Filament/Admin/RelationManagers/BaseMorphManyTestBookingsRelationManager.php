@@ -8,7 +8,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Enums\TestBookings\LocationTypeEnum;
 use Filament\Resources\RelationManagers\RelationManager;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class BaseMorphManyTestBookingsRelationManager extends RelationManager
 {
@@ -53,7 +53,7 @@ class BaseMorphManyTestBookingsRelationManager extends RelationManager
                 //
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('reference', 'desc');
     }

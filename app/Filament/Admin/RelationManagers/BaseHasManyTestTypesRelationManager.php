@@ -9,7 +9,6 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class BaseHasManyTestTypesRelationManager extends RelationManager
 {
@@ -66,7 +65,7 @@ class BaseHasManyTestTypesRelationManager extends RelationManager
                 //
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('test_id');
     }

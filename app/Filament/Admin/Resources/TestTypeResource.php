@@ -15,7 +15,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class TestTypeResource extends Resource
 {
@@ -106,7 +106,7 @@ class TestTypeResource extends Resource
                 //
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('test_id');
     }

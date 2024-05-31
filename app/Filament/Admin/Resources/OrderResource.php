@@ -12,7 +12,7 @@ use Filament\Forms\Components\TextInput;
 use App\Traits\Resources\DisplaysCurrencies;
 use App\Filament\Admin\Resources\OrderResource\Pages;
 use App\Filament\Admin\Resources\OrderResource\RelationManagers;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class OrderResource extends Resource
 {
@@ -88,7 +88,7 @@ class OrderResource extends Resource
                 //
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('created_at', 'desc');
     }

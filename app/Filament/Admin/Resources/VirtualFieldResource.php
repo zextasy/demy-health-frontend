@@ -3,8 +3,14 @@
 namespace App\Filament\Admin\Resources;
 
 use Closure;
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use App\Enums\FieldTypeEnum;
+use App\Models\VirtualField;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Hidden;
 use App\Helpers\HelpTextMessageHelper;
@@ -12,15 +18,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Admin\Resources\VirtualFieldResource\Pages;
 use App\Filament\Admin\Resources\VirtualFieldResource\RelationManagers;
-use App\Models\VirtualField;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class VirtualFieldResource extends Resource
 {
@@ -96,7 +94,6 @@ class VirtualFieldResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
             ])
             ->defaultSort('id', 'desc');
     }

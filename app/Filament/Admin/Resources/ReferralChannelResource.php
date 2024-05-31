@@ -4,7 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Helpers\HelpTextMessageHelper;
 use App\Filament\Admin\Resources\ReferralChannelResource\Pages;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 use App\Filament\Admin\Resources\ReferralChannelResource\RelationManagers;
 use App\Models\ReferralChannel;
 use Filament\Forms;
@@ -51,7 +51,7 @@ class ReferralChannelResource extends Resource
                 //
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('name');
     }

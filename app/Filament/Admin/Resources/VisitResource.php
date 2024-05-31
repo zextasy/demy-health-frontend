@@ -12,7 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Admin\Resources\VisitResource\Pages;
 use App\Filament\Admin\Resources\VisitResource\RelationManagers;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class VisitResource extends Resource
 {
@@ -66,7 +66,7 @@ class VisitResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ]);
     }
 

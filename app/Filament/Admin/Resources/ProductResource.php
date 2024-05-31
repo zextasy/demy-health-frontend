@@ -15,7 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class ProductResource extends Resource
 {
@@ -85,7 +85,7 @@ class ProductResource extends Resource
                 //
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ])
             ->defaultSort('name');
     }

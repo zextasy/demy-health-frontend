@@ -7,7 +7,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Traits\Resources\DisplaysCurrencies;
 use Filament\Resources\RelationManagers\RelationManager;
-use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+
 
 class BaseInvoicesRelationManager extends RelationManager
 {
@@ -41,7 +41,7 @@ class BaseInvoicesRelationManager extends RelationManager
 
             ])
             ->bulkActions([
-                FilamentExportBulkAction::make('export'),
+
             ]);
     }
 }
