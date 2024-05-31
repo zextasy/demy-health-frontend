@@ -85,8 +85,8 @@ class VirtualFieldResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('label'),
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\BadgeColumn::make('field_type')->label('Field Type')
-                ->enum(FieldTypeEnum::optionsAsSelectArray()),
+                Tables\Columns\TextColumn::make('field_type')->label('Field Type')
+                ->badge(),
             ])
             ->filters([
                 //

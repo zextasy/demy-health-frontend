@@ -138,6 +138,7 @@ class Payment extends BaseModel implements TransactionDebitableContract
 
     private function determineStatus(): string
     {
+        //TODO return enum instance instead?
         $status = PaymentStatusEnum::RECEIVED->value;
 
         if ($this->transactions()->exists()) {

@@ -61,8 +61,8 @@ class BasePaymentsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('reference')->searchable(),
                 Tables\Columns\TextColumn::make('amount')->money(self::getSystemDefaultCurrency())->searchable(),
                 Tables\Columns\TextColumn::make('balance')->money(self::getSystemDefaultCurrency()),
-                Tables\Columns\BadgeColumn::make('payment_method')
-                    ->enum(PaymentMethodEnum::optionsAsSelectArray())->sortable(),
+                Tables\Columns\TextColumn::make('payment_method')->badge()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label('Payment Date')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('status'),

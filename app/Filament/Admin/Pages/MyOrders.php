@@ -4,12 +4,11 @@ namespace App\Filament\Admin\Pages;
 
 use App\Models\Order;
 use Filament\Pages\Page;
-use Filament\Tables\Actions\LinkAction;
-use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Concerns\InteractsWithTable;
 
 class MyOrders extends Page implements HasTable
 {
@@ -29,7 +28,7 @@ class MyOrders extends Page implements HasTable
     protected function getTableColumns(): array
     {
         return [
-            BadgeColumn::make('status')
+            TextColumn::make('status')->badge()
                 ->label('Booking status')->sortable(),
             TextColumn::make('reference')->sortable(),
             TextColumn::make('created_at')
@@ -42,7 +41,7 @@ class MyOrders extends Page implements HasTable
     protected function getTableActions(): array
     {
         return [
-            LinkAction::make('View')
+            Action::make('View')
                 ->url(fn (Order $record): string => $record->filament_url)
                 ->hidden(fn (Order $record): bool => $record->user()->doesntExist()),
         ];

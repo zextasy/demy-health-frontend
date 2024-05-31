@@ -3,16 +3,15 @@
 namespace App\Livewire\Tables\Filament;
 
 use App\Models\Order;
-use Filament\Forms\Concerns\InteractsWithForms;
-use App\Traits\Livewire\ManipulatesCustomerSession;
+use Livewire\Component;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Tables\Concerns\InteractsWithTable;
+use App\Traits\Livewire\ManipulatesCustomerSession;
 
 class ListOrders extends Component implements HasTable
 {
@@ -40,7 +39,7 @@ class ListOrders extends Component implements HasTable
     protected function getTableColumns(): array
     {
         return [
-            BadgeColumn::make('status')
+            TextColumn::make('status')->badge()
                 ->label('Order status'),
             TextColumn::make('reference'),
         ];

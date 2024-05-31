@@ -122,6 +122,7 @@ class Order extends BaseModel implements InvoiceableContract, DiscountableContra
     //region PRIVATE
     private function determineStatus(): string
     {
+        //TODO return enum instance instead?
         $status = OrderStatusEnum::PLACED->value;
 
         if ($this->invoice()->exists()) {

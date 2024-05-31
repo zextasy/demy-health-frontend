@@ -7,7 +7,6 @@ use App\Models\TestBooking;
 use Filament\Forms\Concerns\InteractsWithForms;
 use App\Traits\Livewire\ManipulatesCustomerSession;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;

@@ -33,7 +33,7 @@ class BaseOrdersRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
-                Tables\Columns\BadgeColumn::make('status'),
+                Tables\Columns\TextColumn::make('status')->badge(),
             ])
             ->filters([
 

@@ -192,6 +192,7 @@ class Invoice extends BaseModel  implements TransactionCreditableContract
 
     private function determineStatus(): string
     {
+        //TODO return enum instance instead?
         $status = InvoiceStatusEnum::GENERATED->value;
 
         if ($this->transactions()->exists()) {

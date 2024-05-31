@@ -45,9 +45,8 @@ class BaseMorphManyTestBookingsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('due_date')
                     ->date()
                     ->sortable(),
-                Tables\Columns\BadgeColumn::make('status'),
-                Tables\Columns\BadgeColumn::make('location_type')
-                    ->enum(LocationTypeEnum::optionsAsSelectArray())
+                Tables\Columns\TextColumn::make('status')->badge(),
+                Tables\Columns\TextColumn::make('location_type')->badge()
                     ->sortable(),
             ])
             ->filters([

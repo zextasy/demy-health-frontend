@@ -2,22 +2,19 @@
 
 namespace App\Filament\Admin\Resources;
 
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\TestBooking;
+use Filament\Resources\Resource;
 use App\Helpers\HelpTextMessageHelper;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Enums\TestBookings\LocationTypeEnum;
 use App\Filament\Admin\Resources\TestBookingResource\Pages;
-use App\Enums\Finance\TestBookings\TestBookingStatusEnum;
-use App\Filament\Admin\Resources\TestBookingResource\RelationManagers;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
+use App\Filament\Admin\Resources\TestBookingResource\RelationManagers;
 use App\Filament\Admin\Resources\TestBookingResource\Widgets\TestBookingCalendarWidget;
-use App\Models\TestBooking;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
 
 class TestBookingResource extends Resource
 {
@@ -105,12 +102,10 @@ class TestBookingResource extends Resource
                     ->dateTime()->sortable(),
                 TextColumn::make('patient.full_name')->label('Patient'),
                 TextColumn::make('customer_email')->sortable(),
-                BadgeColumn::make('status')
-                    ->color(static function ($state): string {
-                        return TestBookingStatusEnum::getFilamentBadgeColor($state);
-                    }),
-                BadgeColumn::make('location_type')
-                    ->enum(LocationTypeEnum::optionsAsSelectArray())
+                TextColumn::make('status')
+                    ->badge(),
+                TextColumn::make('location_type')
+                    ->badge()
                     ->sortable(),
             ])
             ->filters([

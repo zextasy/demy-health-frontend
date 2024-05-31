@@ -33,8 +33,8 @@ class BaseVirtualFieldsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('label'),
-                Tables\Columns\BadgeColumn::make('field_type')->label('Field Type')
-                    ->enum(FieldTypeEnum::optionsAsSelectArray()),
+                Tables\Columns\TextColumn::make('field_type')->label('Field Type')
+                    ->badge(),
                 Tables\Columns\TextColumn::make('display_weight'),
                 Tables\Columns\IconColumn::make('is_required')->boolean(),
 //                Tables\Columns\IconColumn::make('should_display_on_index')->boolean(),

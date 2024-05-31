@@ -3,9 +3,7 @@
 namespace App\Support\Filament;
 
 use App\Models\Task;
-use App\Enums\Tasks\TaskStatusEnum;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
 
 class FilamentSharedTableFieldsGenerator
 {
@@ -24,10 +22,7 @@ class FilamentSharedTableFieldsGenerator
                 ->url(fn(Task $record): string => $record->actionable_url ?? '#'),
             TextColumn::make('due_at')
                 ->dateTime(),
-            BadgeColumn::make('status')
-                ->color(static function ($state): string {
-                    return TaskStatusEnum::getFilamentBadgeColor($state);
-                }),
+            TextColumn::make('status')->badge(),
         ];
     }
 }

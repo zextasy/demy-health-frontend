@@ -56,32 +56,32 @@ class InvoiceResource extends Resource
                     TextInput::make('sub_total_amount')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->mask(fn (Mask $mask) => $mask
                             ->money(self::getSystemDefaultCurrency())
                         ),
                     TextInput::make('total_discount_amount')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->mask(fn (Mask $mask) => $mask
                             ->money(self::getSystemDefaultCurrency())
                         ),
                     TextInput::make('total_amount')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->mask(fn (Mask $mask) => $mask
                             ->money(self::getSystemDefaultCurrency())
                         ),
                     TextInput::make('total_transaction_amount')
                         ->label('Total Received')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->mask(fn (Mask $mask) => $mask
                             ->money(self::getSystemDefaultCurrency())
                         ),
                     TextInput::make('outstanding_amount')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (TextInput\Mask $mask) => $mask
+                        ->mask(fn (Mask $mask) => $mask
                             ->money(self::getSystemDefaultCurrency())
                         ),
                 ])->columns(3),
@@ -98,10 +98,7 @@ class InvoiceResource extends Resource
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
                 Tables\Columns\TextColumn::make('outstanding_amount')->money(self::getSystemDefaultCurrency()),
-                Tables\Columns\BadgeColumn::make('status'),
-//                    ->color(static function ($state): string {
-//                        return InvoiceStatusEnum::getDisplayColor($state);
-//                    }),
+                Tables\Columns\TextColumn::make('status')->badge(),
                 Tables\Columns\TextColumn::make('created_at')->sortable()
                     ->dateTime(),
             ])

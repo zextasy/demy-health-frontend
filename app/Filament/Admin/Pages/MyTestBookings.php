@@ -2,14 +2,13 @@
 
 namespace App\Filament\Admin\Pages;
 
-use App\Models\TestBooking;
 use Filament\Pages\Page;
-use Filament\Tables\Actions\LinkAction;
-use Filament\Tables\Columns\BadgeColumn;
+use App\Models\TestBooking;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Concerns\InteractsWithTable;
 
 class MyTestBookings extends Page implements HasTable
 {
@@ -29,7 +28,7 @@ class MyTestBookings extends Page implements HasTable
     protected function getTableColumns(): array
     {
         return [
-            BadgeColumn::make('status')
+            TextColumn::make('status')->badge()
                 ->label('Booking status')->sortable(),
             TextColumn::make('reference')->sortable(),
             TextColumn::make('testType.name')->wrap(),
@@ -46,7 +45,7 @@ class MyTestBookings extends Page implements HasTable
     protected function getTableActions(): array
     {
         return [
-            LinkAction::make('View')
+            Action::make('View')
                 ->url(fn (TestBooking $record): string => $record->filament_url)
                 ->hidden(fn (TestBooking $record): bool => $record->user()->doesntExist()),
         ];

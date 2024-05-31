@@ -2,18 +2,16 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Enums\NavigationGroupEnum;
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\Visit;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Admin\Resources\VisitResource\Pages;
 use App\Filament\Admin\Resources\VisitResource\RelationManagers;
-use App\Models\Visit;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class VisitResource extends Resource

@@ -2,17 +2,14 @@
 
 namespace App\Filament\Admin\Resources\Communication;
 
-use App\Enums\Communication\CommunicationStatusEnum;
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use App\Models\Communication\Communication;
 use App\Filament\Admin\Resources\Communication\CommunicationResource\Pages;
 use App\Filament\Admin\Resources\Communication\CommunicationResource\RelationManagers;
-use App\Models\Communication\Communication;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CommunicationResource extends Resource
 {
@@ -53,8 +50,8 @@ class CommunicationResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('communication.channel')->label('Channel')
                 ->sortable(),
-                Tables\Columns\BadgeColumn::make('status')
-                    ->enum(CommunicationStatusEnum::optionsAsSelectArray())->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()->sortable(),
                 Tables\Columns\TextColumn::make('tries')
                     ->sortable(),
             ])

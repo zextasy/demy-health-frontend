@@ -2,15 +2,11 @@
 
 namespace App\Filament\Admin\RelationManagers;
 
-use Filament\Forms;
+use Filament\Tables;
 use Filament\Forms\Form;
-use App\Enums\FieldTypeEnum;
+use Filament\Tables\Table;
 use App\Traits\Resources\DisplaysCurrencies;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables\Table;
-use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 
 class BaseInvoicesRelationManager extends RelationManager
@@ -33,7 +29,7 @@ class BaseInvoicesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('customer_email')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('total_amount')->money(self::getSystemDefaultCurrency()),
-                Tables\Columns\BadgeColumn::make('status'),
+                Tables\Columns\TextColumn::make('status')->badge(),
             ])
             ->filters([
                 //
