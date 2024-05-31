@@ -36,7 +36,7 @@ class ViewDiscount extends ViewRecord
                     ->unique()
                     ->maxLength(255),
                 Select::make('type')
-                    ->options(DiscountTypeEnum::optionsAsSelectArray())
+                    ->options(DiscountTypeEnum::class)
                     ->required(),
                 TextInput::make('discount_value')
                     ->required(),

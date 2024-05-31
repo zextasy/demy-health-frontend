@@ -57,7 +57,7 @@ class CustomerEnquiryResource extends Resource
                 ])->columns(1),
                 Forms\Components\Fieldset::make('General Info')->schema([
                     Forms\Components\Select::make('type')
-                        ->options(EnquiryTypeEnum::optionsAsSelectArray())
+                        ->options(EnquiryTypeEnum::class)
                         ->disabled(),
                     Forms\Components\TextInput::make('status')->disabled(),
                 ])->columns(2),

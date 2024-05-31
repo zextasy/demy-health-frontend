@@ -35,7 +35,7 @@ class TestBookingsRelationManager extends RelationManager
                         ->required(),
                 ])->columns(3),
                 Forms\Components\Select::make('location_type')
-                    ->options(LocationTypeEnum::optionsAsSelectArray())
+                    ->options(LocationTypeEnum::class)
                     ->default(LocationTypeEnum::CENTER->value)
                     ->disabled(),
                 Forms\Components\BelongsToSelect::make('testCenter')

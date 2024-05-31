@@ -58,10 +58,10 @@ class PatientResource extends Resource
                 Fieldset::make('Age')->schema([
                     DatePicker::make('date_of_birth'),
                     //                    TextInput::make('age')->label('Age (Years)')->numeric(),
-                    Select::make('age_classification')->options(AgeClassificationEnum::optionsAsSelectArray()),
+                    Select::make('age_classification')->options(AgeClassificationEnum::class),
                 ])->columns(3),
                 Fieldset::make('Data')->schema([
-                    Select::make('gender')->options(GenderEnum::optionsAsSelectArray()),
+                    Select::make('gender')->options(GenderEnum::class),
                     TextInput::make('height')->numeric(),
                     TextInput::make('weight')->numeric(),
                 ])->columns(3),

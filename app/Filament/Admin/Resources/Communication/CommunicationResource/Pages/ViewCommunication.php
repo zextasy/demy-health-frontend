@@ -25,9 +25,9 @@ class ViewCommunication extends ViewRecord
             Fieldset::make('General')
                 ->schema([
                     Select::make('channel')
-                        ->options(CommunicationChannelEnum::optionsAsSelectArray()),
+                        ->options(CommunicationChannelEnum::class),
                     Select::make('status')
-                        ->options(CommunicationStatusEnum::optionsAsSelectArray()),
+                        ->options(CommunicationStatusEnum::class),
                     TextInput::make('contact_name')->label('Sent to'),
                     TextInput::make('contact_details'),
                 ])

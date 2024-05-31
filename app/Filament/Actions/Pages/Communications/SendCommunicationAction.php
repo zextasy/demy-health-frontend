@@ -32,7 +32,7 @@ class SendCommunicationAction extends BasePageAction
         $this->form([
             Select::make('channel')
                 ->label('Type')
-                ->options(CommunicationChannelEnum::optionsAsSelectArray())
+                ->options(CommunicationChannelEnum::class)
                 ->default(CommunicationChannelEnum::EMAIL->value)
                 ->disabled()
                 ->required(),

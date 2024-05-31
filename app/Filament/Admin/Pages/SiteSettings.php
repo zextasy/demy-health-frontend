@@ -61,15 +61,15 @@ class SiteSettings extends SettingsPage
             Fieldset::make('Internationalization')->schema([
                 Select::make('default_locale')
                     ->label('Default Locale')
-                    ->options(LocaleEnum::optionsAsSelectArray()),
+                    ->options(LocaleEnum::class),
 //                TextInput::make('default_timezone')->label('Default Timezone'),
                 Select::make('default_currency')
                     ->label('Default Currency')
-                    ->options(CurrencyEnum::optionsAsSelectArray()),
+                    ->options(CurrencyEnum::class),
 //                TextInput::make('default_currency')->label('Default '),
                 Select::make('alternate_currency')
                     ->label('Alternate Currency')
-                    ->options(CurrencyEnum::optionsAsSelectArray()),
+                    ->options(CurrencyEnum::class),
 //                TextInput::make('alternate_currency')->label('Alternate Currency'),
 
             ])->columns(1),

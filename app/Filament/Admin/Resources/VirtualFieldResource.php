@@ -68,7 +68,7 @@ class VirtualFieldResource extends Resource
                         ->default(false)
                         ->dehydrated(false),
                         Select::make('field_type')
-                            ->options(FieldTypeEnum::optionsAsSelectArray())
+                            ->options(FieldTypeEnum::class)
                             ->required(),
                         ])->columns(3),
                 Repeater::make('options')

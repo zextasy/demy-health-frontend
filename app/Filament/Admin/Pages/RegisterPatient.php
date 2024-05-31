@@ -92,7 +92,7 @@ class RegisterPatient extends Page implements HasForms
                                 ->maxLength(255)
                                 ->helperText('Reference number for the patient. Leave this blank and the system will generate one for you'),
                             Select::make('detailLevel')
-                                ->options(PatientDataDetailEnum::optionsAsSelectArray())
+                                ->options(PatientDataDetailEnum::class)
                                 ->reactive()
                                 ->helperText('How much data is required?')
                                 ->required(),
@@ -111,13 +111,13 @@ class RegisterPatient extends Page implements HasForms
                             DatePicker::make('dateOfBirth'),
                             TextInput::make('ageInYears')->integer(),
                             Select::make('ageClassification')
-                                ->options(AgeClassificationEnum::optionsAsSelectArray())
+                                ->options(AgeClassificationEnum::class)
                                 ->rules(['required_without_all:dateOfBirth,ageInYears']),
                         ])
                             ->columns(3),
                         Fieldset::make('Data')->schema([
                             Select::make('gender')
-                                ->options(GenderEnum::optionsAsSelectArray())
+                                ->options(GenderEnum::class)
                                 ->required(),
                             TextInput::make('height')
                                 ->hidden(fn (\Filament\Forms\Get $get) => $get('detailLevel') != PatientDataDetailEnum::DETAILED->value)

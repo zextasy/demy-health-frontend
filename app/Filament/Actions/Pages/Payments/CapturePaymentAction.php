@@ -33,7 +33,7 @@ class CapturePaymentAction extends BasePageAction
                     ->required(),
                 Select::make('method')
                     ->label('Payment Method')
-                    ->options(PaymentMethodEnum::optionsAsSelectArray())
+                    ->options(PaymentMethodEnum::class)
                     ->searchable()
                     ->required(),
             ])->action(function (array $data): void {

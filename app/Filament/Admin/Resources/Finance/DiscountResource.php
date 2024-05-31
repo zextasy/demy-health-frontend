@@ -45,7 +45,7 @@ class DiscountResource extends Resource
                     ->unique()
                     ->maxLength(255),
                 Forms\Components\Select::make('type')
-                    ->options(DiscountTypeEnum::optionsAsSelectArray())
+                    ->options(DiscountTypeEnum::class)
                     ->required(),
                 Forms\Components\TextInput::make('discount_value')
                     ->required()

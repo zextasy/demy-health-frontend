@@ -47,7 +47,7 @@ class BasePaymentsRelationManager extends RelationManager
                     ->label("Paid By")
                     ->disabled(),
                 Select::make('payment_method')
-                    ->options(PaymentMethodEnum::optionsAsSelectArray())
+                    ->options(PaymentMethodEnum::class)
                     ->disabled(),
                 TextInput::make('amount')
                     ->disabled(),

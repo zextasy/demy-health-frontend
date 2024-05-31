@@ -83,7 +83,7 @@ class TestBookingResource extends Resource
                 ])->columns(3),
                 Forms\Components\Fieldset::make('Location')->schema([
                     Forms\Components\Select::make('location_type')
-                        ->options(LocationTypeEnum::optionsAsSelectArray())
+                        ->options(LocationTypeEnum::class)
                         ->required(),
                     Forms\Components\BelongsToSelect::make('testCenter')
                         ->relationship('testCenter', 'name')

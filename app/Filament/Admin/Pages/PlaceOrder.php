@@ -122,7 +122,7 @@ class PlaceOrder extends Page
                                 ->maxLength(25),
                             TextInput::make('customerFirstName')->required()->disabled($this->hasCustomer),
                             TextInput::make('customerLastName')->required()->disabled($this->hasCustomer),
-                            Select::make('customerGender')->options(GenderEnum::optionsAsSelectArray())
+                            Select::make('customerGender')->options(GenderEnum::class)
                                 ->required()->disabled($this->hasCustomer),
                         ])->columns(2),
                     ]),

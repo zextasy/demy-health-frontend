@@ -21,7 +21,7 @@ class CreatePayment extends CreateRecord
                 ->helperText(HelpTextMessageHelper::GENERAL_REFERENCE_HELP_TEXT)
                 ->maxLength(255),
             Select::make('payment_method')
-                ->options(PaymentMethodEnum::optionsAsSelectArray())->required(),
+                ->options(PaymentMethodEnum::class)->required(),
             TextInput::make('amount')->required(),
         ];
     }
