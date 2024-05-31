@@ -2,15 +2,20 @@
 
 namespace App\Enums\Communication;
 
-use App\Traits\Enums\HasSelectArrayOptions;
-use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Names;
-use ArchTech\Enums\Options;
 use ArchTech\Enums\Values;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\InvokableCases;
+use Filament\Support\Contracts\HasLabel;
+use App\Traits\Enums\HasDefaultFilamentLabels;
 
-enum CommunicationStatusEnum: int
+enum CommunicationStatusEnum: int implements HasLabel
 {
-    use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
+    use InvokableCases;
+    use Names;
+    use Values;
+    use Options;
+    use HasDefaultFilamentLabels;
 
     case PENDING = 1;
 
@@ -21,4 +26,5 @@ enum CommunicationStatusEnum: int
     case FAILED = 30;
 
     case PERMANENT_FAILURE = 39;
+
 }

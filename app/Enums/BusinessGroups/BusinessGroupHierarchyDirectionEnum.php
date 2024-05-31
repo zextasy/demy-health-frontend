@@ -2,15 +2,20 @@
 
 namespace App\Enums\BusinessGroups;
 
-use App\Traits\Enums\HasSelectArrayOptions;
-use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Names;
-use ArchTech\Enums\Options;
 use ArchTech\Enums\Values;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\InvokableCases;
+use Filament\Support\Contracts\HasLabel;
+use App\Traits\Enums\HasDefaultFilamentLabels;
 
-enum BusinessGroupHierarchyDirectionEnum: int
+enum BusinessGroupHierarchyDirectionEnum: int  implements HasLabel
 {
-    use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
+    use InvokableCases;
+    use Names;
+    use Values;
+    use Options;
+    use HasDefaultFilamentLabels;
 
     case UP = 1;
     case DOWN = 2;

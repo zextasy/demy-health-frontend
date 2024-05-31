@@ -10,6 +10,7 @@ use ArchTech\Enums\Values;
 
 enum LocaleEnum: string
 {
+    //TODO use squire php package?
     use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
 
     case EN_US = 'en-US';

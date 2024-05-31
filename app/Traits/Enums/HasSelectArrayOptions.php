@@ -6,6 +6,7 @@ use App\Helpers\StringHelper;
 
 trait HasSelectArrayOptions
 {
+    //TODO check usage and delete?
     /** Get an associative array of [case name => case value]. */
     public static function optionsAsSelectArray(): array
     {

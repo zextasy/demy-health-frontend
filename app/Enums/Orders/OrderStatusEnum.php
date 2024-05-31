@@ -2,19 +2,20 @@
 
 namespace App\Enums\Orders;
 
-use App\Models\Finance\FullDiscount;
-use App\Models\Finance\FixedValueDiscount;
-use App\Models\Finance\PercentageOffDiscount;
-use App\Traits\Enums\HasSelectArrayOptions;
-use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Names;
-use ArchTech\Enums\Options;
 use ArchTech\Enums\Values;
-use App\Exceptions\UnexpectedMatchValueException;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\InvokableCases;
+use Filament\Support\Contracts\HasLabel;
+use App\Traits\Enums\HasDefaultFilamentLabels;
 
-enum OrderStatusEnum: string
+enum OrderStatusEnum: string  implements HasLabel
 {
-    use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
+    use InvokableCases;
+    use Names;
+    use Values;
+    use Options;
+    use HasDefaultFilamentLabels;
 
     case PLACED = 'Ordered';
     case INVOICE_GENERATED = 'Invoiced';

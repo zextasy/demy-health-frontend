@@ -6,11 +6,16 @@ use ArchTech\Enums\Names;
 use ArchTech\Enums\Values;
 use ArchTech\Enums\Options;
 use ArchTech\Enums\InvokableCases;
-use App\Traits\Enums\HasSelectArrayOptions;
+use Filament\Support\Contracts\HasLabel;
+use App\Traits\Enums\HasDefaultFilamentLabels;
 
-enum ConsultationChannelEnum: int
+enum ConsultationChannelEnum: int implements HasLabel
 {
-    use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
+    use InvokableCases;
+    use Names;
+    use Values;
+    use Options;
+    use HasDefaultFilamentLabels;
 
     case NONE = 1;
 

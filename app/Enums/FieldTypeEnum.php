@@ -2,15 +2,22 @@
 
 namespace App\Enums;
 
-use App\Traits\Enums\HasSelectArrayOptions;
-use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Names;
-use ArchTech\Enums\Options;
 use ArchTech\Enums\Values;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\InvokableCases;
+use Filament\Support\Contracts\HasLabel;
+use App\Traits\Enums\HasSelectArrayOptions;
+use App\Traits\Enums\HasDefaultFilamentLabels;
 
-enum FieldTypeEnum: int
+enum FieldTypeEnum: int implements HasLabel
 {
-    use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
+    use InvokableCases;
+    use Names;
+    use Values;
+    use Options;
+    use HasSelectArrayOptions;
+    use HasDefaultFilamentLabels;
 
     case TEXT = 1;
     case TEXTAREA = 2;
@@ -29,4 +36,5 @@ enum FieldTypeEnum: int
     case KEY_VALUE = 51;
     case COLOR = 61;
     case FILE = 101;
+
 }

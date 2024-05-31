@@ -2,9 +2,13 @@
 
 namespace App\Enums\Tasks;
 
-enum TaskStatusEnum: string
-{
+use Filament\Support\Contracts\HasLabel;
+use Filament\Support\Contracts\HasColor;
+use App\Traits\Enums\HasDefaultFilamentLabels;
 
+enum TaskStatusEnum: string implements HasLabel, HasColor
+{
+    use HasDefaultFilamentLabels;
     case PENDING = 'pending';
     case ONGOING = 'ongoing';
     case UNDER_REVIEW = 'under review';
@@ -12,15 +16,16 @@ enum TaskStatusEnum: string
     case FAILED = 'failed';
     case UNKNOWN = 'unknown';
 
-    public static function getFilamentBadgeColor($value): string
+
+    public function getColor(): string|array|null
     {
-        return match ($value) {
-            TaskStatusEnum::COMPLETE->value => 'success',
-            TaskStatusEnum::ONGOING->value => 'primary',
-            TaskStatusEnum::PENDING->value => 'secondary',
-            TaskStatusEnum::FAILED->value, TaskStatusEnum::UNKNOWN->value => 'danger',
-            TaskStatusEnum::UNDER_REVIEW->value => 'warning',
-            default => 'none'
+        return match ($this) {
+            self::COMPLETE => 'success',
+            self::ONGOING => 'primary',
+            self::PENDING => 'secondary',
+            self::FAILED, self::UNKNOWN => 'danger',
+            self::UNDER_REVIEW => 'warning',
         };
     }
+
 }

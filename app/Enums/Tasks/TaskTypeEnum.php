@@ -2,15 +2,20 @@
 
 namespace App\Enums\Tasks;
 
-use App\Traits\Enums\HasSelectArrayOptions;
-use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Names;
-use ArchTech\Enums\Options;
 use ArchTech\Enums\Values;
+use ArchTech\Enums\Options;
+use ArchTech\Enums\InvokableCases;
+use Filament\Support\Contracts\HasLabel;
+use App\Traits\Enums\HasDefaultFilamentLabels;
 
-enum TaskTypeEnum: int
+enum TaskTypeEnum: int implements HasLabel
 {
-    use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
+    use InvokableCases;
+    use Names;
+    use Values;
+    use Options;
+    use HasDefaultFilamentLabels;
 
     case GENERIC = 1;
     case CONSULTATION = 10;

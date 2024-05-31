@@ -10,7 +10,12 @@ use ArchTech\Enums\Values;
 
 enum NavigationGroupEnum: string
 {
-    use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
+    //TODO check usage -- different panels
+    use InvokableCases;
+    use Names;
+    use Values;
+    use Options;
+    use HasSelectArrayOptions;
 
     case NONE = '';
 	case ADMIN = 'Admin';

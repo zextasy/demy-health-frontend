@@ -7,10 +7,15 @@ use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Names;
 use ArchTech\Enums\Options;
 use ArchTech\Enums\Values;
+use App\Traits\Enums\HasDefaultFilamentLabels;
 
 enum PaymentMethodEnum: int
 {
-    use InvokableCases, Names, Values, Options, HasSelectArrayOptions;
+    use InvokableCases;
+    use Names;
+    use Values;
+    use Options;
+    use HasDefaultFilamentLabels;
 
     case CASH = 1;
     case BANK_TRANSFER = 2;
