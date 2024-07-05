@@ -15,7 +15,6 @@ class Dashboard extends BasePage
     public function getWidgets(): array
     {
         return [
-            AccountWidget::class,
             StatsOverview::class,
             TotalTestsApexBarChart::class,
             TestsByPatientApexDonutChart::class,

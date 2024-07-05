@@ -23,8 +23,8 @@ class StatsOverview extends BaseWidget
     {
         return [
             //            Card::make('Available Test Types', TestType::all()->count()),
-            Card::make('Available Test Types', TestType::all()->count()),
-            Card::make('Available Products', Product::all()->count()),
+            Card::make('Available Test Types', TestType::count()),
+            Card::make('Available Products', Product::count()),
             //            Card::make('Total Bookings', TestBooking::all()->count()),
             Card::make('Bookings Today', TestBooking::whereDate('created_at', today())->count()),
             //            Card::make('Total Orders', Order::all()->count()),

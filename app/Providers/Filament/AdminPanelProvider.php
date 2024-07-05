@@ -30,7 +30,8 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->navigationGroups(
-                [ 'Dashboards',
+                [
+                    'Dashboards',
                     'Account',
                     'Personal',
                     'CRM',
@@ -40,12 +41,13 @@ class AdminPanelProvider extends PanelProvider
                     'Products',
                     'Blog',
                     'Marketing',
-                    'Locations',]
+                    'Locations',
+                    ]
             )
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([

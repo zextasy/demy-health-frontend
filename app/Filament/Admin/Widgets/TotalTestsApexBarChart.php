@@ -42,7 +42,7 @@ class TotalTestsApexBarChart extends ApexChartWidget
             ],
             'series' => [
                 [
-                    'name' => 'BasicBarChart',
+                    'name' => 'TotalTestsBarChart',
                     'data' => $data,
                 ],
             ],
