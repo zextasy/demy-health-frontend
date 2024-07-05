@@ -43,7 +43,7 @@ class VirtualFieldService
                 FieldTypeEnum::DATE->value => DatePicker::make($field->name)->label($field->label),
                 FieldTypeEnum::DATETIME->value => DateTimePicker::make($field->name)->label($field->label),
                 FieldTypeEnum::DECIMAL->value => TextInput::make($field->name)->label($field->label)
-                    ->numeric()->mask(fn (TextInput\Mask $mask) => $mask->numeric()->decimalPlaces(2)),
+                    ->numeric()->step(.00000001),
                 FieldTypeEnum::FILE->value => FileUpload::make($field->name)->label($field->label),
                 FieldTypeEnum::INTEGER->value => TextInput::make($field->name)->label($field->label)
                     ->numeric(),

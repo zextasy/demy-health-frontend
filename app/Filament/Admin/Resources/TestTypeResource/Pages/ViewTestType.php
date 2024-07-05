@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\TestTypeResource\Pages;
 
+use App\Constants\Constants;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Select;
 use App\Helpers\HelpTextMessageHelper;
@@ -11,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use App\Filament\Admin\Resources\TestTypeResource;
 use Filament\Resources\Pages\ViewRecord;
 use App\Traits\Resources\DisplaysCurrencies;
+use Filament\Support\RawJs;
 
 class ViewTestType extends ViewRecord
 {
@@ -35,10 +37,10 @@ class ViewTestType extends ViewRecord
             Fieldset::make('Pricing')->schema([
                 Toggle::make('should_call_in_for_details')
                     ->helperText(HelpTextMessageHelper::GENERAL_CALL_IN_MSG),
-                TextInput::make('price')->numeric()
-                    ->mask(fn (TextInput\Mask $mask) => $mask
-                        ->money(self::getSystemDefaultCurrency())
-                    ),
+                TextInput::make('price')
+                    ->numeric()
+                    ->prefix(self::getSystemDefaultCurrency())
+                    ->mask(RawJs::make(Constants::MONEY_INPUT)),
             ]),
             Fieldset::make('Turn around time')
                 ->schema([

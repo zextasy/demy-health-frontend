@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\ProductResource\Pages;
 
+use App\Constants\Constants;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use App\Helpers\HelpTextMessageHelper;
@@ -12,6 +13,7 @@ use App\Filament\Admin\Resources\ProductResource;
 use Filament\Resources\Pages\ViewRecord;
 use App\Traits\Resources\DisplaysCurrencies;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Support\RawJs;
 
 class ViewProduct extends ViewRecord
 {
@@ -33,10 +35,10 @@ class ViewProduct extends ViewRecord
             Fieldset::make('Pricing')->schema([
                 Toggle::make('should_call_in_for_details')
                     ->helperText(HelpTextMessageHelper::GENERAL_CALL_IN_MSG),
-                TextInput::make('price')->numeric()
-                    ->mask(fn (TextInput\Mask $mask) => $mask
-                        ->money(self::getSystemDefaultCurrency())
-                    ),
+                TextInput::make('price')
+                    ->numeric()
+                    ->prefix(self::getSystemDefaultCurrency())
+                    ->mask(RawJs::make(Constants::MONEY_INPUT)),
             ]),
             Fieldset::make('General Info')->schema([
                 TextInput::make('sku')

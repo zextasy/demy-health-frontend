@@ -14,7 +14,6 @@ use App\Traits\Resources\DisplaysCurrencies;
 use App\Enums\Finance\Payments\PaymentMethodEnum;
 use App\Filament\Admin\Resources\Finance\PaymentResource\Pages;
 
-use App\Filament\Admin\Resources\Finance\PaymentResource\RelationManagers;
 
 class PaymentResource extends Resource
 {
@@ -60,6 +59,7 @@ class PaymentResource extends Resource
                     ->options(PaymentMethodEnum::class)
                     ->disabled(),
                 TextInput::make('amount')
+                    ->prefix(self::getSystemDefaultCurrency())
                     ->disabled(),
             ]);
     }

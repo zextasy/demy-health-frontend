@@ -2,6 +2,8 @@
 
 namespace App\Filament\Admin\Resources\Finance;
 
+use App\Constants\Constants;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -56,34 +58,29 @@ class InvoiceResource extends Resource
                     TextInput::make('sub_total_amount')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (Mask $mask) => $mask
-                            ->money(self::getSystemDefaultCurrency())
-                        ),
+                        ->prefix(self::getSystemDefaultCurrency())
+                        ->mask(RawJs::make(Constants::MONEY_INPUT)),
                     TextInput::make('total_discount_amount')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (Mask $mask) => $mask
-                            ->money(self::getSystemDefaultCurrency())
-                        ),
+                        ->prefix(self::getSystemDefaultCurrency())
+                        ->mask(RawJs::make(Constants::MONEY_INPUT)),
                     TextInput::make('total_amount')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (Mask $mask) => $mask
-                            ->money(self::getSystemDefaultCurrency())
-                        ),
+                        ->prefix(self::getSystemDefaultCurrency())
+                        ->mask(RawJs::make(Constants::MONEY_INPUT)),
                     TextInput::make('total_transaction_amount')
                         ->label('Total Received')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (Mask $mask) => $mask
-                            ->money(self::getSystemDefaultCurrency())
-                        ),
+                        ->prefix(self::getSystemDefaultCurrency())
+                        ->mask(RawJs::make(Constants::MONEY_INPUT)),
                     TextInput::make('outstanding_amount')
                         ->disabled()
                         ->numeric()
-                        ->mask(fn (Mask $mask) => $mask
-                            ->money(self::getSystemDefaultCurrency())
-                        ),
+                        ->prefix(self::getSystemDefaultCurrency())
+                        ->mask(RawJs::make(Constants::MONEY_INPUT)),
                 ])->columns(3),
                 TextInput::make('status')
                     ->disabled(),
