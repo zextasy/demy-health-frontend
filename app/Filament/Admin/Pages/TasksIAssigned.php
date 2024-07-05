@@ -68,7 +68,7 @@ class TasksIAssigned extends Page implements HasTable
                 ])
                 ->visible(fn (Task $record): bool => auth()->user()->can('reviewCompletionRequest', $record)),
 	        Action::make('view')
-		        ->url(fn (Task $record): string => TaskResource::getUrl('view', $record)),
+		        ->url(fn (Task $record): string => TaskResource::getUrl('view', [$record])),
         ];
     }
 }
