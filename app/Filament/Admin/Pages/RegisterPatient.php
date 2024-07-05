@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Pages;
 
 use App\Actions\Patients\CreatePatientAction;
+use App\Constants\NavigationGroupConstants;
 use App\Enums\AgeClassificationEnum;
 use App\Enums\GenderEnum;
 use App\Enums\PatientDataDetailEnum;
@@ -29,7 +30,7 @@ class RegisterPatient extends Page implements HasForms
 
     protected static string $view = 'filament.pages.register-patient';
 
-    protected static ?string $navigationGroup = 'CRM';
+    protected static ?string $navigationGroup = NavigationGroupConstants::CRM;
 
     protected static ?int $navigationSort = 1;
 

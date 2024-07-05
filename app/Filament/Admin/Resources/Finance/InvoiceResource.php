@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources\Finance;
 
 use App\Constants\Constants;
+use App\Constants\NavigationGroupConstants;
 use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -25,7 +26,7 @@ class InvoiceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
-    protected static ?string $navigationGroup = 'Finance';
+    protected static ?string $navigationGroup = NavigationGroupConstants::FINANCE;
 
     public static function shouldRegisterNavigation(): bool
     {

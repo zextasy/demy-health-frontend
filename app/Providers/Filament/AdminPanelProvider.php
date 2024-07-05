@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Constants\NavigationGroupConstants;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -18,9 +19,11 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
+
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -31,17 +34,17 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups(
                 [
-                    'Dashboards',
-                    'Account',
-                    'Personal',
-                    'CRM',
-                    'Consultation',
-                    'Tests',
-                    'Finance',
-                    'Products',
-                    'Blog',
-                    'Marketing',
-                    'Locations',
+                    NavigationGroupConstants::DASHBOARDS,
+                    NavigationGroupConstants::ACCOUNT,
+                    NavigationGroupConstants::PERSONAL,
+                    NavigationGroupConstants::CRM,
+                    NavigationGroupConstants::CONSULTATION,
+                    NavigationGroupConstants::TESTS,
+                    NavigationGroupConstants::FINANCE,
+                    NavigationGroupConstants::PRODUCTS,
+                    NavigationGroupConstants::BLOG,
+                    NavigationGroupConstants::MARKETING,
+                    NavigationGroupConstants::LOCATIONS,
                     ]
             )
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
@@ -57,7 +60,8 @@ class AdminPanelProvider extends PanelProvider
 
             ])
             ->plugins([
-                FilamentApexChartsPlugin::make()
+                FilamentApexChartsPlugin::make(),
+                FilamentFullCalendarPlugin::make(),
             ])
             ->middleware([
                 EncryptCookies::class,

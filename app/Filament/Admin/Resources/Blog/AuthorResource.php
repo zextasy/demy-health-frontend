@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Blog;
 
+use App\Constants\NavigationGroupConstants;
 use Filament\Forms;
 use App\Models\Blog\Author;
 use Filament\Forms\Form;
@@ -21,7 +22,7 @@ class AuthorResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationGroup = NavigationGroupConstants::BLOG;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 

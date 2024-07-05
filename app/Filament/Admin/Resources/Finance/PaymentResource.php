@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Finance;
 
+use App\Constants\NavigationGroupConstants;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -23,7 +24,7 @@ class PaymentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
-    protected static ?string $navigationGroup = 'Finance';
+    protected static ?string $navigationGroup = NavigationGroupConstants::FINANCE;
 
     public static function shouldRegisterNavigation(): bool
     {

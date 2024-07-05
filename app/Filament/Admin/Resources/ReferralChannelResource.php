@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Helpers\HelpTextMessageHelper;
 use App\Filament\Admin\Resources\ReferralChannelResource\Pages;
 
@@ -19,7 +20,7 @@ class ReferralChannelResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'Marketing';
+    protected static ?string $navigationGroup = NavigationGroupConstants::MARKETING;
 
     public static function shouldRegisterNavigation(): bool
     {

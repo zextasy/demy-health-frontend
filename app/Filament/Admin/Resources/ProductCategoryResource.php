@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\ProductCategoryResource\Pages;
 
 use App\Filament\Admin\Resources\ProductCategoryResource\RelationManagers;
@@ -20,7 +21,7 @@ class ProductCategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = NavigationGroupConstants::PRODUCTS;
 
     public static function form(Form $form): Form
     {

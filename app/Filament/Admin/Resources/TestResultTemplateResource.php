@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\TestResultTemplateResource\Pages;
 
 use App\Filament\Admin\Resources\TestResultTemplateResource\RelationManagers;
@@ -22,7 +23,7 @@ class TestResultTemplateResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Tests';
+    protected static ?string $navigationGroup = NavigationGroupConstants::TESTS;
 
     public static function shouldRegisterNavigation(): bool
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Visit;
@@ -20,7 +21,7 @@ class VisitResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'Consultation';
+    protected static ?string $navigationGroup = NavigationGroupConstants::CONSULTATION;
 
     public static function shouldRegisterNavigation(): bool
     {

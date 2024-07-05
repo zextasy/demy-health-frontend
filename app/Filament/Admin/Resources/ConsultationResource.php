@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\ConsultationResource\Pages;
 use App\Filament\Admin\Resources\ConsultationResource\RelationManagers;
 use App\Models\Consultation;
@@ -18,7 +19,7 @@ class ConsultationResource extends Resource
     protected static ?string $model = Consultation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationGroup = NavigationGroupConstants::CONSULTATION;
     public static function form(Form $form): Form
     {
         return $form

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\CountryResource\Pages;
 use App\Models\Country;
 use Filament\Forms;
@@ -16,7 +17,7 @@ class CountryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'Locations';
+    protected static ?string $navigationGroup = NavigationGroupConstants::LOCATIONS;
 
     public static function shouldRegisterNavigation(): bool
     {

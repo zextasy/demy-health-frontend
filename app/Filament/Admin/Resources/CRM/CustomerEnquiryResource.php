@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\CRM;
 
+use App\Constants\NavigationGroupConstants;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\CRM\CustomerEnquiries\EnquiryTypeEnum;
 use App\Filament\Admin\Resources\CRM\CustomerEnquiryResource\Pages;
@@ -19,7 +20,7 @@ class CustomerEnquiryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'CRM';
+    protected static ?string $navigationGroup = NavigationGroupConstants::CRM;
 
     protected static ?int $navigationSort = 5;
 

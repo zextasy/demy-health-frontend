@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Constants\Constants;
+use App\Constants\NavigationGroupConstants;
 use Filament\Support\RawJs;
 use Filament\Tables;
 use App\Models\Order;
@@ -24,7 +25,7 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'CRM';
+    protected static ?string $navigationGroup = NavigationGroupConstants::CRM;
 
     protected static ?int $navigationSort = 5;
 

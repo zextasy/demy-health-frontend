@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\AddressResource\Pages;
 use App\Filament\Admin\Resources\AddressResource\RelationManagers;
 use App\Models\Address;
@@ -18,7 +19,7 @@ class AddressResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'Locations';
+    protected static ?string $navigationGroup = NavigationGroupConstants::LOCATIONS;
 
     public static function shouldRegisterNavigation(): bool
     {

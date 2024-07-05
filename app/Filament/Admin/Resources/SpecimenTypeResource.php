@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\SpecimenTypeResource\Pages;
 use App\Filament\Admin\Resources\SpecimenTypeResource\RelationManagers;
 use App\Models\SpecimenType;
@@ -20,7 +21,7 @@ class SpecimenTypeResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'description';
 
-    protected static ?string $navigationGroup = 'Tests';
+    protected static ?string $navigationGroup = NavigationGroupConstants::TESTS;
 
     protected static ?int $navigationSort = 1;
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Helpers\HelpTextMessageHelper;
 use App\Filament\Admin\Resources\TestResultResource\Pages;
 use App\Models\TestResult;
@@ -21,7 +22,7 @@ class TestResultResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'reference';
 
-    protected static ?string $navigationGroup = 'Tests';
+    protected static ?string $navigationGroup = NavigationGroupConstants::TESTS;
 
     public static function shouldRegisterNavigation(): bool
     {

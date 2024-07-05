@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\DoctorResource\Pages;
 use App\Filament\Admin\Resources\DoctorResource\RelationManagers;
 use App\Models\Doctor;
@@ -19,7 +20,7 @@ class DoctorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'Consultation';
+    protected static ?string $navigationGroup = NavigationGroupConstants::CONSULTATION;
 
     public static function shouldRegisterNavigation(): bool
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Blog;
 
+use App\Constants\NavigationGroupConstants;
 use Filament\Forms;
 use Filament\Forms\Form;
 use App\Models\Blog\Category;
@@ -22,7 +23,7 @@ class CategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationGroup = NavigationGroupConstants::BLOG;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 

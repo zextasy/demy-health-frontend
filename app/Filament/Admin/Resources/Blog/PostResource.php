@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Blog;
 
+use App\Constants\NavigationGroupConstants;
 use Filament\Forms;
 use App\Models\Blog\Post;
 use App\Traits\Blog\HasContentEditor;
@@ -30,7 +31,7 @@ class PostResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationGroup = NavigationGroupConstants::BLOG;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 

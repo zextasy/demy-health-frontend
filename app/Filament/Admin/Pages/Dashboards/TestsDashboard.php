@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Filament\Pages\Dashboards;
+namespace App\Filament\Admin\Pages\Dashboards;
 
+use App\Constants\NavigationGroupConstants;
 use Filament\Pages\Page;
 use App\Filament\Admin\Widgets\TotalTestsApexBarChart;
 use App\Filament\Admin\Widgets\TestsByPatientApexDonutChart;
@@ -10,7 +11,7 @@ use App\Filament\Admin\Widgets\PatientsByReferralApexDonutChart;
 
 class TestsDashboard extends Page
 {
-    protected static ?string $navigationGroup = 'Dashboards';
+    protected static ?string $navigationGroup = NavigationGroupConstants::DASHBOARDS;
 
     protected static string $view = 'filament.pages.dashboard';
 

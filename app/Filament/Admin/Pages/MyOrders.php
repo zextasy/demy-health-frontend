@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Pages;
 
+use App\Constants\NavigationGroupConstants;
 use App\Models\Order;
 use Filament\Pages\Page;
 use Filament\Tables\Actions\Action;
@@ -16,7 +17,7 @@ class MyOrders extends Page implements HasTable
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static ?string $navigationGroup = 'Personal';
+    protected static ?string $navigationGroup = NavigationGroupConstants::PERSONAL;
 
     protected static string $view = 'filament.pages.my-orders';
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\LocalGovernmentAreaResource\Pages;
 use App\Models\LocalGovernmentArea;
 use Filament\Forms;
@@ -18,7 +19,7 @@ class LocalGovernmentAreaResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Locations';
+    protected static ?string $navigationGroup = NavigationGroupConstants::LOCATIONS;
 
     public static function shouldRegisterNavigation(): bool
     {

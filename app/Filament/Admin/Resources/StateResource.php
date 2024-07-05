@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\StateResource\Pages;
 use App\Filament\Admin\Resources\StateResource\RelationManagers;
 use App\Models\State;
@@ -19,7 +20,7 @@ class StateResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Locations';
+    protected static ?string $navigationGroup = NavigationGroupConstants::LOCATIONS;
 
     public static function shouldRegisterNavigation(): bool
     {

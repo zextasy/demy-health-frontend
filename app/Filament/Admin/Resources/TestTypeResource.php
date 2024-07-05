@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Settings\GeneralSettings;
 use App\Helpers\HelpTextMessageHelper;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,7 +28,7 @@ class TestTypeResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Tests';
+    protected static ?string $navigationGroup = NavigationGroupConstants::TESTS;
 
     public static function getEloquentQuery(): Builder
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Filament\Admin\Resources\TestCategoryResource\Pages;
 use App\Filament\Admin\Resources\TestCategoryResource\RelationManagers;
 use App\Models\TestCategory;
@@ -20,7 +21,7 @@ class TestCategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Tests';
+    protected static ?string $navigationGroup = NavigationGroupConstants::TESTS;
 
     public static function form(Form $form): Form
     {

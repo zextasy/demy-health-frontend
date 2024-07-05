@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Pages;
 
 
+use App\Constants\NavigationGroupConstants;
 use App\Models\Product;
 use App\Models\Patient;
 use Filament\Pages\Page;
@@ -36,7 +37,7 @@ class PlaceOrder extends Page
 
     protected static string $view = 'filament.pages.place-order';
 
-    protected static ?string $navigationGroup = 'CRM';
+    protected static ?string $navigationGroup = NavigationGroupConstants::CRM;
 
     protected static ?string $title = 'Place an Order';
 

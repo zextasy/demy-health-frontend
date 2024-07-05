@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Settings\GeneralSettings;
 use App\Helpers\HelpTextMessageHelper;
 use App\Traits\Resources\DisplaysCurrencies;
@@ -27,7 +28,7 @@ class ProductResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = NavigationGroupConstants::PRODUCTS;
 
     public static function form(Form $form): Form
     {

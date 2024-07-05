@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -24,7 +25,7 @@ class TestBookingResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'reference';
 
-    protected static ?string $navigationGroup = 'CRM';
+    protected static ?string $navigationGroup = NavigationGroupConstants::CRM;
 
     protected static ?int $navigationSort = 5;
 

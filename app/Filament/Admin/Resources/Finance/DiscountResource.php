@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources\Finance;
 
+use App\Constants\NavigationGroupConstants;
 use App\Enums\Finance\Discounts\DiscountTypeEnum;
 use App\Filament\Admin\Resources\Finance\DiscountResource\Pages;
 use App\Filament\Admin\Resources\Finance\DiscountResource\RelationManagers;
@@ -20,7 +21,7 @@ class DiscountResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'Finance';
+    protected static ?string $navigationGroup = NavigationGroupConstants::FINANCE;
 
     public static function shouldRegisterNavigation(): bool
     {

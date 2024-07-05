@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Constants\NavigationGroupConstants;
 use App\Enums\AgeClassificationEnum;
 use App\Enums\GenderEnum;
 use App\Helpers\HelpTextMessageHelper;
@@ -26,7 +27,7 @@ class PatientResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'Consultation';
+    protected static ?string $navigationGroup = NavigationGroupConstants::CONSULTATION;
 
     protected static ?string $recordTitleAttribute = 'full_name';
 
