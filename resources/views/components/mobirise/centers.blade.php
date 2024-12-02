@@ -78,10 +78,13 @@
                         <div class="row">
                             <div class="col-md">
                                 <h6 class="card-title mbr-fonts-style display-5">
-                                    <strong>Lagos</strong></h6>
+                                    <strong>Lekki Office</strong></h6>
                                 <p class="mbr-text mbr-fonts-style display-7">
-                                    Plot 2, Aina Close, Beside Justrite Super Stores, Opposite New Page Plaza,
-                                    Kosoko Road, Ojodu Berger, Lagos State
+                                    Plot 1-10, Akiogun road, Banex Mall,
+                                    Opp Maroko Police Station, Oniru Victoria Island Lagos, by Lekki-Epe expressway,
+                                    Lekki phase 1.
+                                    Lagos
+                                    Nigeria.
                                 </p>
                             </div>
                             <div class="col-md-auto">
