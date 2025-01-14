@@ -12,6 +12,12 @@
                 Email: care@demyhealth.com <br>
                 Phone: 08092776022<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;08092776069<br>&nbsp; &nbsp; &nbsp;
                 &nbsp; &nbsp; &nbsp;07015362458</p>
+                        <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
+                <strong>Anambra Office</strong>
+            </h5>
+            <p class="mbr-text mbr-fonts-style display-7">40B Ridge Road,<br>After Stock Exchange, Before Holy Trinity cathedral<br>Onitsha GRA, <br>Anambra State,<br>Nigeria.</p> <br>
+            <p class="mbr-text mbr-fonts-style mb-4 display-7">
+                Phone: 08145240114</p>
             <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
                 <strong>Links</strong>
             </h5>
@@ -23,13 +29,21 @@
         </div>
         <div class="col-12 col-md-3 mbr-fonts-style display-7">
             <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
-                <strong>Lagos Office</strong>
+                <strong>Lekki Office</strong>
             </h5>
-            <p class="mbr-text mbr-fonts-style display-7">No 3 Aina close,<br>Beside Justrite Supermarket,<br>Ojudu Berger,<br>Lagos<br>Nigeria.</p>
+            <p class="mbr-text mbr-fonts-style display-7">Plot 1-10, Akiogun road, Banex Mall,<br>Opp Maroko Police Station, Oniru Victoria Island Lagos, by Lekki-Epe expressway,<br>Lekki phase 1.<br>Lagos<br>Nigeria.</p>
             <br>
             <p class="mbr-text mbr-fonts-style mb-4 display-7">
                 Email: lag@demyhealth.com <br>
-                Phone: 08092776065<br>&nbsp; &nbsp; &nbsp; 07065838743</p>
+                Phone: 08092776065</p>
+                        <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 display-7">
+                <strong>Odofin Office</strong>
+            </h5>
+            <p class="mbr-text mbr-fonts-style display-7">Plot 3011, Rafiu Babatunde way,<br>Opposite Sunfit Hotel, by apple Junction,<br>Amuwo Odofin.<br>Lagos<br>Nigeria.</p>
+            <br>
+            <p class="mbr-text mbr-fonts-style mb-4 display-7">
+                Email: lag@demyhealth.com <br>
+                Phone: 07065838743<br></p>
             <h5 class="mbr-section-subtitle mbr-fonts-style mb-2 mt-5 display-7">
                 <strong>Feedback</strong>
             </h5>
@@ -77,7 +91,7 @@
         </div>
         <div class="col-sm-12 copyright pl-0">
             <p class="mbr-text mbr-fonts-style mbr-white display-7">
-                © Copyright 2022 DemyHealth - All Rights Reserved
+                © Copyright 2024 DemyHealth - All Rights Reserved
             </p>
         </div>
     </div>
