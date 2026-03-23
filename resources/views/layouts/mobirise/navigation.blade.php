@@ -37,10 +37,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdown-undefined">
                         <a class="text-black dropdown-item text-primary display-4" href="{{route('frontend.take-a-test')}}" data-bs-auto-close="outside" aria-expanded="false">
-                            Take a test
+                            Book a test
                         </a>
                         <a class="text-black dropdown-item display-4" href="{{route('frontend.upcoming-test-bookings')}}" data-bs-auto-close="outside" aria-expanded="false">
-                            Test  Bookings
+                            Retrieve  Bookings
                         </a>
                         <a class="text-black dropdown-item display-4" href="{{route('frontend.test-results')}}" data-bs-auto-close="outside" aria-expanded="false">
                             Test Results
